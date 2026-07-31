@@ -1,0 +1,1683 @@
+{
+  "settings": {
+    "name": "NewSite-02-06_1312",
+    "currentPage": "index.html",
+    "theme": {
+      "name": "mobirise3",
+      "title": "Mobirise 3",
+      "styling": {
+        "primaryColor": "#c0a375",
+        "secondaryColor": "#bfcecb",
+        "successColor": "#90a878",
+        "infoColor": "#7e9b9f",
+        "warningColor": "#f3c649",
+        "dangerColor": "#f28281",
+        "titleFont": "Montserrat",
+        "subtitleFont": "Lora",
+        "textFont": "Raleway",
+        "isRoundedButtons": false,
+        "isAnimatedOnScroll": true,
+        "isScrollToTopButton": false
+      }
+    },
+    "versionFirst": "3.11.1",
+    "uniqCompNum": 41,
+    "versionPublish": "3.11.1",
+    "path": "@PROJECT_PATH@",
+    "screenshot": "screenshot.png"
+  },
+  "pages": {
+    "index.html": {
+      "settings": {
+        "main": true,
+        "title": "INTERNATIONAL ADMISSION",
+        "meta_descr": "",
+        "header_custom": "",
+        "footer_custom": "",
+        "html_before": ""
+      },
+      "components": [
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "slider",
+          "_styles": {
+            "H2": {
+              "font-size": "32px"
+            }
+          },
+          "_params": {
+            "autoplay": true,
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "timeout": 5,
+            "slides": [
+              {
+                "active": false,
+                "image": "@PROJECT_PATH@/assets/images/african-leaders-of-tomorrow-scholarship-2000x1000.jpg",
+                "playVideo": false,
+                "videoUrl": "https://www.youtube.com/watch?v=uNCr7NdOJgw",
+                "overlay": true,
+                "overlayOpacity": "0.6",
+                "contentAlign": "center",
+                "showTitle": true,
+                "title": "FULL SCREEN SLIDER",
+                "showText": false,
+                "text": "Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.",
+                "showButtons": false,
+                "buttons": "<a data-app-btn=\"true\" class=\"btn btn-lg btn-success\" href=\"https://mobirise.com\">FOR WINDOWS</a> <a data-app-btn=\"true\" class=\"btn btn-lg btn-white btn-white-outline\" href=\"https://mobirise.com\">FOR MAC</a>"
+              },
+              {
+                "active": true,
+                "image": "@PROJECT_PATH@/assets/images/oasdom-2000x827.png",
+                "playVideo": false,
+                "videoUrl": "https://www.youtube.com/watch?v=uNCr7NdOJgw",
+                "overlay": true,
+                "contentAlign": "center",
+                "showTitle": true,
+                "title": "FULL SCREEN SLIDER",
+                "showText": false,
+                "text": "Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.",
+                "showButtons": false,
+                "buttons": "<a data-app-btn=\"true\" class=\"btn btn-lg btn-success\" href=\"https://mobirise.com\">FOR WINDOWS</a> <a data-app-btn=\"true\" class=\"btn btn-lg btn-white btn-white-outline\" href=\"https://mobirise.com\">FOR MAC</a>"
+              },
+              {
+                "active": false,
+                "image": "@PROJECT_PATH@/assets/images/scholarships-for-black-students-guide-2000x1066.jpg",
+                "playVideo": false,
+                "videoUrl": "https://www.youtube.com/watch?v=uNCr7NdOJgw",
+                "overlay": true,
+                "contentAlign": "center",
+                "showTitle": true,
+                "title": "BRINGING TOGETHER DIVERSE CULTURES<br> WHILE PROMOTING INDIVIDUALITY",
+                "showText": false,
+                "text": "Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.",
+                "showButtons": false,
+                "buttons": "<a data-app-btn=\"true\" class=\"btn btn-lg btn-success\" href=\"https://mobirise.com\">FOR WINDOWS</a> <a data-app-btn=\"true\" class=\"btn btn-lg btn-white btn-white-outline\" href=\"https://mobirise.com\">FOR MAC</a>"
+              }
+            ],
+            "fullScreen": true,
+            "bgColor": "#fff",
+            "showBullets": true
+          },
+          "_anchor": "slider-5",
+          "articleLayout": false
+        },
+        {
+          "_styles": {
+            ".card-subtitle": {
+              "color": "#bcbcbc"
+            },
+            ".iconbox": {
+              "background-color": "#f2f2f2",
+              "border-color": "#f2f2f2"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "features4",
+          "_anchor": "features4-6",
+          "_params": {
+            "iconsBgColor": "#f2f2f2",
+            "paddingTop": 2,
+            "paddingBottom": 2,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": true,
+            "bgVideo": {
+              "url": "https://www.youtube.com/watch?v=uNCr7NdOJgw"
+            },
+            "bgVideoRadio": false,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "columns": 3,
+            "showImages": true,
+            "showTitles": true,
+            "showSubtitles": true,
+            "ShowTexts": true,
+            "showButtons": false
+          },
+          "media1": {
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-features4",
+              "linkInNewWindow": false,
+              "name": "pages",
+              "family": "MobiriseIcons",
+              "active": true,
+              "link": "https://mobirise.com",
+              "size": 0,
+              "color": "black"
+            }
+          },
+          "title1": "Courses &amp; Fee",
+          "subtitle1": "Bootstrap 4 has been noted",
+          "caption1": "Bootstrap 4 has been noted as one of the most reliable and proven frameworks and Mobirise has been equipped to develop websites using this framework.",
+          "button1": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media2": {
+            "iconFont": {
+              "active": true,
+              "class": "mbr-iconfont mbr-iconfont-features4",
+              "name": "edit",
+              "link": "https://mobirise.com",
+              "size": 0,
+              "color": "black",
+              "family": "et-line"
+            }
+          },
+          "title2": "International Collabration",
+          "subtitle2": "One of Bootstrap 4's big points",
+          "caption2": "One of Bootstrap 4's big points is responsiveness and Mobirise makes effective use of this by generating highly responsive website for you.",
+          "button2": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media3": {
+            "iconFont": {
+              "active": true,
+              "class": "mbr-iconfont mbr-iconfont-features4",
+              "name": "briefcase",
+              "link": "https://mobirise.com",
+              "size": 0,
+              "color": "black",
+              "family": "et-line"
+            }
+          },
+          "title3": "Download Broucher",
+          "subtitle3": "Google has a highly exhaustive list of fonts",
+          "caption3": "Google has a highly exhaustive list of fonts compiled into its web font platform and Mobirise makes it easy for you to use them on your website easily and freely.",
+          "button3": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media4": {
+            "iconFont": {
+              "active": true,
+              "class": "mbr-iconfont mbr-iconfont-features4",
+              "name": "linegraph",
+              "link": "https://mobirise.com",
+              "size": 0,
+              "color": "black",
+              "family": "et-line"
+            }
+          },
+          "title4": "Unlimited Sites",
+          "subtitle4": "Mobirise gives you the freedom to develop",
+          "caption4": "Mobirise gives you the freedom to develop as many websites as you like given the fact that it is a desktop app.",
+          "button4": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media5": {
+            "iconFont": {
+              "active": true,
+              "class": "mbr-iconfont mbr-iconfont-features4",
+              "name": "briefcase",
+              "link": "https://mobirise.com",
+              "size": 0,
+              "color": "black",
+              "family": "et-line"
+            }
+          },
+          "title5": "Trendy Website Blocks",
+          "subtitle5": "Choose from the large selection of blocks",
+          "caption5": "Choose from the large selection of latest pre-made blocks - jumbotrons, hero images, parallax scrolling, video backgrounds, hamburger menu, sticky header and more.",
+          "button5": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>",
+          "media6": {
+            "iconFont": {
+              "active": true,
+              "class": "mbr-iconfont mbr-iconfont-features4",
+              "name": "linegraph",
+              "link": "https://mobirise.com",
+              "size": 0,
+              "color": "black",
+              "family": "et-line"
+            }
+          },
+          "title6": "Host Anywhere",
+          "subtitle6": "Don't limit yourself to just one platform",
+          "caption6": "Publish your website to a local drive, FTP or host on Amazon S3, Google Drive, Github. Don't limit yourself to just one platform or service provider.",
+          "button6": "<a data-app-btn=\"true\" href=\"https://mobirise.com\" class=\"btn btn-primary\">MORE</a>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "form1",
+          "_styles": {
+            ".form-control-label": {
+              "color": "#232323"
+            }
+          },
+          "_anchor": "form1-b",
+          "_params": {
+            "labelsColor": "#232323",
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": true,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "showTitle": true,
+            "showSubTitle": true
+          },
+          "title": "CONTACT FORM",
+          "subtitle": "Shape your future web project with sharp design and refine coded functions.",
+          "form": {
+            "action": "ask@eduzina.com",
+            "alerts": {
+              "success": "Thanks for filling out form!"
+            },
+            "fields": {
+              "name": {
+                "title": "Name",
+                "visible": true,
+                "customTitle": "Name*"
+              },
+              "email": {
+                "title": "Email",
+                "visible": true,
+                "customTitle": "Email*"
+              },
+              "phone": {
+                "title": "Phone",
+                "visible": true,
+                "customTitle": "Phone"
+              },
+              "message": {
+                "title": "Message",
+                "customTitle": "Message"
+              }
+            }
+          },
+          "buttons": "<a data-app-btn=\"true\" type=\"submit\" class=\"btn btn-primary\">CONTACT US</a>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "social-buttons1",
+          "_anchor": "social-buttons1-a",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": true,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "facebook": true,
+            "twitter": true,
+            "google": true,
+            "vkontakte": false,
+            "odnoklassniki": false
+          },
+          "text": "Follow us"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-c",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "@PROJECT_PATH@/assets/images/logo-128x28.png",
+              "width": 128,
+              "active": true,
+              "link": "www.eduzina.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>No.4 C 5/3,HRBR Layout<br>Kalyan Nagar, Bangalore - 560043&nbsp;<br>",
+          "text2": "<strong>Contacts</strong><br>Email: ask@eduzina.com<br>Phone: 1800 121 3006<br>",
+          "text3": "<strong>Links</strong><br>www.eduzina.com"
+        },
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "menu",
+          "_anchor": "menu-d",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": false,
+            "sticky": true,
+            "logo": true,
+            "showBrand": true,
+            "collapsed": true,
+            "hideButtons": true
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "@PROJECT_PATH@/assets/images/logo-92x128.png",
+              "height": 128,
+              "alt": "Mobirise",
+              "link": "https://mobirise.com",
+              "title": "",
+              "linkInNewWindow": false
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\">RKDF</a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\" aria-expanded=\"false\">HOME</a></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" href=\"https://mobirise.com/\" data-toggle=\"dropdown-submenu\" aria-expanded=\"false\">INTERNATIONAL ADMISSION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"admissio.html\">ADMISSION PROCESS</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">PAYMENT PROCEDURE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"rules.html\">ADMISSION RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">COURSES &amp; FEE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"faq.html\">FAQs</a></div></li><li class=\"nav-item dropdown open\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"true\">STUDENT INFORMATION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">STUDENT NOTIFICATION</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://www.mnnit.ac.in/swo/files/MNNIT_Hostel_Rules.pdf\">HOSTEL RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"FROFRRO.html\">FRO/FRRO</a></div></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"false\">HELP</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"http://forums.mobirise.com/\">Forum</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">Contact us</a></div></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
+        }
+      ]
+    },
+    "admissio.html": {
+      "settings": {
+        "title": "ADMISSION PROCESS",
+        "meta_descr": "Site Maker Description"
+      },
+      "components": [
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "menu",
+          "_anchor": "menu-f",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": false,
+            "sticky": true,
+            "logo": false,
+            "showBrand": false,
+            "collapsed": true,
+            "hideButtons": true
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "@THEME_PATH@/components/_images/logo.png",
+              "height": 128,
+              "alt": "Mobirise",
+              "link": "https://mobirise.com"
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\">RKDF</a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\" aria-expanded=\"false\">HOME</a></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" href=\"https://mobirise.com/\" data-toggle=\"dropdown-submenu\" aria-expanded=\"false\">INTERNATIONAL ADMISSION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"admissio.html\">ADMISSION PROCESS</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">PAYMENT PROCEDURE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"rules.html\">ADMISSION RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">COURSES &amp; FEE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"faq.html\">FAQs</a></div></li><li class=\"nav-item dropdown open\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"true\">STUDENT INFORMATION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">STUDENT NOTIFICATION</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://www.mnnit.ac.in/swo/files/MNNIT_Hostel_Rules.pdf\">HOSTEL RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"FROFRRO.html\">FRO/FRRO</a></div></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"false\">HELP</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"http://forums.mobirise.com/\">Forum</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">Contact us</a></div></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
+        },
+        {
+          "_inherit": "testimonials2",
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "testimonials4",
+          "_styles": {
+            ".card-block P": {
+              "text-align": "left"
+            }
+          },
+          "testimonial": [
+            {
+              "text": "<p><b>STEP 1 &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;</b><span style=\"font-size: 1.125rem; line-height: 2;\">Submit online application form, supporting all relevant information, at www.eduzina.com . A profile will be created and you will be mailed your login id and password.</span></p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face3.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><b>STEP 2</b>&nbsp; &nbsp; &nbsp; &nbsp; Wait until you receive offer of admission from our university. A message will be sent to you to intimate announcement of result on your MY APPLICATION STATUS.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face1.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><b>STEP 3</b>&nbsp; &nbsp; &nbsp; &nbsp; After receiving the offer letter, Pay registration fees USD 500 . For Bank Details ..</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "Jhollman C.",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><b>STEP 4</b><span style=\"font-size: 1.125rem; line-height: 2;\">&nbsp; &nbsp; &nbsp; &nbsp;After receipt of registration amount the applicant will receive an admission letter for applying student visa.</span></p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "John Smith",
+              "authorBio": "Developer"
+            },
+            {
+              "text": "<p><b>STEP 5</b>&nbsp; &nbsp; &nbsp; &nbsp; Verification follows with complete fees deposition.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "John Smith",
+              "authorBio": "Developer"
+            },
+            {
+              "text": "<p><b>STEP 6 &nbsp; &nbsp; &nbsp; &nbsp;</b>Attend orientation and confirm enrolment.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "John Smith",
+              "authorBio": "Developer"
+            }
+          ],
+          "_anchor": "testimonials4-g",
+          "_params": {
+            "count": "6",
+            "paddingTop": "3",
+            "paddingBottom": "0",
+            "showImages": false,
+            "showName": false,
+            "showBio": false,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/sky.jpg",
+            "bgColor": "#00a885",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": "0.4",
+            "overlayColor": "#222",
+            "showTitle": true,
+            "showSubtitle": false
+          },
+          "title": "Admission Process",
+          "subtitle": "Shape your future web project with sharp design and refine coded functions."
+        },
+        {
+          "_inherit": "testimonials2",
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "testimonials4",
+          "_styles": {
+            ".card-block P": {
+              "text-align": "left"
+            }
+          },
+          "testimonial": [
+            {
+              "text": "<p><b>STEP 7</b> &nbsp; &nbsp; &nbsp; &nbsp;Start classes, take advantage of campus opportunities and transform your future into a bright one.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face3.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "Abanoub S.",
+              "authorBio": "User"
+            }
+          ],
+          "_anchor": "testimonials4-h",
+          "_params": {
+            "count": "1",
+            "paddingTop": "0",
+            "paddingBottom": "3",
+            "showImages": false,
+            "showName": false,
+            "showBio": false,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/sky.jpg",
+            "bgColor": "#00a885",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.2,
+            "overlayColor": "#efefef",
+            "showTitle": false,
+            "showSubtitle": false
+          },
+          "title": "WHAT OUR FANTASTIC USERS SAY",
+          "subtitle": "Shape your future web project with sharp design and refine coded functions."
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-e",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "@PROJECT_PATH@/assets/images/logo-128x28.png",
+              "width": 128,
+              "active": true,
+              "link": "www.eduzina.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>No.4 C 5/3,HRBR Layout<br>Kalyan Nagar, Bangalore - 560043&nbsp;<br>",
+          "text2": "<strong>Contacts</strong><br>Email: ask@eduzina.com<br>Phone: 1800 121 3006<br>",
+          "text3": "<strong>Links</strong><br>www.eduzina.com"
+        }
+      ]
+    },
+    "rules.html": {
+      "settings": {
+        "title": "admission rules",
+        "meta_descr": "Web Page Builder Description"
+      },
+      "components": [
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "menu",
+          "_anchor": "menu-i",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": false,
+            "sticky": true,
+            "logo": false,
+            "showBrand": false,
+            "collapsed": true,
+            "hideButtons": true
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "@THEME_PATH@/components/_images/logo.png",
+              "height": 128,
+              "alt": "Mobirise",
+              "link": "https://mobirise.com"
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\">RKDF</a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\" aria-expanded=\"false\">HOME</a></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" href=\"https://mobirise.com/\" data-toggle=\"dropdown-submenu\" aria-expanded=\"false\">INTERNATIONAL ADMISSION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"admissio.html\">ADMISSION PROCESS</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">PAYMENT PROCEDURE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"rules.html\">ADMISSION RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">COURSES &amp; FEE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"faq.html\">FAQs</a></div></li><li class=\"nav-item dropdown open\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"true\">STUDENT INFORMATION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">STUDENT NOTIFICATION</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://www.mnnit.ac.in/swo/files/MNNIT_Hostel_Rules.pdf\">HOSTEL RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"FROFRRO.html\">FRO/FRRO</a></div></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"false\">HELP</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"http://forums.mobirise.com/\">Forum</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">Contact us</a></div></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
+        },
+        {
+          "_inherit": "testimonials2",
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "testimonials4",
+          "_styles": {
+            ".card-block P": {
+              "text-align": "left"
+            }
+          },
+          "testimonial": [
+            {
+              "text": "<p><b>1.0 General</b></p><p>The University agrees in principle to admit Foreign Nationals/NRI students to the Postgraduate, Undergraduate and Ph. D. programmes in different fields on full time basis to provide educational opportunities to Foreign Nationals/NRI students and thereby generate resources for funding the cost of education and development of facilities.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face3.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><span style=\"font-size: 1.125rem; line-height: 2;\"><b>2.0 Category of Foreign Nationals/NRI</b></span><br></p><p>Foreign Nationals /NRI students are categorized as follows</p><p>•\tSponsored by the Govt. of India (through ICCR) on cultural exchange programme</p><p>•\tSponsored by the home country of the concerned Foreign Nationals/NRI students and/or funding agencies</p><p>•\tSelf-financing direct entry (with the clearance of Govt. of India)</p><p>•\tNRI students</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face1.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><b>2.1 Qualification</b></p><p>The eligibility required for admission to different programmes can be checked in detail from the prospectus or University website. The minimum educational qualification for admission of Foreign Nationals/NRI in various programmes is same as for Indians. Only those students who have qualified from Foreign Universities or Boards of Higher Education, recognized as equivalent by the Association of Indian Universities (AIU) are eligible for admission. When required, a reference will be made to AIU to check the equivalent.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><b>2.2 Requirement of Visa</b></p><p>All the Foreign Nationals/NRI students will require a student visa endorsed to only RKDF University for joining full time programmes. No other endorsement is acceptable. Students wishing to join a research programme will require a research visa endorsed to RKDF University. The visa should be valid for the prescribed duration of the course or for a maximum of five years. Study visa applications require an unconditional offer from a recognized Indian educational institute.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "Developer"
+            },
+            {
+              "text": "<p><b>3.0 Admission</b></p><p><b>3.1 Admission Information</b></p><p>Student willing to join the University for various programmes will get the information about the application form, eligibility requirements, courses available and admission procedure from Eduzina.com or the website of the University.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "",
+              "authorBio": "Developer"
+            }
+          ],
+          "_anchor": "testimonials4-k",
+          "_params": {
+            "count": "5",
+            "paddingTop": 3,
+            "paddingBottom": "1",
+            "showImages": false,
+            "showName": true,
+            "showBio": false,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/sky.jpg",
+            "bgColor": "#00a885",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.2,
+            "overlayColor": "#222",
+            "showTitle": true,
+            "showSubtitle": false
+          },
+          "title": "Admissions Rules",
+          "subtitle": "Shape your future web project with sharp design and refine coded functions."
+        },
+        {
+          "_inherit": "testimonials2",
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "testimonials4",
+          "_styles": {
+            ".card-block P": {
+              "text-align": "left"
+            }
+          },
+          "testimonial": [
+            {
+              "text": "<p>1. X / SSC Marks Sheet / ‘O’ Level Certificate.</p><p>2. XII / HSSC / Intermediate Marks Sheet / ‘A’ Level Certificate</p><p>3. Leaving / Transfer Certificate</p><p>4. Graduation Mark Sheets</p><p>5. Migration Certificate*.</p><p>6. Photocopy of  Visa / Passport.</p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face3.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "Abanoub S.",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p>•\tAfter checking applicant eligibility criteria, we will forward the consent approval with elaborated process on students’ email id.</p><p>•\tAfter receiving the approval of the application, the applicant has to deposit USD 500 towards registration and other formalities. For bank details click here.</p><p>•\tAfter receipt of registration amount the applicant will receive an admission letter for applying student visa.</p><p>•\tPersonal interview with verification along with the full fee deposition is the final step for the conversion of provisional admission into confirmed admission.</p><p><br></p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face1.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "Suffian A.",
+              "authorBio": "User"
+            },
+            {
+              "text": "<p><b>3.2 Final admission</b></p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;After obtaining the provisional eligibility letter the following requirements have to be fulfilled:</p><p><b>3.2.1 Visa</b></p><p><b>3.2.2 Fee</b></p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face2.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "Jhollman C.",
+              "authorBio": "User"
+            }
+          ],
+          "_anchor": "testimonials4-l",
+          "_params": {
+            "count": "3",
+            "paddingTop": "0",
+            "paddingBottom": "1",
+            "showImages": false,
+            "showName": false,
+            "showBio": false,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/sky.jpg",
+            "bgColor": "#00a885",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.2,
+            "overlayColor": "#222",
+            "showTitle": true,
+            "showSubtitle": false
+          },
+          "title": "List of required documents",
+          "subtitle": "Shape your future web project with sharp design and refine coded functions."
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-j",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "@PROJECT_PATH@/assets/images/logo-128x28.png",
+              "width": 128,
+              "active": true,
+              "link": "www.eduzina.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>No.4 C 5/3,HRBR Layout<br>Kalyan Nagar, Bangalore - 560043&nbsp;<br>",
+          "text2": "<strong>Contacts</strong><br>Email: ask@eduzina.com<br>Phone: 1800 121 3006<br>",
+          "text3": "<strong>Links</strong><br>www.eduzina.com"
+        }
+      ]
+    },
+    "faq.html": {
+      "settings": {
+        "title": "FAQ",
+        "meta_descr": "Web Page Maker Description"
+      },
+      "components": [
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "menu",
+          "_anchor": "menu-m",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": false,
+            "sticky": true,
+            "logo": false,
+            "showBrand": false,
+            "collapsed": true,
+            "hideButtons": true
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "@THEME_PATH@/components/_images/logo.png",
+              "height": 128,
+              "alt": "Mobirise",
+              "link": "https://mobirise.com"
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\">RKDF</a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\" aria-expanded=\"false\">HOME</a></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" href=\"https://mobirise.com/\" data-toggle=\"dropdown-submenu\" aria-expanded=\"false\">INTERNATIONAL ADMISSION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"admissio.html\">ADMISSION PROCESS</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">PAYMENT PROCEDURE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"rules.html\">ADMISSION RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">COURSES &amp; FEE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"faq.html\">FAQs</a></div></li><li class=\"nav-item dropdown open\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"true\">STUDENT INFORMATION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">STUDENT NOTIFICATION</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://www.mnnit.ac.in/swo/files/MNNIT_Hostel_Rules.pdf\">HOSTEL RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"FROFRRO.html\">FRO/FRRO</a></div></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"false\">HELP</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"http://forums.mobirise.com/\">Forum</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">Contact us</a></div></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
+        },
+        {
+          "_inherit": "testimonials2",
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "testimonials4",
+          "_styles": {
+            ".card-block P": {
+              "text-align": "left"
+            }
+          },
+          "testimonial": [
+            {
+              "text": "<p><b>01. Are programmes offered by RKDFUniversity recognized/approved by any authority body?</b></p><p>It is mandatory for all universities/institutions offering professional and technical courses in India to be recognized by the national level statutory bodies established for the maintenance of norms and standards. Indian degrees are recognized worldwide. RKDF University is approved by UGC (Govt. of India).</p><p><b>02. What are the courses / programmes offered by RKDF University?</b></p><p>RKDF University offers Engineering, Management, Science, Pharmacy, Computer Application, Social Science, Agriculture, Architecture, Law, Nursing, Paramedical.</p><p><b>03. What is the medium of instruction in the classes?</b></p><p>English.</p><p><b>04. Is there any capitation fee?</b></p><p>No. There is no capitation fee. You only pay tuition and other fees which have been mentioned in the fee schedule (Link)</p><p><b>05. What are the other fees need to be paid apart from tuition fee?</b></p><p>Other than tuition fee and registration fee, you have to pay for hostel accommodation and mess charges which has been mentioned in the hostel fee schedule.</p><p><b>06. Is there any provision for concession or scholarships?</b></p><p>The University shall receive scholarships if sanctioned and released by the sponsoring University and shall disburse to the awardees as per the terms and conditions of the University i.e. regularity in attendance, progress, good character and conduct.</p><p><b>07. Can an NRI/Foreign Nationals student pay the course /tuition fee in Indian rupees?</b></p><p>Yes, Course/ tuition fee can be paid either in US Dollars or in Indian Rupees.</p><p><b>08. What are the eligibility requirements for admission?</b></p><p>Please check our website for admission rules and get your required information.</p><p><b>09. When do I apply?</b></p><p>Students can start applying from Feb 2016 to July 2016.</p><p><b>10. How to apply and from where do I get the application?</b></p><p>You can apply through our website: www.eduzina.com (click Apply Now).</p><p><b>11.When is the last date to submit the application?</b></p><p>July 30, 2016 is the last date to submit the application for all courses, under foreign/ NRI quota.</p><p><br></p>",
+              "media": {
+                "image": {
+                  "src": "@THEME_PATH@/components/_images/face3.jpg",
+                  "class": "img-circle",
+                  "height": 160,
+                  "width": 160,
+                  "active": true
+                }
+              },
+              "authorName": "Abanoub S.",
+              "authorBio": "User"
+            }
+          ],
+          "_anchor": "testimonials4-o",
+          "_params": {
+            "count": "1",
+            "paddingTop": "3",
+            "paddingBottom": "0",
+            "showImages": false,
+            "showName": false,
+            "showBio": false,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/sky.jpg",
+            "bgColor": "#00a885",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.2,
+            "overlayColor": "#222",
+            "showTitle": true,
+            "showSubtitle": false
+          },
+          "title": "FAQs",
+          "subtitle": "Shape your future web project with sharp design and refine coded functions."
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-n",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "@PROJECT_PATH@/assets/images/logo-128x28.png",
+              "width": 128,
+              "active": true,
+              "link": "www.eduzina.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>No.4 C 5/3,HRBR Layout<br>Kalyan Nagar, Bangalore - 560043&nbsp;<br>",
+          "text2": "<strong>Contacts</strong><br>Email: ask@eduzina.com<br>Phone: 1800 121 3006<br>",
+          "text3": "<strong>Links</strong><br>www.eduzina.com"
+        }
+      ]
+    },
+    "FROFRRO.html": {
+      "settings": {
+        "title": "FRO/FRRO",
+        "meta_descr": "Site Builder Description"
+      },
+      "components": [
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-t",
+          "_params": {
+            "paddingTop": "6",
+            "paddingBottom": 1,
+            "bgColor": "#00a885"
+          },
+          "text": "<blockquote><h1>FRO/RRO</h1><p>We are informing to all International students that filling and processing of application is ON LINE for Registration for Registration Certificate (RC) &amp; Residential permit (RP) on arrival in lndia, visa Extension for stay visa, Residence permit Extension (RP Extension), change of address, change of course &amp; change of Institution and OFF LINE for No Objection Certificate (NOC) for travelling outside India in Foreigner’s Registration Office (FRO) in Bhopal and Foreigner’s Regional Registration Office (FRRO) in Bhopal.&nbsp;</p><p><br></p><p>Admissions and Facilitation Department of RKDF University is providing facility for filling of documents ON LINE and OFF LINE forms in FRO/ FRRO, For blank processing form, please come to FRO section of Admissions &amp; Facilitation Department.</p><p><br></p><p>&nbsp;It is the prime responsibility of the student to visit Admissions and Facilitation Department in time to complete the required documentations, so that no fine is levied against him/her.</p><p><br></p><p>Guidelines for FRO/FRRO - <a href=\"#top\">Click here&nbsp;</a></p><p>Registration for RC&amp; RP on arrival in India - <a href=\"FROFRRO.html#content2-y\">Click here</a></p><p>Visa Extension for Stay Visa - <a href=\"FROFRRO.html#content2-z\">Click here</a></p><p>RP Extension - <a href=\"FROFRRO.html#content2-10\">Click here</a></p><p>Change of Address - <a href=\"FROFRRO.html#content2-11\">Click here&nbsp;</a></p><p>Change of Course - <a href=\"FROFRRO.html#content2-12\">Click here</a>&nbsp;</p><p>Change of Institution - <a href=\"FROFRRO.html#content2-13\">Click here&nbsp;</a></p><p>NOC for travelling outside India - <a href=\"FROFRRO.html#content2-14\">Click here</a></p><p>In case you need further information please visit the web link:<a href=\" http://indianfrro.gov.in/frro/\"> http://indianfrro.gov.in/frro/</a></p></blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-y",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#fff"
+          },
+          "text": "<blockquote><h2>Registration for RC / RP on arrival in India</h2><p><span style=\"font-size: 1.09rem; line-height: 1.5;\">Processing for Appointment for Registration of New Visa is ON LINE in FRO/FRRO and all processing &amp; submission of documents including taking appointment date should be within 14 days of arrival in India. It is the responsibility of the student to report in time in Admission &amp; Facilitation Cell for filling the papers ON LINE. If he/she fails to file the application in time, he/she is liable to pay fine to Government of India. In case fine is payable, the student will collect the document called “Challan” from the concerned FRO/FRRO to pay fine in Bhopal.</span><br></p></blockquote><blockquote>After collection of your RP and RC from FRO/FRRO students are required to submit a copy immediately to Admissions &amp; Facilitation Department of RKDF University.</blockquote><blockquote>&nbsp; &nbsp; &nbsp;Documents required:&nbsp;</blockquote><blockquote>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; i.\tPhotograph - 02 nos.&nbsp;</blockquote><blockquote>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;ii.\t Passport &amp; Visa Copy + Original&nbsp;</blockquote><blockquote>&nbsp; &nbsp; &nbsp; &nbsp; iii.\t Copy of House Rent agreement&nbsp;</blockquote><blockquote>&nbsp; &nbsp; &nbsp; &nbsp; iv.\t C Form for Hostellers&nbsp;</blockquote><blockquote>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;v.\t Copy of House owner’s Identity Proof (ID) and Electricity bill of the Flat / House.&nbsp;</blockquote><blockquote>&nbsp; &nbsp; &nbsp; &nbsp; vi.\t Bonafide Certificate - The student will come to FRO Section in Admission &amp; Facilitation Department for the form. The student will           fill the form &amp; take signatures of the concerned officers in the FRO Section, which he will submit in the office of his school for getting Bonafide Certificate.</blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-z",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#00a885"
+          },
+          "text": "<h2>Visa Extension for Stay Visa</h2><blockquote>&nbsp;Processing for Appointment for Visa Extension for Stay Visa is ON LINE in FRO/FRRO and all processing &amp; submission of documents including taking appointment date should be started 2 months from the expiry date of Visa. It is the responsibility of the student to report in time in Admission &amp; Facilitation Cell for filling the papers ON LINE. If he/she fails to file the application in time he/she is liable to pay fine to Government of India. In case fine is payable, the student will collect the document called “Challan” from the concerned FRO/FRRO to pay fine in Bhopal.</blockquote><blockquote>&nbsp;After collection of your Visa Extension for Stay Visa from FRO/FRRO students are required to submit a copy immediately to Admissions &amp; Facilitation Department of RKDF University.</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents required:&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.\tPhotograph - 02 nos.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;ii.\t Passport &amp; Visa Copy &amp; Visa Extended copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp; iii.\t RP/RC Copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iv.\t Copy of House Rent agreement&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v.\tC Form for Hostellers &nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vi.\tCopy of House owner’s Identity Proof (ID) and Electricity bill of the Flat / House.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vii.\t Bonafide Certificate - The student will come to FRO Section in Admission &amp; Facilitation Department for the form. The student will fill the form &amp; take signatures of the concerned officers in the FRO Section, which he will submit in the office of his school for getting Bonafide Certificate.</p></blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-10",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#fff"
+          },
+          "text": "<h2>RP Extension</h2><blockquote>&nbsp;Processing for Appointment for RP Extension is ON LINE in FRO/FRRO and all processing &amp; submission of documents including taking appointment date should be started 2 months from the expiry date of RP. It is the responsibility of the student to report in time in Admission &amp; Facilitation Cell for filling the papers ON LINE. If he/she fails to file the application in time he/she is liable to pay fine to Government of India. In case fine is payable, the student will collect the document called “Challan” from the concerned FRO/FRRO to pay fine in Bhopal.</blockquote><blockquote>After collection of your RP extension from FRO/FRRO students are required to submit a copy immediately to Admissions &amp; Facilitation Department of RKDF University.</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents required:&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.\tPhotograph - 02 nos.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii.\t Passport &amp; Visa Copy &amp; Visa Extended copies + Original&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii.\t RP/RC Copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iv.\t Copy of House Rent agreement&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v.\tC Form for Hostellers &nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vi.\tCopy of House owner’s Identity Proof (ID) and Electricity bill of the Flat / House.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vii.\t Bonafide Certificate - The student will come to FRO Section in Admission &amp; Facilitation Department for the form. The student will fill the form &amp; take signatures of the concerned officers in the FRO Section, which he will submit in the office of his school for getting Bonafide Certificate.</p></blockquote><blockquote><br></blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-11",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#00a885"
+          },
+          "text": "<h2>Change of Address&nbsp;</h2><blockquote>Processing for Appointment for Change of Address for those who have changed their place of stay in India is ON LINE in FRO/FRRO and all processing &amp; submission of documents including taking appointment date should be started and taken within 4 weeks of change of address. It is the responsibility of the student to report in time in Admission &amp; Facilitation Cell for filling the papers ON LINE. If he/she fails to file the application in time he/she is liable to pay fine to Government of India. In case fine is payable, the student will collect the document called “Challan” from the concerned FRO/FRRO to pay fine in Bhopal.</blockquote><blockquote>After collection of your “Change of Address” document from FRO/FRRO students are required to submit a copy immediately to Admissions &amp; Facilitation Department of RKDF University.</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents required:&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.\tPhotograph - 02 nos.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii.\t Passport &amp; Visa Copy &amp; Visa Extended copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii.\t RP/RC Copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iv.\t Copy of House Rent agreement&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v.\tC Form for Hostellers &nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vi.\tCopy of House owner’s Identity Proof (ID) and Electricity bill of the Flat / House.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vii.\t Bonafide Certificate - The student will come to FRO Section in Admission &amp; Facilitation Department for the form. The student will fill the form &amp; take signatures of the concerned officers in the FRO Section, which he will submit in the office of his school for getting Bonafide Certificate.</p></blockquote><blockquote><br></blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-12",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#fff"
+          },
+          "text": "<h2>Change of Course</h2><blockquote>Processing for Appointment for Change of course for those who have changed their course is ON LINE in FRO/FRRO and all processing &amp; submission of documents including taking appointment date should be started and taken within 4 weeks of change of course. It is the responsibility of the student to report in time in Admission &amp; Facilitation Cell for filling the papers ON LINE. If he/she fails to file the application in time he/she is liable to pay fine to Government of India. In case fine is payable, the student will collect the document called “Challan” from the concerned FRO/FRRO to pay fine in Bhopal.</blockquote><blockquote>After collection of your “Change of Course” document from FRO/FRRO students are required to submit a copy immediately to Admissions &amp; Facilitation Department of RKDF University.</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents required:&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.\tPhotograph - 02 nos.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii.\t Passport &amp; Visa Copy &amp; Visa Extended copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii.\t RP/RC Copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iv.\t Copy of House Rent agreement&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v.\tC Form for Hostellers &nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vi.\tCopy of House owner’s Identity Proof (ID) and Electricity bill of the Flat / House.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vii.\t Bonafide Certificate - The student will come to FRO Section in Admission &amp; Facilitation Department for the form. The student will fill the form &amp; take signatures of the concerned officers in the FRO Section, which he will submit in the office of his school for getting Bonafide Certificate.</p></blockquote><blockquote><br></blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-13",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#00a885"
+          },
+          "text": "<h2>Change of Institution&nbsp;</h2><blockquote>Processing for Appointment for Change of Institution for those who have taken admission in RKDF University with the endorsement of other Institute name on his/her visa is ON LINE in FRO/FRRO and all processing &amp; submission of documents including taking appointment date should be started and taken within 4 weeks of Change of Institution. It is the responsibility of the student to report in time in Admission &amp; Facilitation Cell for filling the papers ON LINE. If he/she fails to file the application in time he/she is liable to pay fine to Government of India. In case fine is payable, the student will collect the document called “Challan” from the concerned FRO/FRRO to pay fine in Bhopal.</blockquote><blockquote>After collection of your “Change of Institution” document from FRO/FRRO students are required to submit a copy immediately to Admissions &amp; Facilitation Department of RKDF University.</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents required:&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.\tPhotograph - 02 nos.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii.\t Passport &amp; Visa Copy &amp; Visa Extended copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii.\t RP/RC Copies + Original&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iv.\t Copy of House Rent agreement&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;v.\tC Form for Hostellers &nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vi.\tCopy of House owner’s Identity Proof (ID) and Electricity bill of the Flat / House.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vii.\t Bonafide Certificate - The student will come to FRO Section in Admission &amp; Facilitation Department for the form. The student will fill the form &amp; take signatures of the concerned officers in the FRO Section, which he will submit in the office of his school for getting Bonafide Certificate.</p></blockquote><blockquote><br></blockquote>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "content2",
+          "_anchor": "content2-14",
+          "_params": {
+            "paddingTop": 1,
+            "paddingBottom": 1,
+            "bgColor": "#fff"
+          },
+          "text": "<h2>NOC for travelling outside India</h2><blockquote>&nbsp;Students are supposed to take “NOC for Travelling outside India” from their respective school. It is required for getting NOC Stamp on RP/RC from FRO/FRRO.</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Documents required:&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;i.\tCopies of Passport &amp; Visa with extensions if any.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ii.\t Copies of RC &amp; RP + Original.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iii.\tNOC for travelling in original.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;iv.\t Flight ticket copy&nbsp;</p></blockquote><blockquote>Student must check the following before travelling:-&nbsp;</blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;a) Students must be back in India within the validity period of Visa.&nbsp;</p></blockquote><blockquote><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;b) It will be more easier and convenient, if required to go out of India during their study period, that if the student comes with Multiple Entry Visa. Students must take with them Bonafide Certificate for the purpose of availing New Visa before going out of India. Student should approach Admission and Facilitation Department for this purpose.</p></blockquote><blockquote><br></blockquote>"
+        },
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "menu",
+          "_anchor": "menu-q",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": false,
+            "sticky": true,
+            "logo": true,
+            "showBrand": true,
+            "collapsed": true,
+            "hideButtons": true
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "@THEME_PATH@/components/_images/logo.png",
+              "height": 128,
+              "alt": "Mobirise",
+              "link": "https://mobirise.com"
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\">RKDF</a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\" aria-expanded=\"false\">HOME</a></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" href=\"https://mobirise.com/\" data-toggle=\"dropdown-submenu\" aria-expanded=\"false\">INTERNATIONAL ADMISSION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"admissio.html\">ADMISSION PROCESS</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">PAYMENT PROCEDURE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"rules.html\">ADMISSION RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">COURSES &amp; FEE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"faq.html\">FAQs</a></div></li><li class=\"nav-item dropdown open\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"true\">STUDENT INFORMATION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">STUDENT NOTIFICATION</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://www.mnnit.ac.in/swo/files/MNNIT_Hostel_Rules.pdf\">HOSTEL RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"FROFRRO.html\">FRO/FRRO</a></div></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"false\">HELP</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"http://forums.mobirise.com/\">Forum</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">Contact us</a></div></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-r",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "@PROJECT_PATH@/assets/images/logo-128x28.png",
+              "width": 128,
+              "active": true,
+              "link": "www.eduzina.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>No.4 C 5/3,HRBR Layout<br>Kalyan Nagar, Bangalore - 560043&nbsp;<br>",
+          "text2": "<strong>Contacts</strong><br>Email: ask@eduzina.com<br>Phone: 1800 121 3006<br>",
+          "text3": "<strong>Links</strong><br>www.eduzina.com"
+        }
+      ]
+    },
+    "contact.html": {
+      "settings": {
+        "title": "contactus",
+        "meta_descr": "Web Page Builder Description"
+      },
+      "components": [
+        {
+          "_styles": {
+            ".hide-buttons .nav-btn": {
+              "display": "none !important"
+            },
+            ".navbar-caption": {
+              "color": "#ffffff"
+            },
+            ".navbar-toggler": {
+              "color": "#ffffff"
+            },
+            ".close-icon::before, .close-icon::after": {
+              "background-color": "#ffffff"
+            },
+            ".link, .dropdown-item": {
+              "color": "#ffffff"
+            },
+            ".link": {
+              "font-size": "0.75rem"
+            },
+            ".dropdown-item, .nav-dropdown-sm .link": {
+              "font-size": "0.812rem"
+            },
+            ".link:hover, .dropdown-item:hover, .link:focus, .dropdown-item:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-menu": {
+              "background": "#0e0e0e"
+            },
+            ".nav-dropdown-sm .link:focus, .nav-dropdown-sm .link:hover, .nav-dropdown-sm .dropdown-item:focus, .nav-dropdown-sm .dropdown-item:hover": {
+              "background": "#202020!important"
+            },
+            ".navbar, .nav-dropdown-sm, .nav-dropdown-sm .link[aria-expanded=\"true\"], .nav-dropdown-sm .dropdown-menu": {
+              "background": "#282828"
+            },
+            ".bg-color.transparent .link": {
+              "color": "#ffffff",
+              "transition": "none"
+            },
+            ".bg-color.transparent.opened .link": {
+              "transition": "color .2s ease-in-out"
+            },
+            ".bg-color.transparent.opened .link:hover, .bg-color.transparent.opened .link:focus": {
+              "color": "@primaryColor"
+            },
+            ".link[aria-expanded=\"true\"], .dropdown-item[aria-expanded=\"true\"]": {
+              "color": "#c0a375!important"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "menu",
+          "_anchor": "menu-u",
+          "_params": {
+            "bgColor": "#282828",
+            "fontSize": 0.75,
+            "fontName": {},
+            "fontColor": "#ffffff",
+            "fontHoverColor": "@primaryColor",
+            "transparent": false,
+            "sticky": true,
+            "logo": false,
+            "showBrand": true,
+            "collapsed": true,
+            "hideButtons": true
+          },
+          "logo": {
+            "image": {
+              "active": true,
+              "src": "@THEME_PATH@/components/_images/logo.png",
+              "height": 128,
+              "alt": "Mobirise",
+              "link": "https://mobirise.com"
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-menu",
+              "link": "https://mobirise.com",
+              "size": 0
+            }
+          },
+          "brand": "<a class=\"navbar-caption\" data-app-btn=\"true\" data-app-selector=\".navbar-caption\" href=\"https://mobirise.com\" data-app-placeholder=\"Type Brand Name\" data-toolbar=\"-mbrBtnMove,-mbrBtnAdd,-mbrBtnRemove,mbrColor\">RKDF</a>",
+          "items": "<li class=\"nav-item\"><a data-app-btn=\"true\" class=\"nav-link link\" href=\"index.html\" aria-expanded=\"false\">HOME</a></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" href=\"https://mobirise.com/\" data-toggle=\"dropdown-submenu\" aria-expanded=\"false\">INTERNATIONAL ADMISSION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"admissio.html\">ADMISSION PROCESS</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">PAYMENT PROCEDURE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"rules.html\">ADMISSION RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"#\">COURSES &amp; FEE</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"faq.html\">FAQs</a></div></li><li class=\"nav-item dropdown open\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"true\">STUDENT INFORMATION</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">STUDENT NOTIFICATION</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://www.mnnit.ac.in/swo/files/MNNIT_Hostel_Rules.pdf\">HOSTEL RULES</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"FROFRRO.html\">FRO/FRRO</a></div></li><li class=\"nav-item dropdown\"><a data-app-btn=\"true\" class=\"nav-link link dropdown-toggle\" data-toggle=\"dropdown-submenu\" href=\"https://mobirise.com/\" aria-expanded=\"false\">HELP</a><div class=\"dropdown-menu\"><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"http://forums.mobirise.com/\">Forum</a><a data-app-btn=\"true\" class=\"dropdown-item\" href=\"https://mobirise.com/\">Contact us</a></div></li><li class=\"nav-item nav-btn\"><a data-app-btn=\"true\" data-button=\"\" data-app-selector=\".btn\" class=\"nav-link btn btn-white btn-white-outline\" href=\"https://mobirise.com/\">DOWNLOAD</a></li>"
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "form1",
+          "_styles": {
+            ".form-control-label": {
+              "color": "#232323"
+            }
+          },
+          "_anchor": "form1-w",
+          "_params": {
+            "labelsColor": "#232323",
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#fff",
+            "bgColorRadio": true,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222",
+            "showTitle": true,
+            "showSubTitle": true
+          },
+          "title": "CONTACT FORM",
+          "subtitle": "",
+          "form": {
+            "action": "ask@eduzina.com",
+            "alerts": {
+              "success": "Thanks for filling out form!"
+            },
+            "fields": {
+              "name": {
+                "title": "Name",
+                "visible": true,
+                "customTitle": "Name*"
+              },
+              "email": {
+                "title": "Email",
+                "visible": true,
+                "customTitle": "Email*"
+              },
+              "phone": {
+                "title": "Phone",
+                "visible": true,
+                "customTitle": "Phone"
+              },
+              "message": {
+                "title": "Message",
+                "customTitle": "Message"
+              }
+            }
+          },
+          "buttons": "<a data-app-btn=\"true\" type=\"submit\" class=\"btn btn-primary\">CONTACT US</a>"
+        },
+        {
+          "_inherit": "social-buttons2",
+          "_styles": {
+            ".mbr-section-title, .btn-social": {
+              "color": "#fff"
+            }
+          },
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "social-buttons4",
+          "_anchor": "social-buttons4-x",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/landscape3.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": false,
+            "overlayOpacity": 0.5,
+            "overlayColor": "#222"
+          },
+          "text": "FOLLOW US",
+          "icons": "<a data-app-btn=\"true\" class=\"btn btn-social\" title=\"Twitter\" target=\"_blank\" href=\"https://twitter.com/mobirise\"><i class=\"socicon socicon-twitter\"></i></a> <a data-app-btn=\"true\" class=\"btn btn-social\" title=\"Facebook\" target=\"_blank\" href=\"https://www.facebook.com/pages/Mobirise/1616226671953247\"><i class=\"socicon socicon-facebook\"></i></a> <a data-app-btn=\"true\" class=\"btn btn-social\" title=\"Google+\" target=\"_blank\" href=\"https://plus.google.com/u/0/+Mobirise/posts\"><i class=\"socicon socicon-googleplus\"></i></a> <a data-app-btn=\"true\" class=\"btn btn-social\" title=\"YouTube\" target=\"_blank\" href=\"https://www.youtube.com/channel/UCt_tncVAetpK5JeM8L-8jyw\"><i class=\"socicon socicon-youtube\"></i></a> <a data-app-btn=\"true\" class=\"btn btn-social\" title=\"Instagram\" target=\"_blank\" href=\"https://instagram.com/mobirise/\"><i class=\"socicon socicon-instagram\"></i></a>   <a data-app-btn=\"true\" class=\"btn btn-social\" title=\"LinkedIn\" target=\"_blank\" href=\"https://www.linkedin.com/in/mobirise\" data-toolbar=\"-mbrBtnAdd,-mbrBtnMove,-mbrFonts,-mbrFontSize,-mbrBtnColor\"><i class=\"socicon socicon-linkedin\"></i></a>   "
+        },
+        {
+          "_tags": [
+            "Theme"
+          ],
+          "_name": "contacts1",
+          "_anchor": "contacts1-v",
+          "_params": {
+            "paddingTop": 3,
+            "paddingBottom": 3,
+            "bgImageRadio": false,
+            "parallax": true,
+            "bgImage": "@THEME_PATH@/components/_images/jumbotron.jpg",
+            "bgColor": "#2e2e2e",
+            "bgColorRadio": true,
+            "overlay": true,
+            "overlayOpacity": 0.8,
+            "overlayColor": "#3C3C3C"
+          },
+          "logo": {
+            "image": {
+              "src": "@PROJECT_PATH@/assets/images/logo-128x28.png",
+              "width": 128,
+              "active": true,
+              "link": "www.eduzina.com",
+              "alt": "",
+              "title": "",
+              "linkInNewWindow": true
+            },
+            "iconFont": {
+              "class": "mbr-iconfont mbr-iconfont-contacts1",
+              "link": "",
+              "size": 0
+            }
+          },
+          "text1": "<strong>Address</strong><br>No.4 C 5/3,HRBR Layout<br>Kalyan Nagar, Bangalore - 560043&nbsp;<br>",
+          "text2": "<strong>Contacts</strong><br>Email: ask@eduzina.com<br>Phone: 1800 121 3006<br>",
+          "text3": "<strong>Links</strong><br>www.eduzina.com"
+        }
+      ]
+    }
+  }
+}
