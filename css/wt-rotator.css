@@ -1,0 +1,216 @@
+.wt-rotator {
+	BORDER-BOTTOM: #000 1px solid;
+	POSITION: relative;
+	BORDER-LEFT: #000 1px solid;
+	BACKGROUND-COLOR: #666666;
+	WIDTH: 700px;
+	FONT-FAMILY: Arial, Helvetica, sans-serif;
+	HEIGHT: 310px;
+	FONT-SIZE: 12px;
+	OVERFLOW: hidden;
+	BORDER-TOP: #000 1px solid;
+	BORDER-RIGHT: #000 1px solid;
+	left: -9px;
+	top: 0px;
+}
+.wt-rotator A {
+	OUTLINE-STYLE: none; OUTLINE-COLOR: invert; OUTLINE-WIDTH: medium
+}
+.wt-rotator .screen {
+	POSITION: relative;
+	WIDTH: 700px;
+	HEIGHT: 300px;
+	OVERFLOW: hidden
+}
+.wt-rotator .strip {
+	Z-INDEX: 0; POSITION: absolute; DISPLAY: block; OVERFLOW: hidden; TOP: 0px; LEFT: 0px
+}
+.wt-rotator .content-box {
+	POSITION: absolute; DISPLAY: none; OVERFLOW: hidden; TOP: 0px; LEFT: 0px
+}
+.wt-rotator .main-img {
+	Z-INDEX: 0; BORDER-BOTTOM: 0px; POSITION: absolute; BORDER-LEFT: 0px; DISPLAY: none; BORDER-TOP: 0px; TOP: 0px; BORDER-RIGHT: 0px; LEFT: 0px
+}
+.wt-rotator .preloader {
+	Z-INDEX: 4; POSITION: absolute; MARGIN-TOP: -20px; WIDTH: 40px; DISPLAY: none; BACKGROUND: url(assets/loader.gif) #000 no-repeat center 50%; HEIGHT: 40px; MARGIN-LEFT: -20px; TOP: 50%; LEFT: 50%; -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px
+}
+.wt-rotator .timer {
+	Z-INDEX: 4; POSITION: absolute; FILTER: alpha(opacity=50); BACKGROUND-COLOR: #fff; HEIGHT: 4px; VISIBILITY: hidden; FONT-SIZE: 0px; LEFT: 0px; -moz-opacity: .5; opacity: 0.5
+}
+.wt-rotator .desc {
+	Z-INDEX: 6; POSITION: absolute; TEXT-ALIGN: left; VISIBILITY: hidden; COLOR: #fff; OVERFLOW: hidden
+}
+.wt-rotator .inner-bg {
+	Z-INDEX: 0; POSITION: relative; FILTER: alpha(opacity=70); BACKGROUND-COLOR: #000; WIDTH: 100%; HEIGHT: 100%; TOP: 0px; LEFT: 0px; -moz-opacity: .7; opacity: .7
+}
+.wt-rotator .inner-text {
+	Z-INDEX: 1; POSITION: absolute; PADDING-BOTTOM: 10px; PADDING-LEFT: 10px; WIDTH: auto; PADDING-RIGHT: 10px; HEIGHT: auto; TOP: 0px; PADDING-TOP: 10px; LEFT: 0px
+}
+.wt-rotator .c-panel {
+	Z-INDEX: 7; POSITION: absolute; VISIBILITY: hidden; TOP: 0px
+}
+.wt-rotator .outer-hp {
+	BORDER-BOTTOM: #000 1px solid; POSITION: absolute; FILTER: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111',GradientType=0); BORDER-LEFT: #000 1px solid; BACKGROUND: #333; BORDER-TOP: #000 1px solid; BORDER-RIGHT: #000 1px solid
+}
+.wt-rotator .outer-vp {
+	BORDER-BOTTOM: #000 1px solid; POSITION: absolute; FILTER: progid:DXImageTransform.Microsoft.gradient(startColorstr='#444444', endColorstr='#111111',GradientType=0); BORDER-LEFT: #000 1px solid; BACKGROUND: #333; BORDER-TOP: #000 1px solid; BORDER-RIGHT: #000 1px solid
+}
+.wt-rotator .outer-hp {
+	BORDER-LEFT: medium none; WIDTH: 100%; BORDER-RIGHT: medium none; LEFT: 0px
+}
+.wt-rotator .outer-vp {
+	BORDER-BOTTOM: medium none; HEIGHT: 100%; BORDER-TOP: medium none; TOP: 0px
+}
+.wt-rotator .back-scroll {
+	Z-INDEX: 10; POSITION: absolute; BACKGROUND: url(assets/spacer.png) no-repeat; TOP: 0px; LEFT: 0px
+}
+.wt-rotator .fwd-scroll {
+	Z-INDEX: 10; POSITION: absolute; BACKGROUND: url(assets/spacer.png) no-repeat; TOP: 0px; LEFT: 0px
+}
+.wt-rotator .thumbnails {
+	POSITION: relative; DISPLAY: inline; FLOAT: left; OVERFLOW: hidden
+}
+.wt-rotator .buttons {
+	POSITION: relative; DISPLAY: inline; FLOAT: left; OVERFLOW: hidden
+}
+.wt-rotator .thumbnails UL {
+	POSITION: relative; PADDING-BOTTOM: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; PADDING-LEFT: 0px; PADDING-RIGHT: 0px; LIST-STYLE-IMAGE: none; PADDING-TOP: 0px
+}
+.wt-rotator .thumbnails UL.inside {
+	POSITION: absolute; TOP: 0px; LEFT: 0px
+}
+.wt-rotator .thumbnails LI {
+	BORDER-BOTTOM: #111 1px solid; POSITION: relative; TEXT-ALIGN: center; BORDER-LEFT: #111 1px solid; LINE-HEIGHT: 24px; BACKGROUND-COLOR: #000; LIST-STYLE-TYPE: none; WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat !important; BACKGROUND-POSITION: center 50%; FLOAT: left; HEIGHT: 24px; COLOR: #eee; FONT-SIZE: 12px; OVERFLOW: hidden; BORDER-TOP: #111 1px solid; CURSOR: pointer; FONT-WEIGHT: bold; LIST-STYLE-IMAGE: none; BORDER-RIGHT: #111 1px solid; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; text-shadow: 0 1px 0 #222
+}
+.wt-rotator .play-btn {
+	BORDER-BOTTOM: #111 1px solid; POSITION: relative; TEXT-ALIGN: center; BORDER-LEFT: #111 1px solid; LINE-HEIGHT: 24px; BACKGROUND-COLOR: #000; LIST-STYLE-TYPE: none; WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat !important; BACKGROUND-POSITION: center 50%; FLOAT: left; HEIGHT: 24px; COLOR: #eee; FONT-SIZE: 12px; OVERFLOW: hidden; BORDER-TOP: #111 1px solid; CURSOR: pointer; FONT-WEIGHT: bold; LIST-STYLE-IMAGE: none; BORDER-RIGHT: #111 1px solid; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; text-shadow: 0 1px 0 #222
+}
+.wt-rotator .prev-btn {
+	BORDER-BOTTOM: #111 1px solid; POSITION: relative; TEXT-ALIGN: center; BORDER-LEFT: #111 1px solid; LINE-HEIGHT: 24px; BACKGROUND-COLOR: #000; LIST-STYLE-TYPE: none; WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat !important; BACKGROUND-POSITION: center 50%; FLOAT: left; HEIGHT: 24px; COLOR: #eee; FONT-SIZE: 12px; OVERFLOW: hidden; BORDER-TOP: #111 1px solid; CURSOR: pointer; FONT-WEIGHT: bold; LIST-STYLE-IMAGE: none; BORDER-RIGHT: #111 1px solid; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; text-shadow: 0 1px 0 #222
+}
+.wt-rotator .next-btn {
+	BORDER-BOTTOM: #111 1px solid; POSITION: relative; TEXT-ALIGN: center; BORDER-LEFT: #111 1px solid; LINE-HEIGHT: 24px; BACKGROUND-COLOR: #000; LIST-STYLE-TYPE: none; WIDTH: 24px; DISPLAY: inline; BACKGROUND-REPEAT: no-repeat !important; BACKGROUND-POSITION: center 50%; FLOAT: left; HEIGHT: 24px; COLOR: #eee; FONT-SIZE: 12px; OVERFLOW: hidden; BORDER-TOP: #111 1px solid; CURSOR: pointer; FONT-WEIGHT: bold; LIST-STYLE-IMAGE: none; BORDER-RIGHT: #111 1px solid; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px; text-shadow: 0 1px 0 #222
+}
+.wt-rotator .thumbnails LI:hover {
+	BACKGROUND-COLOR: #ccc; COLOR: #fff; text-shadow: 0 1px 0 #888
+}
+.wt-rotator .thumbnails LI.curr-thumb {
+	BACKGROUND-COLOR: #fff; COLOR: #000; CURSOR: default; text-shadow: 0 1px 0 #fff
+}
+.wt-rotator .thumbnails LI.image {
+	BACKGROUND: #000; -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0
+}
+.wt-rotator .thumbnails LI.curr-thumb.image {
+	BORDER-BOTTOM-COLOR: #06f; BORDER-TOP-COLOR: #06f; BORDER-RIGHT-COLOR: #06f; BORDER-LEFT-COLOR: #06f
+}
+.wt-rotator .thumbnails LI.image:hover {
+	BORDER-BOTTOM-COLOR: #06f; BORDER-TOP-COLOR: #06f; BORDER-RIGHT-COLOR: #06f; BORDER-LEFT-COLOR: #06f
+}
+.wt-rotator .thumbnails LI.image A {
+	BORDER-BOTTOM: 0px; BORDER-LEFT: 0px; DISPLAY: block; BORDER-TOP: 0px; BORDER-RIGHT: 0px
+}
+.wt-rotator .thumbnails LI.image IMG {
+	BORDER-BOTTOM: 0px; POSITION: absolute; FILTER: alpha(opacity=85); BORDER-LEFT: 0px; DISPLAY: block; BORDER-TOP: 0px; BORDER-RIGHT: 0px; -moz-opacity: .85; opacity: 0.85
+}
+.wt-rotator .thumbnails LI.image:hover IMG {
+	FILTER: alpha(opacity=100); -moz-opacity: 1; opacity: 1
+}
+.wt-rotator .thumbnails LI.curr-thumb.image IMG {
+	FILTER: alpha(opacity=100); CURSOR: default; -moz-opacity: 1; opacity: 1
+}
+.wt-rotator .thumbnails LI * {
+	DISPLAY: none
+}
+.wt-rotator .thumbnails LI DIV {
+	POSITION: relative; BACKGROUND-COLOR: #000; WIDTH: auto; HEIGHT: auto; COLOR: #fff
+}
+.wt-rotator .play-btn {
+	BACKGROUND: url(assets/play.png) #000
+}
+.wt-rotator .play-btn:hover {
+	BACKGROUND-COLOR: #ccc !important
+}
+.wt-rotator .pause {
+	BACKGROUND: url(assets/pause.png) #000
+}
+.wt-rotator .pause:hover {
+	BACKGROUND-COLOR: #ccc !important
+}
+.wt-rotator .prev-btn {
+	BACKGROUND: url(assets/prev.png) #000
+}
+.wt-rotator .prev-btn:hover {
+	BACKGROUND-COLOR: #ccc !important
+}
+.wt-rotator .next-btn {
+	BACKGROUND: url(assets/next.png) #000
+}
+.wt-rotator .next-btn:hover {
+	BACKGROUND-COLOR: #ccc !important
+}
+.wt-rotator .up {
+	BACKGROUND: url(assets/up.png) #000
+}
+.wt-rotator .up:hover {
+	BACKGROUND-COLOR: #ccc !important
+}
+.wt-rotator .down {
+	BACKGROUND: url(assets/down.png) #000
+}
+.wt-rotator .down:hover {
+	BACKGROUND-COLOR: #ccc !important
+}
+#rotator-tooltip {
+	Z-INDEX: 99999; POSITION: absolute; DISPLAY: none; TOP: 0px; LEFT: 0px
+}
+.txt-up#rotator-tooltip {
+	MARGIN-BOTTOM: 5px; BACKGROUND: url(assets/vtip.png) no-repeat 10px bottom; MARGIN-LEFT: -10px
+}
+.txt-down#rotator-tooltip {
+	MARGIN-TOP: 24px; BACKGROUND: url(assets/vtip.png) no-repeat 10px top; MARGIN-LEFT: -10px
+}
+.img-up#rotator-tooltip {
+	BACKGROUND: url(assets/vtip.png) no-repeat center bottom
+}
+.img-down#rotator-tooltip {
+	BACKGROUND: url(assets/vtip.png) no-repeat center top
+}
+.img-right#rotator-tooltip {
+	BACKGROUND: url(assets/htip.png) no-repeat left center
+}
+.img-left#rotator-tooltip {
+	BACKGROUND: url(assets/htip.png) no-repeat right center
+}
+#rotator-tooltip .tt-txt {
+	PADDING-BOTTOM: 5px; BACKGROUND-COLOR: #000; MARGIN: 8px 0px; PADDING-LEFT: 5px; PADDING-RIGHT: 5px; FONT-FAMILY: Arial, Helvetica, sans-serif; MAX-WIDTH: 300px; COLOR: #fff; FONT-SIZE: 12px; PADDING-TOP: 5px; -moz-border-radius: 3px; -webkit-border-radius: 3px; border-radius: 3px
+}
+#rotator-tooltip IMG {
+	PADDING-BOTTOM: 3px; BACKGROUND-COLOR: #000; MARGIN: 8px; PADDING-LEFT: 3px; PADDING-RIGHT: 3px; DISPLAY: none; PADDING-TOP: 3px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px
+}
+.wt-rotator .s-prev {
+	Z-INDEX: 8; POSITION: absolute; FILTER: alpha(opacity=80); MARGIN-TOP: -25px; WIDTH: 40px; BACKGROUND: url(assets/prev.png) no-repeat; HEIGHT: 50px; TOP: 50%; CURSOR: pointer; -moz-opacity: .8; opacity: .8
+}
+.wt-rotator .s-next {
+	Z-INDEX: 8; POSITION: absolute; FILTER: alpha(opacity=80); MARGIN-TOP: -25px; WIDTH: 40px; BACKGROUND: url(assets/next.png) no-repeat; HEIGHT: 50px; TOP: 50%; CURSOR: pointer; -moz-opacity: .8; opacity: .8
+}
+.wt-rotator .s-prev {
+	BACKGROUND-POSITION: 0px center; LEFT: 0px
+}
+.wt-rotator .s-next {
+	BACKGROUND-POSITION: -40px center; MARGIN-LEFT: -40px; LEFT: 100%
+}
+.wt-rotator .s-prev:hover {
+	FILTER: alpha(opacity=95); BACKGROUND-COLOR: transparent !important; -moz-opacity: .95; opacity: .95
+}
+.wt-rotator .s-next:hover {
+	FILTER: alpha(opacity=95); BACKGROUND-COLOR: transparent !important; -moz-opacity: .95; opacity: .95
+}
+.wt-rotator .block {
+	Z-INDEX: 2; POSITION: absolute
+}
+.wt-rotator .vpiece {
+	Z-INDEX: 2; POSITION: absolute
+}
+.wt-rotator .hpiece {
+	Z-INDEX: 2; POSITION: absolute
+}

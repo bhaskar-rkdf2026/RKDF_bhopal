@@ -1,0 +1,62 @@
+/*HTML {
+	BACKGROUND: #ccc; HEIGHT: 100%
+}
+BODY {
+	FILTER: progid:DXImageTransform.Microsoft.gradient(startColorStr='#EEEEEE', EndColorStr='#CCCCCC');
+	MARGIN: 0px;
+	FONT-FAMILY: Arial, Helvetica, sans-serif;
+	BACKGROUND: #ccc;
+	HEIGHT: 100%
+}*/
+A {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+A:visited {
+	COLOR: #666666; TEXT-DECORATION: none
+}
+H1 {
+	MARGIN: 0px; COLOR: #b5ff00; FONT-SIZE: 16px; FONT-WEIGHT: normal
+}
+.title {
+	HEIGHT: 60px
+}
+.panel {
+	POSITION:inherit;
+	TEXT-ALIGN: left;
+	PADDING-BOTTOM: 0px;
+	BACKGROUND-COLOR: #fff;
+	MIN-HEIGHT: 310px;
+	PADDING-LEFT: 10px;
+	/*WIDTH: 827px;*/
+	WIDTH: 700px;
+	PADDING-RIGHT: 0px;
+	MARGIN-LEFT:0px;
+	PADDING-TOP:0px;
+	LEFT: 0px;
+	-moz-box-shadow: 0px 0px 3px #000;
+	box-shadow: 0px 0px 3px #000;
+	-webkit-box-shadow: 0px 0px 3px #000;
+	top: 0px;
+	height: 310px;
+}
+.info-section {
+	BORDER-BOTTOM: #333 1px solid; POSITION: relative; BORDER-LEFT: #333 1px solid; MARGIN-TOP: 20px; WIDTH: 710px; BACKGROUND: url(bg.png) #222 repeat-y 0px 0px; OVERFLOW: hidden; BORDER-TOP: #333 1px solid; BORDER-RIGHT: #333 1px solid
+}
+.form-panel {
+	POSITION: relative; PADDING-BOTTOM: 10px; BACKGROUND-COLOR: #eee; PADDING-LEFT: 10px; WIDTH: 190px; PADDING-RIGHT: 10px; FLOAT: left; COLOR: #000; FONT-SIZE: 12px; PADDING-TOP: 10px
+}
+.form-sec {
+	MARGIN-BOTTOM: 10px
+}
+.description {
+	POSITION: relative; PADDING-BOTTOM: 15px; PADDING-LEFT: 15px; WIDTH: 585px; PADDING-RIGHT: 15px; FLOAT: left; COLOR: #fff; FONT-SIZE: 14px; PADDING-TOP: 15px
+}
+SELECT {
+	WIDTH: 190px
+}
+LABEL.disable {
+	COLOR: #777
+}
+.copyright {
+	TEXT-ALIGN: right; MARGIN: 15px 0px; WIDTH: 100%; FONT-SIZE: 11px
+}

@@ -1,0 +1,344 @@
+html,body {
+    padding:0;
+    margin:0;
+}
+* {
+    margin:0;
+    padding: 0;
+}
+.scrolled{
+  background-color:rgba(28, 113, 204,0.8) !important;
+  transition: background-color 800ms linear;
+}
+.scrollednot {
+  background-color:rgba(0,0,0,0.1) !important;
+  transition: background-color 800ms linear;
+}
+
+@media (max-width:375px){
+   .scrollednot {
+  background-color:rgba(28, 113, 204,1) !important;
+  transition: background-color 800ms linear;
+} 
+}
+.row{
+    position: relative;
+    width: 100%;
+}
+.nav-link:hover{
+        color:white !important;
+        
+    }
+    .header{
+        filter:blur(3px);
+        padding:80px 0 80px;
+        min-height: 500px;
+        width:100%;
+        background: url("../images/backgroundimage.jpg");
+        background-repeat:no-repeat;
+        background-position:left;
+        background-attachment:fixed;;
+        background-size:cover;
+        color:#FFFFFF;
+    }
+    .footback{
+        filter:blur(2px);
+        padding:80px 0 80px;
+        min-height: 50px;
+        width:100%;
+        background: url("../images/footerimage1.jpg");
+        background-repeat:no-repeat;
+        background-position:left;
+        background-attachment:fixed;;
+        background-size:cover;
+        color:#FFFFFF;
+    }
+    .headerContent{
+        position:absolute;
+        top:50%;
+        left:50%;
+        transform: translate(-50%, -50%);
+        color:white;
+        text-align: center;
+    }
+    .aboutheader{
+        filter:blur(4px);
+        padding:80px 0 80px;
+        min-height: 500px;
+        width:100%;
+        background: url("../images/aboutus.jpg");
+        background-repeat:no-repeat;
+        background-position:center center;
+        background-attachment: fixed;
+        background-size:cover;
+        color:#FFFFFF;
+    }
+    .contactheader{
+        filter:blur(4px) grayscale(50%);
+        padding:80px 0 80px;
+        min-height: 500px;
+        width:100%;
+        background: url("../images/contactus1.jpg") 0 -120px;
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-attachment: fixed;
+        color:#FFFFFF;
+    }
+    .j2bot{
+        padding:80px 0 80px;
+        min-height: 500px;
+        width:100%;
+        background: url("../images/aboutback.jpg") 0 -100px;
+        background-repeat: no-repeat;
+        background-size:cover;
+        background-attachment: fixed;
+    }
+    .d-block{
+        height: 300px;
+        width: 500px;
+    }
+    .row{
+        width:100%;
+        margin:0px;
+    }
+    .jumbotron{
+        margin-bottom: 0px;
+    }
+    .j2{
+        padding:0px;
+    }
+    .j2img::after { 
+     display: block;
+    position: relative;
+    background-image: linear-gradient(to right,#17a2b8, #1ba2b700, #17a2b854);
+    margin-top: -200px;
+    height: 200px;
+    width: 100%;
+    content: '';
+}
+
+img{
+    height: auto;
+}
+.rksize{
+    height: 200px;
+}
+.carousel{
+    margin:0px;
+    padding: 0px;
+}
+.carouselsize{
+    width:100%;
+}
+@media (max-width: 768px) {
+.jumbo-layer{
+    padding:0;
+    width:auto;
+}
+}
+/*Overriding display-4*/
+.jumbo-layer .display-4{
+    font-size: 2.5rem !important;
+}
+
+.jumbo-layer{
+       background-color: rgba(0,0,0,0.8);
+    padding: 20px 0 20px;
+    border-radius: 10px;
+    margin-top: 70px;
+}
+.head{
+    text-shadow: 0 -3px 0px rgba(41, 48, 59, 0.92);
+}
+.pg-color{
+    background-color: rgba(255,255,255,0.46);
+}
+.content-area{
+   position: relative;
+    height: auto;
+    margin: 16px 0px 16px 0px;
+}
+.card-deck{
+    margin:10px;
+}
+.content-area .card{
+    box-shadow: 0 2px 15px rgba(41, 48, 59, 0.62);
+}
+.card-text{
+    color:#17a2b8;
+}
+.animated{
+    animation-delay: 1s;
+    animation-duration: 1.5s;
+}
+.section{
+    min-height:  564px;
+}
+
+/*css for Academics section*/
+
+#feedback { font-size: 1.4em; }
+  #selectable{ text-align: center;}
+  #selectable .ui-selecting { background: #007bff; }
+  #selectable .ui-selected { background: #007bff;
+    color: white; }
+  #selectable .ui-selected:hover { background: #007bff;
+    color: white; }
+  #selectable li{padding:8px;}
+
+  #selectable li:hover{
+      background-color: #278fff8f;
+  }
+  #selectable li a{
+    text-decoration: none; color:#524b4be3; padding-right: 25%;
+    padding-left: 25%;
+  }
+  #selectable li a:hover{
+      color:white;
+  }
+  
+  .card-header .btn-link:hover{
+      text-decoration: none;
+  }
+  
+  .card-header .btn-link:focus{
+      text-decoration: none;
+  }
+  
+  @media (max-width:466px ){
+      .card-header .btn-link{
+          font-size: 11px;
+      }
+      
+      .collapse .card-body{
+          font-size: 13px;
+      }
+      .card-header{
+          padding:0px;
+       }
+  }
+  
+  .card-body, .mb-0 {
+      text-align: center;
+  }
+  
+  .section .row{
+      min-height: 490px;
+  }
+  
+  .section .row .col-md-3 , .col-md-9{
+      margin-top:50px;
+  }
+  
+  .year{
+      text-decoration: none !important;
+      color:#4c4749cc;
+      padding:4px 100px 4px 100px;
+      
+  }
+  
+  .year:hover{
+      color:white;
+     background-color:#143373a1;
+  }
+  
+  @media (max-width:375px){
+      .year{
+          padding:4px 60px 4px 60px;
+      }
+  .pdf{
+    width: 159px;
+    height: 166px;
+}
+}
+
+/*Adding styling to font awesome*/
+#facebook:hover{
+    color:blue !important;
+    
+}
+#twitter:hover{
+    color:#00daff !important;
+    
+}
+#googleplus:hover{
+    color:#BD081B !important;
+    
+}
+#linkedin:hover{
+    color:#1cbcd8 !important;
+    
+}
+#instagram:hover{
+    color:#823864 !important;
+    
+}
+#pinterest:hover{
+    color:#BD081B !important;
+    
+}
+
+#facebook{
+    font-size:30px;
+    color:white;
+    
+}
+#twitter{
+    font-size:30px;
+    color:white;
+    
+}
+#googleplus{
+    font-size:30px;
+    color:white;
+    
+}
+#linkedin{
+    font-size:30px;
+    color:white;
+    
+}
+#instagram{
+   font-size:30px;
+    color:white;
+    
+}
+#pinterest{
+    font-size:30px;
+    color:white;
+    
+}
+@media (max-width:775px){
+    
+    #facebook{
+    font-size:15px;
+    color:white;
+    
+}
+#twitter{
+    font-size:15px;
+    color:white;
+    
+}
+#googleplus{
+    font-size:15px;
+    color:white;
+    
+}
+#linkedin{
+    font-size:15px;
+    color:white;
+    
+}
+#instagram{
+   font-size:15px;
+    color:white;
+    
+}
+#pinterest{
+    font-size:15px;
+    color:white;
+    
+}
+    
+}

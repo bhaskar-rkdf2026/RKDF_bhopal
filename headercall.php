@@ -1,0 +1,1 @@
+header("Location: http://rkdfu.org/test1.php");

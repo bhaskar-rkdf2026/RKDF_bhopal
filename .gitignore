@@ -1,0 +1,8 @@
+# Git Ignore for RKDF Bhopal Project
+*.zip
+*.mp4
+*.mov
+*.avi
+*.lock-*
+.htaccess.lock*
+naac/SIRO/Bibliographic.pdf
