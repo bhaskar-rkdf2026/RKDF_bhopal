@@ -3,6 +3,15 @@ RewriteOptions inherit
 
 RewriteEngine on
 
+# ── CORS: Allow fonts for staging subdomain ──
+<IfModule mod_headers.c>
+    <FilesMatch "\.(woff|woff2|eot|ttf|otf|svg|css)$">
+        Header set Access-Control-Allow-Origin "*"
+        Header set Access-Control-Allow-Methods "GET, OPTIONS"
+        Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
+    </FilesMatch>
+</IfModule>
+
 # RewriteOptions inherit
 # Header set content-Security-Policy: upgrade-insecure-requests
 # RewriteEngine On
