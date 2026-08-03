@@ -15,7 +15,9 @@ titlebar(0);
 
 
 $(document).ready(function() {
-	$('#slider').nivoSlider();
+	if (typeof $.fn.nivoSlider === 'function' && $('#slider').length) {
+		$('#slider').nivoSlider();
+	}
 	var active_color = '#000'; // Colour of user provided text
 	var inactive_color = '#888'; // Colour of default text
 	$('input.captchaText').val("Enter the charectors...");

@@ -101,15 +101,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <link rel="stylesheet" type="text/css" media="all" href="css/style_engi_tech.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/base.css" />
     <link rel=stylesheet type=text/css href="css/flip.css">
+    <!-- RKDF New Design System — loaded LAST so it wins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/rkdf-navbar.css" />
+    <link rel="stylesheet" type="text/css" href="css/rkdf-home.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      /* Suppress old legacy content — new RKDF design is visible */
+      #header, section#topHeader, .nb_bar, .menu-main-menu-container,
+      section#content, section#spotlight, #feedback, #feedbackadmission,
+      #comment, #shortNote, #boxes, .panel,
+      .wt-rotator, #qm0, section#contentLeft,
+      footer#footer { display:none!important; }
+      /* Body reset */
+      html, body { margin:0; padding:0; overflow-x:hidden; }
+    </style>
     <link rel="icon" type="image/jpg" href="images/rkdflogo.jpg">
     <script type='text/javascript' src='js/jquery.min1159.js?ver=1.4.2'></script>
     <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/jcarouselite.js"></script>
-    <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
-    <link rel=stylesheet type=text/css href="css/preview.css">
-    <link rel=stylesheet type=text/css href="css/wt-rotator.css">
-    <script type=text/javascript src="js/jquery.wt-rotator.min.js"></script>
-    <script type=text/javascript src="js/preview.js"></script>
+    <!-- Legacy unused slider scripts commented to prevent console errors -->
+    <!-- <script type="text/javascript" src="js/jcarouselite.js"></script> -->
+    <!-- <script type="text/javascript" src="js/jquery.nivo.slider.js"></script> -->
+    <!-- <script type=text/javascript src="js/jquery.wt-rotator.min.js"></script> -->
+    <!-- <script type=text/javascript src="js/preview.js"></script> -->
     <script type="text/javascript" src="js/jquery_0022.js"></script>
     <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/ddaccordion.js"></script>
@@ -389,11 +405,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 <!--  <body oncontextmenu="return false"> index page right clik disasble   -->
 
-<body>
+<body style="margin:0;padding:0;">
     <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6JGQG75"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+
+    <!-- ══ RKDF NEW APPROVED NAVBAR ══ -->
+    <?php include "include/new_navbar.php"; ?>
+    <!-- ══════════════════════════════ -->
+
+    <!-- ══ RKDF REDESIGNED HOMEPAGE ══ -->
+    <?php include "include/home_sections.php"; ?>
+    <!-- ═════════════════════════════ -->
+
+    <!-- ══ RKDF NEW FOOTER ══ -->
+    <?php include "include/footer.php"; ?>
+    <!-- ══════════════════════ -->
+
+    <!-- OLD content below is hidden via CSS suppression above -->
+
     <div id="boxes">
         <div id="dialog" class="window">
             <!--  <button  type="button" class="close" data-dismiss="modal">&times;</button>-->
@@ -633,23 +664,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <a href="http://www.rkdf.ac.in">M.Tech Result Declared...Click</a>
       </div>-->
 
-    <header id="header">
-
+    <header id="header" style="padding:0; margin:0; width:100%; background:transparent;">
         <?php
-        include "include/topmenu.php";
+        include "include/menu.php";
+        include_once __DIR__ . "/include/home_sections.php";
         ?>
-        <div class="wrapper">
-            <img src="images/img/logo33.png" height="129" />
-            <img src="images/img/logo22.png" width="528" height="111" />
-            <img src="images/img/approval.gif" width="110" height="122" />
-            <a href="Content/Documents/NAAC-Certificate-of-Accrediation-RKDF-University-Bhopal.pdf" target="_blank"><img
-                    src="images/img/NaccLogo.jpg" style="width: 100px;height: 121px;"></a>
-            <a href="images/Accreditation/ICAR Accreditation.jpeg" target="_blank"><img src="images/img/icarlogo.png"
-                    style="width: 100px;height: 121px;background: white;"></a>
-
-            <nav class="menu-main-menu-container">
-                <div class="nb_bar" style="z-index:100;">
-                    <div style="width:960px;margin:0px auto;">
+    </header>
+    <?php exit(); ?>
                         <!--[START-QM0-INSERT]-->
                         <!--%%%%%%%%%%%% NodeFire Styles [Publish this section to the document head for full validation!] %%%%%%%%%%%-->
 
@@ -710,84 +731,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                             list-style: none;
                             padding: 0px;
                             margin: 0px;
-                        }
-
-                        .qmmc .qmdivider {
-                            display: block;
-                            border-width: 0px;
-                            border-style: solid;
-                            position: relative;
-                        }
-
-                        .qmmc .qmtitle {
-                            display: block;
-                            cursor: default;
-                            white-space: nowrap;
-                            position: relative;
-                        }
-
-                        .qmmc {
-                            position: relative;
-                            zoom: 1;
-                        }
-
-                        .qmmc .qmitem-m,
-
-                        .qmmc>li {
-                            display: block;
-                            white-space: nowrap;
-                            position: relative;
-                        }
-
-                        .qmmc .qmitem-s,
-
-                        .qmmc .qmsub>li {
-                            display: block;
-                            white-space: nowrap;
-                            position: relative;
-                        }
-
-                        .qmmc .qmsub {
-                            visibility: hidden;
-                            position: absolute;
-                            z-index: 10;
-                            left: 100%;
-                            top: 0px;
-                        }
-
-                        .qmmc div.qmsub {
-                            left: 0px;
-                        }
-
-                        .qmmc .qmcbox {
-                            cursor: default;
-                            display: block;
-                            position: relative;
-                            white-space: normal;
-                        }
-
-                        .qmmc .qmmulti {
-                            display: block;
-                            float: left;
-                            position: relative;
-                        }
-
-                        .qmmc .qmmulti dd {
-                            margin: 0px;
-                            padding: 0px;
-                            position: relative;
-                        }
-
-                        .qmmc.qm-horizontal-c>li,
-                        .qmmc.qm-horizontal-c>.qmitem-m,
-                        .qmsub.qm-horizontal-c>li,
-                        .qmsub.qm-horizontal-c>.qmitem-s,
-                        .qm-horizontal-c>.qmtitle,
-                        .qm-horizontal-c>.qmdivider,
-                        .qm-horizontal-c>.qmcbox,
-                        .qm-horizontal-c>li>.qmtitle,
-                        .qm-horizontal-c>li>.qmdivider,
-                        .qm-horizontal-c>li>.qmcbox {
                             float: left;
                         }
 
@@ -3388,9 +3331,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a href="https://erplive.rkdf.ac.in/Student/Registration" title="For Admission Query" target="_blank"><img
                     src="images/img/admisn2.JPG" width="37" height="152" /></a>
         </div>
-        <?php
-        include "include/footer.php";
-        ?>
+        <?php /* footer moved above */ ?>
     </footer>
     <script type="text/javascript" src="js/jquery.js"></script>
     <!--<link type="text/css" href="css/docs.css" rel="stylesheet" media="all">-->
