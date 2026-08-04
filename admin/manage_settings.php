@@ -40,7 +40,6 @@ try {
 }
 ?>
 
-
 <style>
   .settings-card {
     background: #ffffff;
@@ -125,20 +124,42 @@ try {
 
   <form action="manage_settings.php" method="POST">
     
-    <!-- 1. Contact & Identity -->
+    <!-- 1. Header Logo & University Identity -->
+    <div class="settings-section-title">
+      <i class="fa-solid fa-image" style="color: var(--primary);"></i>
+      Header Logo &amp; Brand Identity
+    </div>
+
+    <div class="form-grid-2">
+      <div class="form-group-full">
+        <label>Header Logo Image URL / Path</label>
+        <input type="text" name="settings[header_logo_url]" value="<?= htmlspecialchars($currentSettings['header_logo_url'] ?? 'images/lovable/rkdf-logo.png') ?>" placeholder="e.g. images/lovable/rkdf-logo.png">
+        <div style="font-size:12px;color:#64748b;margin-top:4px;">Direct URL or relative path for university header logo image</div>
+      </div>
+      <div>
+        <label>University Name / Brand Title</label>
+        <input type="text" name="settings[site_title]" value="<?= htmlspecialchars($currentSettings['site_title'] ?? 'RKDF University Bhopal') ?>">
+      </div>
+      <div>
+        <label>University Subtitle / Tagline</label>
+        <input type="text" name="settings[site_tagline]" value="<?= htmlspecialchars($currentSettings['site_tagline'] ?? 'BHOPAL · SINCE 2011') ?>">
+      </div>
+    </div>
+
+    <!-- 2. Contact & Identity -->
     <div class="settings-section-title">
       <i class="fa-solid fa-building-columns" style="color: var(--primary);"></i>
-      Contact Information & University Identity
+      Contact Information &amp; Office Details
     </div>
 
     <div class="form-grid-2">
       <div>
-        <label>University Title</label>
-        <input type="text" name="settings[site_title]" value="<?= htmlspecialchars($currentSettings['site_title'] ?? 'RKDF University Bhopal') ?>">
+        <label>Contact Phone Number</label>
+        <input type="text" name="settings[contact_phone]" value="<?= htmlspecialchars($currentSettings['contact_phone'] ?? '+91 755 2751 000') ?>">
       </div>
       <div>
-        <label>Contact Phone Number</label>
-        <input type="text" name="settings[contact_phone]" value="<?= htmlspecialchars($currentSettings['contact_phone'] ?? '+91-755-2740395') ?>">
+        <label>Emergency Helpline Phone</label>
+        <input type="text" name="settings[emergency_phone]" value="<?= htmlspecialchars($currentSettings['emergency_phone'] ?? '1800 200 2233') ?>">
       </div>
       <div>
         <label>General Email</label>
@@ -146,7 +167,7 @@ try {
       </div>
       <div>
         <label>Admissions Email</label>
-        <input type="text" name="settings[admission_email]" value="<?= htmlspecialchars($currentSettings['admission_email'] ?? 'admission@rkdf.ac.in') ?>">
+        <input type="text" name="settings[admission_email]" value="<?= htmlspecialchars($currentSettings['admission_email'] ?? 'admissions@rkdf.ac.in') ?>">
       </div>
       <div class="form-group-full">
         <label>Campus Address</label>
@@ -154,10 +175,10 @@ try {
       </div>
     </div>
 
-    <!-- 2. Admissions & Important Links -->
+    <!-- 3. Admissions & Important Links -->
     <div class="settings-section-title">
       <i class="fa-solid fa-user-graduate" style="color: var(--primary);"></i>
-      Admissions & Important Document Links
+      Admissions &amp; Important Document Links
     </div>
 
     <div class="form-grid-2">
@@ -190,10 +211,10 @@ try {
       </div>
     </div>
 
-    <!-- 3. Announcement Ticker & Footer -->
+    <!-- 4. Announcement Ticker & Footer -->
     <div class="settings-section-title">
       <i class="fa-solid fa-bullhorn" style="color: var(--primary);"></i>
-      Global Announcement Ticker & Footer
+      Global Announcement Ticker &amp; Footer
     </div>
 
     <div class="form-grid-2">
@@ -203,7 +224,7 @@ try {
       </div>
       <div class="form-group-full">
         <label>Footer Copyright Text</label>
-        <input type="text" name="settings[copyright_text]" value="<?= htmlspecialchars($currentSettings['copyright_text'] ?? '© RKDF University Bhopal. All rights reserved.') ?>">
+        <input type="text" name="settings[copyright_text]" value="<?= htmlspecialchars($currentSettings['copyright_text'] ?? '© 2026 RKDF University · All rights reserved') ?>">
       </div>
     </div>
 
@@ -217,7 +238,7 @@ try {
 
 <script>
   <?php if (!empty($msg)): ?>
-    showToast('Global Site Settings updated successfully across all pages!', 'success');
+    alert('Global Site Settings updated successfully across all pages!');
   <?php endif; ?>
 </script>
 

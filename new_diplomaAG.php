@@ -1,349 +1,108 @@
 <?php
-// Start the session. This should be at the very top of your PHP script.
-// In a production environment, ensure session parameters are configured securely
-// in php.ini (e.g., session.cookie_httponly = 1, session.cookie_secure = 1, session.cookie_samesite = "Lax")
-// or via session_set_cookie_params() before session_start().
-session_start();
-
-// --- Configuration ---
-// IMPORTANT: In a real production environment, these credentials should NOT be hardcoded.
-// Use environment variables (e.g., $_ENV, getenv()), a dedicated configuration file
-// outside the web root, or a secrets management service.
-define('DB_HOST', 'localhost');
-define('DB_USER', 'rkdfu_rkdfresults');     // Replace with your actual database user
-define('DB_PASS', 'CcW6JcDUF-Sl');         // Replace with your actual database password
-define('DB_NAME', 'rkdfu_rkdf_results');    // Replace with your actual database name
-
-// Define constants for image paths. This improves maintainability and readability.
-define('BASE_IMAGE_PATH', 'images/'); // Assuming images are in ../images/ relative to this file
-define('LOGO_IMAGE_PATH', 'RKDF_LOGO2.png'); // Assuming this is in the same directory as diplomaAG.php
-define('BACKGROUND_IMAGE_PATH', 'logobg_2.png'); // Assuming this is in the same directory as diplomaAG.php
-
-// --- Error Handling Setup ---
-// In production, display_errors should be 'Off' in php.ini.
-// Errors should be logged to a file for security and debugging.
-// ini_set('display_errors', 'Off');
-// ini_set('log_errors', 'On');
-// ini_set('error_log', 'php_error.log'); // IMPORTANT: Set a real path to your log file
-
-// Function to handle critical errors gracefully without exposing details
-function handleCriticalError($message, $redirectPage = 'new_diplomaAG_result.php?err=server_error') {
-    error_log("<br>" . "CRITICAL ERROR: First call to - new_diplomaAG_result.php - " . $message); // Log the detailed error
-    // Redirect to a generic error page or the login page with a generic error code
-    header("Location: " . $redirectPage);
-    exit(); // Terminate script execution
-}
-
-$rno=$_REQUEST["rno"];
-$rno = trim($_POST["rno"]);
-$_SESSION['xrno'] = $rno;
-
-// --- Session Validation ---
-// Ensure the roll number is set in the session.
-if (!isset($_SESSION['xrno']) || empty($_SESSION['xrno'])) {
-    // If not set, redirect to the login/result page with an error.
-    handleCriticalError("Session roll number not found or empty.", "new_diplomaAG_result.php?err=session_expired");
-}
-
-// Sanitize the session roll number for database query
-$xrno = htmlspecialchars($_SESSION['xrno'], ENT_QUOTES, 'UTF-8');
-
-// --- Database Connection (using mysqli) ---
-// Create a new mysqli connection object.
-$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_NAME);
-
-// Check for connection errors.
-if ($mysqli->connect_error) {
-    handleCriticalError("Database connection failed: " . $mysqli->connect_error);
-}
-
-// --- Prepared Statement to Prevent SQL Injection ---
-// Prepare the SQL query. Use '?' as a placeholder for the roll number.
-$query = "SELECT * FROM diploamag_result_1 WHERE rollno = ?";
-
-// Prepare the statement.
-$stmt = $mysqli->prepare($query);
-
-// Check if the statement preparation was successful.
-if (false === $stmt) {
-    handleCriticalError("Failed to prepare statement: " . $mysqli->error);
-}
-
-// Bind parameters. 's' indicates the parameter is a string.
-$stmt->bind_param("s", $xrno);
-
-// Execute the prepared statement.
-if (!$stmt->execute()) {
-    handleCriticalError("Statement execution failed: " . $stmt->error);
-}
-
-// Get the result set from the executed statement.
-$result = $stmt->get_result();
-
-// Fetch the row.
-// We expect only one row for a unique roll number.
-$row = $result->fetch_assoc(); // Use fetch_assoc() for associative array
-
-// Close the statement and connection as we've fetched the data.
-$stmt->close();
-$mysqli->close();
-
-// Check if a result was found for the roll number.
-if (!$row) {
-    // If no result found, redirect back to the result page with an error.
-    handleCriticalError("No result found for roll number: " . $xrno, "diplomaAG_result.php?err=no_result");
-}
-
-// --- Data Extraction and Sanitization for Display ---
-// Extract data from the fetched row and sanitize it using htmlspecialchars()
-// to prevent XSS vulnerabilities when displaying on the page.
-$rno            = htmlspecialchars($row["rollno"] ?? '', ENT_QUOTES, 'UTF-8');
-$name           = htmlspecialchars($row["name"] ?? '', ENT_QUOTES, 'UTF-8');
-$fname          = htmlspecialchars($row["fname"] ?? '', ENT_QUOTES, 'UTF-8');
-$theory1        = htmlspecialchars($row["theory1"] ?? '', ENT_QUOTES, 'UTF-8');
-$sessional1     = htmlspecialchars($row["sessional1"] ?? '', ENT_QUOTES, 'UTF-8');
-$total1         = htmlspecialchars($row["total1"] ?? '', ENT_QUOTES, 'UTF-8');
-$theory2        = htmlspecialchars($row["theory2"] ?? '', ENT_QUOTES, 'UTF-8');
-$sessional2     = htmlspecialchars($row["sessional2"] ?? '', ENT_QUOTES, 'UTF-8');
-$total2         = htmlspecialchars($row["total2"] ?? '', ENT_QUOTES, 'UTF-8');
-$practical1     = htmlspecialchars($row["practical1"] ?? '', ENT_QUOTES, 'UTF-8');
-$practical2     = htmlspecialchars($row["practical2"] ?? '', ENT_QUOTES, 'UTF-8');
-$practicaltotal = htmlspecialchars($row["practicaltotal"] ?? '', ENT_QUOTES, 'UTF-8');
-$viva1          = htmlspecialchars($row["viva1"] ?? '', ENT_QUOTES, 'UTF-8');
-$viva2          = htmlspecialchars($row["viva2"] ?? '', ENT_QUOTES, 'UTF-8');
-$vivatotal      = htmlspecialchars($row["vivatotal"] ?? '', ENT_QUOTES, 'UTF-8');
-$totalfig       = htmlspecialchars($row["totalfig"] ?? '', ENT_QUOTES, 'UTF-8');
-$totalword      = htmlspecialchars($row["totalword"] ?? '', ENT_QUOTES, 'UTF-8');
-$fresult        = htmlspecialchars($row["result"] ?? '', ENT_QUOTES, 'UTF-8');
-
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Diploma AG - Result - RKDF University, Bhopal</title>
-    <style type="text/css">
-    body {
-        font-family: 'Inter', Arial, Helvetica, sans-serif;
-        background-color: #E6E9D1;
-        /* Original background color */
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-        /* Align to top */
-        min-height: 100vh;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diploma AG - Result - RKDF University, Bhopal — RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-
-    .result-container {
-        background-color: #FFFFFF;
-        /* White background for the content area */
-        border: 1px solid #ccc;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        /* Enhanced shadow */
-        border-radius: 10px;
-        /* Rounded corners */
-        padding: 25px;
-        max-width: 900px;
-        /* Max width for readability */
-        width: 100%;
-        box-sizing: border-box;
-        /* Include padding in width */
-        overflow: hidden;
-        /* Ensure content stays within bounds */
+    .sp-main-box {
+      padding: 80px 0;
+      background: var(--p-paper);
+      color: var(--p-navy-deep);
+      font-size: 16px;
+      line-height: 1.8;
     }
-
-    .bg {
-        background-image: url('<?php echo BACKGROUND_IMAGE_PATH; ?>');
-        background-repeat: no-repeat;
-        background-position: center;
-        background-attachment: scroll;
-        background-size: cover;
-        /* Ensure background image covers the area */
-        border-collapse: collapse;
-        /* Remove table cell spacing */
-        width: 100%;
+    .sp-main-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      border: 1px solid var(--p-hairline);
     }
-
-    .style8 {
-        font-size: 35px;
-        font-weight: bold;
-        color: #333;
-        /* Darker color for better contrast */
-        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    .sp-main-box th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 16px 20px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-
-    .style1 {
-        font-size: 24px;
-        font-weight: bold;
-        color: #555;
+    .sp-main-box td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
     }
-
-    .style7 {
-        /* Assuming style7 was intended for color/style */
-        color: #880000;
-        /* Example color for emphasis */
+    .sp-main-box tr:hover td {
+      background: rgba(220,38,38,0.03);
     }
-
-    .style9 {
-        font-family: Arial, Helvetica, sans-serif;
-        font-weight: bold;
-        color: #666;
-        font-size: 16px;
-        /* Adjusted for readability */
+    .sp-main-box a {
+      color: var(--p-gold);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-
-    .fonttb {
-        font-size: 15px;
-        padding: 8px 10px;
-        /* Add padding to table cells */
-        border: 1px solid #ddd;
-        /* Lighter border for tables */
-        text-align: left;
-        /* Default text alignment */
+    .sp-main-box a:hover {
+      text-decoration: underline;
+      color: #b91c1c;
     }
-
-    .fonttb strong {
-        color: #333;
-        /* Darker text for strong elements */
+    .sp-main-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
     }
-
-    .style10 {
-        font-size: 15px;
-        font-weight: bold;
-        padding: 8px 10px;
-        border: 1px solid #ddd;
-        text-align: center;
-        /* Centered for headers */
-        background-color: #f0f0f0;
-        /* Light background for header cells */
+    .glossymenu a.menuitem {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px;
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 8px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
     }
-
-    /* Specific table styling for marks sheet */
-    .marks-table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-top: 20px;
+    .glossymenu a.menuitem:hover {
+      background: var(--p-gold);
+      color: #ffffff;
+      border-color: var(--p-gold);
     }
-
-    .marks-table th,
-    .marks-table td {
-        border: 1px solid #ccc;
-        /* Consistent borders */
-        padding: 10px;
-        text-align: center;
-    }
-
-    .marks-table th {
-        background-color: #e0e0e0;
-        font-weight: bold;
-    }
-
-    .note-section {
-        margin-top: 20px;
-        padding: 10px;
-        border: 1px dashed #999;
-        background-color: #f9f9f9;
-        color: #777;
-        font-size: 14px;
-        text-align: center;
-        border-radius: 5px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .result-container {
-            padding: 15px;
-        }
-
-        .style8 {
-            font-size: 28px;
-        }
-
-        .style1 {
-            font-size: 20px;
-        }
-
-        .fonttb,
-        .style10 {
-            font-size: 13px;
-            padding: 6px 8px;
-        }
-
-        .header-logo {
-            width: 80px;
-            /* Smaller logo for mobile */
-            height: auto;
-        }
-
-        .marks-table,
-        .marks-table tbody,
-        .marks-table tr,
-        .marks-table td {
-            display: block;
-            /* Stack table cells on small screens */
-            width: 100%;
-        }
-
-        .marks-table tr {
-            margin-bottom: 15px;
-            border: 1px solid #eee;
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .marks-table td {
-            border: none;
-            border-bottom: 1px solid #eee;
-            position: relative;
-            padding-left: 50%;
-            /* Space for pseudo-element labels */
-            text-align: right;
-        }
-
-        .marks-table td:before {
-            content: attr(data-label);
-            /* Use data-label for mobile headers */
-            position: absolute;
-            left: 6px;
-            width: 45%;
-            padding-right: 10px;
-            white-space: nowrap;
-            text-align: left;
-            font-weight: bold;
-            color: #555;
-        }
-
-        /* Hide original table headers on mobile */
-        .marks-table thead {
-            display: none;
-        }
-
-        /* Specific adjustments for marks table layout on small screens */
-        .marks-table tr td:nth-child(1) {
-            /* Subject Code */
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-            background-color: #f9f9f9;
-            border-bottom: 2px solid #ddd;
-        }
-
-        .marks-table tr td:nth-child(2) {
-            /* Title of Paper */
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-        }
-    }
-    </style>
+  </style>
 </head>
-
 <body>
-    <div class="result-container">
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
+
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Diploma AG - Result - RKDF University, Bhopal</h1>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
+  <section class="sp-main-box">
+    <div class="rk-container">
+<div class="result-container">
         <table class="bg" border="0" align="center" cellpadding="0" cellspacing="0">
             <tr>
                 <td width="18%" rowspan="3"><img src="images/RKDF_LOGO2.png" width="118" height="160"
@@ -575,6 +334,11 @@ $fresult        = htmlspecialchars($row["result"] ?? '', ENT_QUOTES, 'UTF-8');
             </tr>
         </table>
     </div>
-</body>
+    </div>
+  </section>
 
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
+
+</body>
 </html>

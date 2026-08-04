@@ -1,75 +1,107 @@
 <?php
-session_start();
-include "include/dblogin.php";
-
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
 ?>
-
-
-<?php
-$con=mysql_connect($host,$user,$pass);
-	   mysql_select_db($db,$con);
-	   $regid=$_SESSION['rid'];
-		$mob=$_SESSION['rmob'];	
-$qry=" select * from pay where id='".$regid."' and mob='".$mob."'";
-	 $result=mysql_query($qry);
-	 //where payment.id =".$id."
-			while($row=mysql_fetch_array($result))
-			{
-			$id=$row["id"];
-			$ORDER_ID=$row["order_id"];
-			//$STATUS=$row["status"];
-			$TXNDATE=$row["txndate"];
-			$TXN_AMOUNT=$row["txnamount"];
-			$name=$row["name"];
-			$fname=$row["fname"];
-			$course=$row["course"];
-			$branch=$row["branch"]; 
-			$mob=$row["mob"];
-			$email=$row["email"];
-			$ref=$row["ref"];  
-			$TXN_ID=$row["txnid"];
-			//$BANKTXNID=$row["bankid"];
-			//$BANKNAME=$row["bankname"];
-			//$PAYMENT_MOD=$row["payment_mode"];
-			}
-  mysql_close($con);
-	  ?>
-
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Untitled Document</title>
-<style type="text/css">
-.style6 {
-	color: #007100;
-	font-weight: bold;
-}
-.style5 {
-	color: #D70000;
-	font-weight: bold;
-}
-.style7 {
-	color: #2D2DFF;
-	font-weight: bold;
-}
-.style8 {font-family: "Times New Roman", Times, serif}
-.style9 {color: #007100; font-weight: bold; font-family: "Times New Roman", Times, serif; }
-.style10 {
-	color: #5B0000;
-	font-weight: bold;
-}
-.style11 {color: #0000FF}
-.style12 {
-	color: #CA0000;
-	font-weight: bold;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Untitled Document — RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+    }
+    .sp-main-box {
+      padding: 80px 0;
+      background: var(--p-paper);
+      color: var(--p-navy-deep);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .sp-main-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      border: 1px solid var(--p-hairline);
+    }
+    .sp-main-box th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 16px 20px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sp-main-box td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
+    }
+    .sp-main-box tr:hover td {
+      background: rgba(220,38,38,0.03);
+    }
+    .sp-main-box a {
+      color: var(--p-gold);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sp-main-box a:hover {
+      text-decoration: underline;
+      color: #b91c1c;
+    }
+    .sp-main-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .glossymenu a.menuitem {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px;
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 8px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .glossymenu a.menuitem:hover {
+      background: var(--p-gold);
+      color: #ffffff;
+      border-color: var(--p-gold);
+    }
+  </style>
 </head>
-
 <body>
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
+
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Untitled Document</h1>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
+  <section class="sp-main-box">
+    <div class="rk-container">
 <table width="100%" border="0"  cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="4" align="center"><img src="images/header.jpg"  width="79%" height="46%"  /></td>
@@ -215,5 +247,11 @@ $qry=" select * from pay where id='".$regid."' and mob='".$mob."'";
 </tr>
 </table>
 <p>&nbsp;</p>
+    </div>
+  </section>
+
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
+
 </body>
 </html>

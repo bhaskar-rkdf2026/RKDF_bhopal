@@ -1,0 +1,3 @@
+<?php
+$pageKey = 'dgm';
+include __DIR__ . '/include/subpage_template.php';

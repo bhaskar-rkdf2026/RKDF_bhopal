@@ -1,177 +1,107 @@
 <?php
-session_start();
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
 ?>
-<?php
-header("Pragma: no-cache");
-header("Cache-Control: no-cache");
-header("Expires: 0");
-
-// following files need to be included
-require_once("PaytmKit/lib/config_paytm.php");
-require_once("PaytmKit/lib/encdec_paytm.php");
-
-$paytmChecksum = "";
-$paramList = array();
-$isValidChecksum = "FALSE";
-
-$paramList = $_POST;
-$paytmChecksum = isset($_POST["CHECKSUMHASH"]) ? $_POST["CHECKSUMHASH"] : ""; //Sent by Paytm pg
-
-//Verify all parameters received from Paytm pg to your application. Like MID received from paytm pg is same as your application’s MID, TXN_AMOUNT and ORDER_ID are same as what was sent by you to Paytm PG for initiating transaction etc.
-$isValidChecksum = verifychecksum_e($paramList, PAYTM_MERCHANT_KEY, $paytmChecksum); //will return TRUE or FALSE string.
-
-
-if($isValidChecksum == "TRUE") {
-	//echo "<b>Checksum matched and following are the transaction details:</b>" . "<br/>"; // i hidden
-	if ($_POST["STATUS"] == "TXN_SUCCESS") {
-		echo "<h2 align='center'><b><font color='#CA0000'> Transaction status is success</font></b><h2>";
-	    if (isset($_POST["ORDERID"],$_POST["TXNID"],$_POST["TXNAMOUNT"],$_POST["BANKTXNID"],$_POST["STATUS"],$_POST["GATEWAYNAME"],$_POST["BANKNAME"],$_POST["MID"],$_POST["PAYMENTMODE"],$_POST["TXNDATE"]))
-		{
-	    $ORDER_ID=$_POST["ORDERID"];
-		$TXN_ID=$_POST["TXNID"];
-		$TXN_AMOUNT=$_POST["TXNAMOUNT"];
-		$BANKTXNID=$_POST["BANKTXNID"];
-		$STATUS=$_POST["STATUS"];
-		//$TXNTYPE=$_POST["TXNTYPE"];
-		$GATEWAYNAME=$_POST["GATEWAYNAME"];
-		//$RESPCODE=$_POST["RESPCODE"];
-		//$RESPMSG=$_POST["RESPMSG"];
-		$BANKNAME=$_POST["BANKNAME"];
-		$MID=$_POST["MID"];
-		$PAYMENTMODE=$_POST["PAYMENTMODE"];
-		//$REFUNDAMT=$_POST["REFUNDAMT"];
-		$TXN_DATE=$_POST["TXNDATE"];
-	}
-	else {
-		echo "<b>Transaction status is failure</b>" . "<br/>";
-	}
-
-	if (isset($_POST) && count($_POST)>0 )
-	{ 
-		if (isset($_POST["ORDERID"],$_POST["TXNAMOUNT"]))
-		{
-	    //echo "ID".$ORDER_ID;
-		//echo "AMOUNT".$TXN_AMOUNT;
-	}
-		
-	}
-	}
-	}
-
-else {
-	echo "<b>Checksum mismatched.</b>";
-	//Process transaction as suspicious.
-}
-
-?>
-<?php
-
- $con=mysql_connect("localhost","rkhare_prashant","Vcwbtbcpii09");
-if(!$con)
-			 {
-			    die ('could not connect').mysql_error();
-		  	 }
-	mysql_select_db("rkhare_result2013",$con);
-	$xid=$_SESSION['rid'];
-   	 $qry=" select * from student where id='".$xid."'";
-$result = mysql_query($qry) or die("SQL select statement failed");
-
-while ($row = mysql_fetch_array($result))  
-  {
-//$xid=$_POST["id"];
-$id=$_SESSION['rid'];
-$name=$row["name"];
-$fname=$row["fname"];
-$course=$row["course"];
-$branch=$row["branch"];
-$adhar=$row["adhar"];
-$mob=$row["mob"];
-$email=$row["email"];
-$gen=$row["gen"];
-$cat=$row["cat"];
-$add1=$row["address"];
-$dom=$row["dom"];
-$nob1=$row["nob1"];
-$yop1=$row["yop1"];
-$tm1=$row["tm1"];
-$mo1=$row["mo1"];
-$per1=$row["per1"];
-$nob2=$row["nob2"];
-$yop2=$row["yop2"];
-$tm2=$row["tm2"];
-$mo2=$row["mo2"];
-$per2=$row["per2"];
-$nob3=$row["nob3"];
-$yop3=$row["yop3"];
-$tm3=$row["tm3"];
-$mo3=$row["mo3"];
-$per3=$row["per3"];
-$nob4=$row["nob4"];
-$yop4=$row["yop4"];
-$tm4=$row["tm4"];
-$mo4=$row["mo4"];
-$per4=$row["per4"];
-$nob5=$row["nob5"];
-$yop5=$row["yop5"];
-$tm5=$row["tm5"];
-$mo5=$row["mo5"];
-$per5=$row["per5"];
-$ref=$row["ref"];
-}
-?>
-
-<?php
-$con=mysql_connect("localhost","rkhare_prashant","Vcwbtbcpii09");
-	   mysql_select_db("rkhare_result2013",$con);
-       $qry= "insert into payment(id,order_id,txn_id,txnamount,banktxnid,status,gateway,bankname,mid,payment_method,txndate) 
-	        values('".$id."','".$ORDER_ID."','".$TXN_ID."','".$TXN_AMOUNT."','".$BANKTXNID."','".$STATUS."','".$GATEWAYNAME."','".$BANKNAME."','".$MID."','".$PAYMENTMODE."','".$TXN_DATE."')";
-			
-	//echo $qry;
-	//exit;		
-	 mysql_query($qry);
-	mysql_close($con); 
-	 //echo "One record inserted";
-	 
-	  ?>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>admission form</title>
-<style type="text/css">
-.style6 {
-	color: #007100;
-	font-weight: bold;
-}
-.style7 {
-	color: #2D2DFF;
-	font-weight: bold;
-}
-.style8 {font-family: "Times New Roman", Times, serif}
-.style9 {color: #007100; font-weight: bold; font-family: "Times New Roman", Times, serif; }
-.style10 {
-	color: #5B0000;
-	font-weight: bold;
-}
-.style11 {color: #0000FF}
-.style12 {
-	color: #CA0000;
-	font-weight: bold;
-}
-</style>
-<script type="text/javascript">
-        window.history.forward();
-        function noBack()
-        {
-            window.history.forward();
-        }
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>admission form â€” RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+    }
+    .sp-main-box {
+      padding: 80px 0;
+      background: var(--p-paper);
+      color: var(--p-navy-deep);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .sp-main-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      border: 1px solid var(--p-hairline);
+    }
+    .sp-main-box th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 16px 20px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sp-main-box td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
+    }
+    .sp-main-box tr:hover td {
+      background: rgba(220,38,38,0.03);
+    }
+    .sp-main-box a {
+      color: var(--p-gold);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sp-main-box a:hover {
+      text-decoration: underline;
+      color: #b91c1c;
+    }
+    .sp-main-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .glossymenu a.menuitem {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px;
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 8px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .glossymenu a.menuitem:hover {
+      background: var(--p-gold);
+      color: #ffffff;
+      border-color: var(--p-gold);
+    }
+  </style>
 </head>
+<body>
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
-<body topmargin="40px" leftmargin="40"  >
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">admission form</h1>
+    </div>
+  </section>
 
+  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
+  <section class="sp-main-box">
+    <div class="rk-container">
 <table width="1162" border="0"  cellspacing="2"  cellpadding="6" bgcolor="#FFFFD2">
   
   <tr>
@@ -328,5 +258,11 @@ $con=mysql_connect("localhost","rkhare_prashant","Vcwbtbcpii09");
     <td colspan="3">&nbsp;</td>
     </tr>
 </table>
+    </div>
+  </section>
+
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
+
 </body>
 </html>

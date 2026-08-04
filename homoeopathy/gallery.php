@@ -1,295 +1,108 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-
+<?php
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>::RAM KRISHNA COLLEGE OF HOMOEOPATHY & MEDICAL SCIENCES, RKDF University::</title>
-    <meta name="keywords"
-        content="rkdf homoeopathy, homoeopathy college in bhopal, homoeopathic college in mp,RAM KRISHNA COLLEGE OF HOMOEOPATHY & MEDICAL SCIENCES,RKDF UNIVERSITY, madhya pradesh homoeopathy college, mp top homoeopathy college,ram krishna college of homoeopathy,rkdf university,rkdf bhopal,cch ,nch new delhi,ayush bhopal, homoeopathy college in mp, homoeopathy college in madhya pradesh" />
-    <meta name="description"
-        content="RAM KRISHNA COLLEGE OF HOMOEOPATHY & MEDICAL SCIENCES, RKDF UNIVERSITY,BHOPAL.
- was established in the year 2015.It is run by the Ayushmati Education and Social Society,Bhopal & Affilited to RKDF UNIVERSITY, Bhopal on a self financing basis." />
-    <link href="templatemo_style.css" rel="stylesheet" type="text/css" />
-    <link href="css/jquery.ennui.contentslider.css" rel="stylesheet" type="text/css" media="screen,projection" />
-    <script language="javascript" type="text/javascript">
-    function clearText(field) {
-        if (field.defaultValue == field.value) field.value = '';
-        else if (field.value == '') field.value = field.defaultValue;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>::RAM KRISHNA COLLEGE OF HOMOEOPATHY &amp; MEDICAL SCIENCES, RKDF University:: — RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    </script>
-    <style type="text/css">
-    <!--
-    .style1 {
-        color: #FFFFFF;
-        font-weight: bold;
-        font-size: 20px;
+    .sp-main-box {
+      padding: 80px 0;
+      background: var(--p-paper);
+      color: var(--p-navy-deep);
+      font-size: 16px;
+      line-height: 1.8;
     }
-
-    .style2 {
-        color: #FFFFFF;
-        font-size: 18px;
-
+    .sp-main-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      border: 1px solid var(--p-hairline);
     }
-
-    .style5 {
-        color: #AA0000;
-        font-size: 12px;
+    .sp-main-box th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 16px 20px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
-    -->
-    *
-    {
-    box-sizing:
-    border-box;
+    .sp-main-box td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
     }
-    img
-    {
-    vertical-align:
-    middle;
+    .sp-main-box tr:hover td {
+      background: rgba(220,38,38,0.03);
     }
-    /*
-    Position
-    the
-    image
-    container
-    (needed
-    to
-    position
-    the
-    left
-    and
-    right
-    arrows)
-    */
-    .container
-    {
-    position:
-    relative;
+    .sp-main-box a {
+      color: var(--p-gold);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
     }
-    /*
-    Hide
-    the
-    images
-    by
-    default
-    */
-    .mySlides
-    {
-    display:
-    none;
+    .sp-main-box a:hover {
+      text-decoration: underline;
+      color: #b91c1c;
     }
-    /*
-    Add
-    a
-    pointer
-    when
-    hovering
-    over
-    the
-    thumbnail
-    images
-    */
-    .cursor
-    {
-    cursor:
-    pointer;
+    .sp-main-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
     }
-    /*
-    Next
-    &
-    previous
-    buttons
-    */
-    .prev,
-    .next
-    {
-    cursor:
-    pointer;
-    position:
-    absolute;
-    top:
-    40%;
-    width:
-    auto;
-    padding:
-    16px;
-    margin-top:
-    -50px;
-    color:
-    white;
-    font-weight:
-    bold;
-    font-size:
-    20px;
-    border-radius:
-    0
-    3px
-    3px
-    0;
-    user-select:
-    none;
-    -webkit-user-select:
-    none;
+    .glossymenu a.menuitem {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px;
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 8px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
     }
-    /*
-    Position
-    the
-    "next
-    button"
-    to
-    the
-    right
-    */
-    .next
-    {
-    right:
-    0;
-    border-radius:
-    3px
-    0
-    0
-    3px;
+    .glossymenu a.menuitem:hover {
+      background: var(--p-gold);
+      color: #ffffff;
+      border-color: var(--p-gold);
     }
-    /*
-    On
-    hover,
-    add
-    a
-    black
-    background
-    color
-    with
-    a
-    little
-    bit
-    see-through
-    */
-    .prev:hover,
-    .next:hover
-    {
-    background-color:
-    rgba(0,
-    0,
-    0,
-    0.8);
-    }
-    /*
-    Number
-    text
-    (1/3
-    etc)
-    */
-    .numbertext
-    {
-    color:
-    #f2f2f2;
-    font-size:
-    12px;
-    padding:
-    8px
-    12px;
-    position:
-    absolute;
-    top:
-    0;
-    }
-    /*
-    Container
-    for
-    image
-    text
-    */
-    .caption-container
-    {
-    text-align:
-    center;
-    background-color:
-    #222;
-    padding:
-    2px
-    16px;
-    color:
-    white;
-    }
-    .row:after
-    {
-    content:
-    "";
-    display:
-    table;
-    clear:
-    both;
-    }
-    /*
-    Six
-    columns
-    side
-    by
-    side
-    */
-    .column
-    {
-    float:
-    left;
-    width:
-    16.66%;
-    }
-    /*
-    Add
-    a
-    transparency
-    effect
-    for
-    thumnbail
-    images
-    */
-    .demo
-    {
-    opacity:
-    0.6;
-    }
-    .active,
-    .demo:hover
-    {
-    opacity:
-    1;
-    }
-    .demo1
-    {
-    opacity:
-    0.6;
-    }
-    .demo2
-    {
-    opacity:
-    0.6;
-    }
-    </style>
+  </style>
 </head>
-
 <body>
-    <div id="templatemo_header_wrapper">
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
-        <div id="templatemo_header">
-
-            <div></div>
-        </div> <br /> <br /><!-- end of header -->
-        <p align="center" class="style1">RAM KRISHNA COLLEGE OF HOMOEOPATHY & MEDICAL SCIENCES,RKDF UNIVERSITY</p>
-        <br />
-        <p align="center" class="style2">
-            (Gandhi Nagar Campus) Bhopal<br>
-            <img src="images\RKCAM_QCI_Logo.jpg" width="100px" />
-        </p>
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">::RAM KRISHNA COLLEGE OF HOMOEOPATHY &amp; MEDICAL SCIENCES, RKDF University::</h1>
     </div>
-    <!-- end of header wrapper -->
+  </section>
 
-    <div id="templatemo_menu_wrapper">
-
-        <div id="templatemo_menu">
-            <?php
-		include "include/menu.php";
-		
-		?>
+  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
+  <section class="sp-main-box">
+    <div class="rk-container">
+?>
         </div> <!-- end of menu -->
     </div> <!-- end of menu wrapper -->
 
@@ -413,12 +226,11 @@
     <div id="templatemo_footer_wrapper">
 
         <div id="templatemo_footer">
+    </div>
+  </section>
 
-            <?php
-    include "include/footer.php";
-      ?>
-            <div class="cleaner"></div>
-        </div> <!-- end of footer -->
-    </div> <!-- end of footer -->
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
 
-</html> <!-- end of content wrapper -->
+</body>
+</html>

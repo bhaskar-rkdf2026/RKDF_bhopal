@@ -76,9 +76,11 @@ html { scroll-behavior: smooth; }
   text-transform: uppercase;
   letter-spacing: 0.28em;
   color: var(--p-royal);
-  display: inline-flex;
+  display: flex;           /* block-level so margin-bottom is respected */
   align-items: center;
   gap: 16px;
+  width: fit-content;      /* don't stretch full row */
+  margin-bottom: 22px;     /* consistent gap between tag and heading */
 }
 .rk-eyebrow::before {
   content: '';
@@ -1531,6 +1533,92 @@ html { scroll-behavior: smooth; }
 /* No scrollbar utility */
 .no-scrollbar { scrollbar-width: none; }
 .no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ── §13. Gallery — Premium Masonry ── */
+.rk-gallery {
+  padding: 120px 0;
+  background: var(--p-paper);
+  border-top: 1px solid var(--p-hairline);
+  border-bottom: 1px solid var(--p-hairline);
+}
+
+/* Masonry grid: bleeds edge-to-edge */
+.rk-gallery-masonry {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-auto-rows: 220px;
+  gap: 8px;
+  padding: 0 clamp(16px, 3vw, 40px);
+}
+
+/* Individual tile */
+.rk-gallery-tile {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.rk-gallery-tile--tall {
+  grid-row: span 2;  /* tall tiles = 440px */
+}
+
+/* Image zoom on hover */
+.rk-gallery-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.rk-gallery-tile:hover img {
+  transform: scale(1.07);
+}
+
+/* Overlay fades in on hover */
+.rk-gallery-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(12,20,36,0.72) 0%, rgba(12,20,36,0) 55%);
+  display: flex;
+  align-items: flex-end;
+  padding: 18px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+.rk-gallery-tile:hover .rk-gallery-tile-overlay {
+  opacity: 1;
+}
+
+/* Label badge in overlay */
+.rk-gallery-tile-label {
+  font-family: var(--p-font-sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--p-paper);
+  letter-spacing: 0.04em;
+  transform: translateY(8px);
+  transition: transform 0.35s ease;
+}
+.rk-gallery-tile:hover .rk-gallery-tile-label {
+  transform: translateY(0);
+}
+
+/* Keep old class for backward compat */
+.rk-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.rk-gallery-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  aspect-ratio: 4/3;
+}
+.rk-gallery-item img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
 
 /* ── Responsive tweaks ── */
 @media (max-width: 768px) {

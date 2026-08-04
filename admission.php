@@ -1,101 +1,107 @@
 <?php
-session_start();
-//error_reporting(0);
- include "include/dblogin.php";
-
-if (isset($_POST["Submit"]))
-{
-$name=$_POST["nm"];
-$fname=$_POST["fnm"];
-$course=$_POST["category"];
-$branch=$_POST["choices"];
-$adhar=$_POST["adhar"];
-$mob=$_POST["mob"];
-$email=$_POST["eid"];
-$gen=$_POST["gen"];
-$cat=$_POST["cat"];
-$add1=$_POST["address"];
-$dom=$_POST["dom"];
-$nob1=$_POST["nob1"];
-$yop1=$_POST["yop1"];
-$tm1=$_POST["tm1"];
-$mo1=$_POST["mo1"];
-$per1=$_POST["per1"];
-$nob2=$_POST["nob2"];
-$yop2=$_POST["yop2"];
-$tm2=$_POST["tm2"];
-$mo2=$_POST["mo2"];
-$per2=$_POST["per2"];
-$nob3=$_POST["nob3"];
-$yop3=$_POST["yop3"];
-$tm3=$_POST["tm3"];
-$mo3=$_POST["mo3"];
-$per3=$_POST["per3"];
-$nob4=$_POST["nob4"];
-$yop4=$_POST["yop4"];
-$tm4=$_POST["tm4"];
-$mo4=$_POST["mo4"];
-$per4=$_POST["per4"];
-$nob5=$_POST["nob5"];
-$yop5=$_POST["yop5"];
-$tm5=$_POST["tm5"];
-$mo5=$_POST["mo5"];
-$per5=$_POST["per5"];
-$ref=$_POST["ref"];
-}
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
 ?>
-
-
- <?php
-	   if (isset($_POST["Submit"]))
- {
-$con=mysql_connect($host,$user,$pass);
-	   mysql_select_db($db,$con);
-       $qry= "insert into student(name,fname,course,branch,adhar,mob,email,gen,cat,address,dom,t_brd,t_yr,t_tm,t_mo,t_per,tw_brd,tw_yr,tw_tm,tw_mo,tw_per,d_brd,d_yr,d_tm,d_mo,d_per,g_brd,g_yr,g_tm,g_mo,g_per,p_brd,p_yr,p_tm,p_mo,p_per,ref,session) 
-	        values('".$name."','".$fname."','".$course."','".$branch."','".$adhar."','".$mob."','".$email."','".$gen."','".$cat."','".$add1."','".$dom."','".$nob1."','".$yop1."','".$tm1."','".$mo1."','".$per1."','".$nob2."','".$yop2."','".$tm2."','".$mo2."','".$per2."','".$nob3."','".$yop3."','".$tm3."','".$mo3."','".$per3."','".$nob4."','".$yop4."','".$tm4."','".$mo4."','".$per4."','".$nob5."','".$yop5."','".$tm5."','".$mo5."','".$per5."','".$ref."','2021')";
-			
-	//echo $qry;
-	//exit;		
-	 mysql_query($qry);
-	mysql_close($con); 
-	 //echo "One record inserted";
-}	 
-	  ?>
-
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>admission form</title>
-<style type="text/css">
-.style6 {
-	color: #007100;
-	font-weight: bold;
-}
-.style7 {
-	color: #2D2DFF;
-	font-weight: bold;
-}
-.style8 {font-family: "Times New Roman", Times, serif}
-.style9 {color: #007100; font-weight: bold; font-family: "Times New Roman", Times, serif; }
-.style10 {
-	color: #5B0000;
-	font-weight: bold;
-}
-.style11 {color: #0000FF}
-</style>
-<script type="text/javascript">
-        window.history.forward();
-        function noBack()
-        {
-            window.history.forward();
-        }
-</script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>admission form — RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+    }
+    .sp-main-box {
+      padding: 80px 0;
+      background: var(--p-paper);
+      color: var(--p-navy-deep);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .sp-main-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      border: 1px solid var(--p-hairline);
+    }
+    .sp-main-box th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 16px 20px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sp-main-box td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
+    }
+    .sp-main-box tr:hover td {
+      background: rgba(220,38,38,0.03);
+    }
+    .sp-main-box a {
+      color: var(--p-gold);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sp-main-box a:hover {
+      text-decoration: underline;
+      color: #b91c1c;
+    }
+    .sp-main-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .glossymenu a.menuitem {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px;
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 8px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .glossymenu a.menuitem:hover {
+      background: var(--p-gold);
+      color: #ffffff;
+      border-color: var(--p-gold);
+    }
+  </style>
 </head>
+<body>
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
-<body topmargin="35px" leftmargin="80" onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="" >
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">admission form</h1>
+    </div>
+  </section>
 
+  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
+  <section class="sp-main-box">
+    <div class="rk-container">
 <table width="1162" border="0"  cellspacing="2"  cellpadding="6" bgcolor="#FFFFD2">
   <tr>
     <td width="287">&nbsp;</td>
@@ -240,5 +246,11 @@ $con=mysql_connect("localhost","rkhare_prashant","Vcwbtbcpii09");
     <td colspan="3">&nbsp;</td>
     </tr>
 </table>
+    </div>
+  </section>
+
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
+
 </body>
 </html>

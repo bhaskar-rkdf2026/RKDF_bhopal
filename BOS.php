@@ -1,1012 +1,313 @@
-<!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
-
+<?php
+// ============================================================
+// RKDF University — Board of Studies (BOS)
+// Luxury Prestige Design + 100% Exact BOS PDF Links Preserved
+// ============================================================
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>RKDF UNIVERSITY | EDUCATION GLORIFIES NATION</title>
-
-    <link rel="stylesheet" type="text/css" media="all" href="css/style1.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/style_engi_tech.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/base.css" />
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
-
-    <script type='text/javascript' src='js/jquery.min1159.js?ver=1.4.2'></script>
-
-    <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/jcarouselite.js"></script>
-    <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
-
-    <LINK rel=stylesheet type=text/css href="css/preview.css">
-    <LINK rel=stylesheet type=text/css href="css/wt-rotator.css">
-    <SCRIPT type=text/javascript src="js/jquery.wt-rotator.min.js"></SCRIPT>
-    <SCRIPT type=text/javascript src="js/preview.js"></SCRIPT>
-    <script type="text/javascript" src="js/jquery_0022.js"></script>
-    <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/ddaccordion.js"></script>
-    <script type="text/javascript">
-    ddaccordion.init({
-        headerclass: "submenuheader", //Shared CSS class name of headers group
-        contentclass: "submenu", //Shared CSS class name of contents group
-        revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
-        mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
-        collapseprev: true, //Collapse previous content (so only one open at any time)? true/false 
-        defaultexpanded: [], //index of content(s) open by default [index1, index2, etc] [] denotes no content
-        onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
-        animatedefault: false, //Should contents open by default be animated into view?
-        persiststate: true, //persist state of opened contents within browser session?
-        toggleclass: ["",
-            ""
-        ], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
-        togglehtml: ["suffix", "<img src='images/plus.gif' class='statusicon' />",
-            "<img src='images/minus.gif' class='statusicon' />"
-        ], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
-        animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
-        oninit: function(headers, expandedindices) { //custom code to run when headers have initalized
-            //do nothing
-        },
-        onopenclose: function(header, index, state,
-            isuseractivated) { //custom code to run whenever a header is opened or closed
-            //do nothing
-        }
-    })
-    </script>
-    <style type="text/css">
-    .submenu {
-        display: none
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Board of Studies (BOS) — RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+    }
+    
+    .bos-grid-layout {
+      display: grid;
+      grid-template-columns: 8fr 4fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .bos-grid-layout { grid-template-columns: 1fr; }
     }
 
-    a.hiddenajaxlink {
-        display: none
+    .bos-table-card {
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(12,20,36,0.04);
+      margin-bottom: 48px;
     }
-    </style>
-
-
-    <style type="text/css">
-    .glossymenu {
-        margin: 5px 0;
-        padding: 0;
-        width: 240px;
-        /*width of menu*/
-        border: 1px solid #2586AD;
-        border-bottom-width: 0;
+    .bos-table-card table {
+      width: 100%;
+      border-collapse: collapse;
     }
-
-    .glossymenu a.menuitem {
-        background: black url(images/menuBg.png) repeat-x bottom left;
-        font: 13px "DroidSansRegular";
-        color: white;
-        display: block;
-        position: relative;
-        /*To help in the anchoring of the ".statusicon" icon image*/
-        width: auto;
-        padding: 4px 0;
-        padding-left: 10px;
-        text-decoration: none;
+    .bos-table-card th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 18px 24px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: left;
     }
-
-
-    .glossymenu a.menuitem:visited,
-    .glossymenu .menuitem:active {
-        color: white;
+    .bos-table-card td {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
+      color: var(--p-navy-deep);
     }
-
-    .glossymenu a.menuitem .statusicon {
-        /*CSS for icon image that gets dynamically added to headers*/
-        position: absolute;
-        top: 5px;
-        right: 5px;
-        border: none;
+    .bos-table-card tr:hover td {
+      background: rgba(220,38,38,0.02);
     }
-
-    .glossymenu a.menuitem:hover {
-        background-image: url(images/menuHoverBg.png);
+    .bos-table-card a {
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .bos-table-card a:hover {
+      color: var(--p-gold);
+      text-decoration: underline;
     }
 
-    .glossymenu div.submenu {
-        /*DIV that contains each sub menu*/
-        background: white;
+    .side-gov-card {
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 18px;
+      padding: 28px;
+      box-shadow: 0 12px 32px rgba(12,20,36,0.06);
+      position: sticky;
+      top: 100px;
     }
-
-    .glossymenu div.submenu ul {
-        /*UL of each sub menu*/
-        list-style-type: none;
-        margin: 0;
-        padding: 0;
+    .side-gov-title {
+      font-family: var(--p-font-serif);
+      font-size: 20px;
+      color: var(--p-navy-deep);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--p-gold);
+      font-weight: 700;
     }
-
-    .glossymenu div.submenu ul li {
-        /*border-bottom: 1px solid #2586AD;*/
+    .side-gov-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
     }
-
-    .glossymenu div.submenu ul li a {
-        display: block;
-        font: normal 12px "DroidSansRegular";
-        /*color: black;*/
-        text-decoration: none;
-        padding: 2px 0;
-        padding-left: 10px;
+    .side-gov-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: rgba(12,20,36,0.02);
+      border: 1px solid var(--p-hairline);
+      border-radius: 10px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      font-size: 14.5px;
+      text-decoration: none;
+      transition: all 0.25s ease;
     }
-
-    .glossymenu div.submenu ul li a:hover {
-        background: #DFDCCB;
-        colorz: white;
+    .side-gov-link:hover, .side-gov-link.active {
+      background: var(--p-navy-deep);
+      color: #ffffff !important;
+      border-color: var(--p-navy-deep);
     }
-    </style>
+  </style>
 </head>
-
 <body>
-    <header id="header">
-        <?php
-			include "include/topmenu.php";
-			
-			?>
-        <div class="wrapper">
-            <br />
-            <?php
-			include "include/header.php";
-			?>
-            <nav class="menu-main-menu-container">
-                <div class="nb_bar" style="z-index:100;">
 
-                    <div style="width:960px;margin:0px auto;">
-                        <!--[START-QM0-INSERT]-->
-                        <!--%%%%%%%%%%%% NodeFire Styles [Publish this section to the document head for full validation!] %%%%%%%%%%%-->
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
+
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">04 · Academic Governance</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">
+        Board of Studies (BOS)
+      </h1>
+      <p style="margin-top:20px;font-size:18px;line-height:1.7;color:rgba(250,249,246,0.85);max-width:640px;">
+        Official curriculum approvals, faculty course structures, and Board of Studies statutory notifications.
+      </p>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT SECTION -->
+  <section style="padding:80px 0;background:var(--p-paper);">
+    <div class="rk-container">
+      
+      <div class="bos-grid-layout">
+        
+        <!-- LEFT COLUMN: TABLES -->
+        <div>
+          
+          <!-- TABLE 1: FACULTY BOARD OF STUDIES -->
+          <span class="rk-eyebrow">Faculty Directory</span>
+          <h2 class="rk-h2" style="margin-bottom:24px;">Board of Studies — Faculty Notifications</h2>
+          
+          <div class="bos-table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:70px;">#</th>
+                  <th>Faculty Board of Studies</th>
+                  <th style="width:160px;text-align:right;">Document</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>01</strong></td>
+                  <td>Board of Studies — Faculty of Agriculture</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Agriculture.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>02</strong></td>
+                  <td>Board of Studies — Faculty of Architecture</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Architecture.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>03</strong></td>
+                  <td>Board of Studies — Faculty of Commerce</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Commerce.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>04</strong></td>
+                  <td>Board of Studies — Faculty of Engineering and Technology (2024)</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Engineering and Technology 2024.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>05</strong></td>
+                  <td>Board of Studies — Faculty of Management</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Management.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>06</strong></td>
+                  <td>Board of Studies — Faculty of Paramedical</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Paramedical.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>07</strong></td>
+                  <td>Board of Studies — Faculty of Pharmaceutical Sciences</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Pharmaceutical Sciences.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>08</strong></td>
+                  <td>Board of Studies — Faculty of Social Science</td>
+                  <td style="text-align:right;"><a href="Content/Documents/board_of_management/Board of Studies Faculty of Social Science.pdf" target="_blank">📄 View PDF ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- TABLE 2: FACULTY OF SOCIAL SCIENCE COURSE SYLLABUS PDFs -->
+          <span class="rk-eyebrow">Departmental Syllabi</span>
+          <h2 class="rk-h2" style="margin-bottom:24px;">BOS — Faculty of Social Science (Nov-2025)</h2>
+          
+          <div class="bos-table-card">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width:70px;">#</th>
+                  <th>Course / Subject Code</th>
+                  <th style="width:160px;text-align:right;">Syllabus PDF</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>01</strong></td>
+                  <td>B.A-HI-701 &amp; 702</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/B.A-HI-701 &702.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>02</strong></td>
+                  <td>BA-EC-701 &amp; 702</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-EC- 701& 702.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>03</strong></td>
+                  <td>BA-SO-701 &amp; 702</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-SO-701 & 702.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>04</strong></td>
+                  <td>BA-EN-701 &amp; 702</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-EN-701 & 702.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>05</strong></td>
+                  <td>BA-PS-701 &amp; 702</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-PS-701 & 702.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>06</strong></td>
+                  <td>BAHS-701 &amp; 702</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BAHS-701 & 702.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>07</strong></td>
+                  <td>B.A-HI-801 &amp; 802</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/B.A-HI-801 & 802.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>08</strong></td>
+                  <td>BA-EN-801 &amp; 802</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-EN- 801 & 802.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>09</strong></td>
+                  <td>BA-PS-801 &amp; 802</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-PS-801 & 802.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>10</strong></td>
+                  <td>BA-SO-801 &amp; 802</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BA-SO-801 & 802.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>11</strong></td>
+                  <td>BAHS-801 &amp; 802</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/BAHS-801 & 802.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+                <tr>
+                  <td><strong>12</strong></td>
+                  <td>Research Methodology 703</td>
+                  <td style="text-align:right;"><a href="Content/Documents/BOS_Social_Science_Nov-2025/Research Methodology 703.pdf" target="_blank">📄 Download PDF ↗</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
 
-                        <style type="text/css">
-                        /*!!!!!!!!!!! NodeFire Core CSS [Do Not Modify!] !!!!!!!!!!!!!*/
-                        /*[START-QCC]*/
-                        .qmclear {}
-
-                        .qmmc:after {
-                            content: ".";
-                            display: block;
-                            height: 0px;
-                            clear: both;
-                            overflow: hidden;
-                        }
-
-                        .qmmc img {
-                            border: none;
-                        }
-
-                        .qmmc,
-                        .qmmc>span,
-                        .qmmc>a,
-                        .qmmc div>a,
-                        .qmmc dd>a,
-                        .qmmc li>a,
-                        .qmmc div>span,
-                        .qmmc dd>span,
-                        .qmmc li>span,
-                        .qmmc div.qmsub,
-                        .qmmc dl,
-                        .qmmc dd,
-                        .qmmc .qmsub>li,
-                        .qmmc ul.qmsub {
-                            text-align: left;
-                            outline: none;
-                            font-wieght: normal;
-                            text-decoration: none;
-                            font-family: DroidSansRegular;
-                            font-size: 14px;
-                            line-height: normal;
-                            padding: 0px;
-                            margin: 0px;
-                            color: #333;
-                            background-color: transparent;
-                        }
-
-                        .qmmc .qmiefix {
-                            z-index: 0;
-                        }
-
-                        .qmmc,
-                        .qmmc .qmsub,
-                        .qmmc .qmmulti {
-                            list-style: none;
-                            padding: 0px;
-                            margin: 0px;
-                        }
-
-                        .qmmc .qmdivider {
-                            display: block;
-                            border-width: 0px;
-                            border-style: solid;
-                            position: relative;
-                        }
-
-                        .qmmc .qmtitle {
-                            display: block;
-                            cursor: default;
-                            white-space: nowrap;
-                            position: relative;
-                        }
-
-                        .qmmc {
-                            position: relative;
-                            zoom: 1;
-                        }
-
-                        .qmmc .qmitem-m,
-                        .qmmc>li {
-                            display: block;
-                            white-space: nowrap;
-                            position: relative;
-                        }
-
-                        .qmmc .qmitem-s,
-                        .qmmc .qmsub>li {
-                            display: block;
-                            white-space: nowrap;
-                            position: relative;
-                        }
-
-                        .qmmc .qmsub {
-                            visibility: hidden;
-                            position: absolute;
-                            z-index: 10;
-                            left: 100%;
-                            top: 0px;
-                        }
-
-                        .qmmc div.qmsub {
-                            left: 0px;
-                        }
-
-                        .qmmc .qmcbox {
-                            cursor: default;
-                            display: block;
-                            position: relative;
-                            white-space: normal;
-                        }
-
-                        .qmmc .qmmulti {
-                            display: block;
-                            float: left;
-                            position: relative;
-                        }
-
-                        .qmmc .qmmulti dd {
-                            margin: 0px;
-                            padding: 0px;
-                            position: relative;
-                        }
-
-                        .qmmc.qm-horizontal-c>li,
-                        .qmmc.qm-horizontal-c>.qmitem-m,
-                        .qmsub.qm-horizontal-c>li,
-                        .qmsub.qm-horizontal-c>.qmitem-s,
-                        .qm-horizontal-c>.qmtitle,
-                        .qm-horizontal-c>.qmdivider,
-                        .qm-horizontal-c>.qmcbox,
-                        .qm-horizontal-c>li>.qmtitle,
-                        .qm-horizontal-c>li>.qmdivider,
-                        .qm-horizontal-c>li>.qmcbox {
-                            float: left;
-                        }
-
-                        .qm-horizontal-c>li>.qmsub {
-                            left: 0px;
-                            top: 100%
-                        }
-
-                        .qmmc li:hover>.qmsub,
-                        .qmmc dd:hover>ul.qmsub {
-                            visibility: inherit;
-                        }
-
-                        .qmmc .qmml0 {
-                            z-index: 99;
-                        }
-
-                        .qmmc .qmml1 {
-                            z-index: 98;
-                        }
-
-                        .qmmc .qmml2 {
-                            z-index: 97;
-                        }
-
-                        .qmmc .qmml3 {
-                            z-index: 96;
-                        }
-
-                        .qmmc .qmml4 {
-                            z-index: 95;
-                        }
-
-                        .qmmc .qmml5 {
-                            z-index: 94;
-                        }
-
-                        .qmmc .qmml6 {
-                            z-index: 93;
-                        }
-
-                        .qmmc .qmml7 {
-                            z-index: 92;
-                        }
-
-                        .qmmc .qmml8 {
-                            z-index: 91;
-                        }
-
-                        .qmmc .qmml9 {
-                            z-index: 90;
-                        }
-
-
-                        /*!!!!!!!!!!! NodeFire Styles [Please Modify!] !!!!!!!!!!!*/
-
-
-                        /* NodeFire 0 */
-
-                        /*"""""""" (MAIN) Container""""""""*/
-                        #qm0 {
-                            width: auto;
-                            padding: 0px 0px 0px 20px;
-                            background-image: url("images/menuBg.png");
-                        }
-
-
-                        /*"""""""" (MAIN) Items""""""""*/
-                        #qm0 .qmitem-m {
-                            height: 27px;
-                            padding: 10px 23px 0px 23px;
-                            background-image: url("images/topmenu_bar.gif");
-                            background-repeat: no-repeat;
-                            background-position: left top;
-                            color: #FFFFFF;
-                            font-family: DroidSansRegular;
-                            font-size: 13px;
-                            text-decoration: none;
-                            text-align: left;
-                            border-width: 2px 0px;
-                            border-style: solid;
-                            border-color: #2586AD;
-                        }
-
-
-                        /*"""""""" (MAIN) Hover State""""""""*/
-                        #qm0 .qmitem-m:hover {
-                            text-decoration: underline;
-                        }
-
-
-                        /*"""""""" (MAIN) Active State""""""""*/
-                        #qm0.qmmc .qmitem-m.qmactive,
-                        #qm0 li:hover>.qmitem-m.qmparent,
-                        #qm0 dd:hover>.qmitem-m.qmparent {
-                            z-index: 100;
-                            background: #3D9074;
-                            background-image: url("images/menuHoverBg.png");
-                            color: #FFFFFF;
-                            text-decoration: none;
-                            border-color: #48A785 #3D9074 transparent;
-                        }
-
-
-                        /*"""""""" (SUB) Container""""""""*/
-                        #qm0 .qmsub {
-                            padding: 10px;
-                            margin: -2px -130px 0px;
-                            background-image: url("images/dropdownBg.png");
-                            border-width: 2px;
-                            border-style: solid;
-                            border-color: #53AC8D;
-                            border-radius: 0px 0px 12px 12px;
-                            -moz-border-radius: 0px 0px 12px 12px;
-                            -webkit-border-radius: 0px 0px 12px 12px;
-                            -ms-border-radius: 0px 0px 12px 12px;
-                            -o-border-radius: 0px 0px 12px 12px;
-                            -khtml-border-radius: 0px 0px 12px 12px;
-                            box-shadow: 5px 5px 10px rgba(67, 67, 67, 0.9);
-                            -moz-box-shadow: 5px 5px 10px rgba(67, 67, 67, 0.9);
-                            -webkit-box-shadow: 5px 5px 10px rgba(67, 67, 67, 0.9);
-                            -ms-box-shadow: 5px 5px 10px rgba(67, 67, 67, 0.9);
-                            -o-box-shadow: 5px 5px 10px rgba(67, 67, 67, 0.9);
-                            -khtml-box-shadow: 5px 5px 10px rgba(67, 67, 67, 0.9);
-                        }
-
-
-                        /*"""""""" (SUB) Column""""""""*/
-                        #qm0 .qmsub .qmmulti {
-                            padding: 10px 15px 10px 5px;
-                        }
-
-
-                        /*"""""""" (SUB) Items""""""""*/
-                        #qm0 .qmitem-s {
-                            background: url("images/arrowRight.png") no-repeat scroll 7px 7px transparent;
-                            padding: 4px 40px 4px 20px;
-                            color: #FFFFFF;
-                            font-size: 12px;
-                            border-width: 0px;
-                            border-style: none;
-                            border-radius: 7px 7px 7px 7px;
-                            -moz-border-radius: 7px 7px 7px 7px;
-                            -webkit-border-radius: 7px 7px 7px 7px;
-                            -ms-border-radius: 7px 7px 7px 7px;
-                            -o-border-radius: 7px 7px 7px 7px;
-                            -khtml-border-radius: 7px 7px 7px 7px;
-                        }
-
-
-                        /*"""""""" (SUB) Hover State""""""""*/
-                        #qm0 .qmitem-s:hover {
-                            background: url("images/drop-hover.png") scroll no-repeat 6px 5px #3d9074;
-                            /*background-color:#3D9074;
-		color:#292A2F;*/
-                        }
-
-
-                        /*"""""""" (SUB) Active State""""""""*/
-                        #qm0.qmmc .qmitem-s.qmactive,
-                        #qm0 ul li:hover>.qmitem-s.qmparent,
-                        #qm0 ul dd:hover>.qmitem-s.qmparent {
-                            background-color: #3D9074;
-                            color: #FFFFFF;
-                            border-radius: 7px 0px 0px 7px;
-                            -moz-border-radius: 7px 0px 0px 7px;
-                            -webkit-border-radius: 7px 0px 0px 7px;
-                            -ms-border-radius: 7px 0px 0px 7px;
-                            -o-border-radius: 7px 0px 0px 7px;
-                            -khtml-border-radius: 7px 0px 0px 7px;
-                        }
-
-
-                        /*"""""""" Individual Titles""""""""*/
-                        #qm0 .qmtitle {
-                            padding: 4px 5px;
-                            margin: 2px 0px 8px;
-                            background-color: #3D9074;
-                            color: #FFFFFF;
-                            font-family: DroidSansRegular;
-                            font-size: 12px;
-                            font-weight: bold;
-                            border-radius: 4px 4px 4px 4px;
-                            -moz-border-radius: 4px 4px 4px 4px;
-                            -webkit-border-radius: 4px 4px 4px 4px;
-                            -ms-border-radius: 4px 4px 4px 4px;
-                            -o-border-radius: 4px 4px 4px 4px;
-                            -khtml-border-radius: 4px 4px 4px 4px;
-                            box-shadow: 4px 4px 10px rgb(56, 56, 56);
-                            -moz-box-shadow: 4px 4px 10px rgb(56, 56, 56);
-                            -webkit-box-shadow: 4px 4px 10px rgb(56, 56, 56);
-                            -ms-box-shadow: 4px 4px 10px rgb(56, 56, 56);
-                            -o-box-shadow: 4px 4px 10px rgb(56, 56, 56);
-                            -khtml-box-shadow: 4px 4px 10px rgb(56, 56, 56);
-                        }
-
-
-                        /*"""""""" Individual Horizontal Dividers""""""""*/
-                        #qm0>.qmdivider,
-                        #qm0 .qmsub>.qmdivider,
-                        #qm0 dd>.qmdivider,
-                        #qm0>li>.qmdivider,
-                        #qm0 .qmsub>li>.qmdivider {
-                            height: 1px;
-                            background-color: #D7DEE8;
-                            margin: 5px 0px;
-                        }
-
-
-                        /*"""""""" Content Box""""""""*/
-                        body #qm0 span.qmcbox {
-                            color: #D7DEE8;
-                            font-size: 13px;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmsub .qmc_mystatic,
-                        ul#qm0 .qmsub .qmc_mystatic {
-                            padding: 0px 10px 0px 0px;
-                            margin: 10px 0px 0px 4px;
-                            color: #FFFFFF;
-                            font-size: 12px;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmsub .qmtitle span,
-                        ul#qm0 .qmsub .qmtitle span {
-                            margin: 0px;
-                            color: #000000;
-                            font-size: 11px;
-                            border-width: 4px;
-                            border-color: #3D9074;
-                            border-radius: 0px 12px 12px 12px;
-                            -moz-border-radius: 0px 12px 12px 12px;
-                            -webkit-border-radius: 0px 12px 12px 12px;
-                            -ms-border-radius: 0px 12px 12px 12px;
-                            -o-border-radius: 0px 12px 12px 12px;
-                            -khtml-border-radius: 0px 12px 12px 12px;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmsub .qmsub,
-                        ul#qm0 .qmsub .qmsub {
-                            margin: 0px;
-                            background-color: #37393F;
-                            border-width: 5px;
-                            border-color: #3D9074;
-                            border-radius: 0px 12px 12px 12px;
-                            -moz-border-radius: 0px 12px 12px 12px;
-                            -webkit-border-radius: 0px 12px 12px 12px;
-                            -ms-border-radius: 0px 12px 12px 12px;
-                            -o-border-radius: 0px 12px 12px 12px;
-                            -khtml-border-radius: 0px 12px 12px 12px;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmc_screen_thumb_img,
-                        ul#qm0 .qmc_screen_thumb_img {
-                            opacity: 0.7;
-                            border-width: 1px;
-                            border-style: solid;
-                            border-color: #292A2F;
-                            border-radius: 8px 8px 8px 8px;
-                            -moz-border-radius: 8px 8px 8px 8px;
-                            -webkit-border-radius: 8px 8px 8px 8px;
-                            -ms-border-radius: 8px 8px 8px 8px;
-                            -o-border-radius: 8px 8px 8px 8px;
-                            -khtml-border-radius: 8px 8px 8px 8px;
-                            box-shadow: 1px 1px 6px rgb(62, 62, 62);
-                            -moz-box-shadow: 1px 1px 6px rgb(62, 62, 62);
-                            -webkit-box-shadow: 1px 1px 6px rgb(62, 62, 62);
-                            -ms-box-shadow: 1px 1px 6px rgb(62, 62, 62);
-                            -o-box-shadow: 1px 1px 6px rgb(62, 62, 62);
-                            -khtml-box-shadow: 1px 1px 6px rgb(62, 62, 62);
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmsub .qmc_screen_thumbs_cbox,
-                        ul#qm0 .qmsub .qmc_screen_thumbs_cbox {
-                            margin: 10px;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmsub .qmcbox .qmc_thumb_title,
-                        ul#qm0 .qmsub .qmcbox .qmc_thumb_title {
-                            margin: 6px 0px 0px;
-                            color: #FFFFFF;
-                            font-size: 12px;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmc_screen_thumb_img:hover,
-                        ul#qm0 .qmc_screen_thumb_img:hover {
-                            opacity: 1;
-                            border-color: #ED353C;
-                        }
-
-
-                        /*"""""""" Custom Rule""""""""*/
-                        div#qm0 .qmsub .qmitem-s span,
-                        ul#qm0 .qmsub .qmitem-s span {
-                            color: #708AAD;
-                        }
-
-
-
-                        /*[END-QS0]*/
-                        </style>
-                        <!--[START-LJ0]-->
-                        <script type="text/javascript" src="js/top_menu.js"></script>
-                        <style type="text/css">
-                        .qmfv {
-                            visibility: visible !important;
-                        }
-
-                        .qmfh {
-                            visibility: hidden !important;
-                        }
-                        </style>
-                        <style type="text/css">
-                        .qmvibcssmenu {}
-
-                        #qm0 .qm-ibcss-static span {
-                            background-color: #FFFFFF;
-                            border-color: #FFFFFF;
-                            box-shadow: ;
-                        }
-
-                        div#qm0 .qm-ibcss-hover span {
-                            background-color: #FFFFFF;
-                            border-color: #FFFFFF;
-                            box-shadow: ;
-                        }
-
-                        body div#qm0 .qm-ibcss-active span {
-                            background-color: #FFFFFF;
-                            border-color: #FFFFFF;
-                            box-shadow: ;
-                        }
-
-                        #qm0 div .qm-ibcss-static span {
-                            background-color: #FFFFFF;
-                            border-color: #FFFFFF;
-                            box-shadow: ;
-                        }
-
-                        div#qm0 div .qm-ibcss-hover span {
-                            background-color: #292a2f;
-                            border-color: #292a2f;
-                            box-shadow: 2px 2px 3px #292a2f;
-                        }
-
-                        body div#qm0 div .qm-ibcss-active span {
-                            background-color: #292a2f;
-                            border-color: #292a2f;
-                            box-shadow: 2px 2px 3px #292a2f;
-                        }
-                        </style>
-                        <!--[END-LJ0]-->
-                        <?php
-
-include "include/menu.php";
-
-?>
-
-                        <!-- Create Menu Settings: (Int Menu ID, Object Literal Settings - {showDelay:int, hideDelay:int, interaction:string}) [interaction options... 'hover', 'all-always-open', 'click-all', 'all', 'all-always-open', 'main')] -->
-                        <script type="text/javascript">
-                        qm_create(0, {
-                            showDelay: 200,
-                            hideDelay: 200,
-                            interaction: 'hover',
-                            autoResize: false
-                        });
-                        </script>
-                        <!--[END-QM0]-->
-                        <!--[END-QM0-INSERT]-->
-                    </div>
-
-                </div>
-            </nav>
         </div>
-    </header>
-    <!--- header -->
-    <section id="content" class="wrapper ">
-        <!--- spotlight -->
-        <section id="contentLeft">
-            <div id="collegeDetail">
-                <h2 class="titleDescription">
-                    <font color="#003366">
-                        <b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            Board of Studies </b>
-                    </font>
-                </h2>
-                <hr />
 
-                <p class="style14">&nbsp;</p>
-                <h2 class="titleDescription">
-                    <font color="#003366"> <b>Board of Studies</b></font>
-                </h2>
-
-                <blockquote>
-                    <table width="648" border="1" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Agriculture.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Agriculture
-                                            </font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Architecture.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Architecture
-                                            </font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Commerce.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Commerce
-                                            </font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Engineering and Technology 2024.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Engineering
-                                                and Technology 2024</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Management.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Management
-                                            </font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Paramedical.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Paramedical
-                                            </font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Pharmaceutical Sciences.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Pharmaceutical
-                                                Sciences</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/board_of_management/Board of Studies Faculty of Social Science.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Board of Studies Faculty of Social Science
-                                            </font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </blockquote>
-
-
-
-                <p class="style14">&nbsp;</p>
-                <h2 class="titleDescription">
-                    <font color="#003366"> <b>Board of Studies - FACULTY OF SOCIAL SCIENCE</b></font>
-                </h2>
-                <blockquote>
-                    <table width="648" border="1" cellpadding="0" cellspacing="0">
-                        <tbody>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/B.A-HI-701 &702.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;B.A-HI-701 &702</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-EC- 701& 702.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-EC-701& 702</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-SO-701 & 702.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-SO-701 & 702</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-EN-701 & 702.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-EN-701 & 702</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-PS-701 & 702.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-PS-701 & 702</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BAHS-701 & 702.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BAHS-701 & 702</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/B.A-HI-801 & 802.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;B.A-HI-801 & 802</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-EN- 801 & 802.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-EN-801 & 802</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-PS-801 & 802.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-PS-801 & 802</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BA-SO-801 & 802.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BA-SO-801 & 802</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/BAHS-801 & 802.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;BAHS-801 & 802</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td width="890" height="45">
-                                    <h3 class="titleDescription"><a
-                                            href="Content/Documents/BOS_Social_Science_Nov-2025/Research Methodology 703.pdf"
-                                            target="_blank">
-                                            <font color="#55AAFF">&nbsp;&nbsp;Research Methodology 703</font>
-                                        </a></h3>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </blockquote>
+        <!-- RIGHT COLUMN: GOVERNANCE DIRECTORY SIDEBAR -->
+        <div>
+          <div class="side-gov-card">
+            <div class="side-gov-title">Statutory Governance</div>
+            <div class="side-gov-list">
+              <a href="Academic_Council.php" class="side-gov-link"><span>📜</span> Academic Council</a>
+              <a href="BOS.php" class="side-gov-link active"><span>📚</span> Board of Studies (BOS)</a>
+              <a href="BoM.php" class="side-gov-link"><span>🏛️</span> Board of Management</a>
+              <a href="Governingbody.php" class="side-gov-link"><span>⚖️</span> Governing Body</a>
+              <a href="Statuary-Bodies.php" class="side-gov-link"><span>📋</span> Statutory Bodies</a>
             </div>
-            <div align="justify"></div>
+          </div>
+        </div>
 
+      </div>
 
-        </section>
-        <!--- contentLeft -->
-        <section id="sideBar">
+    </div>
+  </section>
 
-        </section>
-        <!--- sideBar -->
-        <br class="clear" />
-    </section>
-    <!--- content -->
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $('#mainNav li').hover(
-            function() {
-                jQuery(this).find('.dropdown').fadeIn(300);
-            },
-            function() {
-                jQuery(this).find('.dropdown').fadeOut(200);
-            }
-        );
-    });
-    </script>
-    <?php
-include "include/footer.php";
-?>
-    <script type="text/javascript" src="js/jquery.js"></script>
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
 
-    <!--<link type="text/css" href="css/docs.css" rel="stylesheet" media="all">-->
-    <link type="text/css" href="css/jquery.css" rel="stylesheet" title="default" media="all">
-    <script type="text/javascript">
-    <!--//
-    var use_debug = false;
-
-    function debug() {
-        if (use_debug && window.console && window.console.log) console.log(arguments);
-    }
-
-    // on DOM ready
-    $(document).ready(function() {
-        $(".marquee").marquee({
-            loop: -1
-                // this callback runs when the marquee is initialized
-                ,
-            init: function($marquee, options) {
-                    debug("init", arguments);
-
-                    // shows how we can change the options at runtime
-                    if ($marquee.is("#marquee2")) options.yScroll = "bottom";
-                }
-                // this callback runs before a marquee is shown
-                ,
-            beforeshow: function($marquee, $li) {
-                    debug("beforeshow", arguments);
-
-                    // check to see if we have an author in the message (used in #marquee6)
-                    var $author = $li.find(".author");
-                    // move author from the item marquee-author layer and then fade it in
-                    if ($author.length) {
-
-                        $("#marquee-author").php("<span style='display:none;'>" + $author.php() +
-                            "</span>").find("> span").fadeIn(850);
-                    }
-                }
-                // this callback runs when a has fully scrolled into view (from either top or bottom)
-                ,
-            show: function() {
-                    debug("show", arguments);
-                }
-                // this callback runs when a after message has being shown
-                ,
-            aftershow: function($marquee, $li) {
-                debug("aftershow", arguments);
-
-                // find the author
-                var $author = $li.find(".author");
-                // hide the author
-                if ($author.length) $("#marquee-author").find("> span").fadeOut(250);
-            }
-        });
-    });
-
-    var iNewMessageCount = 0;
-
-    function addMessage(selector) {
-        // increase counter
-        iNewMessageCount++;
-
-        // append a new message to the marquee scrolling list
-        var $ul = $(selector).append("<li>New message #" + iNewMessageCount + "</li>");
-        // update the marquee
-        $ul.marquee("update");
-    }
-
-    function pause(selector) {
-        $(selector).marquee('pause');
-    }
-
-    function resume(selector) {
-        $(selector).marquee('resume');
-    }
-    //
-    -->
-    </script>
-    <!--<script type="text/javascript" src="js/jquery.min.js"></script>-->
 </body>
-<meta http-equiv="content-type" content="text/html;charset=UTF-8">
-
 </html>

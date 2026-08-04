@@ -1,3 +1,107 @@
+<?php
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menu Not Used — RKDF University Bhopal</title>
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
+      color: var(--p-paper);
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+    }
+    .sp-main-box {
+      padding: 80px 0;
+      background: var(--p-paper);
+      color: var(--p-navy-deep);
+      font-size: 16px;
+      line-height: 1.8;
+    }
+    .sp-main-box table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 28px 0;
+      background: #ffffff;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      border: 1px solid var(--p-hairline);
+    }
+    .sp-main-box th {
+      background: var(--p-navy-deep);
+      color: #ffffff;
+      padding: 16px 20px;
+      font-family: var(--p-font-mono);
+      font-size: 13.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .sp-main-box td {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--p-hairline);
+      font-size: 15px;
+    }
+    .sp-main-box tr:hover td {
+      background: rgba(220,38,38,0.03);
+    }
+    .sp-main-box a {
+      color: var(--p-gold);
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sp-main-box a:hover {
+      text-decoration: underline;
+      color: #b91c1c;
+    }
+    .sp-main-box img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+    .glossymenu a.menuitem {
+      display: inline-block;
+      padding: 10px 18px;
+      margin: 4px;
+      background: #ffffff;
+      border: 1px solid var(--p-hairline);
+      border-radius: 8px;
+      color: var(--p-navy-deep);
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.25s;
+    }
+    .glossymenu a.menuitem:hover {
+      background: var(--p-gold);
+      color: #ffffff;
+      border-color: var(--p-gold);
+    }
+  </style>
+</head>
+<body>
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
+
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Menu Not Used</h1>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
+  <section class="sp-main-box">
+    <div class="rk-container">
 <div style="z-index: 9999999;" id="qm0" class="qmmc qm-horizontal-c">
 <a class="qmitem-m qmparent" title="Home" href="index.php" style="padding:10px 10px 0px 0px;background-image:none;border-style:none;border-width:0px;"><img src="images/home_icon1.png" height="21" width="24"></a>
 <a class="qmitem-m qmparent" href="RKDFHR/Index.html" target="_blank" title="Campus Virtual Tour"><span isibulletcss="1" qmvbefore="1" style="display: block; position: relative; font-size: 1px; line-height: 0px; z-index: 1; left: 110px; top: 8px;" class="qm-ibcss-static"></span>Virtual Tour</a>
@@ -299,3 +403,11 @@ All the games have <br />grand and lucrative prizes.
                 <dd><a class="qmitem-s" href="" title="Photo Gallery">Photo Gallery</a></dd>
 				<dd><a class="qmitem-s" href="contactsangraam.php" title="Contact Us">Contact Us</a></dd>
   </dl>--></div>
+    </div>
+  </section>
+
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
+
+</body>
+</html>

@@ -264,15 +264,22 @@ $pageTitle = $pageTitle ?? 'Admin Dashboard — RKDF Bhopal';
       </a>
 
       <div class="menu-category">CMS Content</div>
+      <a href="manage_pages.php" class="menu-item <?= (basename($_SERVER['PHP_SELF']) == 'manage_pages.php') ? 'active' : '' ?>">
+        <i class="fa-solid fa-file-lines"></i>
+        <span>Page Content Editor</span>
+      </a>
       <a href="manage_sections.php" class="menu-item <?= (basename($_SERVER['PHP_SELF']) == 'manage_sections.php') ? 'active' : '' ?>">
         <i class="fa-solid fa-layer-group"></i>
         <span>Homepage Sections</span>
+      </a>
+      <a href="manage_appearance.php" class="menu-item <?= (basename($_SERVER['PHP_SELF']) == 'manage_appearance.php') ? 'active' : '' ?>">
+        <i class="fa-solid fa-palette"></i>
+        <span>Header &amp; Footer Layout</span>
       </a>
       <a href="manage_settings.php" class="menu-item <?= (basename($_SERVER['PHP_SELF']) == 'manage_settings.php') ? 'active' : '' ?>">
         <i class="fa-solid fa-sliders"></i>
         <span>Global Site Settings</span>
       </a>
-
 
       <div class="menu-category">System</div>
       <a href="../database/seed_data.php" target="_blank" class="menu-item">
