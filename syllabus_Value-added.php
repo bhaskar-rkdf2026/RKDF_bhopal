@@ -242,7 +242,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="vac-block-card">
             <div class="vac-card-header">
-              <h2 class="vac-card-title">Approved Value-Added Certificate Syllabi</h2>
+              <h2 class="vac-card-title">Approved Value-Added Certificate Syllabus</h2>
               <span class="vac-badge">38+ CERTIFICATE COURSES</span>
             </div>
             <div class="vac-card-body">
@@ -540,8 +540,8 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Academic Quick Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link active">Value-Added Syllabi <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link active">Value-Added Syllabus <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

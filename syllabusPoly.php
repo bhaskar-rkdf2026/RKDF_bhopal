@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">63 · FACULTY OF ENGINEERING (POLYTECHNIC DIPLOMA) SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Polytechnic (Diploma) Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and 3-year diploma course syllabi for Polytechnic Engineering streams approved by AICTE.
+        Curriculum schemes and 3-year diploma course Syllabus for Polytechnic Engineering streams approved by AICTE.
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="spoly-block-card">
             <div class="spoly-card-header">
-              <h2 class="spoly-card-title">Polytechnic Diploma Syllabi</h2>
+              <h2 class="spoly-card-title">Polytechnic Diploma Syllabus</h2>
               <span class="spoly-badge">AICTE APPROVED</span>
             </div>
             <div class="spoly-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for 3-year Polytechnic Diploma engineering programs, covering Applied Physics, Chemistry, Workshop Technology, Mechanical Engineering, Civil Engineering, and Electronics.
+                Download official PDF course Syllabus for 3-year Polytechnic Diploma engineering programs, covering Applied Physics, Chemistry, Workshop Technology, Mechanical Engineering, Civil Engineering, and Electronics.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -344,7 +344,7 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="syllabusBe.php" class="sidebar-link">B.E. / B.Tech Syllabus <span>→</span></a></li>
               <li><a href="syllabusMtech.php" class="sidebar-link">M.Tech Syllabus <span>→</span></a></li>
               <li><a href="syllabusPoly.php" class="sidebar-link active">Polytechnic Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
             </ul>
           </div>

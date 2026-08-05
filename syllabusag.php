@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">48 · FACULTY OF AGRICULTURE SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Agriculture Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum and semester-wise course syllabi for B.Sc. (Hons) Agriculture following ICAR 5th &amp; 6th Deans Committee recommendations.
+        Curriculum and semester-wise course Syllabus for B.Sc. (Hons) Agriculture following ICAR 5th &amp; 6th Deans Committee recommendations.
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="sag-block-card">
             <div class="sag-card-header">
-              <h2 class="sag-card-title">B.Sc. (Hons) Agriculture Syllabi</h2>
+              <h2 class="sag-card-title">B.Sc. (Hons) Agriculture Syllabus</h2>
               <span class="sag-badge">ICAR COMPLIANT</span>
             </div>
             <div class="sag-card-body">
@@ -334,8 +334,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Agriculture.php" class="sidebar-link">Faculty of Agriculture <span>→</span></a></li>
               <li><a href="syllabusag.php" class="sidebar-link active">Agriculture Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

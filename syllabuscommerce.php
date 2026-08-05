@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">52 · FACULTY OF COMMERCE SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Commerce Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Semester-wise course syllabi for B.Com (Plain), B.Com (Computer Applications), B.Com (Honours), and M.Com following National Education Policy (NEP) guidelines.
+        Semester-wise course Syllabus for B.Com (Plain), B.Com (Computer Applications), B.Com (Honours), and M.Com following National Education Policy (NEP) guidelines.
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="scom-block-card">
             <div class="scom-card-header">
-              <h2 class="scom-card-title">Commerce NEP &amp; Postgraduate Syllabi</h2>
+              <h2 class="scom-card-title">Commerce NEP &amp; Postgraduate Syllabus</h2>
               <span class="scom-badge">NEP 2020 COMPLIANT</span>
             </div>
             <div class="scom-card-body">
@@ -289,9 +289,9 @@ require_once __DIR__ . '/config/db.php';
                 <img src="images/ai_syllabus_commerce/rkdf_syll_com_card.jpg" alt="RKDF Faculty of Commerce &amp; Financial Analytics Lab" class="scom-media-img">
               </div>
 
-              <!-- SECTION 1: NEP B.COM (PLAIN) SYLLABI -->
+              <!-- SECTION 1: NEP B.COM (PLAIN) Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                B.Com (Plain) NEP Semester Syllabi
+                B.Com (Plain) NEP Semester Syllabus
               </div>
 
               <div class="scom-download-grid">
@@ -321,9 +321,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 2: NEP B.COM (COMPUTER) SYLLABI -->
+              <!-- SECTION 2: NEP B.COM (COMPUTER) Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
-                B.Com (Computer Applications) NEP Semester Syllabi
+                B.Com (Computer Applications) NEP Semester Syllabus
               </div>
 
               <div class="scom-download-grid">
@@ -375,7 +375,7 @@ require_once __DIR__ . '/config/db.php';
 
               <!-- SECTION 4: M.COM NEP SYLLABUS -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
-                M.Com NEP Semester Syllabi
+                M.Com NEP Semester Syllabus
               </div>
 
               <div class="scom-download-grid">
@@ -397,9 +397,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 5: FULL PROGRAM COMBINED SYLLABI (NON-TECHNICAL) -->
+              <!-- SECTION 5: FULL PROGRAM COMBINED Syllabus (NON-TECHNICAL) -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                Combined Full Program Syllabi (1st to 6th Sem All)
+                Combined Full Program Syllabus (1st to 6th Sem All)
               </div>
 
               <div class="scom-download-grid">
@@ -432,8 +432,8 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Commerce Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="syllabuscommerce.php" class="sidebar-link active">Commerce Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>

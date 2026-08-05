@@ -327,7 +327,7 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="skill.php" class="sidebar-link active">Skill Enhancement <span>→</span></a></li>
               <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Courses <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>

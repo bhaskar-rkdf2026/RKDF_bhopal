@@ -415,7 +415,7 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Academic Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="academic&amp;departments.php" class="sidebar-link active">Faculties &amp; Departments <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabi Hub <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabus Hub <span>→</span></a></li>
               <li><a href="acadmiccalander.php" class="sidebar-link">Academic Calendar <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department <span>→</span></a></li>

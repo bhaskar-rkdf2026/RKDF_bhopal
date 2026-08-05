@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">56 · FACULTY OF LIBRARY &amp; INFORMATION SCIENCE SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Library &amp; Information Science Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Updated course syllabi for Bachelor of Library and Information Science (B.Lib.I.Sc.) and Master of Library and Information Science (M.Lib.I.Sc.).
+        Updated course Syllabus for Bachelor of Library and Information Science (B.Lib.I.Sc.) and Master of Library and Information Science (M.Lib.I.Sc.).
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="slib-block-card">
             <div class="slib-card-header">
-              <h2 class="slib-card-title">Library Science Syllabi (New)</h2>
+              <h2 class="slib-card-title">Library Science Syllabus (New)</h2>
               <span class="slib-badge">B.LIB.I.SC · M.LIB.I.SC</span>
             </div>
             <div class="slib-card-body">
@@ -294,11 +294,11 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#C5A059;margin-bottom:14px;font-weight:700;">
-                Professional Degree Syllabi (Updated Session)
+                Professional Degree Syllabus (Updated Session)
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for Library and Information Science degrees, covering Knowledge Organization, Digital Archiving, Library Management Systems, Information Retrieval, and Bibliometrics.
+                Download official PDF course Syllabus for Library and Information Science degrees, covering Knowledge Organization, Digital Archiving, Library Management Systems, Information Retrieval, and Bibliometrics.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -334,8 +334,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Library.php" class="sidebar-link">Faculty of Library Science <span>→</span></a></li>
               <li><a href="syllabuslib.php" class="sidebar-link active">Library Science Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
             </ul>

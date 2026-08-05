@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">70 · FACULTY OF SCIENCE (NEP MINOR 2ND YEAR SYLLABUS)</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">B.Sc. NEP Minor 2nd Year Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and minor course syllabi for B.Sc. 2nd Year under National Education Policy (NEP 2020 – Session 2023-24).
+        Curriculum schemes and minor course Syllabus for B.Sc. 2nd Year under National Education Policy (NEP 2020 – Session 2023-24).
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="ssmin2-block-card">
             <div class="ssmin2-card-header">
-              <h2 class="ssmin2-card-title">NEP Minor 2nd Year Discipline Syllabi</h2>
+              <h2 class="ssmin2-card-title">NEP Minor 2nd Year Discipline Syllabus</h2>
               <span class="ssmin2-badge">NEP 2020 COMPLIANT</span>
             </div>
             <div class="ssmin2-card-body">
@@ -294,7 +294,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for B.Sc. 2nd Year Minor subjects under NEP 2020 (Session 2023-24), covering Physics, Zoology, Chemistry, Botany, and Mathematics.
+                Download official PDF course Syllabus for B.Sc. 2nd Year Minor subjects under NEP 2020 (Session 2023-24), covering Physics, Zoology, Chemistry, Botany, and Mathematics.
               </p>
 
               <!-- DOWNLOAD GRID -->
@@ -341,8 +341,8 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="syllabus_science_major.php" class="sidebar-link">NEP Major 1st Year <span>→</span></a></li>
               <li><a href="syllabus_science_minor.php" class="sidebar-link">NEP Minor (Sem 1 &amp; 2) <span>→</span></a></li>
               <li><a href="syllabus_science_minor2ndyr.php" class="sidebar-link active">NEP Minor 2nd Year <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

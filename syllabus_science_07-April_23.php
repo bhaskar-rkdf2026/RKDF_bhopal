@@ -135,7 +135,7 @@ require_once __DIR__ . '/config/db.php';
                         </tr>
 						<tr>
                             <td width="516" height="36"><span class="style3">
-                          Syllabus According to New Education Policy (NEP)  </span><br /></td>
+                         Syllabus According to New Education Policy (NEP)  </span><br /></td>
                             <td width="39">&nbsp;</td>
                             <td width="73">&nbsp;</td>
                         </tr>

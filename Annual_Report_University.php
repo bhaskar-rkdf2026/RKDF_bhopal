@@ -336,7 +336,7 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="Annual_Report_University.php" class="sidebar-link active">Annual Reports <span>→</span></a></li>
               <li><a href="Feedback_Analysis.php" class="sidebar-link">Feedback Analysis <span>→</span></a></li>
               <li><a href="acadmiccalander.php" class="sidebar-link">Academic Calendar <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

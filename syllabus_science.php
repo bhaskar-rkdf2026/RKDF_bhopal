@@ -267,7 +267,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">64 · FACULTY OF SCIENCE SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Science Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and semester-wise course syllabi for B.Sc. and M.Sc. across physical, chemical, biological, and mathematical sciences under NEP 2020.
+        Curriculum schemes and semester-wise course Syllabus for B.Sc. and M.Sc. across physical, chemical, biological, and mathematical sciences under NEP 2020.
       </p>
     </div>
   </section>
@@ -282,7 +282,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="ssci-block-card">
             <div class="ssci-card-header">
-              <h2 class="ssci-card-title">Science Syllabi (B.Sc. &amp; M.Sc.)</h2>
+              <h2 class="ssci-card-title">Science Syllabus (B.Sc. &amp; M.Sc.)</h2>
               <span class="ssci-badge">NEP 2020 COMPLIANT</span>
             </div>
             <div class="ssci-card-body">
@@ -379,9 +379,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 3: M.SC. TRADITIONAL / DISCIPLINE SYLLABI -->
+              <!-- SECTION 3: M.SC. TRADITIONAL / DISCIPLINE Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                Master of Science (M.Sc. Discipline Syllabi)
+                Master of Science (M.Sc. Discipline Syllabus)
               </div>
 
               <div class="ssci-download-grid">
@@ -438,8 +438,8 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Science Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="syllabus_science.php" class="sidebar-link active">Science Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>

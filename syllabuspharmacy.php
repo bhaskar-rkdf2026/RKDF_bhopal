@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">61 · FACULTY OF PHARMACEUTICAL SCIENCES SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Pharmacy Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and course syllabi for D.Pharma, B.Pharma (New PCI &amp; Old Scheme), and M.Pharma approved by Pharmacy Council of India (PCI).
+        Curriculum schemes and course Syllabus for D.Pharma, B.Pharma (New PCI &amp; Old Scheme), and M.Pharma approved by Pharmacy Council of India (PCI).
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="spharm-block-card">
             <div class="spharm-card-header">
-              <h2 class="spharm-card-title">Pharmaceutical Sciences Syllabi</h2>
+              <h2 class="spharm-card-title">Pharmaceutical Sciences Syllabus</h2>
               <span class="spharm-badge">PCI APPROVED</span>
             </div>
             <div class="spharm-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for Pharmacy programs, covering Pharmaceutics, Pharmaceutical Chemistry, Pharmacology, Pharmacognosy, Quality Assurance, and Regulatory Affairs.
+                Download official PDF course Syllabus for Pharmacy programs, covering Pharmaceutics, Pharmaceutical Chemistry, Pharmacology, Pharmacognosy, Quality Assurance, and Regulatory Affairs.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -350,8 +350,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="pharmacy.php" class="sidebar-link">Faculty of Pharmacy <span>→</span></a></li>
               <li><a href="syllabuspharmacy.php" class="sidebar-link active">Pharmacy Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

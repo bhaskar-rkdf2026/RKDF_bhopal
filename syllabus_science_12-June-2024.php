@@ -714,7 +714,7 @@ include "include/menu.php";
                         </tr>
 						<tr>
                             <td width="516" height="36"><span class="style3">
-                          SYLLABUS ACCORDING TO NEW EDUCATION POLICY ( NEP)  </span><br /></td>
+                         Syllabus ACCORDING TO NEW EDUCATION POLICY ( NEP)  </span><br /></td>
                             <td width="39">&nbsp;</td>
                             <td width="73">&nbsp;</td>
                         </tr>

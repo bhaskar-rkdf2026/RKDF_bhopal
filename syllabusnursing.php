@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">60 · FACULTY OF NURSING SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Nursing Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and course syllabi for B.Sc. Nursing (New &amp; Old Scheme), Post Basic B.Sc. Nursing, and GNM approved by Indian Nursing Council (INC) &amp; MPNRC.
+        Curriculum schemes and course Syllabus for B.Sc. Nursing (New &amp; Old Scheme), Post Basic B.Sc. Nursing, and GNM approved by Indian Nursing Council (INC) &amp; MPNRC.
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="snurs-block-card">
             <div class="snurs-card-header">
-              <h2 class="snurs-card-title">Nursing Education Syllabi</h2>
+              <h2 class="snurs-card-title">Nursing Education Syllabus</h2>
               <span class="snurs-badge">INC &amp; MPNRC APPROVED</span>
             </div>
             <div class="snurs-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for B.Sc. Nursing (New &amp; Old Schemes), Post Basic B.Sc. Nursing, and General Nursing &amp; Midwifery (GNM), covering Clinical Nursing, Anatomy, Physiology, Pharmacology, Community Health, and Psychiatric Nursing.
+                Download official PDF course Syllabus for B.Sc. Nursing (New &amp; Old Schemes), Post Basic B.Sc. Nursing, and General Nursing &amp; Midwifery (GNM), covering Clinical Nursing, Anatomy, Physiology, Pharmacology, Community Health, and Psychiatric Nursing.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -350,8 +350,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="nursing.php" class="sidebar-link">Faculty of Nursing <span>→</span></a></li>
               <li><a href="syllabusnursing.php" class="sidebar-link active">Nursing Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

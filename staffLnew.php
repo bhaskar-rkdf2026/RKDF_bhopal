@@ -515,7 +515,7 @@ try {
               <li><a href="staffLnew.php" class="sidebar-link active">Staff Directory <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="Feedback_Analysis.php" class="sidebar-link">Feedback &amp; Analysis <span>→</span></a></li>
             </ul>

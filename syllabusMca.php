@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">53 · FACULTY OF COMPUTER APPLICATION SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Computer Application Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and semester-wise course syllabi for BCA, MCA (New &amp; Old Scheme), Bridge Course, DCA, and PGDCA.
+        Curriculum schemes and semester-wise course Syllabus for BCA, MCA (New &amp; Old Scheme), Bridge Course, DCA, and PGDCA.
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="smca-block-card">
             <div class="smca-card-header">
-              <h2 class="smca-card-title">Computer Application Syllabi</h2>
+              <h2 class="smca-card-title">Computer Application Syllabus</h2>
               <span class="smca-badge">BCA · MCA · DCA · PGDCA</span>
             </div>
             <div class="smca-card-body">
@@ -289,9 +289,9 @@ require_once __DIR__ . '/config/db.php';
                 <img src="images/ai_syllabus_mca/rkdf_syll_mca_card.jpg" alt="RKDF Computer Science &amp; Software Engineering Laboratory" class="smca-media-img">
               </div>
 
-              <!-- SECTION 1: NEP BCA SEMESTER SYLLABI -->
+              <!-- SECTION 1: NEP BCA SEMESTER Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                BCA NEP Semester Syllabi (Sem 1 to 6) &amp; Combined Course
+                BCA NEP Semester Syllabus (Sem 1 to 6) &amp; Combined Course
               </div>
 
               <div class="smca-download-grid">
@@ -385,8 +385,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Computer-Application.php" class="sidebar-link">Computer Application <span>→</span></a></li>
               <li><a href="syllabusMca.php" class="sidebar-link active">MCA / BCA Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
             </ul>

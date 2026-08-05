@@ -281,7 +281,7 @@ require_once __DIR__ . '/config/db.php';
           <article class="bos-table-card">
             <div class="bos-card-header" style="background:#0C1424;border-bottom-color:#E31B23;">
               <h2 class="bos-card-title">BOS — Faculty of Social Science (Nov-2025)</h2>
-              <span class="bos-badge" style="color:#E31B23;border-color:rgba(227,27,35,0.3);background:rgba(227,27,35,0.1);">DEPARTMENTAL SYLLABI</span>
+              <span class="bos-badge" style="color:#E31B23;border-color:rgba(227,27,35,0.3);background:rgba(227,27,35,0.1);">DEPARTMENTAL Syllabus</span>
             </div>
             <table>
               <thead>

@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">57 · FACULTY OF MANAGEMENT SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Management Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and semester-wise course syllabi for BBA (NEP) and MBA (CBCS 2025-26, New &amp; Old Schemes) approved by AICTE.
+        Curriculum schemes and semester-wise course Syllabus for BBA (NEP) and MBA (CBCS 2025-26, New &amp; Old Schemes) approved by AICTE.
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="smba-block-card">
             <div class="smba-card-header">
-              <h2 class="smba-card-title">Management Syllabi (MBA &amp; BBA)</h2>
+              <h2 class="smba-card-title">Management Syllabus (MBA &amp; BBA)</h2>
               <span class="smba-badge">CBCS 2025-26 · NEP COMPLIANT</span>
             </div>
             <div class="smba-card-body">
@@ -291,7 +291,7 @@ require_once __DIR__ . '/config/db.php';
 
               <!-- SECTION 1: BBA NEP SYLLABUS -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                BBA NEP Semester Syllabi (Years 1 to 4)
+                BBA NEP Semester Syllabus (Years 1 to 4)
               </div>
 
               <div class="smba-download-grid">
@@ -339,7 +339,7 @@ require_once __DIR__ . '/config/db.php';
 
               <!-- SECTION 3: MBA NEW & OLD SCHEME SYLLABUS -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                MBA New &amp; Old Scheme Semester Syllabi
+                MBA New &amp; Old Scheme Semester Syllabus
               </div>
 
               <div class="smba-download-grid">
@@ -376,8 +376,8 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Management Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="syllabusMba.php" class="sidebar-link active">MBA / BBA Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>

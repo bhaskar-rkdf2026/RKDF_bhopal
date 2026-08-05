@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">69 · FACULTY OF SCIENCE (NEP 3RD YEAR SYLLABUS)</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">B.Sc. NEP 3rd Year Syllabus (Sem V &amp; VI)</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes, Major specialization syllabi, and Discipline Specific Electives (DSE-I &amp; DSE-II) for B.Sc. 3rd Year (Semesters V &amp; VI) under NEP 2020.
+        Curriculum schemes, Major specialization Syllabus, and Discipline Specific Electives (DSE-I &amp; DSE-II) for B.Sc. 3rd Year (Semesters V &amp; VI) under NEP 2020.
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="ss3-block-card">
             <div class="ss3-card-header">
-              <h2 class="ss3-card-title">NEP 3rd Year Major &amp; DSE Syllabi</h2>
+              <h2 class="ss3-card-title">NEP 3rd Year Major &amp; DSE Syllabus</h2>
               <span class="ss3-badge">NEP 2020 COMPLIANT</span>
             </div>
             <div class="ss3-card-body">
@@ -289,7 +289,7 @@ require_once __DIR__ . '/config/db.php';
                 <img src="images/ai_syllabus_science_3yr/rkdf_syll_sci_3_card.jpg" alt="RKDF Science Faculty Advanced Research &amp; Analytical Instrumentation Center" class="ss3-media-img">
               </div>
 
-              <!-- SECTION 1: 5TH SEMESTER DSE SYLLABI -->
+              <!-- SECTION 1: 5TH SEMESTER DSE Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
                 5th Semester Discipline Specific Electives (DSE)
               </div>
@@ -329,9 +329,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 2: 5TH SEMESTER MAJOR SYLLABI -->
+              <!-- SECTION 2: 5TH SEMESTER MAJOR Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
-                5th Semester Major Specialization Syllabi
+                5th Semester Major Specialization Syllabus
               </div>
 
               <div class="ss3-download-grid">
@@ -369,9 +369,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 3: 6TH SEMESTER MAJOR SYLLABI -->
+              <!-- SECTION 3: 6TH SEMESTER MAJOR Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                6th Semester Major Specialization Syllabi
+                6th Semester Major Specialization Syllabus
               </div>
 
               <div class="ss3-download-grid">
@@ -409,9 +409,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 4: 6TH SEMESTER DSE-I & DSE-II SYLLABI -->
+              <!-- SECTION 4: 6TH SEMESTER DSE-I & DSE-II Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
-                6th Semester DSE - I &amp; DSE - II Syllabi
+                6th Semester DSE - I &amp; DSE - II Syllabus
               </div>
 
               <div class="ss3-download-grid">
@@ -475,8 +475,8 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="syllabus_science_major.php" class="sidebar-link">NEP Major 1st Year <span>→</span></a></li>
               <li><a href="syllabus_science_major3rdsem.php" class="sidebar-link">NEP Major 2nd Year <span>→</span></a></li>
               <li><a href="syllabus_science_3year.php" class="sidebar-link active">NEP 3rd Year (Sem 5 &amp; 6) <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

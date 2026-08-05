@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">50 · AYURVEDA (BAMS) SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Ayurveda (B.A.M.S.) Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Professional year course syllabi for B.A.M.S. approved by National Commission for Indian System of Medicine (NCISM) &amp; CCH.
+        Professional year course Syllabus for B.A.M.S. approved by National Commission for Indian System of Medicine (NCISM) &amp; CCH.
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="sbams-block-card">
             <div class="sbams-card-header">
-              <h2 class="sbams-card-title">B.A.M.S. Professional Syllabi</h2>
+              <h2 class="sbams-card-title">B.A.M.S. Professional Syllabus</h2>
               <span class="sbams-badge">NCISM APPROVED</span>
             </div>
             <div class="sbams-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for B.A.M.S., covering Samhita Adhyayan, Kriya Sharir (Physiology), Padartha Vijnanam (Fundamental Principles), Rachana Sharira (Anatomy), and Samskritam Evam Ayurved Itihas.
+                Download official PDF course Syllabus for B.A.M.S., covering Samhita Adhyayan, Kriya Sharir (Physiology), Padartha Vijnanam (Fundamental Principles), Rachana Sharira (Anatomy), and Samskritam Evam Ayurved Itihas.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -358,8 +358,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="BAMS.php" class="sidebar-link">Faculty of Ayurveda (BAMS) <span>→</span></a></li>
               <li><a href="syllabusBAMS.php" class="sidebar-link active">BAMS Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

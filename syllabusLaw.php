@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">55 · FACULTY OF LAW SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Law Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and semester-wise course syllabi for B.A. LL.B., LL.B., and LL.M. approved by Bar Council of India (BCI).
+        Curriculum schemes and semester-wise course Syllabus for B.A. LL.B., LL.B., and LL.M. approved by Bar Council of India (BCI).
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="slaw-block-card">
             <div class="slaw-card-header">
-              <h2 class="slaw-card-title">Legal Education Syllabi</h2>
+              <h2 class="slaw-card-title">Legal Education Syllabus</h2>
               <span class="slaw-badge">BCI APPROVED</span>
             </div>
             <div class="slaw-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for Law programs, covering Constitutional Law, Criminal Procedure, Corporate Jurisprudence, Cyber Law, International Law, and Moot Court Advocacy.
+                Download official PDF course Syllabus for Law programs, covering Constitutional Law, Criminal Procedure, Corporate Jurisprudence, Cyber Law, International Law, and Moot Court Advocacy.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -358,8 +358,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Law.php" class="sidebar-link">Faculty of Law <span>→</span></a></li>
               <li><a href="syllabusLaw.php" class="sidebar-link active">Law Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

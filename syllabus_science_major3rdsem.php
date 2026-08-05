@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">68 · FACULTY OF SCIENCE (NEP MAJOR 2ND YEAR SYLLABUS)</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">B.Sc. NEP Major 2nd Year Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and major subject course syllabi for B.Sc. 2nd Year (Semester 3) under National Education Policy (NEP 2020) across 10 scientific disciplines.
+        Curriculum schemes and major subject course Syllabus for B.Sc. 2nd Year (Semester 3) under National Education Policy (NEP 2020) across 10 scientific disciplines.
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="ssmaj2-block-card">
             <div class="ssmaj2-card-header">
-              <h2 class="ssmaj2-card-title">NEP Major 2nd Year Discipline Syllabi</h2>
+              <h2 class="ssmaj2-card-title">NEP Major 2nd Year Discipline Syllabus</h2>
               <span class="ssmaj2-badge">NEP 2020 COMPLIANT</span>
             </div>
             <div class="ssmaj2-card-body">
@@ -290,11 +290,11 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#C5A059;margin-bottom:14px;font-weight:700;">
-                B.Sc. 2nd Year (Semester III) Major Syllabi
+                B.Sc. 2nd Year (Semester III) Major Syllabus
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for B.Sc. 2nd Year (Semester III) Major subjects under NEP 2020, covering Physics, Zoology, Chemistry, Environmental Science, Botany, Microbiology, Mathematics, Biotechnology, Computer Science, and Forensic Science.
+                Download official PDF course Syllabus for B.Sc. 2nd Year (Semester III) Major subjects under NEP 2020, covering Physics, Zoology, Chemistry, Environmental Science, Botany, Microbiology, Mathematics, Biotechnology, Computer Science, and Forensic Science.
               </p>
 
               <!-- DOWNLOAD GRID -->
@@ -365,8 +365,8 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="syllabus_science.php" class="sidebar-link">Science Syllabus Hub <span>→</span></a></li>
               <li><a href="syllabus_science_major.php" class="sidebar-link">NEP Major 1st Year <span>→</span></a></li>
               <li><a href="syllabus_science_major3rdsem.php" class="sidebar-link active">NEP Major 2nd Year <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

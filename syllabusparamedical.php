@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">59 · FACULTY OF PARAMEDICAL SCIENCES SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Paramedical Sciences Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and degree/diploma course syllabi for BMLT, BPT, DMLT, X-Ray Radiography, and D.Pharm (Homoeopathy) approved by MP Paramedical Council.
+        Curriculum schemes and degree/diploma course Syllabus for BMLT, BPT, DMLT, X-Ray Radiography, and D.Pharm (Homoeopathy) approved by MP Paramedical Council.
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="spara-block-card">
             <div class="spara-card-header">
-              <h2 class="spara-card-title">Paramedical Degree &amp; Diploma Syllabi</h2>
+              <h2 class="spara-card-title">Paramedical Degree &amp; Diploma Syllabus</h2>
               <span class="spara-badge">MP PARAMEDICAL COUNCIL</span>
             </div>
             <div class="spara-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for Paramedical programs including Bachelor of Medical Laboratory Technology (BMLT), Bachelor of Physiotherapy (BPT), Diploma in Medical Laboratory Technology (DMLT), X-Ray Radiography, and D.Pharm (Homoeopathy).
+                Download official PDF course Syllabus for Paramedical programs including Bachelor of Medical Laboratory Technology (BMLT), Bachelor of Physiotherapy (BPT), Diploma in Medical Laboratory Technology (DMLT), X-Ray Radiography, and D.Pharm (Homoeopathy).
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -374,8 +374,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="paramdical.php" class="sidebar-link">Faculty of Paramedical Sciences <span>→</span></a></li>
               <li><a href="syllabusparamedical.php" class="sidebar-link active">Paramedical Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

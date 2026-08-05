@@ -256,7 +256,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">49 · FACULTY OF ARCHITECTURE SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Architecture Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum, architectural design studio guidelines, and semester-wise course syllabi for B.Arch (Semesters 1 to 10) approved by Council of Architecture (COA).
+        Curriculum, architectural design studio guidelines, and semester-wise course Syllabus for B.Arch (Semesters 1 to 10) approved by Council of Architecture (COA).
       </p>
     </div>
   </section>
@@ -271,7 +271,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="sarc-block-card">
             <div class="sarc-card-header">
-              <h2 class="sarc-card-title">B.Arch 10-Semester Syllabi</h2>
+              <h2 class="sarc-card-title">B.Arch 10-Semester Syllabus</h2>
               <span class="sarc-badge">COA APPROVED</span>
             </div>
             <div class="sarc-card-body">
@@ -368,8 +368,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="architect.php" class="sidebar-link">Faculty of Architecture <span>→</span></a></li>
               <li><a href="syllabusarchitect.php" class="sidebar-link active">Architecture Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

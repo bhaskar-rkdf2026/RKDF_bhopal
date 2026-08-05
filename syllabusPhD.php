@@ -383,7 +383,7 @@ require_once __DIR__ . '/config/db.php';
               <div class="sphd-download-hero-card">
                 <div>
                   <h3 class="sphd-dl-title">Ph.D. 1st Sem Course Work - Scheme &amp; Syllabus</h3>
-                  <p class="sphd-dl-sub">Official 1st Semester Coursework Regulations, Exam Scheme &amp; Unit-wise Syllabi for All Branches</p>
+                  <p class="sphd-dl-sub">Official 1st Semester Coursework Regulations, Exam Scheme &amp; Unit-wise Syllabus for All Branches</p>
                 </div>
                 <a href="syllabus/Ph_D_Course_work__Scheme_and_Syllabus.pdf" target="_blank" class="sphd-main-pdf-btn">
                   <span>📄 Download PDF</span>
@@ -402,8 +402,8 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Research Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="syllabusPhD.php" class="sidebar-link active">Ph.D. Coursework Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="E_Resource.php" class="sidebar-link">E-Resources Portal <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>

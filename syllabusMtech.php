@@ -269,7 +269,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">58 · FACULTY OF ENGINEERING (M.TECH) SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Master of Technology (M.Tech) Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and 2-year postgraduate course syllabi (Semesters 1 to 4) for M.Tech across 9 specialized engineering disciplines approved by AICTE.
+        Curriculum schemes and 2-year postgraduate course Syllabus (Semesters 1 to 4) for M.Tech across 9 specialized engineering disciplines approved by AICTE.
       </p>
     </div>
   </section>
@@ -284,7 +284,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="smt-block-card">
             <div class="smt-card-header">
-              <h2 class="smt-card-title">M.Tech Specialization Syllabi</h2>
+              <h2 class="smt-card-title">M.Tech Specialization Syllabus</h2>
               <span class="smt-badge">AICTE COMPLIANT</span>
             </div>
             <div class="smt-card-body">
@@ -374,8 +374,8 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="Engineering.php" class="sidebar-link">Faculty of Engineering <span>→</span></a></li>
               <li><a href="syllabusBe.php" class="sidebar-link">B.E. / B.Tech Syllabus <span>→</span></a></li>
               <li><a href="syllabusMtech.php" class="sidebar-link active">M.Tech Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
             </ul>
           </div>

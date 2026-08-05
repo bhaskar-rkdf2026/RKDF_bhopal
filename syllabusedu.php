@@ -261,7 +261,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">54 · FACULTY OF EDUCATION SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Education Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        NCTE approved teacher education course syllabi for Bachelor of Education (B.Ed.) and Master of Education (M.Ed.).
+        NCTE approved teacher education course Syllabus for Bachelor of Education (B.Ed.) and Master of Education (M.Ed.).
       </p>
     </div>
   </section>
@@ -276,7 +276,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="sedu-block-card">
             <div class="sedu-card-header">
-              <h2 class="sedu-card-title">Teacher Education Syllabi</h2>
+              <h2 class="sedu-card-title">Teacher Education Syllabus</h2>
               <span class="sedu-badge">NCTE APPROVED</span>
             </div>
             <div class="sedu-card-body">
@@ -298,7 +298,7 @@ require_once __DIR__ . '/config/db.php';
               </div>
 
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
-                Download official PDF course syllabi for B.Ed. and M.Ed. programs, covering Educational Psychology, Curriculum &amp; Pedagogy, School Internship, and Educational Research.
+                Download official PDF course Syllabus for B.Ed. and M.Ed. programs, covering Educational Psychology, Curriculum &amp; Pedagogy, School Internship, and Educational Research.
               </p>
 
               <!-- DOWNLOAD ROWS -->
@@ -334,8 +334,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Education.php" class="sidebar-link">Faculty of Education <span>→</span></a></li>
               <li><a href="syllabusedu.php" class="sidebar-link active">Education Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

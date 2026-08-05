@@ -250,7 +250,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">38 · ACADEMICS &amp; SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">View Academic Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Access course curricula, semester-wise syllabi, credit distribution, and subject outlines across all undergraduate, postgraduate, diploma, and doctoral programs.
+        Access course curricula, semester-wise Syllabus, credit distribution, and subject outlines across all undergraduate, postgraduate, diploma, and doctoral programs.
       </p>
     </div>
   </section>
@@ -274,7 +274,7 @@ require_once __DIR__ . '/config/db.php';
           <!-- OVERVIEW BLOCK -->
           <article class="syl-block-card">
             <div class="syl-card-header">
-              <h2 class="syl-card-title">Academic Curricula &amp; Syllabi Repository</h2>
+              <h2 class="syl-card-title">Academic Curricula &amp; Syllabus Repository</h2>
               <span class="syl-badge">UGC &amp; COUNCIL ALIGNED</span>
             </div>
             <div class="syl-card-body">
@@ -329,7 +329,7 @@ require_once __DIR__ . '/config/db.php';
             <h3 class="sidebar-title">Academic Quick Links</h3>
             <ul class="sidebar-nav-list">
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link active">Course Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link active">Course Syllabus <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>
               <li><a href="Engineering.php" class="sidebar-link">Faculty of Engineering <span>→</span></a></li>

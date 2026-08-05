@@ -381,7 +381,7 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="E_Resource.php" class="sidebar-link active">E-Resources Portal <span>→</span></a></li>
               <li><a href="eresourse_login.php" class="sidebar-link">E-Resource Login <span>→</span></a></li>
               <li><a href="Library.php" class="sidebar-link">Faculty of Library Science <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

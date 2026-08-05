@@ -257,7 +257,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">65 · FACULTY OF HUMANITIES &amp; SOCIAL SCIENCES SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Social Science &amp; Humanities Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes and semester-wise course syllabi for B.A. (Plain &amp; Honours), M.A., BSW, and MSW under National Education Policy (NEP 2020).
+        Curriculum schemes and semester-wise course Syllabus for B.A. (Plain &amp; Honours), M.A., BSW, and MSW under National Education Policy (NEP 2020).
       </p>
     </div>
   </section>
@@ -272,7 +272,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="sart-block-card">
             <div class="sart-card-header">
-              <h2 class="sart-card-title">Humanities &amp; Social Science Syllabi</h2>
+              <h2 class="sart-card-title">Humanities &amp; Social Science Syllabus</h2>
               <span class="sart-badge">NEP 2020 COMPLIANT</span>
             </div>
             <div class="sart-card-body">
@@ -289,9 +289,9 @@ require_once __DIR__ . '/config/db.php';
                 <img src="images/ai_syllabus_art/rkdf_syll_art_card.jpg" alt="RKDF Faculty of Humanities &amp; Behavioral Research Center" class="sart-media-img">
               </div>
 
-              <!-- SECTION 1: NEP B.A. SEMESTER SYLLABI -->
+              <!-- SECTION 1: NEP B.A. SEMESTER Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                B.A. NEP Semester Syllabi (Sem 1 to 6)
+                B.A. NEP Semester Syllabus (Sem 1 to 6)
               </div>
 
               <div class="sart-download-grid">
@@ -393,9 +393,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 3: NEP M.A. POSTGRADUATE SYLLABI -->
+              <!-- SECTION 3: NEP M.A. POSTGRADUATE Syllabus -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                M.A. NEP Postgraduate Syllabi (All Semesters)
+                M.A. NEP Postgraduate Syllabus (All Semesters)
               </div>
 
               <div class="sart-download-grid">
@@ -429,9 +429,9 @@ require_once __DIR__ . '/config/db.php';
                 </div>
               </div>
 
-              <!-- SECTION 4: COMBINED & TRADITIONAL SYLLABI (B.A., M.A., BSW, MSW) -->
+              <!-- SECTION 4: COMBINED & TRADITIONAL Syllabus (B.A., M.A., BSW, MSW) -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
-                Combined Full Program &amp; Social Work Syllabi
+                Combined Full Program &amp; Social Work Syllabus
               </div>
 
               <div class="sart-download-grid">
@@ -493,8 +493,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Social-Science.php" class="sidebar-link">Faculty of Social Science <span>→</span></a></li>
               <li><a href="syllabusart.php" class="sidebar-link active">Humanities Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>

@@ -265,7 +265,7 @@ require_once __DIR__ . '/config/db.php';
       <span class="rk-eyebrow tone-gold">51 · FACULTY OF ENGINEERING (B.E. / B.TECH) SYLLABUS</span>
       <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Bachelor of Engineering (B.E.) Syllabus</h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Curriculum schemes, evaluation rules, and semester-wise course syllabi for B.E. / B.Tech across 10 specialized engineering disciplines approved by AICTE.
+        Curriculum schemes, evaluation rules, and semester-wise course Syllabus for B.E. / B.Tech across 10 specialized engineering disciplines approved by AICTE.
       </p>
     </div>
   </section>
@@ -280,7 +280,7 @@ require_once __DIR__ . '/config/db.php';
 
           <article class="sbe-block-card">
             <div class="sbe-card-header">
-              <h2 class="sbe-card-title">B.E. / B.Tech Schemes &amp; Syllabi</h2>
+              <h2 class="sbe-card-title">B.E. / B.Tech Schemes &amp; Syllabus</h2>
               <span class="sbe-badge">AICTE COMPLIANT</span>
             </div>
             <div class="sbe-card-body">
@@ -382,7 +382,7 @@ require_once __DIR__ . '/config/db.php';
 
               <!-- SECTION 3: OLD SCHEME (3RD TO 8TH SEMESTER ALL BRANCHES) -->
               <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-top:36px;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
-                Old Scheme Syllabi (3rd to 8th Semesters)
+                Old Scheme Syllabus (3rd to 8th Semesters)
               </div>
 
               <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:14px;">
@@ -428,8 +428,8 @@ require_once __DIR__ . '/config/db.php';
             <ul class="sidebar-nav-list">
               <li><a href="Engineering.php" class="sidebar-link">Faculty of Engineering <span>→</span></a></li>
               <li><a href="syllabusBe.php" class="sidebar-link active">B.E. / B.Tech Syllabus <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
-              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabus <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabus <span>→</span></a></li>
               <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
               <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
               <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>
