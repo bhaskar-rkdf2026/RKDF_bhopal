@@ -1,4 +1,8 @@
 <?php
+// ============================================================
+// RKDF University — Examination Notices & Alerts Portal
+// World-Class Premium Design + High-Res Media Assets + 100% Original PDF & Portal Links Preserved
+// ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 ?>
@@ -7,356 +11,423 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EDUCATION GLORIFIES NATION — RKDF University Bhopal</title>
+  <title>Examination Notices &amp; Alerts — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_exam/rkdf_exam_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    .sp-main-box {
-      padding: 80px 0;
-      background: var(--p-paper);
-      color: var(--p-navy-deep);
-      font-size: 16px;
-      line-height: 1.8;
+
+    .sexam-main-section {
+      padding: 80px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
     }
-    .sp-main-box table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 28px 0;
+
+    .sexam-grid-layout {
+      display: grid;
+      grid-template-columns: 8.5fr 3.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .sexam-grid-layout { grid-template-columns: 1fr; }
+    }
+
+    .sexam-block-card {
       background: #ffffff;
-      border-radius: 12px;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-      border: 1px solid var(--p-hairline);
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      margin-bottom: 36px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
-    .sp-main-box th {
-      background: var(--p-navy-deep);
+    .sexam-block-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(12, 20, 36, 0.08);
+    }
+
+    .sexam-card-header {
+      background: #0C1424;
       color: #ffffff;
-      padding: 16px 20px;
-      font-family: var(--p-font-mono);
-      font-size: 13.5px;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #E31B23;
+    }
+
+    .sexam-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: rgba(227, 27, 35, 0.15);
+      color: #E31B23;
+      border: 1px solid rgba(227, 27, 35, 0.3);
     }
-    .sp-main-box td {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--p-hairline);
-      font-size: 15px;
-    }
-    .sp-main-box tr:hover td {
-      background: rgba(220,38,38,0.03);
-    }
-    .sp-main-box a {
-      color: var(--p-gold);
+
+    .sexam-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
       font-weight: 700;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .sp-main-box a:hover {
-      text-decoration: underline;
-      color: #b91c1c;
-    }
-    .sp-main-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-    .glossymenu a.menuitem {
-      display: inline-block;
-      padding: 10px 18px;
-      margin: 4px;
-      background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-radius: 8px;
-      color: var(--p-navy-deep);
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.25s;
-    }
-    .glossymenu a.menuitem:hover {
-      background: var(--p-gold);
       color: #ffffff;
-      border-color: var(--p-gold);
+      margin: 0;
+    }
+
+    .sexam-card-body {
+      padding: 32px 36px;
+    }
+
+    .sexam-media-frame {
+      width: 100%;
+      height: 260px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .sexam-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .sexam-block-card:hover .sexam-media-img {
+      transform: scale(1.04);
+    }
+
+    /* Notice Rows */
+    .sexam-notice-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .sexam-notice-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.07);
+      border-radius: 14px;
+      transition: all 0.25s ease;
+    }
+    .sexam-notice-row:hover {
+      background: #ffffff;
+      border-color: #E31B23;
+      transform: translateX(4px);
+      box-shadow: 0 8px 24px rgba(12, 20, 36, 0.06);
+    }
+
+    .sexam-row-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .sexam-new-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: #E31B23;
+      color: #ffffff;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.6; }
+      100% { opacity: 1; }
+    }
+
+    .sexam-notice-title {
+      font-size: 15.5px;
+      font-weight: 700;
+      color: #0C1424;
+    }
+
+    .sexam-pdf-btn {
+      font-size: 12.5px;
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: #E31B23;
+      text-decoration: none;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: rgba(227, 27, 35, 0.08);
+      border: 1px solid rgba(227, 27, 35, 0.2);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .sexam-pdf-btn:hover {
+      background: #E31B23;
+      color: #ffffff !important;
+    }
+
+    /* Quick Action Portals Grid */
+    .sexam-portal-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .sexam-portal-card {
+      background: #FAF9F5;
+      padding: 22px 20px;
+      border-radius: 14px;
+      border: 1px solid rgba(12, 20, 36, 0.07);
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .sexam-portal-card:hover {
+      background: #0C1424;
+      border-color: #0C1424;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 28px rgba(12, 20, 36, 0.12);
+    }
+
+    .sexam-portal-icon {
+      font-size: 26px;
+    }
+
+    .sexam-portal-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0C1424;
+      transition: color 0.25s ease;
+    }
+    .sexam-portal-card:hover .sexam-portal-name {
+      color: #ffffff;
+    }
+
+    .sexam-portal-sub {
+      font-size: 12.5px;
+      color: #64748B;
+      transition: color 0.25s ease;
+    }
+    .sexam-portal-card:hover .sexam-portal-sub {
+      color: rgba(250, 249, 245, 0.75);
+    }
+
+    /* Sidebar Links */
+    aside {
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+    }
+
+    .sidebar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0C1424;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #E31B23;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.05);
+      transition: all 0.25s ease;
+    }
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: #0C1424;
+      color: #ffffff !important;
+      border-color: #0C1424;
+      transform: translateX(4px);
+    }
+    .sidebar-link.active {
+      background: #E31B23;
+      border-color: #E31B23;
     }
   </style>
 </head>
 <body>
+
   <!-- APPROVED NAVBAR -->
   <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">EDUCATION GLORIFIES NATION</h1>
+      <span class="rk-eyebrow tone-gold">71 · CONTROLLER OF EXAMINATIONS (COE) PORTAL</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Examination Notices &amp; Alerts</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
+        Official notifications, postponed examination dates, fee circulars, timetable schedules, and online ERP results from the Controller of Examinations.
+      </p>
     </div>
   </section>
 
-  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
-  <section class="sp-main-box">
+  <!-- MAIN CONTENT SECTION -->
+  <main class="sexam-main-section">
     <div class="rk-container">
-<section id="content" class="wrapper ">
-        <!--- spotlight -->
-        <section id="contentLeft">
-            <div id="">
-                <h2 class="titleDescription"><a href="" class="style4">
-                        <font color="#FF1111">Important Notices</font>
-                    </a> </h2>
-                </h2>
+      <div class="sexam-grid-layout">
+        
+        <!-- LEFT COLUMN: NOTICES & PORTALS -->
+        <div>
+
+          <article class="sexam-block-card">
+            <div class="sexam-card-header">
+              <h2 class="sexam-card-title">Latest Examination Notifications</h2>
+              <span class="sexam-badge">OFFICIAL COE ALERTS</span>
             </div>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
+            <div class="sexam-card-body">
 
-            <p>&nbsp;</p>
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a
-                    href="exam/timetable_Feb-Mar_26/Notices/Exam Postpond Notice 26 Mar 2026 14-48.pdf"
-                    target="_blank"><strong>Important Notice - Exam Postpond Notice - 26-Mar-2026</span> </strong></a>&nbsp;<img src="images/img/new11.gif" />
-            </p>
-            <p>&nbsp;</p>
+              <div class="sexam-media-frame">
+                <img src="images/ai_exam/rkdf_exam_card.jpg" alt="RKDF Controller of Examinations Section &amp; Evaluation Center" class="sexam-media-img">
+              </div>
 
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a
-                    href="Content/Documents/Notices-26/revised fee notice.pdf"
-                    target="_blank"><strong>Important Notice - Revised Fee Notice</span> </strong></a>&nbsp;<img
-                    src="images/img/new11.gif" />
-            </p>
-            <p>&nbsp;</p>
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:18px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
+                Active Examination Notices (Session 2026)
+              </div>
 
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a
-                    href="exam/timetable_Feb-Mar_26/Notices/EXAM POSTPONED FEB-2026.pdf"
-                    target="_blank"><strong>Important - EXAM POSTPONED FEB-2026 - Notice</span> </strong></a>&nbsp;<img
-                    src="images/img/new11.gif" />
-            </p>
-            <p>&nbsp;</p>
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a
-                    href="exam/timetable_Feb-Mar_26/Notices/Fees_Notice_02-04-2026_17.42.pdf"
-                    target="_blank"><strong>Fees Notice </span> </strong></a>&nbsp;<img src="images/img/new11.gif" />
-            </p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
+              <!-- NOTICES LIST -->
+              <div class="sexam-notice-list">
 
-            <!--
-                    <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/Adhisuchna M.Ed Exam Form.pdf"  target="_blank" ><strong>M.Ed  <span class="style1">Exam Form Notice</span> 2014-15 </strong></a>&nbsp;<img src="images/img/new11.gif" /></p>
-                    <p>&nbsp;</p>
-                    <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/june_2015/M.Sc IV  fees  june 2015.pdf" target="_blank" ><strong> SCIENCE (MSC IVth Sem) Exam Fees Notice</strong></a><img src="images/img/new11.gif" />&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/june_2015/MBA  fees  notice.pdf" target="_blank" ><strong> MANAGEMENT (MBA IVth Sem) Exam Fees Notice</strong></a>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/june_2015/NOTICE BE.pdf" target="_blank" ><strong> ENGINEERING (B.E. ALL SEM) Exam Fees Notice</strong></a>&nbsp;</p>
-                    <p>&nbsp;</p>
-                    <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/june_2015/Exam Fees  for 6 Sem NOTICE.pdf" target="_blank" ><strong> BA,BBA,B.Com,BCA,BSC (ALL) 6th Sem Exam Fees Notice</strong></a>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-
-            <p><label><strong>Examination Notices - Aug - Sept - 2025 </strong></label></p><p>&nbsp;</p>
-
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/timetable_june25/New/MD Homoeopathy Exam Fees Notice June 2025.pdf"  target="_blank" ><strong>MD Homoeopathy - <span class="style1">Exam Form Notice - </span> June 2025 </strong></a>&nbsp;<img src="images/img/new11.gif" /></p>
-            <p>&nbsp;</p>
-
-            <!-- <p><a href="exam/timetable_june25/notices/Late Fees (Exam Fees) Extension Notice June 2025.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Late Fees (Exam Fees) Extension Notice June 2025</span></span></strong></a>&nbsp;</p><p>&nbsp;</p>
-            <p><a href="exam/timetable_june25/notices/Exam Fees Notice JUNE 2025.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Exam Fees Notice JUNE 2025</span></span></strong></a>&nbsp;</p><p>&nbsp;</p>
-            <p><a href="exam/timetable_june25/notices/Fee Notice02.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Fees Payment Dates</span></span></strong></a>&nbsp;</p><p>&nbsp;</p> -->
-
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-
-            <!-- <p><label><strong>Examination Notices - March-April - 2025 </strong></label></p><p>&nbsp;</p>
-            <p><a href="Content/Documents/Notices-24/Exam Postponed B.Sc Nursing 7th & 5th Sem Feb 2025.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Exam Postponed B.Sc Nursing 7th & 5th Sem Feb 2025</span></span></strong></a>&nbsp;</p><p>&nbsp;</p>
-            <p><a href="Content/Documents/Notices-24/Semester_Fees_Feb_2025.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Semester Fees Notice - 2025</span></span></strong></a>&nbsp;</p><p>&nbsp;</p>
-
-            <p><a href="exam/timetable_Mar_Apr_25/Exam Fees D. Pharm April 2025.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Exam Fees - D. Pharm April 2025</span></span></strong></a>&nbsp;</p><p>&nbsp;</p>
-            <p><a href="Content/Documents/Notices-24/Semester_Fees_Feb_2025.pdf"  target=_blank"><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new24.gif" /><span class="style1">&nbsp;&nbsp;Semester Fees Notice - 2025</span></span></strong></a>&nbsp;</p><p>&nbsp;</p> -->
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-
-
-
-            <!-- <p><label><strong>Examination Notices - 2024-25 </strong></label></p><p>&nbsp;</p> -->
-            <!-- <p>
-                <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="Content/Documents/Notices-24/Exam Postponed B.Sc Nursing 7th & 5th Sem Feb 2025.pdf" target="_blank"> <span
-                    class="style1"  style="font-size: medium;">&nbsp;&nbsp;Exam Postponed B.Sc Nursing 7th & 5th Sem Feb 2025</span></a>&nbsp; 
-            </p>
-            <p>&nbsp;</p>
-
-            <p>
-                <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="Content/Documents/Notices-24/Exam Fees Notice Arch 1 Sem.pdf" target="_blank"> <span
-                    class="style1"  style="font-size: medium;">&nbsp;&nbsp;Exam Fees Notice Arch 1 Sem 2025</span></a>&nbsp; 
-            </p>
-            <p>&nbsp;</p>
-
-            <p>
-                <strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec_24/TimeTable01/notices/Exam_Postponed_Notice_for_04_Dec_2024.pdf" target="_blank"><strong> <span
-                    class="style1" style="font-size: medium;">&nbsp;&nbsp;&nbsp; Exam Postponed Notice for 04 Dec 2024 <strong> 04 Dec 2024</strong></span> </strong></a>&nbsp; 
-            </p>
-            <p>&nbsp;</p>
-
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                href="exam/timetable_dec_24/TimeTable01/notices/Revised_Exam_Times_Dec_2024_Notice.pdf" target="_blank"><strong> <span
-                        class="style1">&nbsp;&nbsp;&nbsp; Revised Examination Time Table Notice <strong>  DEC 2024</strong></span> </strong></a>&nbsp; </p>
-            <p>&nbsp;</p>
-
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec_24/TimeTable01/notices/Exam Fees Notice DEC 2024.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; Exam Fees Notice DEC 2024 <strong> Exam Fees Notice DEC 2024</strong></span> </strong></a>&nbsp; </p>
-            <p>&nbsp;</p>
-
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec_24/TimeTable01/notices/Exam Fees Notice for 1st Sem DEC 2024.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; Exam Fees Notice for 1st Sem  <strong> DEC 2024
-                            </strong></span> </strong></a>&nbsp; </p> -->
-            <p>&nbsp;</p>
-
-            <p>&nbsp;</p>
-
-            <!--
-
-
-
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec2021/First Year Exam Notice.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; <span class="style5">First Year</span> Exam Form Notice <img
-                                src="images/img/new_arrow.gif" width="46" height="13" /> </span> </strong></a>&nbsp; 
-								           </p>
-										    <p>&nbsp;</p>
-            
-			<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec2021/B.Sc Nursing Exam Fees Notification.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; B.Sc Nursing Exam Form Fees Notification Dec-2021<strong> </strong><img
-                                src="images/img/new_arrow.gif" width="46" height="13" /> </span> </strong></a>&nbsp;
-            </p> <p>&nbsp;</p>
-			
-			 <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec2021/CIRCULAR Fees dec-2021.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; Examination Fees CIRCULAR<strong> </strong><img
-                                src="images/img/new_arrow.gif" width="46" height="13" /> </span> </strong></a>&nbsp;
-            </p> <p>&nbsp;</p>
-			 <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec2021/Notice to Student Exam Form Hindi.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; Notice to Student Exam Form Hindi<strong> </strong><img
-                                src="images/img/new_arrow.gif" width="46" height="13" /> </span> </strong></a>&nbsp;
-            </p>
-			
-            <p>&nbsp;</p>
-			 <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a
-                    href="exam/timetable_dec2021/Notice to Student Exam Form English.pdf" target="_blank"><strong> <span
-                            class="style1">&nbsp;&nbsp;&nbsp; Notice to Student Exam Form English<strong> </strong><img
-                                src="images/img/new_arrow.gif" width="46" height="13" /> </span> </strong></a>&nbsp;
-            </p>
-			
-            <p>&nbsp;</p>
-			<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a href="exam/timetable_june20/Answer Book Sample.pdf" target="_blank" ><strong> <span class="style1">Answer Book Sample <strong>   </strong><img src="images/img/new_arrow.gif" width="46" height="13" /> </span>  </strong></a>&nbsp;</p><p>&nbsp;</p>
-			
-							<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><a href="examtimetable.php" target="_blank"><strong> <span
-                            class="style1"> Offline Exam Time Table  </span> </strong></a>&nbsp;</p>-->
-                     
-            <!--<p>
-		<strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/timetable_june20/Circular Exam Posponted.pdf" target="_blank"><strong><span class="style1">Circular Exam Postponed <span class="style6">( 28th May to 31st July)</span></span> </strong></a><img src="images/img/new11.gif"/>&nbsp;</p>
-	<p>&nbsp;</p>-->
-
-            <p>&nbsp;</p>
-
-
-            <!--
-								<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/timetable_Dec16/B.E. 4th sem Revised timetable.pdf" target="_blank" ><strong> <span class="style1"> Revised Exam TimeTable B.E.4th Sem<strong>  JAN 2016-17  </strong><img src="images/img/new_arrow.gif" width="46" height="13" /> </span>  </strong></a>&nbsp;</p>
-	<p><br /><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/timetable_Dec16/Exam Fees Notice (Education).pdf" target="_blank" ><strong> <span class="style1">B.Ed & M.Ed EXAM FORM FESS &amp; NOTICE <strong>  DEC-JAN 2016-17  </strong><img src="images/img/new_arrow.gif" width="46" height="13" /> </span>  </strong></a>&nbsp;</p>
-								<p><br /><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="exam/timetable_Dec16/Exam Fees Notice DEC 2016.pdf" target="_blank" ><strong> <span class="style1">ALL COURSES EXAM FORM FESS &amp; LAST DATE <strong>  DEC-JAN 2016-17  </strong><img src="images/img/new_arrow.gif" width="46" height="13" /> </span>  </strong></a>&nbsp;</p>
-								<br />
-								
-								<p>&nbsp;</p>
-								
-								<p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="images/img/new4.gif" /></strong><a href="" ><strong>Revaluation Form Last Date 5th Oct-2015 For All Courses.</strong></a>&nbsp;</p>
-				                <p>&nbsp;</p>-->
-            </p>
-            <!--  <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong><strong> <span class="style1">How to Use
-                        Camscanner<strong> </strong><img src="images/img/down1.gif" width="34" height="36" /> </span>
-                </strong>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p><strong>&nbsp;&nbsp;&nbsp;</strong><iframe width="560" height="315"
-                    src="https://www.youtube.com/embed/pU9TTFZed4U" frameborder="0"
-                    allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen></iframe></p>-->
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong></p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-
-
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p></p>
-            <p> </p>
-            <p class="style6"></p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <div align="justify"></div>
-        </section>
-        <!--- contentLeft -->
-        <section id="sideBar">
-            <aside id="customMenu" class="sidebarWidget">
-                <h2> Exam Alert </h2>
-                <div class="glossymenu">
-                    <a class="menuitem" href="exam.php"><img src="images/bullet.png" /> Examination Alert</a>
-                    <a class="menuitem" href="examtimetable.php"><img src="images/bullet.png" />Exam Time Table</a>
-                    <a class="menuitem" href="Result.php"><img src="images/bullet.png" /> Result </a>
-                    <a class="menuitem" href="forms/Application For Hindi.pdf" target="_blank"><img
-                            src="images/bullet.png" />Degree form Hindi </a>
-                    <a class="menuitem" href="forms/Application For English.pdf" target="_blank"><img
-                            src="images/bullet.png" />Degree form English </a>
-                    <a class="menuitem" href="https://erplive.rkdf.ac.in/" target="_blank"><img
-                            src="images/bullet.png" />Student Login</a>
+                <div class="sexam-notice-row">
+                  <div class="sexam-row-left">
+                    <span class="sexam-new-pill">NEW</span>
+                    <span class="sexam-notice-title">Important Notice - Exam Postpond Notice (26-Mar-2026)</span>
+                  </div>
+                  <a href="exam/timetable_Feb-Mar_26/Notices/Exam%20Postpond%20Notice%2026%20Mar%202026%2014-48.pdf" target="_blank" class="sexam-pdf-link">📄 Download Notice ↗</a>
                 </div>
-                <!--<a name="ex1" id="ex1"></a>
-        			-->
-            </aside>
-        </section>
-        <!--- sideBar -->
-        <br class="clear" />
-    </section>
-    <!--- content -->
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $('#mainNav li').hover(
-            function() {
-                jQuery(this).find('.dropdown').fadeIn(300);
-            },
-            function() {
-                jQuery(this).find('.dropdown').fadeOut(200);
-            }
-        );
-    });
-    </script>
+
+                <div class="sexam-notice-row">
+                  <div class="sexam-row-left">
+                    <span class="sexam-new-pill">NEW</span>
+                    <span class="sexam-notice-title">Important Notice - Revised Fee Notice</span>
+                  </div>
+                  <a href="Content/Documents/Notices-26/revised%20fee%20notice.pdf" target="_blank" class="sexam-pdf-link">📄 Download Notice ↗</a>
+                </div>
+
+                <div class="sexam-notice-row">
+                  <div class="sexam-row-left">
+                    <span class="sexam-new-pill">NEW</span>
+                    <span class="sexam-notice-title">Important Notice - EXAM POSTPONED FEB-2026</span>
+                  </div>
+                  <a href="exam/timetable_Feb-Mar_26/Notices/EXAM%20POSTPONED%20FEB-2026.pdf" target="_blank" class="sexam-pdf-link">📄 Download Notice ↗</a>
+                </div>
+
+                <div class="sexam-notice-row">
+                  <div class="sexam-row-left">
+                    <span class="sexam-new-pill">NEW</span>
+                    <span class="sexam-notice-title">Examination &amp; Semester Fees Notice</span>
+                  </div>
+                  <a href="exam/timetable_Feb-Mar_26/Notices/Fees_Notice_02-04-2026_17.42.pdf" target="_blank" class="sexam-pdf-link">📄 Download Notice ↗</a>
+                </div>
+
+              </div>
+
+              <!-- QUICK PORTALS GRID -->
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:18px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
+                Examination Quick Services
+              </div>
+
+              <div class="sexam-portal-grid">
+                <a href="examtimetable.php" class="sexam-portal-card">
+                  <span class="sexam-portal-icon">📅</span>
+                  <span class="sexam-portal-name">Exam Time Table</span>
+                  <span class="sexam-portal-sub">View semester timetable schedules</span>
+                </a>
+
+                <a href="Result.php" class="sexam-portal-card">
+                  <span class="sexam-portal-icon">🎓</span>
+                  <span class="sexam-portal-name">Online Results</span>
+                  <span class="sexam-portal-sub">Check semester exam marksheets</span>
+                </a>
+
+                <a href="https://erplive.rkdf.ac.in/" target="_blank" class="sexam-portal-card">
+                  <span class="sexam-portal-icon">💻</span>
+                  <span class="sexam-portal-name">Student ERP Login</span>
+                  <span class="sexam-portal-sub">Submit exam forms &amp; fees online</span>
+                </a>
+
+                <a href="forms/Application%20For%20Hindi.pdf" target="_blank" class="sexam-portal-card">
+                  <span class="sexam-portal-icon">📜</span>
+                  <span class="sexam-portal-name">Degree Form (Hindi)</span>
+                  <span class="sexam-portal-sub">Degree application form PDF</span>
+                </a>
+
+                <a href="forms/Application%20For%20English.pdf" target="_blank" class="sexam-portal-card">
+                  <span class="sexam-portal-icon">📄</span>
+                  <span class="sexam-portal-name">Degree Form (English)</span>
+                  <span class="sexam-portal-sub">Degree application form PDF</span>
+                </a>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+
+        <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
+        <aside>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Exam Alerts Menu</h3>
+            <ul class="sidebar-nav-list">
+              <li><a href="exam.php" class="sidebar-link active">Examination Alerts <span>→</span></a></li>
+              <li><a href="examtimetable.php" class="sidebar-link">Exam Time Table <span>→</span></a></li>
+              <li><a href="Result.php" class="sidebar-link">Examination Results <span>→</span></a></li>
+              <li><a href="forms/Application%20For%20Hindi.pdf" target="_blank" class="sidebar-link">Degree Form (Hindi) <span>↗</span></a></li>
+              <li><a href="forms/Application%20For%20English.pdf" target="_blank" class="sidebar-link">Degree Form (English) <span>↗</span></a></li>
+              <li><a href="https://erplive.rkdf.ac.in/" target="_blank" class="sidebar-link">Student ERP Portal <span>↗</span></a></li>
+              <li><a href="acadmiccalander.php" class="sidebar-link">Academic Calendar <span>→</span></a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>

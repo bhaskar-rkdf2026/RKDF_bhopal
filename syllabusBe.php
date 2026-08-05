@@ -1,4 +1,8 @@
 <?php
+// ============================================================
+// RKDF University — Bachelor of Engineering (B.E. / B.Tech) Syllabus
+// World-Class Premium Design + High-Res Media Assets + 100% Original Branch Schemes & PDF Links Preserved
+// ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 ?>
@@ -7,359 +11,435 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EDUCATION GLORIFIES NATION — RKDF University Bhopal</title>
+  <title>Bachelor of Engineering (B.E.) Syllabus — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_syllabus_be/rkdf_syll_be_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    .sp-main-box {
-      padding: 80px 0;
-      background: var(--p-paper);
-      color: var(--p-navy-deep);
-      font-size: 16px;
-      line-height: 1.8;
+
+    .sbe-main-section {
+      padding: 80px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
     }
-    .sp-main-box table {
+
+    .sbe-grid-layout {
+      display: grid;
+      grid-template-columns: 8.5fr 3.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .sbe-grid-layout { grid-template-columns: 1fr; }
+    }
+
+    .sbe-block-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      margin-bottom: 36px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .sbe-block-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(12, 20, 36, 0.08);
+    }
+
+    .sbe-card-header {
+      background: #0C1424;
+      color: #ffffff;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #C5A059;
+    }
+
+    .sbe-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: rgba(197, 160, 89, 0.18);
+      color: #C5A059;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+
+    .sbe-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .sbe-card-body {
+      padding: 32px 36px;
+    }
+
+    .sbe-media-frame {
+      width: 100%;
+      height: 260px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .sbe-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .sbe-block-card:hover .sbe-media-img {
+      transform: scale(1.04);
+    }
+
+    /* Program Dropdown Selector */
+    .prog-filter-bar {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 28px;
+      background: #FAF9F5;
+      padding: 18px 24px;
+      border-radius: 14px;
+      border: 1px solid rgba(12, 20, 36, 0.07);
+    }
+    @media (max-width: 600px) {
+      .prog-filter-bar { flex-direction: column; align-items: stretch; }
+    }
+
+    .prog-select {
+      flex: 1;
+      padding: 12px 18px;
+      border-radius: 10px;
+      border: 1px solid rgba(12, 20, 36, 0.15);
+      background: #ffffff;
+      font-size: 14.5px;
+      color: #0C1424;
+      font-weight: 600;
+      outline: none;
+    }
+
+    /* Branch Scheme Table */
+    .sbe-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 28px 0;
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-      border: 1px solid var(--p-hairline);
+      margin-top: 14px;
+      margin-bottom: 24px;
     }
-    .sp-main-box th {
-      background: var(--p-navy-deep);
-      color: #ffffff;
-      padding: 16px 20px;
-      font-family: var(--p-font-mono);
-      font-size: 13.5px;
+    .sbe-table th {
+      background: #FAF9F5;
+      color: #0C1424;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      text-align: left;
+      border-bottom: 2px solid rgba(12, 20, 36, 0.08);
     }
-    .sp-main-box td {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--p-hairline);
-      font-size: 15px;
+    .sbe-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(12, 20, 36, 0.06);
+      font-size: 14px;
+      color: #334155;
     }
-    .sp-main-box tr:hover td {
-      background: rgba(220,38,38,0.03);
+    .sbe-table tr:hover td {
+      background: rgba(227, 27, 35, 0.02);
     }
-    .sp-main-box a {
-      color: var(--p-gold);
+
+    .sbe-pdf-btn {
+      font-size: 12px;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
+      color: #E31B23;
       text-decoration: none;
-      transition: color 0.2s;
-    }
-    .sp-main-box a:hover {
-      text-decoration: underline;
-      color: #b91c1c;
-    }
-    .sp-main-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-    .glossymenu a.menuitem {
+      padding: 6px 14px;
+      border-radius: 6px;
+      background: rgba(227, 27, 35, 0.08);
+      border: 1px solid rgba(227, 27, 35, 0.2);
+      transition: all 0.2s ease;
       display: inline-block;
-      padding: 10px 18px;
-      margin: 4px;
-      background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-radius: 8px;
-      color: var(--p-navy-deep);
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.25s;
+      margin-right: 6px;
     }
-    .glossymenu a.menuitem:hover {
-      background: var(--p-gold);
-      color: #ffffff;
-      border-color: var(--p-gold);
+    .sbe-pdf-btn:hover {
+      background: #E31B23;
+      color: #ffffff !important;
+    }
+
+    .sbe-scheme-btn {
+      color: #C5A059;
+      background: rgba(197, 160, 89, 0.12);
+      border-color: rgba(197, 160, 89, 0.3);
+    }
+    .sbe-scheme-btn:hover {
+      background: #C5A059;
+      color: #0C1424 !important;
+    }
+
+    /* Sidebar Links */
+    aside {
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+    }
+
+    .sidebar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0C1424;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #E31B23;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.05);
+      transition: all 0.25s ease;
+    }
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: #0C1424;
+      color: #ffffff !important;
+      border-color: #0C1424;
+      transform: translateX(4px);
+    }
+    .sidebar-link.active {
+      background: #E31B23;
+      border-color: #E31B23;
     }
   </style>
 </head>
 <body>
+
   <!-- APPROVED NAVBAR -->
   <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">EDUCATION GLORIFIES NATION</h1>
+      <span class="rk-eyebrow tone-gold">51 · FACULTY OF ENGINEERING (B.E. / B.TECH) SYLLABUS</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Bachelor of Engineering (B.E.) Syllabus</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
+        Curriculum schemes, evaluation rules, and semester-wise course syllabi for B.E. / B.Tech across 10 specialized engineering disciplines approved by AICTE.
+      </p>
     </div>
   </section>
 
-  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
-  <section class="sp-main-box">
+  <!-- MAIN CONTENT SECTION -->
+  <main class="sbe-main-section">
     <div class="rk-container">
-<section id="content" class="wrapper ">
-        <!--- spotlight -->
-        <section id="contentLeft">
-            <h2 class="titleDescription"><a href=""> Bachelor of Engineering (B.E.) Syllabus</a></h2>
+      <div class="sbe-grid-layout">
+        
+        <!-- LEFT COLUMN: SYLLABUS DOWNLOAD & SELECTOR -->
+        <div>
 
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <ul>
-                <li class="style9">
-                    <p>&nbsp;&nbsp;&nbsp;<strong>&nbsp;<span class="style1">SELECT PROGRAM</span></strong> &nbsp;
-                        <select onChange="window.location.href=this.value">
-                            <?php
-				include "include/syllabus.php";
-				?>
-                        </select>
-                    </p>
-                </li>
-                <br />
+          <article class="sbe-block-card">
+            <div class="sbe-card-header">
+              <h2 class="sbe-card-title">B.E. / B.Tech Schemes &amp; Syllabi</h2>
+              <span class="sbe-badge">AICTE COMPLIANT</span>
+            </div>
+            <div class="sbe-card-body">
+              
+              <!-- FACULTY SELECTOR DROPDOWN -->
+              <div class="prog-filter-bar">
+                <label for="syllabusSelect" style="font-weight:700;color:#0C1424;white-space:nowrap;">SELECT PROGRAM:</label>
+                <select id="syllabusSelect" class="prog-select" onChange="window.location.href=this.value">
+                  <?php include __DIR__ . '/include/syllabus.php'; ?>
+                </select>
+              </div>
 
-                <li class="style9"><br />
-                </li>
+              <div class="sbe-media-frame">
+                <img src="images/ai_syllabus_be/rkdf_syll_be_card.jpg" alt="RKDF Engineering Innovation &amp; Robotics Research Center" class="sbe-media-img">
+              </div>
+
+              <!-- SECTION 1: 1ST & 2ND SEMESTER COMMON SYLLABUS -->
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
+                1st Year Common Syllabus (1st &amp; 2nd Sem All Branches)
+              </div>
+
+              <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:36px;">
+                <div style="display:flex;align-items:center;justify-space-between;padding:16px 20px;background:#FAF9F5;border-radius:12px;border:1px solid rgba(12,20,36,0.07);">
+                  <span style="font-weight:700;color:#0C1424;">B.E. Common to All Branches (2018 Admitted)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/BE%20I%20Year%20(All%20Branches)%20for%202018%20admitted.pdf" target="_blank" class="sbe-pdf-btn">📄 Download PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:16px 20px;background:#FAF9F5;border-radius:12px;border:1px solid rgba(12,20,36,0.07);">
+                  <span style="font-weight:700;color:#0C1424;">B.E. Common to All Branches (2020 Admitted)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/BE%20I%20Year%20(All%20Branches)%20for%202020%20admitted.pdf" target="_blank" class="sbe-pdf-btn">📄 Download PDF ↗</a>
+                </div>
+              </div>
+
+              <!-- SECTION 2: NEW SCHEME & SYLLABUS 2025-26 (3RD TO 8TH SEMESTER) -->
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #E31B23;">
+                New Scheme &amp; Syllabus (Session 2025-26 · 3rd to 8th Semesters)
+              </div>
+
+              <table class="sbe-table">
+                <thead>
+                  <tr>
+                    <th>Engineering Branch</th>
+                    <th>Evaluation Scheme</th>
+                    <th>Course Syllabus</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Mechanical Engineering (ME)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_ME_SCHEME_%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BTech-ME-Final%20Syllabus-3rd-8th-Sem.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Civil Engineering (CE)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_Civil_Scheme_3rd_8th_Sem_2025_26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BTech_Civil_Syllabus_3rd_8th_Sem_1.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Computer Science &amp; Engineering (CSE)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_CSE_SCHEME_%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BTech%20CSE%20Syllabus%202025-26.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Electronics &amp; Communication (EC)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_ECE_SCHEME_%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BTech_Electronic_3rd_8th_Sem_Syllabus_2025-26.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Electrical Engineering (EE)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_EE_SCHEME_%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BTech_EE-FINAL%20SYLLABUS_3rd_8th_Sem.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Electrical &amp; Electronics Engineering (EEE)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_EEE_SCHEME_%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/B.Tech_EEE-FINAL%20SYLLABUS_3rd_8th_Sem.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Information Technology (IT)</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_IT_SCHEME_%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BTech%20IT%20Syllabus%202025-26.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Artificial Intelligence &amp; Data Science</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_AI%20&amp;%20Data%20Science%20SCHEME%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BE_AI%20&amp;%20DS_%20Syllabus_3rd_8th_Sem_2025-26.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. Artificial Intelligence &amp; Machine Learning</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech_AI%20&amp;%20ML%20SCHEME%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BE_AI%20&amp;%20ML_Syllabus_3rd_8th_%202025-26.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                  <tr>
+                    <td style="font-weight:700;color:#0C1424;">B.E. CSE - IoT &amp; Cyber Security</td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Scheme/BTech%20CSE-%20IoT%20&amp;%20Cyber%20Security%20SCHEME%203%20TO%208%20UPDATED_2025-26.pdf" target="_blank" class="sbe-pdf-btn sbe-scheme-btn">📊 Scheme PDF ↗</a></td>
+                    <td><a href="syllabus/Technical%20syllabus/B.E/NewSyllabus/Syllabus/BE_CSE%20-%20IoT%20&amp;%20Cyber%20Security_3rd_8th_Syllabus_2025-26.pdf" target="_blank" class="sbe-pdf-btn">📄 Syllabus PDF ↗</a></td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- SECTION 3: OLD SCHEME (3RD TO 8TH SEMESTER ALL BRANCHES) -->
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:#0C1424;margin-top:36px;margin-bottom:14px;font-weight:700;padding-bottom:8px;border-bottom:2px solid #C5A059;">
+                Old Scheme Syllabi (3rd to 8th Semesters)
+              </div>
+
+              <div style="display:grid;grid-template-columns:repeat(auto-fill, minmax(260px, 1fr));gap:14px;">
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Civil Engineering (CE)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/CE%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Computer Science (CSE)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/CSE%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Electronics &amp; Comm (EC)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/EC%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Electrical Engineering (EE)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/EE%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Electrical &amp; Electronics (EX)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/EX%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Information Tech (IT)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/IT%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+                <div style="display:flex;align-items:center;justify-space-between;padding:14px 18px;background:#FAF9F5;border-radius:10px;border:1px solid rgba(12,20,36,0.06);">
+                  <span style="font-weight:700;color:#0C1424;font-size:14px;">B.E. Mechanical Engineering (ME)</span>
+                  <a href="syllabus/Technical%20syllabus/B.E/ME%20Syllabus.pdf" target="_blank" class="sbe-pdf-btn">📄 PDF ↗</a>
+                </div>
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+
+        <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
+        <aside>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Engineering Links</h3>
+            <ul class="sidebar-nav-list">
+              <li><a href="Engineering.php" class="sidebar-link">Faculty of Engineering <span>→</span></a></li>
+              <li><a href="syllabusBe.php" class="sidebar-link active">B.E. / B.Tech Syllabus <span>→</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link">All Course Syllabi <span>→</span></a></li>
+              <li><a href="syllabus_Value-added.php" class="sidebar-link">Value-Added Syllabi <span>→</span></a></li>
+              <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
+              <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
+              <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>
             </ul>
-            <ul>
-                <li class="style9">
-                    <table width="400" border="1">
-                        <tr style="background-color: darkgray;">
-                            <td><span class="style3" Colspan=3  style="font-size:medium;"><br />1st & 2nd Sem Common</span></td>
-                            <td>&nbsp;</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><a
-                                    href="syllabus/Technical syllabus/B.E/BE I Year (All Branches) for 2018 admitted.pdf"
-                                    target="_blank"><strong> &nbsp; Bachelor of Engineering(B.E.) Common to All Branch
-                                        2018 Admitted &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></a></td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><a
-                                    href="syllabus/Technical syllabus/B.E/BE I Year (All Branches) for 2020 admitted.pdf"
-                                    target="_blank"><strong> &nbsp; Bachelor of Engineering(B.E.) Common to All Branch
-                                        2020 Admitted&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong></a></td>
-                        </tr>
+          </div>
+        </aside>
 
-
-                        <tr style="background-color: darkgray;">
-                            <td width="388" height="67" colspan=3 style="padding-top:22px;"><span class="style3" style="font-size:medium;">New Scheme & Syllabus For Admitted Student
-                                    June 2025<br /><br />
-                                    3rd Sem To 8th Sem </span></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (Mechanical Engineering)</td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_ME_SCHEME_ 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BTech-ME-Final Syllabus-3rd-8th-Sem.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (Civil Engineering)</td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_Civil_Scheme_3rd_8th_Sem_2025_26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BTech_Civil_Syllabus_3rd_8th_Sem_1.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (CSE Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_CSE_SCHEME_ 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BTech CSE Syllabus 2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (EC Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_ECE_SCHEME_ 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BTech_Electronic_3rd_8th_Sem_Syllabus_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (EE Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_EE_SCHEME_ 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BTech_EE-FINAL SYLLABUS_3rd_8th_Sem.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (EEE Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_EEE_SCHEME_ 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="12">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/B.Tech_EEE-FINAL SYLLABUS_3rd_8th_Sem.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (IT Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_IT_SCHEME_ 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BTech IT Syllabus 2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (AI & Data Science Engineering)
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_AI & Data Science SCHEME 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BE_AI & DS_ Syllabus_3rd_8th_Sem_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (AI & ML Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech_AI & ML SCHEME 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="12">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BE_AI & ML_Syllabus_3rd_8th_ 2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2" style="color:black; font-size:medium"> B.E. (CSE- IoT & Cyber Security
-                                Engineering) </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Scheme/BTech CSE- IoT & Cyber Security SCHEME 3 TO 8 UPDATED_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Scheme
-                                </a>
-                            </td>
-                            <td colspan="2">
-                                <a href="syllabus/Technical syllabus/B.E/NewSyllabus/Syllabus/BE_CSE - IoT & Cyber Security_3rd_8th_Syllabus_2025-26.pdf"
-                                    target="_blank" style="color:blue; font-size:medium"> Syllabus
-                                </a>
-                            </td>
-                        </tr>
-
-
-
-
-
-                        <tr style="background-color: darkgray;">
-                            <td width="388" height="76"><span class="style3" colspan="3" style="padding-top:22px;font-size:medium">(Old Scheme)<br />
-                                    <br />
-                                    2nd to 4th Year ( 3rd to 8th SEM ALL) </span></td>
-                        </tr>
-
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/CE Syllabus.pdf"
-                                    target="_blank"><strong> B.E. ( CIVIL Engineering )</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/CSE Syllabus.pdf"
-                                    target="_blank"><strong>B.E. ( CSE Engineering )</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/EC Syllabus.pdf"
-                                    target="_blank"><strong>B.E. (Electronics and Comm. Engg.) EC</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/EE Syllabus.pdf"
-                                    target="_blank"><strong>B.E. (Electrical Engineering) EE</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/EX Syllabus.pdf"
-                                    target="_blank"><strong>B.E. (Electrical and Electronics ) EX</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/IT Syllabus.pdf"
-                                    target="_blank"><strong>B.E. (Information Tech.) IT</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="2"><a href="syllabus/Technical syllabus/B.E/ME Syllabus.pdf"
-                                    target="_blank"><strong>B.E. ( Mechanical Engineering) ME</strong></a></td>
-                            <td>&nbsp;</td>
-                        </tr>
-                    </table>
-                    <p>&nbsp;</p>
-                </li>
-            </ul>
-            <ul>
-                <p>&nbsp;</p>
-                <li class="style9"></li>
-            </ul>
-
-            <div align="justify"></div>
-        </section>
-        <!--- contentLeft -->
-        <section id="sideBar"> </section>
-        <!--- sideBar -->
-        <br class="clear" />
-    </section>
-    <!--- content -->
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $('#mainNav li').hover(
-            function() {
-                jQuery(this).find('.dropdown').fadeIn(300);
-            },
-            function() {
-                jQuery(this).find('.dropdown').fadeOut(200);
-            }
-        );
-    });
-    </script>
+      </div>
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>

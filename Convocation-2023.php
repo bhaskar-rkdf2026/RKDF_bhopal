@@ -1,325 +1,544 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+// ============================================================
+// RKDF University — Convocation Ceremony 2023
+// World-Class Premium Design + Responsive Gallery Grid + Lightbox + 100% Original Content Preserved
+// ============================================================
+require_once __DIR__ . '/include/site_settings.php';
+require_once __DIR__ . '/config/db.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>RKDF Gallery</title>
-<style type="text/css">
-<!--
-.style1 {
-	color:#0000F0;
-	font-weight: bold;
-	text-decoration:none;
-	font-size:24px;
-}
-.style3 {
-	color:#0000F0;
-	font-weight: bold;
-	text-decoration:none;
-	font-size:14px;
-}
--->
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convocation Ceremony 2023 — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
+  <style>
+    .subpage-hero {
+      position: relative;
+      padding: 160px 0 90px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
+                  url('images/ai_convocation2023/rkdf_convocation2023_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
+      box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
+    }
 
-<link rel="stylesheet" href="css/basic.css" type="text/css" />
-		<link rel="stylesheet" href="css/galleriffic-3.css" type="text/css" />
-		<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
-		<script type="text/javascript" src="js/jquery.history.js"></script>
-		<script type="text/javascript" src="js/jquery.galleriffic.js"></script>
-		<script type="text/javascript" src="js/jquery.opacityrollover.js"></script>
-		<!-- We only want the thunbnails to display when javascript is disabled -->
-		<script type="text/javascript">
-			document.write('<style>.noscript { display: none; }</style>');
-		</script>
-        <style type="text/css">
-<!--
-.style2 {color: #006595}
--->
-        </style>
+    .gal-main-section {
+      padding: 70px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
+    }
+
+    /* Quick Filter Links Bar */
+    .gal-subnav-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+      padding: 16px 24px;
+      background: #ffffff;
+      border: 1px solid rgba(12,20,36,0.08);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(12,20,36,0.03);
+    }
+    .gal-subnav-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #C5A059;
+      margin-right: 8px;
+    }
+    .gal-subnav-btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0C1424;
+      text-decoration: none;
+      background: #FAF9F5;
+      border: 1px solid rgba(12,20,36,0.08);
+      transition: all 0.25s ease;
+    }
+    .gal-subnav-btn:hover, .gal-subnav-btn.active {
+      background: #0C1424;
+      color: #ffffff !important;
+      border-color: #0C1424;
+    }
+    .gal-subnav-btn.active {
+      background: #E31B23;
+      border-color: #E31B23;
+    }
+
+    /* Gallery Grid */
+    .gal-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 32px;
+    }
+
+    .gal-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      cursor: pointer;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .gal-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 42px rgba(12, 20, 36, 0.1);
+      border-color: #C5A059;
+    }
+
+    .gal-img-wrap {
+      width: 100%;
+      height: 240px;
+      position: relative;
+      overflow: hidden;
+      background: #0C1424;
+    }
+    .gal-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .gal-card:hover .gal-img {
+      transform: scale(1.08);
+    }
+
+    .gal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(12, 20, 36, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gal-card:hover .gal-overlay {
+      opacity: 1;
+    }
+
+    .gal-zoom-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #E31B23;
+      padding: 10px 20px;
+      border-radius: 99px;
+      box-shadow: 0 4px 14px rgba(227,27,35,0.4);
+    }
+
+    .gal-info {
+      padding: 22px 24px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .gal-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 3px 10px;
+      border-radius: 99px;
+      background: rgba(197, 160, 89, 0.15);
+      color: #C5A059;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+
+    .gal-caption {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #334155;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Modal Lightbox */
+    .gal-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      background: rgba(12, 20, 36, 0.92);
+      backdrop-filter: blur(12px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 30px;
+    }
+    .gal-modal.active {
+      display: flex;
+    }
+
+    .gal-modal-box {
+      max-width: 900px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 24px 60px rgba(0,0,0,0.5);
+      position: relative;
+    }
+    .gal-modal-img {
+      width: 100%;
+      max-height: 560px;
+      object-fit: contain;
+      background: #000000;
+      display: block;
+    }
+    .gal-modal-caption {
+      padding: 24px 30px;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #0C1424;
+      font-weight: 600;
+      background: #ffffff;
+      border-top: 3px solid #E31B23;
+    }
+    .gal-modal-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: rgba(0,0,0,0.7);
+      color: #ffffff;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+      z-index: 10;
+    }
+    .gal-modal-close:hover {
+      background: #E31B23;
+    }
+  </style>
 </head>
-
 <body>
-<table width="95%" border="0" cellpadding="0" cellspacing="0">
- 
-  <tr>
-    <td colspan="3">
-	<table width="100%" border="0" background="images/dBg.jpg" cellpadding="0" cellspacing="0">
-      <tr>
-        <td width="890">
-       <?php
-			include "include/header.php";
-			?>        </td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr >
-    <td height="40" colspan="3"><table width="1083" border="0" background="images/dropdownBg.png">
-      <tr>
-        <td width="137" height="30"><a href="http://rkdf.ac.in/index.php"><span class="style1">Home</span></a></td>
-        <td width="983">&nbsp;
-<!--          <div align="left"><a href="videogallery.php" class="style3">Video Gallery</a></div></td>
--->      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td height="101" colspan="3" valign="top">
-	<div id="page">
-			<div id="container">
-				<h1 class="style2">Convocation Ceremony- 2023 Image Gallery</h1>
 
-				<!-- Start Advanced Gallery Html Containers -->
-				<div id="gallery" class="content">
-					<div id="controls" class="controls"></div>
-					<div class="slideshow-container">
-						<div id="loading" class="loader"></div>
-						<div id="slideshow" class="slideshow"></div>
-					</div>
-					<div id="caption" class="caption-container"></div>
-				</div>
-				<div id="thumbs" class="navigation">
-					<ul class="thumbs noscript">
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/1.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/1s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/2.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/2s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/3.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/3s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/4.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/4s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/5.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/5s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/6.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/6s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/7.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/7s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/8.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/8s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/9.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/9s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-					<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/10.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/10s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/11.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/11s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/12.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/12s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/13.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/13s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/14.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/14s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/15.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/15s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/16.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/16s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/17.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/17s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/18.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/18s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/19.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/19s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-						<li>
-							<a class="thumb" href="images/gallery/Convocation-2023/20.JPG" title="दीक्षांत समारोह-2023">
-								<img src="images/gallery/Convocation-2023/20s.JPG" alt="दीक्षांत समारोह-2023" />	</a>
-							<div class="caption">
-								<div class="image-title">Convocation Ceremony- 25th April 2023</div>
-							</div>
-						</li>
-							
-					</ul>
-			  </div>
-				<!-- End Advanced Gallery Html Containers -->
-				<div style="clear: both;"></div>
-			</div>
-		</div>
-		
-		<div id="footer">&copy; RKDF University, Bhopal</div>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				// We only want these styles applied when javascript is enabled
-				$('div.navigation').css({'width' : '300px', 'float' : 'left'});
-				$('div.content').css('display', 'block');
+  <!-- APPROVED NAVBAR -->
+  <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
-				// Initially set opacity on thumbs and add
-				// additional styling for hover effect on thumbs
-				var onMouseOutOpacity = 0.67;
-				$('#thumbs ul.thumbs li').opacityrollover({
-					mouseOutOpacity:   onMouseOutOpacity,
-					mouseOverOpacity:  1.0,
-					fadeSpeed:         'fast',
-					exemptionSelector: '.selected'
-				});
-				
-				// Initialize Advanced Galleriffic Gallery
-				var gallery = $('#thumbs').galleriffic({
-					delay:                     2500,
-					numThumbs:                 15,
-					preloadAhead:              10,
-					enableTopPager:            true,
-					enableBottomPager:         true,
-					maxPagesToShow:            7,
-					imageContainerSel:         '#slideshow',
-					controlsContainerSel:      '#controls',
-					captionContainerSel:       '#caption',
-					loadingContainerSel:       '#loading',
-					renderSSControls:          true,
-					renderNavControls:         true,
-					playLinkText:              'Play Slideshow',
-					pauseLinkText:             'Pause Slideshow',
-					prevLinkText:              '&lsaquo; Previous Photo',
-					nextLinkText:              'Next Photo &rsaquo;',
-					nextPageLinkText:          'Next &rsaquo;',
-					prevPageLinkText:          '&lsaquo; Prev',
-					enableHistory:             true,
-					autoStart:                 false,
-					syncTransitions:           true,
-					defaultTransitionDuration: 900,
-					onSlideChange:             function(prevIndex, nextIndex) {
-						// 'this' refers to the gallery, which is an extension of $('#thumbs')
-						this.find('ul.thumbs').children()
-							.eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
-							.eq(nextIndex).fadeTo('fast', 1.0);
-					},
-					onPageTransitionOut:       function(callback) {
-						this.fadeTo('fast', 0.0, callback);
-					},
-					onPageTransitionIn:        function() {
-						this.fadeTo('fast', 1.0);
-					}
-				});
+  <!-- HERO SECTION -->
+  <section class="subpage-hero">
+    <div class="rk-container">
+      <span class="rk-eyebrow tone-gold">13 · ACADEMIC CONVOCATIONS</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Convocation Ceremony 2023</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
+        Celebrating academic excellence and degree conferment at the Annual Convocation Ceremony held on 25th April 2023.
+      </p>
+    </div>
+  </section>
 
-				/**** Functions to support integration of galleriffic with the jquery.history plugin ****/
+  <!-- MAIN CONTENT SECTION -->
+  <main class="gal-main-section">
+    <div class="rk-container">
+      
+      <!-- Quick Subnav Links Bar -->
+      <div class="gal-subnav-bar">
+        <span class="gal-subnav-title">Media Categories:</span>
+        <a href="imggallery.php" class="gal-subnav-btn">Photo Gallery</a>
+        <a href="videogallery.php" class="gal-subnav-btn">Video Gallery</a>
+        <a href="Convocation-2023.php" class="gal-subnav-btn active">Convocation 2023</a>
+        <a href="Convocation-2024.php" class="gal-subnav-btn">Convocation 2024</a>
+      </div>
 
-				// PageLoad function
-				// This function is called when:
-				// 1. after calling $.historyInit();
-				// 2. after calling $.historyLoad();
-				// 3. after pushing "Go Back" button of a browser
-				function pageload(hash) {
-					// alert("pageload: " + hash);
-					// hash doesn't contain the first # character.
-					if(hash) {
-						$.galleriffic.gotoImage(hash);
-					} else {
-						gallery.gotoIndex(0);
-					}
-				}
+      <!-- Gallery Grid Container -->
+      <div class="gal-grid-container">
 
-				// Initialize history plugin.
-				// The callback is called at once by present location.hash. 
-				$.historyInit(pageload, "advanced.html");
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/1.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/1.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/1s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/2.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/2.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/2s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/3.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/3.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/3s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/4.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/4.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/4s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/5.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/5.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/5s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/6.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/6.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/6s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/7.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/7.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/7s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/8.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/8.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/8s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/9.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/9.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/9s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/10.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/10.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/10s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/11.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/11.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/11s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/12.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/12.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/12s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/13.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/13.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/13s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/14.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/14.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/14s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/15.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/15.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/15s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/16.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/16.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/16s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/17.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/17.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/17s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/18.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/18.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/18s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/19.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/19.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/19s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+    <div class="gal-card" onclick="openGalleryModal('images/gallery/Convocation-2023/20.JPG', 'Convocation Ceremony- 25th April 2023')">
+      <div class="gal-img-wrap">
+        <img src="images/gallery/Convocation-2023/20.JPG" alt="Convocation Ceremony- 25th April 2023" class="gal-img" onError="this.src='images/gallery/Convocation-2023/20s.JPG';">
+        <div class="gal-overlay">
+          <span class="gal-zoom-btn">🔍 View Photo</span>
+        </div>
+      </div>
+      <div class="gal-info">
+        <span class="gal-badge">CONVOCATION 2023</span>
+        <p class="gal-caption">Convocation Ceremony- 25th April 2023</p>
+      </div>
+    </div>
+      </div>
 
-				// set onlick event for buttons using the jQuery 1.3 live method
-				$("a[rel='history']").live('click', function(e) {
-					if (e.button != 0) return true;
-					
-					var hash = this.href;
-					hash = hash.replace(/^.*#/, '');
+    </div>
+  </main>
 
-					// moves to a new page. 
-					// pageload is called at once. 
-					// hash don't contain "#", "?"
-					$.historyLoad(hash);
+  <!-- Modal Lightbox Preview -->
+  <div class="gal-modal" id="galModal" onclick="closeGalleryModal(event)">
+    <div class="gal-modal-box" onclick="event.stopPropagation()">
+      <button class="gal-modal-close" onclick="closeGalleryModal()">✕</button>
+      <img id="galModalImg" src="" alt="" class="gal-modal-img">
+      <div id="galModalCap" class="gal-modal-caption"></div>
+    </div>
+  </div>
 
-					return false;
-				});
+  <script>
+    function openGalleryModal(imgSrc, caption) {
+      document.getElementById('galModalImg').src = imgSrc;
+      document.getElementById('galModalCap').innerText = caption;
+      document.getElementById('galModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
 
-				/****************************************************************************************/
-			});
-		</script>	</td>
-  </tr>
-</table>
+    function closeGalleryModal(e) {
+      document.getElementById('galModal').classList.remove('active');
+      document.body.style.overflow = '';
+    }
+  </script>
+
+  <!-- APPROVED FOOTER -->
+  <?php include __DIR__ . '/include/footer.php'; ?>
+
 </body>
 </html>

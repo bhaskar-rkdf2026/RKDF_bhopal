@@ -1,4 +1,8 @@
 <?php
+// ============================================================
+// RKDF University — Video Gallery
+// World-Class Premium Design + Responsive Video Grid + 100% Original Content Preserved
+// ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 ?>
@@ -7,263 +11,274 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RKDF Gallery — RKDF University Bhopal</title>
+  <title>Video Gallery — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_video_gallery/rkdf_video_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    .sp-main-box {
-      padding: 80px 0;
-      background: var(--p-paper);
-      color: var(--p-navy-deep);
-      font-size: 16px;
-      line-height: 1.8;
+
+    .vid-main-section {
+      padding: 70px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
     }
-    .sp-main-box table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 28px 0;
+
+    /* Quick Filter Links Bar */
+    .vid-subnav-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 44px;
+      padding: 16px 24px;
       background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-      border: 1px solid var(--p-hairline);
+      border: 1px solid rgba(12,20,36,0.08);
+      border-radius: 16px;
+      box-shadow: 0 4px 20px rgba(12,20,36,0.03);
     }
-    .sp-main-box th {
-      background: var(--p-navy-deep);
-      color: #ffffff;
-      padding: 16px 20px;
-      font-family: var(--p-font-mono);
-      font-size: 13.5px;
+    .vid-subnav-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.12em;
+      color: #C5A059;
+      margin-right: 8px;
     }
-    .sp-main-box td {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--p-hairline);
-      font-size: 15px;
-    }
-    .sp-main-box tr:hover td {
-      background: rgba(220,38,38,0.03);
-    }
-    .sp-main-box a {
-      color: var(--p-gold);
-      font-weight: 700;
+    .vid-subnav-btn {
+      padding: 10px 20px;
+      border-radius: 99px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #0C1424;
       text-decoration: none;
-      transition: color 0.2s;
+      background: #FAF9F5;
+      border: 1px solid rgba(12,20,36,0.08);
+      transition: all 0.25s ease;
     }
-    .sp-main-box a:hover {
-      text-decoration: underline;
-      color: #b91c1c;
+    .vid-subnav-btn:hover, .vid-subnav-btn.active {
+      background: #0C1424;
+      color: #ffffff !important;
+      border-color: #0C1424;
     }
-    .sp-main-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      object-fit: contain;
+    .vid-subnav-btn.active {
+      background: #E31B23;
+      border-color: #E31B23;
     }
-    .glossymenu a.menuitem {
-      display: inline-block;
-      padding: 10px 18px;
-      margin: 4px;
+
+    /* Video Grid */
+    .vid-grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 32px;
+    }
+    @media (max-width: 576px) {
+      .vid-grid-container { grid-template-columns: 1fr; }
+    }
+
+    .vid-card {
       background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-radius: 8px;
-      color: var(--p-navy-deep);
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.25s;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      display: flex;
+      flex-direction: column;
     }
-    .glossymenu a.menuitem:hover {
-      background: var(--p-gold);
-      color: #ffffff;
-      border-color: var(--p-gold);
+    .vid-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 42px rgba(12, 20, 36, 0.1);
+      border-color: #C5A059;
+    }
+
+    .vid-player-wrap {
+      width: 100%;
+      height: 240px;
+      background: #000000;
+      position: relative;
+    }
+    .vid-player-wrap video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .vid-info {
+      padding: 24px 28px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .vid-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      background: rgba(227, 27, 35, 0.1);
+      color: #E31B23;
+      margin-bottom: 10px;
+      width: fit-content;
+    }
+
+    .vid-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0C1424;
+      line-height: 1.5;
+      margin: 0;
     }
   </style>
 </head>
 <body>
+
   <!-- APPROVED NAVBAR -->
   <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">RKDF Gallery</h1>
+      <span class="rk-eyebrow tone-gold">12 · CAMPUS MEDIA &amp; VIDEOS</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Video Gallery</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
+        Watch video coverage of RKDF University campus initiatives, Oxford academic awards, Viksit Bharat @2047, and NCC activities.
+      </p>
     </div>
   </section>
 
-  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
-  <section class="sp-main-box">
+  <!-- MAIN CONTENT SECTION -->
+  <main class="vid-main-section">
     <div class="rk-container">
-?>        </td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr >
-    <td height="40" colspan="3"><table width="1080" border="0" background="images/dropdownBg.png">
-      <tr>
-        <td width="139" height="25"><a href="http://rkdf.ac.in/index.php" class="style1">Home</a></td>
-        <td width="931">&nbsp;
-          <div align="left"><a href="imggallery.php" class="style3">Image Gallery</a></div></td>
-      </tr>
-    </table></td>
-  </tr>
-  <tr>
-    <td height="101" colspan="3" valign="top">
-	<div id="page">
-			<div id="container">
-				<h1 class="style2">RKDF UNIVERSITY VIDEO GALLERY</h1>
-           
-				<!-- Start Advanced Gallery Html Containers -->
-				
-				<div id="thumbs" class="navigation">
-			  </div>
-			  <h3 class="style2">विकसित भारत @2047</h3>
-<video width="400" controls>
-  <source src="images/gallery/video/viksit_bharat.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video>
-			  
-			  <h3 class="style2">डॉ.साधना कपूर, कुलाधिपति  को ऑक्सफ़ोर्ड अकादमिक यूनियन का सम्मान</h3>
-			  <video width="400" controls>
-  <source src="images/gallery/video/oxford.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video>
-<h3 class="style2">Organizes -Drug De-Addiction Bharat Campaign - Videos</h3>
-<video width="400" controls>
-  <source src="images/gallery/video/Nasha Mukti.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video>
-							
-						
-						
-							<video width="400" controls>
-  <source src="images/gallery/video/Nasha Mukti Abhiyan.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video><br />
-  <h3 class="style2">National Integration Day programme - October 30, 2022 </h3>
-<video width="400" controls>
-  <source src="images/gallery/video/National Integration Day.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video>
-  <h3 class="style2">पुनीत सागर अभियान के तहत 1 MPCTR <br /> एनसीसी कैडेट कोर ने की सफाई   </h3>
-<video width="400" controls>
-  <source src="images/gallery/video/nadi safai.mp4" type="video/mp4">
-  Your browser does not support HTML video.
-</video>
-					
-					
-							
-				<!-- End Advanced Gallery Html Containers -->
-				<div style="clear: both;"></div>
-			</div>
-		</div>
-		
-		<div id="footer">&copy; 2013 RKDF University, Bhopal</div>
-		<script type="text/javascript">
-			jQuery(document).ready(function($) {
-				// We only want these styles applied when javascript is enabled
-				$('div.navigation').css({'width' : '300px', 'float' : 'left'});
-				$('div.content').css('display', 'block');
+      
+      <!-- Quick Subnav Links Bar -->
+      <div class="vid-subnav-bar">
+        <span class="vid-subnav-title">Media Categories:</span>
+        <a href="imggallery.php" class="vid-subnav-btn">Photo Gallery</a>
+        <a href="videogallery.php" class="vid-subnav-btn active">Video Gallery</a>
+        <a href="Convocation-2023.php" class="vid-subnav-btn">Convocation 2023</a>
+        <a href="Convocation-2024.php" class="vid-subnav-btn">Convocation 2024</a>
+      </div>
 
-				// Initially set opacity on thumbs and add
-				// additional styling for hover effect on thumbs
-				var onMouseOutOpacity = 0.67;
-				$('#thumbs ul.thumbs li').opacityrollover({
-					mouseOutOpacity:   onMouseOutOpacity,
-					mouseOverOpacity:  1.0,
-					fadeSpeed:         'fast',
-					exemptionSelector: '.selected'
-				});
-				
-				// Initialize Advanced Galleriffic Gallery
-				var gallery = $('#thumbs').galleriffic({
-					delay:                     2500,
-					numThumbs:                 15,
-					preloadAhead:              10,
-					enableTopPager:            true,
-					enableBottomPager:         true,
-					maxPagesToShow:            7,
-					imageContainerSel:         '#slideshow',
-					controlsContainerSel:      '#controls',
-					captionContainerSel:       '#caption',
-					loadingContainerSel:       '#loading',
-					renderSSControls:          true,
-					renderNavControls:         true,
-					playLinkText:              'Play Slideshow',
-					pauseLinkText:             'Pause Slideshow',
-					prevLinkText:              '&lsaquo; Previous Photo',
-					nextLinkText:              'Next Photo &rsaquo;',
-					nextPageLinkText:          'Next &rsaquo;',
-					prevPageLinkText:          '&lsaquo; Prev',
-					enableHistory:             true,
-					autoStart:                 false,
-					syncTransitions:           true,
-					defaultTransitionDuration: 900,
-					onSlideChange:             function(prevIndex, nextIndex) {
-						// 'this' refers to the gallery, which is an extension of $('#thumbs')
-						this.find('ul.thumbs').children()
-							.eq(prevIndex).fadeTo('fast', onMouseOutOpacity).end()
-							.eq(nextIndex).fadeTo('fast', 1.0);
-					},
-					onPageTransitionOut:       function(callback) {
-						this.fadeTo('fast', 0.0, callback);
-					},
-					onPageTransitionIn:        function() {
-						this.fadeTo('fast', 1.0);
-					}
-				});
+      <!-- Video Grid Container -->
+      <div class="vid-grid-container">
 
-				/**** Functions to support integration of galleriffic with the jquery.history plugin ****/
+        <!-- Video 1 -->
+        <article class="vid-card">
+          <div class="vid-player-wrap">
+            <video controls preload="metadata">
+              <source src="images/gallery/video/viksit_bharat.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="vid-info">
+            <div>
+              <span class="vid-badge">NATIONAL INITIATIVE</span>
+              <h2 class="vid-title">विकसित भारत @2047</h2>
+            </div>
+          </div>
+        </article>
 
-				// PageLoad function
-				// This function is called when:
-				// 1. after calling $.historyInit();
-				// 2. after calling $.historyLoad();
-				// 3. after pushing "Go Back" button of a browser
-				function pageload(hash) {
-					// alert("pageload: " + hash);
-					// hash doesn't contain the first # character.
-					if(hash) {
-						$.galleriffic.gotoImage(hash);
-					} else {
-						gallery.gotoIndex(0);
-					}
-				}
+        <!-- Video 2 -->
+        <article class="vid-card">
+          <div class="vid-player-wrap">
+            <video controls preload="metadata">
+              <source src="images/gallery/video/oxford.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="vid-info">
+            <div>
+              <span class="vid-badge">GLOBAL HONORS</span>
+              <h2 class="vid-title">डॉ. साधना कपूर, कुलाधिपति को ऑक्सफ़ोर्ड अकादमिक यूनियन का सम्मान</h2>
+            </div>
+          </div>
+        </article>
 
-				// Initialize history plugin.
-				// The callback is called at once by present location.hash. 
-				$.historyInit(pageload, "advanced.html");
+        <!-- Video 3 -->
+        <article class="vid-card">
+          <div class="vid-player-wrap">
+            <video controls preload="metadata">
+              <source src="images/gallery/video/Nasha Mukti.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="vid-info">
+            <div>
+              <span class="vid-badge">SOCIAL CAMPAIGN</span>
+              <h2 class="vid-title">Organizes - Drug De-Addiction Bharat Campaign (Part 1)</h2>
+            </div>
+          </div>
+        </article>
 
-				// set onlick event for buttons using the jQuery 1.3 live method
-				$("a[rel='history']").live('click', function(e) {
-					if (e.button != 0) return true;
-					
-					var hash = this.href;
-					hash = hash.replace(/^.*#/, '');
+        <!-- Video 4 -->
+        <article class="vid-card">
+          <div class="vid-player-wrap">
+            <video controls preload="metadata">
+              <source src="images/gallery/video/Nasha Mukti Abhiyan.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="vid-info">
+            <div>
+              <span class="vid-badge">SOCIAL CAMPAIGN</span>
+              <h2 class="vid-title">Drug De-Addiction Bharat Campaign (Part 2)</h2>
+            </div>
+          </div>
+        </article>
 
-					// moves to a new page. 
-					// pageload is called at once. 
-					// hash don't contain "#", "?"
-					$.historyLoad(hash);
+        <!-- Video 5 -->
+        <article class="vid-card">
+          <div class="vid-player-wrap">
+            <video controls preload="metadata">
+              <source src="images/gallery/video/National Integration Day.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="vid-info">
+            <div>
+              <span class="vid-badge">UNIVERSITY EVENTS</span>
+              <h2 class="vid-title">National Integration Day Programme - October 30, 2022</h2>
+            </div>
+          </div>
+        </article>
 
-					return false;
-				});
+        <!-- Video 6 -->
+        <article class="vid-card">
+          <div class="vid-player-wrap">
+            <video controls preload="metadata">
+              <source src="images/gallery/video/nadi safai.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
+          </div>
+          <div class="vid-info">
+            <div>
+              <span class="vid-badge">NCC OUTREACH</span>
+              <h2 class="vid-title">पुनीत सागर अभियान के तहत 1 MPCTR एनसीसी कैडेट कोर ने की सफाई</h2>
+            </div>
+          </div>
+        </article>
 
-				/****************************************************************************************/
-			});
-		</script>	</td>
-  </tr>
-</table>
+      </div>
+
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>

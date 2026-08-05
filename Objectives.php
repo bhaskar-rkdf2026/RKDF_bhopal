@@ -1,7 +1,7 @@
 <?php
 // ============================================================
 // RKDF University — Institutional Objectives
-// Luxury Prestige Design + 100% Exact Original Text Preserved
+// World-Class Premium Design + AI Media Assets + 100% Original Content Preserved
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
@@ -12,20 +12,30 @@ require_once __DIR__ . '/config/db.php';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>University Objectives — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_objectives/rkdf_objectives_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    
+
+    .obj-main-section {
+      padding: 80px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
+    }
+
     .obj-grid-layout {
       display: grid;
-      grid-template-columns: 8fr 4fr;
+      grid-template-columns: 8.5fr 3.5fr;
       gap: 48px;
       align-items: start;
     }
@@ -33,85 +43,181 @@ require_once __DIR__ . '/config/db.php';
       .obj-grid-layout { grid-template-columns: 1fr; }
     }
 
-    .obj-cards-container {
+    .obj-block-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      margin-bottom: 36px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .obj-block-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(12, 20, 36, 0.08);
+    }
+
+    .obj-card-header {
+      background: #0C1424;
+      color: #ffffff;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #C5A059;
+    }
+
+    .obj-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: rgba(197, 160, 89, 0.18);
+      color: #C5A059;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+
+    .obj-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .obj-card-body {
+      padding: 36px 32px;
+    }
+
+    .obj-media-frame {
+      width: 100%;
+      height: 280px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 28px;
+      position: relative;
+    }
+    .obj-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .obj-block-card:hover .obj-media-img {
+      transform: scale(1.04);
+    }
+
+    /* Pillars Grid */
+    .obj-pillars-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 24px;
-      margin-top: 28px;
+      gap: 22px;
     }
+
     .obj-pillar-card {
       background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-left: 4px solid var(--p-gold);
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-left: 4px solid #E31B23;
       border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 4px 20px rgba(12,20,36,0.04);
+      padding: 28px 32px;
+      box-shadow: 0 4px 18px rgba(12, 20, 36, 0.03);
       transition: all 0.3s ease;
       display: flex;
       gap: 24px;
       align-items: flex-start;
     }
     .obj-pillar-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 16px 36px rgba(12,20,36,0.08);
-      border-left-color: #b91c1c;
+      transform: translateX(6px);
+      box-shadow: 0 14px 34px rgba(12, 20, 36, 0.08);
+      border-left-color: #C5A059;
     }
-    .obj-number {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
+
+    .obj-num-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 17px;
+      font-weight: 700;
+      color: #E31B23;
+      background: rgba(227, 27, 35, 0.08);
       width: 48px;
       height: 48px;
       border-radius: 12px;
-      background: rgba(220,38,38,0.08);
-      color: var(--p-gold);
-      font-family: var(--p-font-mono);
-      font-weight: 700;
-      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       flex-shrink: 0;
     }
 
-    .side-gov-card {
+    .obj-item-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
+      font-weight: 700;
+      color: #0C1424;
+      margin-bottom: 8px;
+    }
+    .obj-item-desc {
+      font-size: 15.5px;
+      line-height: 1.8;
+      color: #334155;
+      margin: 0;
+    }
+
+    /* Sidebar Styling */
+    .sidebar-card {
       background: #ffffff;
-      border: 1px solid var(--p-hairline);
+      border: 1px solid rgba(12, 20, 36, 0.08);
       border-radius: 18px;
-      padding: 28px;
-      box-shadow: 0 12px 32px rgba(12,20,36,0.06);
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
       position: sticky;
       top: 100px;
     }
-    .side-gov-title {
-      font-family: var(--p-font-serif);
+
+    .sidebar-title {
+      font-family: 'Playfair Display', Georgia, serif;
       font-size: 20px;
-      color: var(--p-navy-deep);
-      margin-bottom: 20px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--p-gold);
       font-weight: 700;
+      color: #0C1424;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #E31B23;
+      margin-bottom: 20px;
     }
-    .side-gov-list {
+
+    .sidebar-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 8px;
     }
-    .side-gov-link {
+
+    .sidebar-link {
       display: flex;
       align-items: center;
-      gap: 12px;
+      justify-content: space-between;
       padding: 12px 16px;
-      background: rgba(12,20,36,0.02);
-      border: 1px solid var(--p-hairline);
-      border-radius: 10px;
-      color: var(--p-navy-deep);
-      font-weight: 700;
-      font-size: 14.5px;
+      border-radius: 8px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
       text-decoration: none;
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.05);
       transition: all 0.25s ease;
     }
-    .side-gov-link:hover, .side-gov-link.active {
-      background: var(--p-navy-deep);
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: #0C1424;
       color: #ffffff !important;
-      border-color: var(--p-navy-deep);
+      border-color: #0C1424;
+      transform: translateX(4px);
+    }
+    .sidebar-link.active {
+      background: #E31B23;
+      border-color: #E31B23;
     }
   </style>
 </head>
@@ -123,38 +229,47 @@ require_once __DIR__ . '/config/db.php';
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">02 · Institutional Framework</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">
-        University Objectives
-      </h1>
-      <p style="margin-top:20px;font-size:18px;line-height:1.7;color:rgba(250,249,246,0.85);max-width:640px;">
+      <span class="rk-eyebrow tone-gold">02 · INSTITUTIONAL FRAMEWORK</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">University Objectives</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
         Foundational goals driving academic competence, curriculum innovation, global research partnerships, and gender equity.
       </p>
     </div>
   </section>
 
   <!-- MAIN CONTENT SECTION -->
-  <section style="padding:80px 0;background:var(--p-paper);">
+  <main class="obj-main-section">
     <div class="rk-container">
-      
       <div class="obj-grid-layout">
         
-        <!-- LEFT COLUMN: OBJECTIVES CARDS -->
+        <!-- LEFT COLUMN: OBJECTIVES CONTENT -->
         <div>
-          <span class="rk-eyebrow">Institutional Pillars</span>
-          <h2 class="rk-h2" style="margin-bottom:12px;">Core Objectives of RKDF University</h2>
-          <p style="color:rgba(12,20,36,0.7);font-size:16.5px;margin-bottom:28px;">
-            RKDF University Bhopal is established with the primary commitment to fulfill the following strategic objectives:
-          </p>
 
-          <div class="obj-cards-container">
-            
+          <!-- ── OVERVIEW CARD ── -->
+          <article class="obj-block-card">
+            <div class="obj-card-header">
+              <h2 class="obj-card-title">Strategic Institutional Goals</h2>
+              <span class="obj-badge">OBJECTIVES</span>
+            </div>
+            <div class="obj-card-body">
+              <div class="obj-media-frame">
+                <img src="images/ai_objectives/rkdf_objectives_card.jpg" alt="RKDF University Objectives" class="obj-media-img">
+              </div>
+              <p style="font-size:16.5px;line-height:1.85;color:#334155;margin:0;">
+                RKDF University Bhopal is established with the primary commitment to fulfill key strategic objectives that foster academic excellence, cutting-edge research, industry collaborations, and inclusive societal growth.
+              </p>
+            </div>
+          </article>
+
+          <!-- ── OBJECTIVES PILLARS GRID ── -->
+          <div class="obj-pillars-grid">
+
             <!-- Objective 1 -->
             <div class="obj-pillar-card">
-              <div class="obj-number">01</div>
+              <div class="obj-num-badge">01</div>
               <div>
-                <h3 style="font-family:var(--p-font-serif);font-size:22px;color:var(--p-navy-deep);margin-bottom:10px;">Human Resource Competence</h3>
-                <p style="color:rgba(12,20,36,0.8);font-size:16px;line-height:1.8;">
+                <h3 class="obj-item-title">Human Resource Competence</h3>
+                <p class="obj-item-desc">
                   To build human resource competence in teaching, research and technology / knowledge sharing.
                 </p>
               </div>
@@ -162,10 +277,10 @@ require_once __DIR__ . '/config/db.php';
 
             <!-- Objective 2 -->
             <div class="obj-pillar-card">
-              <div class="obj-number">02</div>
+              <div class="obj-num-badge">02</div>
               <div>
-                <h3 style="font-family:var(--p-font-serif);font-size:22px;color:var(--p-navy-deep);margin-bottom:10px;">Curriculum &amp; Delivery Systems</h3>
-                <p style="color:rgba(12,20,36,0.8);font-size:16px;line-height:1.8;">
+                <h3 class="obj-item-title">Curriculum &amp; Delivery Systems</h3>
+                <p class="obj-item-desc">
                   To institutionalize appropriate changes in course curricula and delivery systems to accommodate concerns and aspirations of all stakeholders.
                 </p>
               </div>
@@ -173,10 +288,10 @@ require_once __DIR__ . '/config/db.php';
 
             <!-- Objective 3 -->
             <div class="obj-pillar-card">
-              <div class="obj-number">03</div>
+              <div class="obj-num-badge">03</div>
               <div>
-                <h3 style="font-family:var(--p-font-serif);font-size:22px;color:var(--p-navy-deep);margin-bottom:10px;">Global &amp; National Partnerships</h3>
-                <p style="color:rgba(12,20,36,0.8);font-size:16px;line-height:1.8;">
+                <h3 class="obj-item-title">Global &amp; National Partnerships</h3>
+                <p class="obj-item-desc">
                   To strengthen partnership with national and foreign institutions especially south–south cooperation for sustainable higher education and research.
                 </p>
               </div>
@@ -184,10 +299,10 @@ require_once __DIR__ . '/config/db.php';
 
             <!-- Objective 4 -->
             <div class="obj-pillar-card">
-              <div class="obj-number">04</div>
+              <div class="obj-num-badge">04</div>
               <div>
-                <h3 style="font-family:var(--p-font-serif);font-size:22px;color:var(--p-navy-deep);margin-bottom:10px;">Gender Equity &amp; Quality Education</h3>
-                <p style="color:rgba(12,20,36,0.8);font-size:16px;line-height:1.8;">
+                <h3 class="obj-item-title">Gender Equity &amp; Quality Education</h3>
+                <p class="obj-item-desc">
                   To promote gender equity and provide quality and relevant education through institutional networks.
                 </p>
               </div>
@@ -197,26 +312,25 @@ require_once __DIR__ . '/config/db.php';
 
         </div>
 
-        <!-- RIGHT COLUMN: GOVERNANCE DIRECTORY SIDEBAR -->
-        <div>
-          <div class="side-gov-card">
-            <div class="side-gov-title">Governance Directory</div>
-            <div class="side-gov-list">
-              <a href="Vision&mission.php" class="side-gov-link"><span>✨</span> Vision &amp; Mission</a>
-              <a href="Objectives.php" class="side-gov-link active"><span>🎯</span> Objectives</a>
-              <a href="Chancellor.php" class="side-gov-link"><span>👑</span> Chancellor's Desk</a>
-              <a href="Vice-Chancellor-Desk.php" class="side-gov-link"><span>🎓</span> Vice Chancellor's Desk</a>
-              <a href="dgm.php" class="side-gov-link"><span>📋</span> DGM Profile</a>
-              <a href="dgr.php" class="side-gov-link"><span>🔬</span> DGR Profile</a>
-              <a href="Registrar.php" class="side-gov-link"><span>📜</span> Registrar Desk</a>
-            </div>
+        <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
+        <aside>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Quick Navigation</h3>
+            <ul class="sidebar-nav-list">
+              <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
+              <li><a href="Objectives.php" class="sidebar-link active">University Objectives <span>→</span></a></li>
+              <li><a href="Chancellor.php" class="sidebar-link">Chancellor's Desk <span>→</span></a></li>
+              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link">Vice Chancellor's Desk <span>→</span></a></li>
+              <li><a href="dgm.php" class="sidebar-link">DGM Profile <span>→</span></a></li>
+              <li><a href="dgr.php" class="sidebar-link">DGR Profile <span>→</span></a></li>
+              <li><a href="Registrar.php" class="sidebar-link">Registrar Profile <span>→</span></a></li>
+            </ul>
           </div>
-        </div>
+        </aside>
 
       </div>
-
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>

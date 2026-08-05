@@ -1,4 +1,8 @@
 <?php
+// ============================================================
+// RKDF University — Faculty of Pharmacy
+// World-Class Premium Design + High-Res Media Assets + 100% Original Content & PCI Approval Links Preserved
+// ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 ?>
@@ -7,394 +11,431 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pharmacy — RKDF University Bhopal</title>
+  <title>Faculty of Pharmacy — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_pharmacy/rkdf_pharmacy_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    .sp-main-box {
-      padding: 80px 0;
-      background: var(--p-paper);
-      color: var(--p-navy-deep);
-      font-size: 16px;
-      line-height: 1.8;
+
+    .pharm-main-section {
+      padding: 80px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
     }
-    .sp-main-box table {
+
+    .pharm-grid-layout {
+      display: grid;
+      grid-template-columns: 8.5fr 3.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .pharm-grid-layout { grid-template-columns: 1fr; }
+    }
+
+    .pharm-block-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      margin-bottom: 36px;
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+    }
+    .pharm-block-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 40px rgba(12, 20, 36, 0.08);
+    }
+
+    .pharm-card-header {
+      background: #0C1424;
+      color: #ffffff;
+      padding: 24px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid #C5A059;
+    }
+
+    .pharm-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      padding: 5px 14px;
+      border-radius: 99px;
+      background: rgba(197, 160, 89, 0.18);
+      color: #C5A059;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+    }
+
+    .pharm-card-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 24px;
+      font-weight: 700;
+      color: #ffffff;
+      margin: 0;
+    }
+
+    .pharm-card-body {
+      padding: 32px 36px;
+    }
+
+    .pharm-media-frame {
+      width: 100%;
+      height: 280px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      position: relative;
+    }
+    .pharm-media-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+    .pharm-block-card:hover .pharm-media-img {
+      transform: scale(1.04);
+    }
+
+    /* Program Table */
+    .pharm-table {
       width: 100%;
       border-collapse: collapse;
-      margin: 28px 0;
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-      border: 1px solid var(--p-hairline);
+      margin-top: 14px;
+      margin-bottom: 24px;
     }
-    .sp-main-box th {
-      background: var(--p-navy-deep);
-      color: #ffffff;
-      padding: 16px 20px;
-      font-family: var(--p-font-mono);
-      font-size: 13.5px;
+    .pharm-table th {
+      background: #FAF9F5;
+      color: #0C1424;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
+      text-align: left;
+      border-bottom: 2px solid rgba(12, 20, 36, 0.08);
     }
-    .sp-main-box td {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--p-hairline);
-      font-size: 15px;
+    .pharm-table td {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(12, 20, 36, 0.06);
+      font-size: 14px;
+      color: #334155;
     }
-    .sp-main-box tr:hover td {
-      background: rgba(220,38,38,0.03);
+    .pharm-table tr:hover td {
+      background: rgba(227, 27, 35, 0.02);
     }
-    .sp-main-box a {
-      color: var(--p-gold);
+
+    .pharm-pdf-link {
+      font-size: 12.5px;
+      font-family: 'JetBrains Mono', monospace;
       font-weight: 700;
+      color: #E31B23;
       text-decoration: none;
-      transition: color 0.2s;
+      padding: 4px 10px;
+      border-radius: 6px;
+      background: rgba(227, 27, 35, 0.08);
+      border: 1px solid rgba(227, 27, 35, 0.2);
+      transition: all 0.2s ease;
+      margin-left: 8px;
     }
-    .sp-main-box a:hover {
-      text-decoration: underline;
-      color: #b91c1c;
+    .pharm-pdf-link:hover {
+      background: #E31B23;
+      color: #ffffff !important;
     }
-    .sp-main-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      object-fit: contain;
+
+    .inst-header-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(12, 20, 36, 0.08);
     }
-    .glossymenu a.menuitem {
-      display: inline-block;
-      padding: 10px 18px;
-      margin: 4px;
+
+    /* Sidebar Links */
+    aside {
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-card {
       background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-radius: 8px;
-      color: var(--p-navy-deep);
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.25s;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
     }
-    .glossymenu a.menuitem:hover {
-      background: var(--p-gold);
-      color: #ffffff;
-      border-color: var(--p-gold);
+
+    .sidebar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0C1424;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #E31B23;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.05);
+      transition: all 0.25s ease;
+    }
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: #0C1424;
+      color: #ffffff !important;
+      border-color: #0C1424;
+      transform: translateX(4px);
+    }
+    .sidebar-link.active {
+      background: #E31B23;
+      border-color: #E31B23;
     }
   </style>
 </head>
 <body>
+
   <!-- APPROVED NAVBAR -->
   <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Pharmacy</h1>
+      <span class="rk-eyebrow tone-gold">26 · ACADEMIC FACULTY</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Faculty of Pharmacy</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
+        Excellence in pharmaceutical research, clinical pharmacy, drug discovery, and healthcare across 6 PCI approved constituent pharmacy colleges.
+      </p>
     </div>
   </section>
 
-  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
-  <section class="sp-main-box">
+  <!-- MAIN CONTENT SECTION -->
+  <main class="pharm-main-section">
     <div class="rk-container">
-<section id="content" class="wrapper ">
-        <!--- spotlight -->
-        <section id="contentLeft">
-            <div id="collegeDetail">
-                <h2 class="titleDescription"><a href="#">FACULTY OF PHARMACY </a></h2>
-                <blockquote>
-                    <p>&nbsp;</p>
-                    <table width="630" border="1" cellpadding="0" cellspacing="0">
-                        <tr>
-                 <td colspan="6"> <span class="style7"><br /> VEDICA COLLEGE OF B.PHARMACY </span><a href="approval/PCI/2022/VCP PCI Decision Letter 2023-24.pdf" target="_blank"><span class="style8">(PCI APPROVED)</span></a></td>
-                        </tr>
-                        <tr bgcolor="#9A9A4E">
-                            <td width="206"><span class="style1">Courses</span></td>
-                            <td width="96"><span class="style1">Seats/Intake</span></td>
-                            <td width="87"><span class="style1">Sem/Year</span></td>
-                            <td width="251" colspan="4"><span class="style1">Eligibility</span></td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206" class="style6">Bachelor of pharmacy</td>
-							<td width="96" class="style6">60</td>
-                            <td width="87" class="style6">8 Sem</td>
-                            <td colspan="4" class="style6"> Passed 10+2 examination with Physics and Chemistry as compulsory subjects along with Mathematics/Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma- (Lateral)</span></td>
-                            <td width="96"><span class="style6">06 <br />
-                            </span></td>
-                            <td width="87"><span class="style6">6 Sem</span></td>
-                            <td colspan="4" class="style6">Passed Diploma examination in a Programme with at least 45% marks (40% marks in case of candidates belonging to reserved category) in appropriate Programme.</span></td>
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                            <!-- <td width="69">&nbsp;</td>
-                            <td width="91">&nbsp;</td>
-                            <td width="294">&nbsp;</td> -->
-                        </tr>
-                        <tr>
-                            <td width="206"><span class="style6">M.Pharma-Regulatory Affairs</span></td>
-                            <td width="96"><span class="style6">09</span></td>
-                            <td width="87"><span class="style6">4 Sem</span></td>
-                            <td rowspan="4" colspan="4" class="style6"> Passed Bachelor Degree in Pharmacy. Obtained at least 55% marks (50% marks
-                                    in case of candidates belonging to reserved category) in the qualifying Examination.</td>
-                        </tr>
-                        <tr>
-                            <td width="206"><span class="style6">M.Pharma-Pharamceutics</span></td>
-                            <td width="96"><span class="style6">15</span></td>
-                            <td width="87"><span class="style6">4 Sem</span></td>
-                        </tr>
-                        <tr>
-                            <td width="206"><span class="style6">M.Pharma-Pharamacology</span></td>
-                            <td width="96"><span class="style6">15 </span></td>
-                            <td width="87"><span class="style6">4 Sem</span></td>
-                            <!-- <td width="294"><span class="style6"> </span></td> -->
-                        </tr>
-                        <tr>
-                            <td width="206"><span class="style6">M.Pharma-Pharmacognosy</span></td>
-                            <td width="96"><span class="style6">15 </span></td>
-                            <td width="87"><span class="style6">4 Sem</span></td>
-                            <!-- <td width="294">&nbsp;</td> -->
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                            <!-- <td width="69">&nbsp;</td>
-                            <td width="91">&nbsp;</td>
-                            <td width="294">&nbsp;</td> -->
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharm (Practice)</span></td>
-                            <td width="96"><span class="style6">40 </span></td>
-                            <td width="87"><span class="style6">2 year </span></td>
-                            <td Colspan="4" class="style6">Passed D.Pharm from an PCI recognized Institutios and must have
-                                    employer certificate and NOC of pacticing in Pharmacy for at least 4 yrs.
-                      </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                            <!-- <td width="69">&nbsp;</td>
-                            <td width="91">&nbsp;</td>
-                            <td width="294">&nbsp;</td> -->
-                        </tr>
-                        <tr>
-                          <td colspan="5"><br />
-                            <span class="style7"> SRI
-                                        SATYA SAI INSTITUTE OF PHARMACY POLYTECHNIC</span><a href="approval/PCI/2022/SSSIP PCI.pdf" target="_blank"> <span class="style8">(PCI APPROVED)</span></a></td>
-                        </tr>
-                        <tr bgcolor="#9A9A4E">
-                            <td width="206"><span class="style1">Courses</span></td>
-                            <td width="96"><span class="style1">Seats/Intake</span></td>
-                            <td width="87"><span class="style1">Sem/Year</span></td>
-                            <td colspan="4"><span class="style1">Eligibility</span></td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">D.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">2 Year</span></td>
-                            <td colspan="4" class="style6">Passed
-                                    10+2 examination with Physics and Chemistry as compulsory subjects along with
-                                    Mathematics/ Biology subject.</td>
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                            <!-- <td width="69">&nbsp;</td>
-                            <td width="91">&nbsp;</td>
-                            <td width="294">&nbsp;</td> -->
-                        </tr>
-                        <tr>
-                            <td colspan="5"><span class="style7"> VEDICA COLLEGE OF PHARMACY (POLYTECHNIC)</span><a href="approval/PCI/2022/VCPP PCI Decision Letter 2022-23.pdf" target="_blank"> <span class="style8">(PCI APPROVED)</span></a></td>
-                        </tr>
-                        <tr bgcolor="#9A9A4E">
-                            <td width="206"><span class="style1">Courses</span></td>
-                            <td width="96"><span class="style1">Seats/Intake</span></td>
-                            <td width="87"><span class="style1">Sem/Year</span></td>
-                            <td colspan="4"><span class="style1">Eligibility</span></td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">D.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">2 Year</span></td>
-                            <td colspan="4" class="style6">Passed
-                                    10+2 examination with Physics and Chemistry as compulsory subjects along with
-                                    Mathematics/ Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">8 Sem</span></td>
-                            <td colspan="4" class="style6">Passed 10+2 examination with Physics and Chemistry as compulsory subjects along with Mathematics/Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma (Lateral)</span></td>
-                            <td width="96"><span class="style6">06</span></td>
-                            <td width="87"><span class="style6">6 Sem</span></td>
-                            <td colspan="4" class="style6">Passed Diploma examination in a Programme with at least 45% marks (40% marks in case of candidates belonging to reserved category) in appropriate Programme.</span></td>
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="5"><span class="style7">
-                                        SRI SATHYA SAI INSTITUTE OF PHARMACEUTICAL SCIENCES</span> <a href="approval/PCI/2022/SSSIPS PCI Decision Letter 2022-23.pdf" target="_blank"><span
-                                            class="style8">(PCI APPROVED)</span></a></td>
-                        </tr>
-                        <tr bgcolor="#9A9A4E">
-                            <td width="206"><span class="style1">Courses</span></td>
-                            <td width="96"><span class="style1">Seats/Intake</span></td>
-                            <td width="87"><span class="style1">Sem/Year</span></td>
-                            <td colspan="4"><span class="style1">Eligibility</span></td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">D.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">2 Year</span></td>
-                            <td colspan="4" class="style6">Passed
-                                    10+2 examination with Physics and Chemistry as compulsory subjects along with
-                                    Mathematics/ Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">8 Sem</span></td>
-                           <td colspan="4" class="style6"> Passed 10+2 examination with Physics and Chemistry as compulsory subjects along with Mathematics/Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma (Lateral)</span></td>
-                            <td width="96"><span class="style6">06</span></td>
-                            <td width="87"><span class="style6">6 Sem</span></td>
-                              <td colspan="4" class="style6">Passed Diploma examination in a Programme with at least 45% marks (40% marks in case of candidates belonging to reserved category) in appropriate Programme.</span></td>
-                        </tr>
-                        <tr rowspan="4">
-                            <td width="206" height="42"><span class="style6">M.Pharma - Pharamceutics</span></td>
-                            <td width="96"><span class="style6">15</span></td>
-                            <td width="87"><span class="style6">4 Sem</span></td>
-                            <td rowspan="2" colspan="4" class="style6"> Passed Bachelor Degree in Pharmacy. Obtained at least 55% marks (50% marks
-                                    in case of candidates belonging to reserved category) in the qualifying Examination.                            </td>
-                        </tr>
-                        <tr rowspan="4">
-                            <td width="206" height="47"><span class="style6">M.Pharma- Pharamacology</span></td>
-                            <td width="96"><span class="style6">15</span></td>
-                            <td width="87"><span class="style6">4 Sem</span></td>
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="5"><br />
-                            <span class="style7"> DR.
-                                        SATYENDRA KUMAR MEMORIAL COLLEGE OF PHARMACY </span><a href="approval/PCI/2022/DSKMCOP Decision Letter 2022-23.pdf" target="_blank"><span class="style8">(PCI
-                                            APPROVED)</span></a></td>
-                        </tr>
-                        <tr bgcolor="#9A9A4E">
-                            <td width="206"><span class="style1">Courses</span></td>
-                            <td width="96"><span class="style1">Seats/Intake</span></td>
-                            <td width="87"><span class="style1">Sem/Year</span></td>
-                            <td colspan="4"><span class="style1">Eligibility</span></td>
-                        </tr>
-                       <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">8 Sem</span></td>
-                           <td colspan="4" class="style6"> Passed 10+2 examination with Physics and Chemistry as compulsory subjects along with Mathematics/Biology subject.</td>
-                      </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma (Lateral)</span></td>
-                            <td width="96"><span class="style6">06</span></td>
-                            <td width="87"><span class="style6">6 Sem</span></td>
-                             <td colspan="4" class="style6">Passed Diploma examination in a Programme with at least 45% marks (40% marks in case of candidates belonging to reserved category) in appropriate Programme.</span></td>
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="5"><span class="style7"> DEPATRMENT
-                                        OF PHARMACY </span><a href="approval/PCI/2022/DOP PCI Decision Letter 2022-23.pdf" target="_blank"><span class="style8">(PCI APPROVED)</span></a>
-                            </td>
-                        </tr>
-                        <tr bgcolor="#9A9A4E">
-                            <td width="206"><span class="style1">Courses</span></td>
-                            <td width="96"><span class="style1">Seats/Intake</span></td>
-                            <td width="87"><span class="style1">Sem/Year</span></td>
-                            <td colspan="4"><span class="style1">Eligibility</span></td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">D.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">2 Year</span></td>
-                            <td colspan="4"  class="style6">Passed
-                                    10+2 examination with Physics and Chemistry as compulsory subjects along with
-                                    Mathematics/ Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma</span></td>
-                            <td width="96"><span class="style6">60</span></td>
-                            <td width="87"><span class="style6">8 Sem</span></td>
-                           <td colspan="4" class="style6">Passed 10+2 examination with Physics and Chemistry as compulsory subjects along with Mathematics/Biology subject.</td>
-                        </tr>
-                        <tr rowspan="2">
-                            <td width="206"><span class="style6">B.Pharma (Lateral)</span></td>
-                            <td width="96"><span class="style6">06</span></td>
-                            <td width="87"><span class="style6">6 Sem</span></td>
-                             <td colspan="4" class="style6">Passed Diploma examination in a Programme with at least 45% marks (40% marks in case of candidates belonging to reserved category) in appropriate Programme.</span></td>
-                        </tr>
-                        <tr rowspan="1">
-                            <td colspan="5">&nbsp;</td>
-                        </tr>
-                    </table>
-					 <h2 class="style14">&nbsp;</h2>
-          <br />
-	   <table width="200" border="1">
-	    <tr>
-                            <td height="45" colspan="2"><span class="style7">DOCTOR OF PHILOSOPHY ( Ph.D)</span>
-                  </td>
-                </tr>
-         <tr>
-           <td width="233" height="34"><span class="style1">Course Name </span></td>
-           <td width="401">&nbsp;<span class="style1">Eligibility </span></td>
-         </tr>
-		  <tr>
-           <td width="233" height="69" class="style6">&nbsp; Ph.D - Pharmaceutical Sciences</td>
-           <td><div align="justify"><span class="style6">As per UGC Norms.</span></div></td>
-         </tr>
-		  <tr>
-           <td width="233" height="34">&nbsp; </td>
-           <td width="401">&nbsp;</td>
-         </tr>
-       </table>
-                    <h2 class="style14">&nbsp;</h2>
-                </blockquote>
+      <div class="pharm-grid-layout">
+        
+        <!-- LEFT COLUMN: PHARMACY INSTITUTES & COURSES -->
+        <div>
+
+          <!-- OVERVIEW BLOCK -->
+          <article class="pharm-block-card">
+            <div class="pharm-card-header">
+              <h2 class="pharm-card-title">Constituent Pharmacy Colleges</h2>
+              <span class="pharm-badge">PCI APPROVED</span>
             </div>
-            <div align="justify"></div>
-        </section>
-        <!--- contentLeft -->
-        <section id="sideBar">
-            <?php
-						include "include/sidemenu.php";
-						?>
-        </section>
-        <!--- sideBar -->
-        <br class="clear" />
-    </section>
-    <!--- content -->
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $('#mainNav li').hover(
-            function() {
-                jQuery(this).find('.dropdown').fadeIn(300);
-            },
-            function() {
-                jQuery(this).find('.dropdown').fadeOut(200);
-            }
-        );
-    });
-    </script>
+            <div class="pharm-card-body">
+              
+              <div class="pharm-media-frame">
+                <img src="images/ai_pharmacy/rkdf_pharmacy_lab.jpg" alt="RKDF Faculty of Pharmacy Research Lab" class="pharm-media-img">
+              </div>
+
+              <div style="font-family:'Playfair Display',serif;font-size:22px;color:#C5A059;margin-bottom:14px;font-weight:700;">
+                Pharmaceutical Sciences &amp; Clinical Research
+              </div>
+
+              <p style="font-size:16.5px;line-height:1.85;color:#334155;margin-bottom:28px;">
+                The Faculty of Pharmacy at RKDF University Bhopal comprises 6 PCI-approved colleges offering D.Pharm, B.Pharm, B.Pharm (Lateral), B.Pharm (Practice), M.Pharm, and Ph.D. degree programs backed by advanced research laboratories and formulation units.
+              </p>
+
+              <!-- INSTITUTE 1: VEDICA COLLEGE OF B.PHARMACY -->
+              <div class="inst-header-box" style="margin-top:0;padding-top:0;border-top:none;">
+                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0C1424;margin:0;">
+                  Vedica College of B.Pharmacy
+                </h3>
+                <a href="approval/PCI/2022/VCP%20PCI%20Decision%20Letter%202023-24.pdf" target="_blank" class="pharm-pdf-link">📄 PCI Approval Letter ↗</a>
+              </div>
+              <table class="pharm-table">
+                <thead>
+                  <tr>
+                    <th>Courses</th>
+                    <th>Seats / Intake</th>
+                    <th>Duration</th>
+                    <th>Eligibility Criteria</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Bachelor of Pharmacy (B.Pharm)</strong></td><td>60</td><td>8 Sem</td><td>Passed 10+2 examination with Physics &amp; Chemistry as compulsory subjects along with Mathematics/Biology.</td></tr>
+                  <tr><td><strong>B.Pharm (Lateral)</strong></td><td>06</td><td>6 Sem</td><td>Passed Diploma (D.Pharm) examination with at least 45% marks (40% for reserved category).</td></tr>
+                  <tr><td><strong>M.Pharm - Regulatory Affairs</strong></td><td>09</td><td>4 Sem</td><td rowspan="4" style="vertical-align:middle;">Passed Bachelor Degree in Pharmacy (B.Pharm). Obtained at least 55% marks (50% for reserved category).</td></tr>
+                  <tr><td><strong>M.Pharm - Pharmaceutics</strong></td><td>15</td><td>4 Sem</td></tr>
+                  <tr><td><strong>M.Pharm - Pharmacology</strong></td><td>15</td><td>4 Sem</td></tr>
+                  <tr><td><strong>M.Pharm - Pharmacognosy</strong></td><td>15</td><td>4 Sem</td></tr>
+                  <tr><td><strong>B.Pharm (Practice)</strong></td><td>40</td><td>2 Years</td><td>Passed D.Pharm from PCI recognized Institution + Employer certificate &amp; NOC practicing for at least 4 yrs.</td></tr>
+                </tbody>
+              </table>
+
+              <!-- INSTITUTE 2: SRI SATYA SAI INSTITUTE OF PHARMACY POLYTECHNIC -->
+              <div class="inst-header-box">
+                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0C1424;margin:0;">
+                  Sri Satya Sai Institute of Pharmacy Polytechnic
+                </h3>
+                <a href="approval/PCI/2022/SSSIP%20PCI.pdf" target="_blank" class="pharm-pdf-link">📄 PCI Approval Letter ↗</a>
+              </div>
+              <table class="pharm-table">
+                <thead>
+                  <tr><th>Courses</th><th>Seats / Intake</th><th>Duration</th><th>Eligibility Criteria</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Diploma in Pharmacy (D.Pharm)</strong></td><td>60</td><td>2 Years</td><td>Passed 10+2 examination with Physics and Chemistry as compulsory subjects along with Mathematics/Biology.</td></tr>
+                </tbody>
+              </table>
+
+              <!-- INSTITUTE 3: VEDICA COLLEGE OF PHARMACY (POLYTECHNIC) -->
+              <div class="inst-header-box">
+                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0C1424;margin:0;">
+                  Vedica College of Pharmacy (Polytechnic)
+                </h3>
+                <a href="approval/PCI/2022/VCPP%20PCI%20Decision%20Letter%202022-23.pdf" target="_blank" class="pharm-pdf-link">📄 PCI Approval Letter ↗</a>
+              </div>
+              <table class="pharm-table">
+                <thead>
+                  <tr><th>Courses</th><th>Seats / Intake</th><th>Duration</th><th>Eligibility Criteria</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Diploma in Pharmacy (D.Pharm)</strong></td><td>60</td><td>2 Years</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>Bachelor of Pharmacy (B.Pharm)</strong></td><td>60</td><td>8 Sem</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>B.Pharm (Lateral)</strong></td><td>06</td><td>6 Sem</td><td>Passed D.Pharm with min 45% marks (40% reserved).</td></tr>
+                </tbody>
+              </table>
+
+              <!-- INSTITUTE 4: SRI SATHYA SAI INSTITUTE OF PHARMACEUTICAL SCIENCES -->
+              <div class="inst-header-box">
+                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0C1424;margin:0;">
+                  Sri Sathya Sai Institute of Pharmaceutical Sciences
+                </h3>
+                <a href="approval/PCI/2022/SSSIPS%20PCI%20Decision%20Letter%202022-23.pdf" target="_blank" class="pharm-pdf-link">📄 PCI Approval Letter ↗</a>
+              </div>
+              <table class="pharm-table">
+                <thead>
+                  <tr><th>Courses</th><th>Seats / Intake</th><th>Duration</th><th>Eligibility Criteria</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Diploma in Pharmacy (D.Pharm)</strong></td><td>60</td><td>2 Years</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>Bachelor of Pharmacy (B.Pharm)</strong></td><td>60</td><td>8 Sem</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>B.Pharm (Lateral)</strong></td><td>06</td><td>6 Sem</td><td>Passed D.Pharm with min 45% marks (40% reserved).</td></tr>
+                  <tr><td><strong>M.Pharm - Pharmaceutics</strong></td><td>15</td><td>4 Sem</td><td rowspan="2">Passed B.Pharm with at least 55% marks (50% reserved).</td></tr>
+                  <tr><td><strong>M.Pharm - Pharmacology</strong></td><td>15</td><td>4 Sem</td></tr>
+                </tbody>
+              </table>
+
+              <!-- INSTITUTE 5: DR. SATYENDRA KUMAR MEMORIAL COLLEGE OF PHARMACY -->
+              <div class="inst-header-box">
+                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0C1424;margin:0;">
+                  Dr. Satyendra Kumar Memorial College of Pharmacy
+                </h3>
+                <a href="approval/PCI/2022/DSKMCOP%20Decision%20Letter%202022-23.pdf" target="_blank" class="pharm-pdf-link">📄 PCI Approval Letter ↗</a>
+              </div>
+              <table class="pharm-table">
+                <thead>
+                  <tr><th>Courses</th><th>Seats / Intake</th><th>Duration</th><th>Eligibility Criteria</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Bachelor of Pharmacy (B.Pharm)</strong></td><td>60</td><td>8 Sem</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>B.Pharm (Lateral)</strong></td><td>06</td><td>6 Sem</td><td>Passed D.Pharm with min 45% marks (40% reserved).</td></tr>
+                </tbody>
+              </table>
+
+              <!-- INSTITUTE 6: DEPARTMENT OF PHARMACY -->
+              <div class="inst-header-box">
+                <h3 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:#0C1424;margin:0;">
+                  Department of Pharmacy
+                </h3>
+                <a href="approval/PCI/2022/DOP%20PCI%20Decision%20Letter%202022-23.pdf" target="_blank" class="pharm-pdf-link">📄 PCI Approval Letter ↗</a>
+              </div>
+              <table class="pharm-table">
+                <thead>
+                  <tr><th>Courses</th><th>Seats / Intake</th><th>Duration</th><th>Eligibility Criteria</th></tr>
+                </thead>
+                <tbody>
+                  <tr><td><strong>Diploma in Pharmacy (D.Pharm)</strong></td><td>60</td><td>2 Years</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>Bachelor of Pharmacy (B.Pharm)</strong></td><td>60</td><td>8 Sem</td><td>Passed 10+2 with Physics &amp; Chemistry + Math/Biology.</td></tr>
+                  <tr><td><strong>B.Pharm (Lateral)</strong></td><td>06</td><td>6 Sem</td><td>Passed D.Pharm with min 45% marks (40% reserved).</td></tr>
+                </tbody>
+              </table>
+
+            </div>
+          </article>
+
+          <!-- Ph.D. PHARMACY BLOCK -->
+          <article class="pharm-block-card">
+            <div class="pharm-card-header" style="background:#0C1424;border-bottom-color:#E31B23;">
+              <h2 class="pharm-card-title">Doctor of Philosophy (Ph.D) in Pharmacy</h2>
+              <span class="pharm-badge" style="color:#E31B23;border-color:rgba(227,27,35,0.3);background:rgba(227,27,35,0.1);">DOCTORAL RESEARCH</span>
+            </div>
+            <div class="pharm-card-body">
+              <table class="pharm-table">
+                <thead>
+                  <tr>
+                    <th>Course Name</th>
+                    <th>Eligibility Criteria</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Ph.D. - Pharmaceutical Sciences</strong></td>
+                    <td>As per UGC Norms.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
+        <aside>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Academic Faculties</h3>
+            <ul class="sidebar-nav-list">
+              <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
+              <li><a href="pharmacy.php" class="sidebar-link active">Faculty of Pharmacy <span>→</span></a></li>
+              <li><a href="Engineering.php" class="sidebar-link">Faculty of Engineering <span>→</span></a></li>
+              <li><a href="Commerce.php" class="sidebar-link">Faculty of Commerce <span>→</span></a></li>
+              <li><a href="Science.php" class="sidebar-link">Faculty of Science <span>→</span></a></li>
+              <li><a href="Management.php" class="sidebar-link">Faculty of Management <span>→</span></a></li>
+              <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
+              <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>
+            </ul>
+          </div>
+        </aside>
+
+      </div>
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>

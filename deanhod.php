@@ -1,4 +1,8 @@
 <?php
+// ============================================================
+// RKDF University — Deans & Institute Heads / HODs Directory
+// World-Class Premium Design + Complete Deans & HODs Grid
+// ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 ?>
@@ -7,403 +11,398 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EDUCATION GLORIFIES NATION — RKDF University Bhopal</title>
+  <title>Deans &amp; Institute Heads / HODs — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_hod/rkdf_hod_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    .sp-main-box {
-      padding: 80px 0;
-      background: var(--p-paper);
-      color: var(--p-navy-deep);
-      font-size: 16px;
-      line-height: 1.8;
+
+    .dh-main-section {
+      padding: 80px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
     }
-    .sp-main-box table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 28px 0;
+
+    .dh-grid-layout {
+      display: grid;
+      grid-template-columns: 8.5fr 3.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+    @media (max-width: 992px) {
+      .dh-grid-layout { grid-template-columns: 1fr; }
+    }
+
+    .dh-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .dh-member-card {
       background: #ffffff;
-      border-radius: 12px;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      padding: 32px 24px 28px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .dh-member-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 42px rgba(12, 20, 36, 0.1);
+      border-color: #C5A059;
+    }
+
+    .dh-avatar-box {
+      width: 140px;
+      height: 150px;
+      border-radius: 16px;
       overflow: hidden;
-      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-      border: 1px solid var(--p-hairline);
+      margin-bottom: 20px;
+      box-shadow: 0 8px 24px rgba(12, 20, 36, 0.12);
+      border: 3px solid #FAF9F5;
+      background: #0C1424;
     }
-    .sp-main-box th {
-      background: var(--p-navy-deep);
-      color: #ffffff;
-      padding: 16px 20px;
-      font-family: var(--p-font-mono);
-      font-size: 13.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .dh-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
     }
-    .sp-main-box td {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--p-hairline);
-      font-size: 15px;
+    .dh-member-card:hover .dh-img {
+      transform: scale(1.08);
     }
-    .sp-main-box tr:hover td {
-      background: rgba(220,38,38,0.03);
-    }
-    .sp-main-box a {
-      color: var(--p-gold);
+
+    .dh-name {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 21px;
       font-weight: 700;
-      text-decoration: none;
-      transition: color 0.2s;
+      color: #0C1424;
+      margin-bottom: 4px;
     }
-    .sp-main-box a:hover {
-      text-decoration: underline;
-      color: #b91c1c;
-    }
-    .sp-main-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-    .glossymenu a.menuitem {
+
+    .dh-desig-badge {
       display: inline-block;
-      padding: 10px 18px;
-      margin: 4px;
-      background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-radius: 8px;
-      color: var(--p-navy-deep);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
       font-weight: 700;
-      text-decoration: none;
-      transition: all 0.25s;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 4px 14px;
+      border-radius: 99px;
+      background: rgba(197, 160, 89, 0.18);
+      color: #C5A059;
+      margin-bottom: 12px;
     }
-    .glossymenu a.menuitem:hover {
-      background: var(--p-gold);
-      color: #ffffff;
-      border-color: var(--p-gold);
+
+    .dh-faculty-title {
+      font-size: 14.5px;
+      line-height: 1.55;
+      color: #475569;
+      font-weight: 600;
+    }
+
+    .dh-univ-tag {
+      font-size: 12.5px;
+      color: #94A3B8;
+      margin-top: 4px;
+    }
+
+    /* Sidebar Links */
+    aside {
+      position: sticky;
+      top: 100px;
+    }
+
+    .sidebar-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+    }
+
+    .sidebar-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: #0C1424;
+      padding-bottom: 14px;
+      border-bottom: 2px solid #E31B23;
+      margin-bottom: 20px;
+    }
+
+    .sidebar-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-radius: 8px;
+      color: #334155;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.05);
+      transition: all 0.25s ease;
+    }
+    .sidebar-link:hover,
+    .sidebar-link.active {
+      background: #0C1424;
+      color: #ffffff !important;
+      border-color: #0C1424;
+      transform: translateX(4px);
+    }
+    .sidebar-link.active {
+      background: #E31B23;
+      border-color: #E31B23;
     }
   </style>
 </head>
 <body>
+
   <!-- APPROVED NAVBAR -->
   <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">EDUCATION GLORIFIES NATION</h1>
+      <span class="rk-eyebrow tone-gold">20 · ACADEMIC LEADERSHIP</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Institute Heads &amp; HODs Directory</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
+        Directory of Institute Heads and Heads of Department leading constituent engineering, pharmacy, nursing, ayurveda, and Polytechnic colleges across RKDF University Bhopal.
+      </p>
     </div>
   </section>
 
-  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
-  <section class="sp-main-box">
+  <!-- MAIN CONTENT SECTION -->
+  <main class="dh-main-section">
     <div class="rk-container">
-<section id="content" class="wrapper ">
-  <!--- spotlight -->
-<section id="contentLeft">
-	<div id="collegeDetail">
-	<h2 class="titleDescription"></h2>
-	<p class="titleDescription">&nbsp;</p>
+      <div class="dh-grid-layout">
+        
+        <!-- LEFT COLUMN: HODs LIST GRID -->
+        <div>
 
-	<p>
-		<h2>Dean's</h2>
-		<hr/>
-	</p>
+          <div style="margin-bottom:36px;">
+            <span class="rk-eyebrow tone-gold">Academic Leadership</span>
+            <h2 class="rk-h2" style="font-size:32px;margin-top:8px;">Institute Heads &amp; Department Heads</h2>
+            <p style="color:#475569;font-size:16px;margin-top:10px;">
+              Eminent academic leaders heading constituent colleges, polytechnics, and specialized departments at RKDF University Bhopal MP:
+            </p>
+          </div>
 
-	<table>
-        <tr>
-            <th>Institute Name </th>
-            <th>Dean / HOD</th>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Pharmaceutical Sciences, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Santram Lodhi.jfif" alt="Dr. Santram Lodhi"><br>
-                <strong>Name:</strong> Dr. Santram Lodhi <br>
-                <strong>Designation:</strong> Dean 
-            </td>
-        </tr>
+          <div class="dh-list-grid">
 
-		<tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Social Science, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Ashvini Joshi.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Ashvini Joshi <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Commerce, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/NK Shrivastava.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. N. K Shrivastava <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Engineering and Technology, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Arun Patel.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Arun Kumar Patel <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Science, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/VK Pandey.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Vinod Kumar Pandey <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Paramedical, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Arpit Bhargav.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Arpit Bhargava <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Health Science, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Anoop J. Katyayan.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Anoop J. Katyayan <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Department of Education, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/MS Pawar.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. M. S. Pawar <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Management, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Satyendra Thakur.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Satendra Singh Thakur <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Agriculture, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/KC Pandey.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Krishna Chandra Pandey <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Law, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Anshuma Upadhya.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr. Anshuma Upadhyay <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of Architecture, <br><br>  RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Richa Pathe.jfif" alt="Dean Photo"><br>
-                <strong>Name:</strong> Dr.Richa Pathe  <br>
-                <strong>Designation:</strong> Dean
-            </td>
-        </tr>
+            <!-- HOD 1: Sri Satya Sai College of Engineering (SSSCE) -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/AC Nayak.jfif" alt="Dr. A. C. Nayak" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. A. C. Nayak</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">Sri Satya Sai College of Engineering (SSSCE)</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-		<!-- Add more rows as needed -->
-    </table>
+            <!-- HOD 2: RKDF College of Technology & Research (RKDFCTR) -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Virendra Choudhary.jfif" alt="Dr. Virendra Singh Chaudhary" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Virendra Singh Chaudhary</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">RKDF College of Technology &amp; Research (RKDFCTR)</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-	<p>
-		<br><br><br><br><h2>Institute Head / HOD's</h2>
-		<hr/>
-	</p>
+            <!-- HOD 3: Bhabha College of Engineering (BCE) -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/SanjaySingh.jfif" alt="Dr. Sanjay Jain" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Sanjay Jain</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">Bhabha College of Engineering (BCE)</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-	<table>
-        <tr>
-            <th>Institute Name </th>
-            <th>Institute Head / HOD's</th>
-        </tr>
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of SRI SATYA SAI COLLEGE OF ENGINEERING (SSSCE), <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/AC Nayak.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. A. C Nayak <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 4: Agnos College of Technology -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Sohail Bux.jfif" alt="Dr. Sohail Bux" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Sohail Bux</h3>
+              <div><span class="dh-desig-badge">Head of Department (HOD)</span></div>
+              <div class="dh-faculty-title">Agnos College of Technology</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of RKDF COLLEGE OF TECHNOLOGY & RESEARCH (RKDFCTR), <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Virendra Choudhary.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Virendra Singh Chaudhary <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 5: Vedica College of Pharmacy Polytechnic -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Sandeep Sahu.jfif" alt="Dr. Sandeep Sahu" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Sandeep Sahu</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">Vedica College of Pharmacy Polytechnic</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of BHABHA COLLEGE OF ENGINEERING (BCE), <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/SanjaySingh.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Sanjay Jain <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 6: Department of Pharmacy -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Aarti Sahu.jfif" alt="Dr. Bharti Sahu" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Bharti Sahu</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">Department of Pharmacy</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of AGNOS COLLEGE OF TECHNOLOGY, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Sohail Bux.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Sohail Bux <br>
-                <strong>Designation:</strong> HOD
-            </td>
-        </tr>
+            <!-- HOD 7: Sri Satya Sai Institute of Pharmacy -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Pradeep Adlak.jfif" alt="Dr. Pradeep Adlak" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Pradeep Adlak</h3>
+              <div><span class="dh-desig-badge">Head of Department (HOD)</span></div>
+              <div class="dh-faculty-title">Sri Satya Sai Institute of Pharmacy</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of VEDICA COLLEGE OF PHARMACY POLYTECHNIC, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Sandeep Sahu.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Sandeep Sahu <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 8: Dr. Satyendra Kumar Memorial College of Pharmacy -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Abhishek Dwivedi.jfif" alt="Dr. Abhishek Dwivedi" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Abhishek Dwivedi</h3>
+              <div><span class="dh-desig-badge">Head of Department (HOD)</span></div>
+              <div class="dh-faculty-title">Dr. Satyendra Kumar Memorial College of Pharmacy</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of DEPARTMENT OF PHARMACY, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Aarti Sahu.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Bharti Sahu <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 9: Sri Sathya Sai Institute of Pharmaceutical Sciences -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Devendra Bhopte.jfif" alt="Dr. Devendra Bhopte" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Devendra Bhopte</h3>
+              <div><span class="dh-desig-badge">Head of Department (HOD)</span></div>
+              <div class="dh-faculty-title">Sri Sathya Sai Institute of Pharmaceutical Sciences</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of SRI SATYA SAI INSTITUTE OF PHARMACY, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Pradeep Adlak.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Pradeep Adlak <br>
-                <strong>Designation:</strong> HOD
-            </td>
-        </tr>
+            <!-- HOD 10: College of Pharmacy -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Virendra Patil.jfif" alt="Dr. Virendra Kumar Patel" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Virendra Kumar Patel</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">College of Pharmacy</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of DR SATYENDRA KUMAR MEMORIAL COLLEGE OF PHARMACY, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Abhishek Dwivedi.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Abhishek Dwivedi <br>
-                <strong>Designation:</strong> HOD
-            </td>
-        </tr>
+            <!-- HOD 11: School of Pharmacy -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Neha Jain.jfif" alt="Dr. Neha Jain" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Neha Jain</h3>
+              <div><span class="dh-desig-badge">Head of Department (HOD)</span></div>
+              <div class="dh-faculty-title">School of Pharmacy</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of SRI SATHYA SAI INSTITUTE OF PHARMACEUTICAL SCIENCES, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Devendra Bhopte.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Devendra Bhopte <br>
-                <strong>Designation:</strong> HOD
-            </td>
-        </tr>
+            <!-- HOD 12: Institute of Polytechnic Engineering -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Ametesh Paul.jfif" alt="Dr. Amitesh Kumar Paul" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Amitesh Kumar Paul</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">Institute of Polytechnic Engineering</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of COLLEGE OF PHARMACY, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Virendra Patil.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Virendra Kumar Patel <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 13: University College of Nursing -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Vandana Raghuvanshi.jfif" alt="Dr. Vandana Raghuvanshi" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Vandana Raghuvanshi</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">University College of Nursing</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of SCHOOL OF PHARMACY, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Neha Jain.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Neha Jain <br>
-                <strong>Designation:</strong> HOD
-            </td>
-        </tr>
+            <!-- HOD 14: Ram Krishna College of Ayurveda & Medical Sciences BAMS -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Anil Kunjilal Baghel.jfif" alt="Dr. Anil Kunjilal Baghel" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Anil Kunjilal Baghel</h3>
+              <div><span class="dh-desig-badge">Institute Head</span></div>
+              <div class="dh-faculty-title">Ram Krishna College of Ayurveda &amp; Medical Sciences BAMS</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">Faculty of INSTITUTE OF POLYTECHNIC ENGINEERING, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Ametesh Paul.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Amitesh Kumar Paul <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+            <!-- HOD 15: Library and Information Science -->
+            <article class="dh-member-card">
+              <div class="dh-avatar-box">
+                <img src="images/deanshod/Minni Walia.jfif" alt="Dr. Minni Walia" class="dh-img" onerror="this.src='images/lovable/rkdf-logo.png';">
+              </div>
+              <h3 class="dh-name">Dr. Minni Walia</h3>
+              <div><span class="dh-desig-badge">Head of Department (HOD)</span></div>
+              <div class="dh-faculty-title">Library and Information Science</div>
+              <div class="dh-univ-tag">RKDF University Bhopal MP</div>
+            </article>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">UNIVERSITY COLLEGE OF NURSING, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Vandana Raghuvanshi.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Vandana Raghuvanshi <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+          </div>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">RAM KRISHNA COLLEGE OF AYURVEDA & MEDICAL SCIENCES BAMS, <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Anil Kunjilal Baghel.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Anil Kunjilal Baghel <br>
-                <strong>Designation:</strong> Institute Head
-            </td>
-        </tr>
+        </div>
 
-        <tr>
-            <td style="font-size: larger;font-weight: lighter;">LIBRARY AND INFORMATION SCIENCE <br><br> RKDF University Bhopal MP</td>
-            <td style="padding-bottom: 25px;margin-bottom: 25px;">
-                <img src="images/deanshod/Minni Walia.jfif" alt="Dr. "><br>
-                <strong>Name:</strong> Dr. Minni Walia <br>
-                <strong>Designation:</strong> HOD
-            </td>
-        </tr>
+        <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
+        <aside>
+          <div class="sidebar-card">
+            <h3 class="sidebar-title">Academic Governance</h3>
+            <ul class="sidebar-nav-list">
+              <li><a href="Chancellor.php" class="sidebar-link">Chancellor's Desk <span>→</span></a></li>
+              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link">Vice Chancellor's Desk <span>→</span></a></li>
+              <li><a href="Registrar.php" class="sidebar-link">Registrar Profile <span>→</span></a></li>
+              <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
+              <li><a href="hod.php" class="sidebar-link active">Heads of Department (HOD) <span>→</span></a></li>
+              <li><a href="Statuary-Bodies.php" class="sidebar-link">Statutory Bodies <span>→</span></a></li>
+            </ul>
+          </div>
+        </aside>
 
-		<!-- Add more rows as needed -->
-	</table>
-
-
-	</div>
-                <p>
-				
-
-				
-				</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p>&nbsp;</p>
-</section>
-			<!--- contentLeft -->
-			<section id="sideBar">
-			  <aside id="customMenu" class="sidebarWidget">              </aside>
-  </section>
-			<br class="clear" />
-		</section>
-<!--- content -->		
-<script type="text/javascript">
-				jQuery(document).ready(function($){
-						$('#mainNav li').hover(
-					function(){ jQuery(this).find('.dropdown').fadeIn(300); },
-					function(){ jQuery(this).find('.dropdown').fadeOut(200); }
-				);
-				});	
-</script>
+      </div>
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>

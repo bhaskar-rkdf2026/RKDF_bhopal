@@ -1,173 +1,294 @@
 <?php
 // ============================================================
-// RKDF University — Approved Navbar (Exact Prototype Match)
-// Matches user design: Logo + 7 Nav items + Search + Student Login + Red APPLY NOW ↗
+// RKDF University — Modern Navbar Component
+// Complete Navigation Titles, Submenus & Redirections
 // ============================================================
 require_once __DIR__ . '/site_settings.php';
 require_once __DIR__ . '/../config/db.php';
 
-$siteTitle = get_site_setting('site_title', 'RKDF University');
-$siteTagline = get_site_setting('site_tagline', 'BHOPAL · SINCE 2011');
-$admissionYear = get_site_setting('admission_year', '2026-27');
+$siteTitle          = get_site_setting('site_title', 'RKDF University');
+$siteTagline        = get_site_setting('site_tagline', 'Bhopal · Since 2011');
+$admissionYear      = get_site_setting('admission_year', '2026-27');
 $admissionPolicyPdf = get_site_setting('admission_policy_pdf', 'ADMISSION POLICY 2026-27.pdf');
-$prospectusPdf = get_site_setting('prospectus_pdf', 'Content/Documents/Prospectus  2024-25.pdf');
-$feePdf = get_site_setting('fee_structure_pdf', 'University_Fees_Structure.pdf');
-$erpPortalUrl = get_site_setting('erp_portal_url', 'https://erplive.rkdf.ac.in');
+$prospectusPdf     = get_site_setting('prospectus_pdf', 'Content/Documents/Prospectus  2024-25.pdf');
+$feePdf             = get_site_setting('fee_structure_pdf', 'University_Fees_Structure.pdf');
+$erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.ac.in');
 ?>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="css/rkdf-navbar.css" />
 
 <!-- ══════════════════════════════════════════════════════════ -->
-<!--  RKDF STICKY NAVBAR (Prototype Exact Match)                -->
+<!--  RKDF STICKY NAVBAR                                         -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <div class="rkdf-navbar-wrap">
 <nav class="rkdf-nav-bar" id="rkdfNavBar" role="navigation" aria-label="Main navigation">
   <div class="rkdf-nav-inner">
 
-    <!-- ── LEFT: Shield Logo + Brand Name ── -->
+    <!-- ── BRAND LOGO + CREST + TYPOGRAPHY ── -->
     <a href="index.php" class="rkdf-brand" title="<?= htmlspecialchars($siteTitle) ?> — Home">
-      <svg class="rkdf-badge" viewBox="0 0 90 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M45 2L4 18V50C4 76 45 98 45 98C45 98 86 76 86 50V18L45 2Z" fill="#C9192A"/>
-        <path d="M45 9L11 23V50C11 72 45 91 45 91C45 91 79 72 79 50V23L45 9Z" fill="#A8101F"/>
-        <circle cx="45" cy="38" r="18" fill="#F5F5F5"/>
-        <rect x="37" y="30" width="16" height="12" rx="1.5" fill="#C9192A"/>
-        <line x1="45" y1="30" x2="45" y2="42" stroke="white" stroke-width="1.5"/>
-        <line x1="37" y1="36" x2="53" y2="36" stroke="white" stroke-width="1"/>
-        <rect x="29" y="62" width="32" height="3.5" rx="1" fill="rgba(255,255,255,0.80)"/>
-        <rect x="32" y="70" width="26" height="3" rx="1" fill="rgba(255,255,255,0.55)"/>
-        <rect x="36" y="77" width="18" height="2.5" rx="1" fill="rgba(255,255,255,0.35)"/>
-      </svg>
+      <div class="rkdf-badge-box">
+        <img src="images/lovable/rkdf-logo.png" alt="RKDF University Crest Logo" class="rkdf-badge-img" style="height:44px;max-height:44px;width:auto;max-width:40px;object-fit:contain;display:block;" onError="this.src='images/rkdflogo.JPG';">
+      </div>
 
       <div class="rkdf-brand-info">
-        <span class="rkdf-brand-name"><?= htmlspecialchars($siteTitle) ?></span>
-        <span class="rkdf-brand-loc"><?= htmlspecialchars($siteTagline) ?></span>
+        <div class="rkdf-brand-name"><?= htmlspecialchars($siteTitle) ?></div>
+        <div class="rkdf-brand-loc"><?= htmlspecialchars($siteTagline) ?></div>
       </div>
     </a>
 
-    <!-- ── CENTER: Main Nav Links (Admissions, Academics, Research, Campus Life, Placements, About, News) ── -->
+    <!-- ── CENTER NAV LINKS & DROPDOWNS ── -->
     <ul class="rkdf-nav-list" id="rkdfNavList" role="menubar">
+
+      <!-- ABOUT US -->
+      <li class="rkdf-nav-item" role="none">
+        <a href="About_Us.pdf" target="_blank" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
+          About Us <i class="rkdf-chev">▾</i>
+        </a>
+        <div class="rkdf-drop rkdf-drop-wide" role="menu" style="min-width:540px;">
+          <div class="rkdf-drop-col">
+            <span class="rkdf-drop-head">About &amp; Leadership</span>
+            <a href="About_Us.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">About Us Overview</a>
+            <a href="Vision&amp;mission.php" class="rkdf-drop-link" role="menuitem">Vision &amp; Mission</a>
+            <a href="Objectives.php" class="rkdf-drop-link" role="menuitem">Objectives</a>
+            <a href="Content/Documents/Institutional Development Plan.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Institutional Development Plan</a>
+            <a href="images/06/Organizational Structure.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Organizational Structure</a>
+            <a href="Chancellor.php" class="rkdf-drop-link" role="menuitem">Chancellor's Desk</a>
+            <a href="ProChancellor.php" class="rkdf-drop-link" role="menuitem">Pro-Chancellor</a>
+            <a href="Vice-Chancellor-Desk.php" class="rkdf-drop-link" role="menuitem">Vice Chancellor's Desk</a>
+            <a href="dgm.php" class="rkdf-drop-link" role="menuitem">DGM Profile</a>
+            <a href="dgr.php" class="rkdf-drop-link" role="menuitem">DGR Profile</a>
+            <a href="Registrar.php" class="rkdf-drop-link" role="menuitem">Registrar Profile</a>
+            <a href="other-officers.php" class="rkdf-drop-link" role="menuitem">Other Officer's</a>
+          </div>
+          <div class="rkdf-drop-col">
+            <span class="rkdf-drop-head">Academic &amp; Governance Bodies</span>
+            <a href="dean.php" class="rkdf-drop-link" role="menuitem">Dean's Profile</a>
+            <a href="hod.php" class="rkdf-drop-link" role="menuitem">Institute Head / HOD's</a>
+            <a href="Governingbody.php" class="rkdf-drop-link" role="menuitem">Governing Body</a>
+            <a href="BoM.php" class="rkdf-drop-link" role="menuitem">Board of Management</a>
+            <a href="Academic_Council.php" class="rkdf-drop-link" role="menuitem">Academic Council</a>
+            <a href="BOS.php" class="rkdf-drop-link" role="menuitem">Board of Studies</a>
+            <a href="Statuary-Bodies.php" class="rkdf-drop-link" role="menuitem">National Core Advisory Group</a>
+            <a href="localadvisory.php" class="rkdf-drop-link" role="menuitem">Local Core Advisory Group</a>
+            <a href="Public Self Disclosure.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Public Self Disclosure</a>
+            <a href="imggallery.php" target="_blank" class="rkdf-drop-link" role="menuitem">Photo Gallery</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- ACADEMIC -->
+      <li class="rkdf-nav-item" role="none">
+        <a href="academic&amp;departments.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
+          Academic <i class="rkdf-chev">▾</i>
+        </a>
+        <div class="rkdf-drop rkdf-drop-wide" role="menu" style="min-width:600px;">
+          <div class="rkdf-drop-col">
+            <span class="rkdf-drop-head">Faculties &amp; Departments</span>
+            <a href="Management.php" class="rkdf-drop-link" role="menuitem">Management</a>
+            <a href="Science.php" class="rkdf-drop-link" role="menuitem">Science</a>
+            <a href="Commerce.php" class="rkdf-drop-link" role="menuitem">Commerce</a>
+            <a href="Engineering.php" class="rkdf-drop-link" role="menuitem">Engineering &amp; Technology</a>
+            <a href="pharmacy.php" class="rkdf-drop-link" role="menuitem">Pharmacy</a>
+            <a href="Computer-Application.php" class="rkdf-drop-link" role="menuitem">Computer Application</a>
+            <a href="Education.php" class="rkdf-drop-link" role="menuitem">Education</a>
+            <a href="Social-Science.php" class="rkdf-drop-link" role="menuitem">Social Science</a>
+            <a href="Agriculture.php" class="rkdf-drop-link" role="menuitem">Agriculture</a>
+            <a href="architect.php" class="rkdf-drop-link" role="menuitem">Architecture</a>
+            <a href="Law.php" class="rkdf-drop-link" role="menuitem">Law</a>
+            <a href="BHMS.php" class="rkdf-drop-link" role="menuitem">Homeopathy (BHMS)</a>
+            <a href="BAMS.php" class="rkdf-drop-link" role="menuitem">Ayurveda (BAMS)</a>
+            <a href="nursing.php" class="rkdf-drop-link" role="menuitem">Nursing</a>
+            <a href="paramdical.php" class="rkdf-drop-link" role="menuitem">Paramedical</a>
+            <a href="Library.php" class="rkdf-drop-link" role="menuitem">Library &amp; Info Sciences</a>
+            <a href="Constituent Units.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Constituent Units</a>
+          </div>
+          <div class="rkdf-drop-col">
+            <span class="rkdf-drop-head">Academic Resources &amp; Notices</span>
+            <a href="University_Fees_Structure.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Fees Structure</a>
+            <a href="Fees Notice.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Notice For Fees Submission</a>
+            <a href="Syllabus.php" class="rkdf-drop-link" role="menuitem">Syllabus</a>
+            <a href="https://rkdfu.org/E_Resource.php" target="_blank" class="rkdf-drop-link" role="menuitem">E-Resources</a>
+            <a href="https://rkdfu.org/syllabus_Value-added.php" target="_blank" class="rkdf-drop-link" role="menuitem">Value-Added Courses</a>
+            <a href="acadmiccalander.php" class="rkdf-drop-link" role="menuitem">Academic Calendar</a>
+            <a href="international-relation.php" class="rkdf-drop-link" role="menuitem">Collaborations</a>
+            <a href="Feedback_Analysis.php" target="_blank" class="rkdf-drop-link" role="menuitem">Feedback Analysis</a>
+            <a href="skill.php" class="rkdf-drop-link" role="menuitem">Skills Enhancement</a>
+            <a href="Annual_Report_University.php" class="rkdf-drop-link" role="menuitem">University Annual Report</a>
+            <a href="staffLnew.php" target="_blank" class="rkdf-drop-link" role="menuitem">Teaching Staff</a>
+            <a href="LMS.php" class="rkdf-drop-link" role="menuitem">LMS Portal</a>
+            <span class="rkdf-drop-head" style="margin-top:10px;">Convocations</span>
+            <a href="Content/Documents/Convocation_2026/List of Gold Medal and Silver Medal Academic Session 2023-24.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Convocation Medals 2023-24</a>
+            <a href="Content/Documents/Convocation_2026/List of Gold Medal and Silver Medal Academic Session 2024-25.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Convocation Medals 2024-25</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- EXAMINATION -->
+      <li class="rkdf-nav-item" role="none">
+        <a href="exam.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
+          Examination <i class="rkdf-chev">▾</i>
+        </a>
+        <div class="rkdf-drop" role="menu" style="min-width:280px;">
+          <span class="rkdf-drop-head">Examination &amp; Student Forms</span>
+          <a href="exam.php" class="rkdf-drop-link" role="menuitem">Examination Notice</a>
+          <a href="examtimetable.php" class="rkdf-drop-link" role="menuitem">Exam Time Table</a>
+          <a href="Result.php" class="rkdf-drop-link" role="menuitem">Examination Results</a>
+          <a href="forms/Verification Form.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Document Verification Form</a>
+          <a href="exam/Marksheet_Correction_form.PDF" target="_blank" class="rkdf-drop-link" role="menuitem">Form for Duplicate/Corrected Marksheet</a>
+          <a href="exam/NAME CORRECTION  Form.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Form for Name Correction Marksheet</a>
+          <a href="forms/Application For Hindi.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Degree Migration Form (Hindi)</a>
+          <a href="forms/Application For English.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Degree Migration Form (English)</a>
+          <a href="images/Alumni-form.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Alumni Registration Form</a>
+          <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" class="rkdf-drop-link" role="menuitem" style="color:var(--nav-red);font-weight:600;">Student Portal Login →</a>
+        </div>
+      </li>
+
+      <!-- R&D ACTIVITIES -->
+      <li class="rkdf-nav-item" role="none">
+        <a href="r&amp;d.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
+          R&amp;D Activities <i class="rkdf-chev">▾</i>
+        </a>
+        <div class="rkdf-drop" role="menu" style="min-width:280px;">
+          <span class="rkdf-drop-head">Research &amp; Innovation</span>
+          <a href="research/Project List.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">List of Projects</a>
+          <a href="research/Projects At a Glance.PDF" target="_blank" class="rkdf-drop-link" role="menuitem">Projects At A Glance</a>
+          <a href="http://shodhsangam.rkdfuniv.in/" target="_blank" class="rkdf-drop-link" role="menuitem">Shodh Sangam Journals</a>
+          <a href="research/R&amp;D Presentation.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Overview Presentation</a>
+          <a href="research/R&amp;D FORMATS.rar" class="rkdf-drop-link" role="menuitem">R&amp;D Formats (Download)</a>
+          <a href="research/Funding agencies for Research Projects.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Funding Agencies</a>
+          <a href="research/List of Publications.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">List of Publications</a>
+          <a href="research/List of MoU.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">List of MoU</a>
+          <a href="patent.php" class="rkdf-drop-link" role="menuitem">University Patents</a>
+          <a href="research/Conferences__Visits_and_Student_acivities.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Industrial Visits &amp; Conferences</a>
+          <a href="Content/Videos/5. Carbon capture plants-Part1.mp4" target="_blank" class="rkdf-drop-link" role="menuitem">R&amp;D Videos</a>
+        </div>
+      </li>
+
+      <!-- RESEARCH SECTION -->
+      <li class="rkdf-nav-item" role="none">
+        <a href="phd.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
+          Research Section <i class="rkdf-chev">▾</i>
+        </a>
+        <div class="rkdf-drop" role="menu" style="min-width:290px;">
+          <span class="rkdf-drop-head">Doctor of Philosophy (Ph.D)</span>
+          <a href="phdsubjects.php" class="rkdf-drop-link" role="menuitem">Subjects Offered (Ph.D)</a>
+          <a href="phd_entrance.php" class="rkdf-drop-link" role="menuitem">Admission in Ph.D Programme</a>
+          <a href="syllabus/Ph_D_Course_work__Scheme_and_Syllabus.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Course Work-Scheme &amp; Syllabus</a>
+          <a href="phdstudent.php" class="rkdf-drop-link" role="menuitem">Ph.D Students Directory</a>
+          <a href="phd_entrance.php" target="_blank" class="rkdf-drop-link" role="menuitem">Ph.D Admissions 2026</a>
+          <a href="https://rkdf.ac.in/stafflist.php" target="_blank" class="rkdf-drop-link" role="menuitem">List of Supervisors</a>
+          <span class="rkdf-drop-head" style="margin-top:10px;">Policies &amp; Projects</span>
+          <a href="research/Research_Policy_RKDF_University.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Research Policy of University</a>
+          <a href="research/consultancy_policy.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Consultancy Policy of University</a>
+          <a href="research/Institutional_Distinctiveness.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Institutional Distinctiveness</a>
+          <a href="research/Projects of Govt of India.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Projects of Govt of India</a>
+          <a href="research/Projects at RKDF  PPT- CSIR  Online 13 Sept-R1.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">CSIR Projects at RKDF</a>
+          <a href="research/Solar Integrated Carbon Capture Plant INDEX of Technical Report.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Solar Carbon Capture Plant Report</a>
+          <a href="research/Innovations.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Incubation Centre</a>
+        </div>
+      </li>
 
       <!-- ADMISSIONS -->
       <li class="rkdf-nav-item" role="none">
-        <a href="#" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
+        <a href="admissionform.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
           Admissions <i class="rkdf-chev">▾</i>
         </a>
-        <div class="rkdf-drop" role="menu">
-          <span class="rkdf-drop-head"><?= htmlspecialchars($admissionYear) ?></span>
-          <a href="<?= htmlspecialchars($admissionPolicyPdf) ?>" target="_blank" class="rkdf-drop-link" role="menuitem">Admission Policy <?= htmlspecialchars($admissionYear) ?></a>
-          <a href="<?= htmlspecialchars($prospectusPdf) ?>" target="_blank" class="rkdf-drop-link" role="menuitem">University Prospectus</a>
-          <a href="<?= htmlspecialchars($feePdf) ?>" target="_blank" class="rkdf-drop-link" role="menuitem">Fee Structure</a>
+        <div class="rkdf-drop" role="menu" style="min-width:300px;">
+          <span class="rkdf-drop-head">Admissions 2026-27</span>
+          <a href="ADMISSION POLICY 2026-27.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Admission Notice, Courses &amp; Last Date</a>
+          <a href="ADMISSION POLICY 2026-27.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Admission Rules 2026-27</a>
+          <a href="images/06/Mapping list for CUET(UG)- 2023.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Mapping list for CUET(UG)</a>
+          <a href="Content/Documents/Prospectus  2024-25.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">University Prospectus</a>
+          <a href="foreign_stud/index.html" target="_blank" class="rkdf-drop-link" role="menuitem">For International Admissions</a>
+          <a href="academic&amp;departments.php" class="rkdf-drop-link" role="menuitem">Faculties and Departments</a>
+          <a href="images/06/Account Details.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">University Bank Account Details</a>
+          <a href="University_Fees_Structure.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Fees Structure</a>
+          <a href="images/06/Campus_Facility.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Campus Facility</a>
           <a href="scholarship.php" class="rkdf-drop-link" role="menuitem">Scholarships</a>
-          <a href="admissionform.php" class="rkdf-drop-link" role="menuitem">Application Form</a>
+          <a href="https://m.p-y.tm/rkdfu_web/" target="_blank" class="rkdf-drop-link" role="menuitem">Pay Fees Through Paytm</a>
+          <a href="Policy/Inhouse_Scheme_Policy.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Inhouse Scheme Policy</a>
+          <a href="Policy/Meritorious_Scheme_Policy.pdf" target="_blank" class="rkdf-drop-link" role="menuitem">Meritorious Scheme Policy</a>
+          <a href="admissionform.php" class="rkdf-drop-link" role="menuitem" style="color:var(--nav-red);font-weight:600;">Online Admission Application →</a>
         </div>
-      </li>
-
-      <!-- ACADEMICS -->
-      <li class="rkdf-nav-item" role="none">
-        <a href="academic&departments.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
-          Academics <i class="rkdf-chev">▾</i>
-        </a>
-        <div class="rkdf-drop rkdf-drop-wide" role="menu">
-          <div class="rkdf-drop-col">
-            <span class="rkdf-drop-head">Faculties &amp; Schools</span>
-            <a href="Engineering.php" class="rkdf-drop-link" role="menuitem">Engineering &amp; Technology</a>
-            <a href="Management.php" class="rkdf-drop-link" role="menuitem">Management Studies</a>
-            <a href="pharmacy.php" class="rkdf-drop-link" role="menuitem">Pharmacy</a>
-            <a href="Science.php" class="rkdf-drop-link" role="menuitem">Basic &amp; Applied Sciences</a>
-            <a href="Agriculture.php" class="rkdf-drop-link" role="menuitem">Agriculture</a>
-            <a href="nursing.php" class="rkdf-drop-link" role="menuitem">Nursing &amp; Paramedical</a>
-            <a href="Law.php" class="rkdf-drop-link" role="menuitem">Law</a>
-          </div>
-          <div class="rkdf-drop-col">
-            <span class="rkdf-drop-head">Academic Resources</span>
-            <a href="Syllabus.php" class="rkdf-drop-link" role="menuitem">Academic Syllabi</a>
-            <a href="acadmiccalander.php" class="rkdf-drop-link" role="menuitem">Academic Calendar</a>
-            <a href="Library.php" class="rkdf-drop-link" role="menuitem">Central Library</a>
-            <a href="phd.php" class="rkdf-drop-link" role="menuitem">Ph.D. Programs</a>
-          </div>
-        </div>
-      </li>
-
-      <!-- RESEARCH -->
-      <li class="rkdf-nav-item" role="none">
-        <a href="r&d.php" class="rkdf-nav-link" role="menuitem">
-          Research
-        </a>
-      </li>
-
-      <!-- CAMPUS LIFE -->
-      <li class="rkdf-nav-item" role="none">
-        <a href="#" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
-          Campus Life <i class="rkdf-chev">▾</i>
-        </a>
-        <div class="rkdf-drop" role="menu">
-          <a href="Hostel.php" class="rkdf-drop-link" role="menuitem">Hostels (Boys &amp; Girls)</a>
-          <a href="Laboratories.php" class="rkdf-drop-link" role="menuitem">Laboratories &amp; R&amp;D</a>
-          <a href="Transport.php" class="rkdf-drop-link" role="menuitem">Transport Facilities</a>
-          <a href="imggallery.php" class="rkdf-drop-link" role="menuitem">Photo Gallery</a>
-        </div>
-      </li>
-
-      <!-- PLACEMENTS -->
-      <li class="rkdf-nav-item" role="none">
-        <a href="placements.php" class="rkdf-nav-link" role="menuitem">
-          Placements
-        </a>
-      </li>
-
-      <!-- ABOUT -->
-      <li class="rkdf-nav-item" role="none">
-        <a href="About_Us.pdf" target="_blank" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
-          About <i class="rkdf-chev">▾</i>
-        </a>
-        <div class="rkdf-drop" role="menu">
-          <a href="Chancellor.php" class="rkdf-drop-link" role="menuitem">Chancellor's Desk</a>
-          <a href="Vice-Chancellor-Desk.php" class="rkdf-drop-link" role="menuitem">Vice Chancellor's Desk</a>
-          <a href="Governingbody.php" class="rkdf-drop-link" role="menuitem">Governing Body</a>
-          <a href="BoM.php" class="rkdf-drop-link" role="menuitem">Board of Management</a>
-          <a href="Academic_Council.php" class="rkdf-drop-link" role="menuitem">Academic Council</a>
-          <a href="BOS.php" class="rkdf-drop-link" role="menuitem">Board of Studies (BOS)</a>
-          <a href="Vision&mission.php" class="rkdf-drop-link" role="menuitem">Vision &amp; Mission</a>
-          <a href="Objectives.php" class="rkdf-drop-link" role="menuitem">University Objectives</a>
-        </div>
-      </li>
-
-      <!-- NEWS -->
-      <li class="rkdf-nav-item" role="none">
-        <a href="Announcements.php" class="rkdf-nav-link" role="menuitem">
-          News
-        </a>
       </li>
 
     </ul>
 
-    <!-- ── RIGHT: Search Icon + Student Login Outline + Red APPLY NOW ↗ ── -->
+    <!-- ── RIGHT ACTIONS: SEARCH + STUDENT LOGIN + RED APPLY NOW ── -->
     <div class="rkdf-nav-right">
-      <!-- Search Icon -->
-      <a href="academic&departments.php" class="rkdf-search-btn" title="Search">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <!-- Search Button -->
+      <a href="academic&departments.php" class="rkdf-search-btn" aria-label="Search" title="Search">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search">
           <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          <path d="m21 21-4.3-4.3"></path>
         </svg>
       </a>
 
-      <!-- Student Login Outline Box -->
+      <!-- Student Login Button -->
       <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" class="rkdf-login-btn">
         Student Login
       </a>
 
-      <!-- Red Solid APPLY NOW Button -->
+      <!-- Solid Red APPLY NOW Button -->
       <a href="admissionform.php" class="rkdf-apply-red-btn">
-        APPLY NOW ↗
+        <span>APPLY NOW</span>
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-arrow-up-right rkdf-arrow-svg">
+          <path d="M7 7h10v10"></path>
+          <path d="M7 17 17 7"></path>
+        </svg>
       </a>
 
-      <!-- Hamburger toggle (mobile) -->
-      <button class="rkdf-burger" id="rkdfBurger" aria-label="Toggle Navigation Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <!-- Mobile Menu Toggle Button -->
+      <button class="rkdf-burger" id="rkdfBurger" aria-label="Toggle Menu" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-menu">
+          <line x1="4" x2="20" y1="12" y2="12"></line>
+          <line x1="4" x2="20" y1="6" y2="6"></line>
+          <line x1="4" x2="20" y1="18" y2="18"></line>
+        </svg>
       </button>
     </div>
 
   </div><!-- /rkdf-nav-inner -->
 </nav><!-- /rkdf-nav-bar -->
+
+<!-- Mobile Navigation Drawer -->
+<div class="rkdf-mobile-drawer" id="rkdfMobileDrawer">
+  <a href="About_Us.pdf" target="_blank" class="rkdf-mobile-link">About Us</a>
+  <a href="academic&amp;departments.php" class="rkdf-mobile-link">Academic</a>
+  <a href="exam.php" class="rkdf-mobile-link">Examination</a>
+  <a href="r&amp;d.php" class="rkdf-mobile-link">R&amp;D Activities</a>
+  <a href="phd.php" class="rkdf-mobile-link">Research Section (Ph.D)</a>
+  <a href="admissionform.php" class="rkdf-mobile-link">Admissions</a>
+  <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" class="rkdf-mobile-link" style="color:var(--nav-red);margin-top:12px;">Student Login →</a>
+</div>
 </div><!-- /rkdf-navbar-wrap -->
+
+<!-- Dynamic Scroll Handler & Mobile Toggle Script -->
+<script>
+(function() {
+  const navBar = document.getElementById('rkdfNavBar');
+  const burger = document.getElementById('rkdfBurger');
+  const drawer = document.getElementById('rkdfMobileDrawer');
+
+  function updateNavScroll() {
+    if (window.scrollY > 20) {
+      navBar.classList.add('scrolled');
+    } else {
+      navBar.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateNavScroll, { passive: true });
+  updateNavScroll(); // Initialize on page load
+
+  if (burger && drawer) {
+    burger.addEventListener('click', function() {
+      const isOpen = drawer.classList.toggle('active');
+      burger.setAttribute('aria-expanded', isOpen);
+    });
+  }
+})();
+</script>
+
+

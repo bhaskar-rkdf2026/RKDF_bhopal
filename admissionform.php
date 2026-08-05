@@ -1,7 +1,7 @@
 <?php
 // ============================================================
-// RKDF University - Online Application & Admission Form 2026-27
-// Luxury Prestige Design + 100% Exact Form Fields & JS Cascading Branch Logic Preserved
+// RKDF University — Online Application & Admission Form 2026-27
+// World-Class Premium Design + High-Res Media Assets + 100% Exact Form Fields & JS Cascading Branch Logic Preserved
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
@@ -11,127 +11,196 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Online Admission Application Form 2026-27 - RKDF University Bhopal</title>
+  <title>Online Admission Application Form 2026-27 — RKDF University Bhopal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/rkdf-home.css">
+  <link rel="stylesheet" href="css/rkdf-navbar.css">
   <style>
     .subpage-hero {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+                  url('images/ai_admissionform/rkdf_admform_banner.jpg') center/cover no-repeat;
+      color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    
-    .adm-form-card {
+
+    .sadm-main-section {
+      padding: 80px 0 100px;
+      background: #FAF9F5;
+      color: #0C1424;
+    }
+
+    .sadm-status-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      max-width: 980px;
+      margin: 0 auto 28px;
+    }
+
+    .sadm-status-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #C5A059;
+      background: rgba(197, 160, 89, 0.15);
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      padding: 8px 18px;
+      border-radius: 99px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .sadm-check-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: #ffffff;
-      border: 1px solid var(--p-hairline);
-      border-radius: 18px;
-      padding: 40px;
-      box-shadow: 0 12px 40px rgba(12,20,36,0.06);
-      max-width: 960px;
+      border: 1px solid rgba(12, 20, 36, 0.1);
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: #0C1424;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      box-shadow: 0 4px 16px rgba(12, 20, 36, 0.04);
+      transition: all 0.25s ease;
+    }
+    .sadm-check-link:hover {
+      background: #0C1424;
+      color: #ffffff;
+      border-color: #0C1424;
+      transform: translateY(-2px);
+    }
+
+    .sadm-form-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      padding: 44px;
+      box-shadow: 0 12px 40px rgba(12, 20, 36, 0.06);
+      max-width: 980px;
       margin: 0 auto;
     }
-    
-    .adm-section-title {
-      font-family: var(--p-font-serif);
+
+    .sadm-section-title {
+      font-family: 'Playfair Display', Georgia, serif;
       font-size: 22px;
-      color: var(--p-navy-deep);
-      border-bottom: 2px solid var(--p-gold);
+      color: #0C1424;
+      border-bottom: 2px solid #E31B23;
       padding-bottom: 8px;
       margin-bottom: 24px;
-      margin-top: 32px;
+      margin-top: 36px;
       font-weight: 700;
     }
 
     .form-grid-2 {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      gap: 24px;
     }
     @media (max-width: 768px) {
       .form-grid-2 { grid-template-columns: 1fr; }
     }
+
     .form-group-full {
       grid-column: 1 / -1;
     }
 
-    .adm-label {
+    .sadm-label {
       display: block;
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 700;
-      color: var(--p-navy-deep);
+      color: #0C1424;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       margin-bottom: 8px;
     }
-    .adm-input, .adm-select, .adm-textarea {
+
+    .sadm-input, .sadm-select, .sadm-textarea {
       width: 100%;
       padding: 12px 16px;
-      border: 1px solid var(--p-hairline);
-      border-radius: 8px;
+      border: 1px solid rgba(12, 20, 36, 0.12);
+      border-radius: 10px;
       font-size: 15px;
-      color: var(--p-navy-deep);
-      background: rgba(12,20,36,0.01);
+      color: #0C1424;
+      background: #FAF9F5;
       outline: none;
       transition: all 0.25s ease;
       box-sizing: border-box;
     }
-    .adm-input:focus, .adm-select:focus, .adm-textarea:focus {
-      border-color: var(--p-gold);
+    .sadm-input:focus, .sadm-select:focus, .sadm-textarea:focus {
+      border-color: #C5A059;
       background: #ffffff;
-      box-shadow: 0 0 0 3px rgba(220,38,38,0.1);
+      box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+    }
+
+    .qual-table-wrapper {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      margin-top: 12px;
     }
 
     .qual-table {
       width: 100%;
       border-collapse: collapse;
-      margin-top: 12px;
-    }
-    .qual-table th {
-      background: var(--p-navy-deep);
-      color: #ffffff;
-      padding: 12px 14px;
-      font-family: var(--p-font-mono);
-      font-size: 12.5px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+      background: #ffffff;
       text-align: left;
     }
-    .qual-table td {
-      padding: 10px 14px;
-      border-bottom: 1px solid var(--p-hairline);
+
+    .qual-table th {
+      background: #0C1424;
+      color: #ffffff;
+      padding: 14px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }
+
+    .qual-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(12, 20, 36, 0.06);
+    }
+
     .qual-table input {
       width: 100%;
-      padding: 8px 10px;
-      border: 1px solid var(--p-hairline);
+      padding: 8px 12px;
+      border: 1px solid rgba(12, 20, 36, 0.12);
       border-radius: 6px;
       font-size: 14px;
       box-sizing: border-box;
     }
 
-    .adm-submit-btn {
-      background: var(--p-navy-deep);
+    .sadm-submit-btn {
+      background: #0C1424;
       color: #ffffff !important;
       border: none;
       padding: 16px 36px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 16px;
+      font-size: 15px;
       cursor: pointer;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 14px rgba(12,20,36,0.15);
+      box-shadow: 0 4px 16px rgba(12, 20, 36, 0.15);
     }
-    .adm-submit-btn:hover {
-      background: var(--p-gold);
+    .sadm-submit-btn:hover {
+      background: #E31B23;
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(220,38,38,0.25);
+      box-shadow: 0 8px 24px rgba(227, 27, 35, 0.25);
     }
-    .adm-reset-btn {
-      background: rgba(12,20,36,0.06);
-      color: var(--p-navy-deep);
-      border: 1px solid var(--p-hairline);
+
+    .sadm-reset-btn {
+      background: #FAF9F5;
+      color: #0C1424;
+      border: 1px solid rgba(12, 20, 36, 0.12);
       padding: 15px 28px;
       border-radius: 10px;
       font-weight: 700;
@@ -139,8 +208,8 @@ require_once __DIR__ . '/config/db.php';
       cursor: pointer;
       transition: all 0.2s ease;
     }
-    .adm-reset-btn:hover {
-      background: rgba(12,20,36,0.12);
+    .sadm-reset-btn:hover {
+      background: rgba(12, 20, 36, 0.08);
     }
   </style>
 </head>
@@ -152,75 +221,71 @@ require_once __DIR__ . '/config/db.php';
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">Admissions Academic Session 2026-27</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">
-        Online Admission Application
-      </h1>
-      <p style="margin-top:20px;font-size:18px;line-height:1.7;color:rgba(250,249,246,0.85);max-width:640px;">
+      <span class="rk-eyebrow tone-gold">81 · CENTRAL ADMISSIONS PORTAL 2026-27</span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Online Admission Application</h1>
+      <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
         Register your application online for Undergraduate, Postgraduate, Diploma, and Doctoral degree programs at RKDF University Bhopal.
       </p>
     </div>
   </section>
 
   <!-- MAIN CONTENT SECTION -->
-  <section style="padding:80px 0;background:var(--p-paper);">
+  <main class="sadm-main-section">
     <div class="rk-container">
       
       <!-- TOP STATUS BAR -->
-      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;max-width:960px;margin:0 auto 28px;">
-        <span style="font-size:15px;font-weight:700;color:var(--p-gold);">
-          ADMISSION OPEN FOR SESSION 2026-27
-        </span>
-        <a href="Admission_search.php" style="display:inline-flex;align-items:center;gap:8px;background:#ffffff;border:1px solid var(--p-hairline);padding:10px 18px;border-radius:8px;color:var(--p-navy-deep);font-weight:700;font-size:14px;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,0.04);">
-          Already Registered? Check Details
+      <div class="sadm-status-bar">
+        <span class="sadm-status-pill">ADMISSIONS OPEN FOR ACADEMIC SESSION 2026-27</span>
+        <a href="Admission_search.php" class="sadm-check-link">
+          Already Registered? Check Application Details ↗
         </a>
       </div>
 
       <!-- ADMISSION FORM CARD -->
-      <div class="adm-form-card">
+      <div class="sadm-form-card">
         
         <form method="post" action="admission.php" id="demoForm" class="demoForm">
           
           <!-- 1. PERSONAL INFORMATION -->
-          <div class="adm-section-title" style="margin-top:0;">1. Personal Information</div>
+          <div class="sadm-section-title" style="margin-top:0;">1. Personal Information</div>
           <div class="form-grid-2">
             <div>
-              <label class="adm-label">Student Full Name *</label>
-              <input type="text" name="nm" class="adm-input" style="text-transform: uppercase;" minlength="2" maxlength="30" placeholder="STUDENT FULL NAME" required />
+              <label class="sadm-label">Student Full Name *</label>
+              <input type="text" name="nm" class="sadm-input" style="text-transform: uppercase;" minlength="2" maxlength="30" placeholder="STUDENT FULL NAME" required />
             </div>
             <div>
-              <label class="adm-label">Father's Name *</label>
-              <input type="text" name="fnm" class="adm-input" style="text-transform: uppercase;" minlength="2" maxlength="30" placeholder="FATHER'S NAME" required />
+              <label class="sadm-label">Father's Name *</label>
+              <input type="text" name="fnm" class="sadm-input" style="text-transform: uppercase;" minlength="2" maxlength="30" placeholder="FATHER'S NAME" required />
             </div>
             <div>
-              <label class="adm-label">Aadhaar ID Number (12 Digits) *</label>
-              <input type="number" name="adhar" class="adm-input" minlength="12" maxlength="12" placeholder="AADHAAR NUMBER" required />
+              <label class="sadm-label">Aadhaar ID Number (12 Digits) *</label>
+              <input type="number" name="adhar" class="sadm-input" minlength="12" maxlength="12" placeholder="AADHAAR NUMBER" required />
             </div>
             <div>
-              <label class="adm-label">Mobile Number *</label>
-              <input type="number" name="mob" class="adm-input" minlength="10" maxlength="11" placeholder="YOUR MOBILE NUMBER" required />
+              <label class="sadm-label">Mobile Number *</label>
+              <input type="number" name="mob" class="sadm-input" minlength="10" maxlength="11" placeholder="YOUR MOBILE NUMBER" required />
             </div>
             <div>
-              <label class="adm-label">Email Address *</label>
-              <input type="email" name="eid" class="adm-input" placeholder="EMAIL ADDRESS" required />
+              <label class="sadm-label">Email Address *</label>
+              <input type="email" name="eid" class="sadm-input" placeholder="EMAIL ADDRESS" required />
             </div>
             <div>
-              <label class="adm-label">Gender *</label>
-              <div style="display:flex;gap:20px;padding-top:10px;font-weight:700;color:var(--p-navy-deep);">
+              <label class="sadm-label">Gender *</label>
+              <div style="display:flex;gap:20px;padding-top:10px;font-weight:700;color:#0C1424;">
                 <label style="cursor:pointer;"><input type="radio" name="gen" value="MALE" required /> MALE</label>
                 <label style="cursor:pointer;"><input type="radio" name="gen" value="FEMALE" required /> FEMALE</label>
               </div>
             </div>
             <div>
-              <label class="adm-label">Domicile *</label>
-              <select name="dom" class="adm-select" required>
+              <label class="sadm-label">Domicile *</label>
+              <select name="dom" class="sadm-select" required>
                 <option value="MP">Madhya Pradesh (MP)</option>
                 <option value="AI">All India (AI)</option>
               </select>
             </div>
             <div>
-              <label class="adm-label">Category *</label>
-              <select name="cat" class="adm-select" required>
+              <label class="sadm-label">Category *</label>
+              <select name="cat" class="sadm-select" required>
                 <option value="">-- SELECT CATEGORY --</option>
                 <option value="SC">SC</option>
                 <option value="ST">ST</option>
@@ -230,17 +295,17 @@ require_once __DIR__ . '/config/db.php';
               </select>
             </div>
             <div class="form-group-full">
-              <label class="adm-label">Permanent Postal Address *</label>
-              <textarea name="address" rows="3" class="adm-textarea" style="text-transform: uppercase;" placeholder="YOUR COMPLETE ADDRESS" required></textarea>
+              <label class="sadm-label">Permanent Postal Address *</label>
+              <textarea name="address" rows="3" class="sadm-textarea" style="text-transform: uppercase;" placeholder="YOUR COMPLETE ADDRESS" required></textarea>
             </div>
           </div>
 
           <!-- 2. COURSE & BRANCH SELECTION -->
-          <div class="adm-section-title">2. Course &amp; Branch Choice</div>
+          <div class="sadm-section-title">2. Course &amp; Branch Choice</div>
           <div class="form-grid-2">
             <div>
-              <label class="adm-label">Select Course / Discipline *</label>
-              <select name="category" class="adm-select" required>
+              <label class="sadm-label">Select Course / Discipline *</label>
+              <select name="category" class="sadm-select" required>
                 <option value="BE">BACHELOR OF ENGINEERING (BE)</option>
                 <option value="BE_LATERAL">BE LATERAL (BE-LATERAL)</option>
                 <option value="BE_PT">BACHELOR OF ENGINEERING (Part Time)</option>
@@ -265,16 +330,16 @@ require_once __DIR__ . '/config/db.php';
               </select>
             </div>
             <div>
-              <label class="adm-label">Select Specialization / Branch *</label>
-              <select name="choices" id="choices" class="adm-select" required>
+              <label class="sadm-label">Select Specialization / Branch *</label>
+              <select name="choices" id="choices" class="sadm-select" required>
                 <!-- Populated automatically via JavaScript -->
               </select>
             </div>
           </div>
 
           <!-- 3. ACADEMIC QUALIFICATIONS -->
-          <div class="adm-section-title">3. Academic Qualifications</div>
-          <div style="overflow-x:auto;">
+          <div class="sadm-section-title">3. Academic Qualifications</div>
+          <div class="qual-table-wrapper">
             <table class="qual-table">
               <thead>
                 <tr>
@@ -332,13 +397,13 @@ require_once __DIR__ . '/config/db.php';
           </div>
 
           <!-- 4. REFERENCE & DECLARATION -->
-          <div class="adm-section-title">4. Reference &amp; Undertaking</div>
+          <div class="sadm-section-title">4. Reference &amp; Undertaking</div>
           <div class="form-grid-2">
             <div class="form-group-full">
-              <label class="adm-label">Reference By / Counselor Name *</label>
-              <input type="text" name="ref" class="adm-input" style="text-transform: uppercase;" placeholder="NAME OF REFERENCE / COUNSELOR" required />
+              <label class="sadm-label">Reference By / Counselor Name *</label>
+              <input type="text" name="ref" class="sadm-input" style="text-transform: uppercase;" placeholder="NAME OF REFERENCE / COUNSELOR" required />
             </div>
-            <div class="form-group-full" style="background:rgba(12,20,36,0.02);border:1px solid var(--p-hairline);border-radius:12px;padding:20px;font-size:14px;line-height:1.7;color:rgba(12,20,36,0.85);">
+            <div class="form-group-full" style="background:#FAF9F5;border:1px solid rgba(12,20,36,0.08);border-radius:12px;padding:20px;font-size:14px;line-height:1.7;color:#334155;">
               <label style="display:flex;align-items:flex-start;gap:12px;cursor:pointer;font-weight:600;">
                 <input type="checkbox" name="checkbox" value="checkbox" style="width:20px;height:20px;margin-top:2px;" required />
                 <div>
@@ -350,8 +415,8 @@ require_once __DIR__ . '/config/db.php';
 
           <!-- SUBMIT & RESET BUTTONS -->
           <div style="margin-top:36px;display:flex;gap:16px;justify-content:flex-end;flex-wrap:wrap;">
-            <input type="reset" value="Reset Form" class="adm-reset-btn">
-            <input type="submit" name="Submit" value="SUBMIT ADMISSION APPLICATION" class="adm-submit-btn">
+            <input type="reset" value="Reset Form" class="sadm-reset-btn">
+            <input type="submit" name="Submit" value="SUBMIT ADMISSION APPLICATION" class="sadm-submit-btn">
           </div>
 
         </form>
@@ -359,7 +424,7 @@ require_once __DIR__ . '/config/db.php';
       </div>
 
     </div>
-  </section>
+  </main>
 
   <!-- APPROVED FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>
