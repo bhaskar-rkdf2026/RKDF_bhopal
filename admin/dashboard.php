@@ -4,7 +4,7 @@ $pageTitle = 'Dashboard Overview — RKDF CMS';
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/../config/db.php';
 
-$totalSections = 14;
+$totalSections = 17;
 $activeSections = 0;
 $totalItems = 0;
 $sectionsList = [];
@@ -223,20 +223,23 @@ try {
   // Fallback section list if DB is not populated
   if (empty($sectionsList)) {
       $sectionsList = [
-          ['section_key' => 'sec_01_numbers', 'tag_number' => '01', 'tag_text' => 'INSTITUTE IN NUMBERS', 'title_main' => 'Numbers that reflect our impact', 'is_active' => 1],
-          ['section_key' => 'sec_02_university', 'tag_number' => '02', 'tag_text' => 'ABOUT RKDF UNIVERSITY', 'title_main' => 'Empowering minds, shaping tomorrow', 'is_active' => 1],
-          ['section_key' => 'sec_03_gateway', 'tag_number' => '03', 'tag_text' => 'STUDENT GATEWAY', 'title_main' => 'Quick Access Portals', 'is_active' => 1],
-          ['section_key' => 'sec_04_schools', 'tag_number' => '04', 'tag_text' => 'FACULTIES & COLLEGES', 'title_main' => 'Schools & Faculties', 'is_active' => 1],
-          ['section_key' => 'sec_05_admissions', 'tag_number' => '05', 'tag_text' => 'ADMISSIONS 2026-27', 'title_main' => 'Start your journey', 'is_active' => 1],
-          ['section_key' => 'sec_06_programs', 'tag_number' => '06', 'tag_text' => 'FLAGSHIP PROGRAMS', 'title_main' => 'Featured Degrees', 'is_active' => 1],
-          ['section_key' => 'sec_07_campus', 'tag_number' => '07', 'tag_text' => 'CAMPUS LIFE', 'title_main' => 'Vibrant environment', 'is_active' => 1],
-          ['section_key' => 'sec_08_research', 'tag_number' => '08', 'tag_text' => 'RESEARCH & INNOVATION', 'title_main' => 'Patents & Innovation', 'is_active' => 1],
-          ['section_key' => 'sec_09_placements', 'tag_number' => '09', 'tag_text' => 'PLACEMENT HIGHLIGHTS', 'title_main' => 'Placements & MNCs', 'is_active' => 1],
-          ['section_key' => 'sec_10_voices', 'tag_number' => '10', 'tag_text' => 'STUDENT TESTIMONIALS', 'title_main' => 'Voices & Stories', 'is_active' => 1],
-          ['section_key' => 'sec_11_news', 'tag_number' => '11', 'tag_text' => 'NEWS & ANNOUNCEMENTS', 'title_main' => 'Latest Updates', 'is_active' => 1],
-          ['section_key' => 'sec_12_experience', 'tag_number' => '12', 'tag_text' => 'CAMPUS EXPERIENCE', 'title_main' => 'Facilities & Ecosystem', 'is_active' => 1],
-          ['section_key' => 'sec_13_recognition', 'tag_number' => '13', 'tag_text' => 'RECOGNITIONS', 'title_main' => 'UGC & AICTE Approvals', 'is_active' => 1],
-          ['section_key' => 'sec_14_career', 'tag_number' => '14', 'tag_text' => 'GLOBAL ALUMNI', 'title_main' => 'Recruiters & Destinations', 'is_active' => 1]
+          ['section_key' => 'sec_00_hero',        'tag_number' => '00', 'tag_text' => '🎬 HERO BANNER',                'title_main' => 'Where heritage meets innovation — video background, headline, CTAs', 'is_active' => 1],
+          ['section_key' => 'sec_01_numbers',     'tag_number' => '01', 'tag_text' => '📊 INSTITUTE IN NUMBERS',       'title_main' => '6 animated counters: Programs, Students, Faculty, Placement, Labs, Years', 'is_active' => 1],
+          ['section_key' => 'sec_02_university',  'tag_number' => '02', 'tag_text' => '🏛️ ABOUT RKDF UNIVERSITY',      'title_main' => 'Sticky split layout: About text + timeline + library image with founder quote', 'is_active' => 1],
+          ['section_key' => 'sec_03_gateway',     'tag_number' => '03', 'tag_text' => '🔗 STUDENT GATEWAY',             'title_main' => '9-column icon grid: Admissions, Courses, Fee, Scholarships, Hostel, Results...', 'is_active' => 1],
+          ['section_key' => 'sec_04_schools',     'tag_number' => '04', 'tag_text' => '🎓 SCHOOLS & FACULTIES RAIL',    'title_main' => 'Horizontal drag-scroll rail with 6 school cards (4:5 aspect ratio)', 'is_active' => 1],
+          ['section_key' => 'sec_05_why',         'tag_number' => '05', 'tag_text' => '⭐ WHY RKDF (GLASS CARDS)',      'title_main' => 'Dark image background + 6 glassmorphism feature cards with hover ring', 'is_active' => 1],
+          ['section_key' => 'sec_06_admissions',  'tag_number' => '06', 'tag_text' => '📋 ADMISSIONS STEPS',            'title_main' => '4-step process: Choose Program → Apply → Verify → Enroll', 'is_active' => 1],
+          ['section_key' => 'sec_07_programs',    'tag_number' => '07', 'tag_text' => '📚 FEATURED PROGRAMS',           'title_main' => 'Magazine layout: Big B.Tech card + 3 smaller program cards (MBA, M.Pharm, LLB)', 'is_active' => 1],
+          ['section_key' => 'sec_08_campus',      'tag_number' => '08', 'tag_text' => '🏟️ CAMPUS LIFE COLLAGE',         'title_main' => '12-col masonry photo grid + 4 campus stats (Sports, Clubs, Hostels, Labs)', 'is_active' => 1],
+          ['section_key' => 'sec_09_research',    'tag_number' => '09', 'tag_text' => '🔬 RESEARCH & INNOVATION',       'title_main' => 'Dark charcoal section: 4 gold stat boxes + 3 specialised lab descriptions', 'is_active' => 1],
+          ['section_key' => 'sec_10_placements',  'tag_number' => '10', 'tag_text' => '💼 PLACEMENTS + RECRUITERS',     'title_main' => '4 placement stats + infinite marquee scrolling recruiter names', 'is_active' => 1],
+          ['section_key' => 'sec_11_voices',      'tag_number' => '11', 'tag_text' => '💬 STUDENT TESTIMONIALS',        'title_main' => '3 staggered testimonial cards with quote, name and role', 'is_active' => 1],
+          ['section_key' => 'sec_12_news',        'tag_number' => '12', 'tag_text' => '📰 NEWS & EVENTS',               'title_main' => 'Featured article (7-col) + 4 stacked news items (5-col)', 'is_active' => 1],
+          ['section_key' => 'sec_13_gallery',     'tag_number' => '13', 'tag_text' => '🖼️ CAMPUS GALLERY',             'title_main' => '8 masonry gallery photos with hover zoom', 'is_active' => 1],
+          ['section_key' => 'sec_14_recognition', 'tag_number' => '14', 'tag_text' => '🏅 ACCREDITATION BADGES',        'title_main' => '6 accreditation badges: NAAC A+, UGC, AICTE, NBA, NIRF, ISO', 'is_active' => 1],
+          ['section_key' => 'sec_15_virtual_tour','tag_number' => '15', 'tag_text' => '🎥 VIRTUAL CAMPUS TOUR CTA',     'title_main' => 'Dark video CTA with huge serif headline + two action buttons', 'is_active' => 1],
+          ['section_key' => 'sec_16_final_cta',   'tag_number' => '16', 'tag_text' => '🚀 FINAL CALL TO ACTION',        'title_main' => 'Bordered block: Your next chapter starts here + Apply Today button', 'is_active' => 1],
       ];
   }
 

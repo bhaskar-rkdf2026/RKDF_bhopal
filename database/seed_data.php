@@ -33,12 +33,29 @@ try {
     // Force re-seed option
     $force = isset($_GET['force']) || (isset($argv[1]) && $argv[1] === 'force');
     if ($force) {
-        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE homepage_items; TRUNCATE TABLE homepage_sections; TRUNCATE TABLE site_settings; SET FOREIGN_KEY_CHECKS = 1;");
+        $pdo->exec("SET FOREIGN_KEY_CHECKS = 0; TRUNCATE TABLE homepage_items; TRUNCATE TABLE homepage_sections; TRUNCATE TABLE site_settings; TRUNCATE TABLE site_pages; TRUNCATE TABLE page_sections; SET FOREIGN_KEY_CHECKS = 1;");
         echo "<p style='color: orange;'>⚡ Tables truncated for fresh seed.</p>";
     }
 
     // 3. Define Exact Baseline Sections from Original Homepage
     $sectionsData = [
+        [
+            'key' => 'sec_00_hero',
+            'tag_num' => '00',
+            'tag_text' => 'EST. 2011 · BHOPAL, MP',
+            'title_main' => 'Where heritage',
+            'title_accent' => 'meets innovation.',
+            'subtitle' => 'RKDF University Bhopal — Premier Private State University in Madhya Pradesh offering UG, PG, Diploma, and Ph.D. degree programs.',
+            'video_path' => 'images/lovable/rkdf-drone.mp4',
+            'image_path' => 'images/lovable/rkdf-building-enhanced.jpg',
+            'extra_text_1' => 'Scroll',
+            'extra_text_2' => 'EXPLORE CAMPUS',
+            'sort' => 0,
+            'items' => [
+                ['type' => 'cta', 'title' => 'Apply Now — Admissions 2026-27', 'link_url' => 'ADMISSION POLICY 2026-27.pdf', 'badge_text' => 'PRIMARY'],
+                ['type' => 'cta', 'title' => 'Explore Campus Virtual Tour', 'link_url' => 'videogallery.php', 'badge_text' => 'SECONDARY']
+            ]
+        ],
         [
             'key' => 'sec_01_numbers',
             'tag_num' => '01',
@@ -59,10 +76,13 @@ try {
         [
             'key' => 'sec_02_university',
             'tag_num' => '02',
-            'tag_text' => 'THE UNIVERSITY',
+            'tag_text' => '02 · THE UNIVERSITY',
             'title_main' => 'A four-decade legacy,',
-            'title_accent' => 'reimagined for the century ahead.',
+            'title_accent' => 'reimagined',
             'subtitle' => 'RKDF University brings together eleven professional schools, thirty-five departments and a cross-disciplinary research culture — under a single unwavering commitment to intellectual rigour and public good.',
+            'image_path' => 'images/lovable/rkdf-library.jpg',
+            'extra_text_1' => '"An education worth having is one that makes you useful — to yourself, and to a world in motion."',
+            'extra_text_2' => '— Shri Sunil Kapoor, Chancellor',
             'sort' => 2,
             'items' => [
                 ['type' => 'timeline', 'title' => 'Founding vision', 'number_val' => '1995', 'subtitle' => 'RKDF Group commits to accessible, quality higher education in central India.'],
@@ -130,10 +150,10 @@ try {
             'subtitle' => 'Discover our flagship career-focused degree programs',
             'sort' => 6,
             'items' => [
-                ['type' => 'program', 'title' => 'B.Tech in Computer Science & AI', 'subtitle' => '4 Years · 240 Seats · 10+2 (PCM)', 'badge_text' => 'FLAGSHIP · ENGINEERING', 'image_path' => 'images/11/sat3.JPG', 'link_url' => 'Engineering.php'],
-                ['type' => 'program', 'title' => 'MBA in Business Analytics', 'subtitle' => '2 Years · 120 Seats', 'badge_text' => 'MANAGEMENT', 'image_path' => 'images/11/sat1.JPG', 'link_url' => 'Management.php'],
-                ['type' => 'program', 'title' => 'M.Pharm Clinical Research', 'subtitle' => '2 Years · 60 Seats', 'badge_text' => 'PHARMACY', 'image_path' => 'images/11/sat4.JPG', 'link_url' => 'pharmacy.php'],
-                ['type' => 'program', 'title' => 'BA-LLB (Hons.) Integrated', 'subtitle' => '5 Years · 180 Seats', 'badge_text' => 'LAW', 'image_path' => 'images/11/about_rkdf.jpg', 'link_url' => 'Law.php']
+                ['type' => 'program', 'title' => 'B.Tech in Computer Science & AI', 'subtitle' => '4 Years · 240 Seats · 10+2 (PCM)', 'badge_text' => 'FLAGSHIP · ENGINEERING', 'image_path' => 'images/lovable/rkdf-engineering.jpg', 'link_url' => 'Engineering.php'],
+                ['type' => 'program', 'title' => 'MBA in Business Analytics', 'subtitle' => '2 Years · 120 Seats', 'badge_text' => 'MANAGEMENT', 'image_path' => 'images/lovable/rkdf-management.jpg', 'link_url' => 'Management.php'],
+                ['type' => 'program', 'title' => 'M.Pharm Clinical Research', 'subtitle' => '2 Years · 60 Seats', 'badge_text' => 'PHARMACY', 'image_path' => 'images/lovable/rkdf-pharmacy.jpg', 'link_url' => 'pharmacy.php'],
+                ['type' => 'program', 'title' => 'BA-LLB (Hons.) Integrated', 'subtitle' => '5 Years · 180 Seats', 'badge_text' => 'LAW', 'image_path' => 'images/lovable/rkdf-law.jpg', 'link_url' => 'Law.php']
             ]
         ],
         [
@@ -266,7 +286,7 @@ try {
     $secCount = $checkSec->fetchColumn();
 
     if ($secCount == 0 || $force) {
-        $stmtSec = $pdo->prepare("INSERT INTO homepage_sections (section_key, tag_number, tag_text, title_main, title_accent, subtitle, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        $stmtSec = $pdo->prepare("INSERT INTO homepage_sections (section_key, tag_number, tag_text, title_main, title_accent, subtitle, image_path, video_path, extra_text_1, extra_text_2, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
         $stmtItem = $pdo->prepare("INSERT INTO homepage_items (section_key, item_type, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         foreach ($sectionsData as $sec) {
@@ -277,6 +297,10 @@ try {
                 $sec['title_main'],
                 $sec['title_accent'],
                 $sec['subtitle'],
+                $sec['image_path'] ?? '',
+                $sec['video_path'] ?? '',
+                $sec['extra_text_1'] ?? '',
+                $sec['extra_text_2'] ?? '',
                 $sec['sort']
             ]);
 
@@ -327,6 +351,29 @@ try {
         echo "<p style='color: green;'>✔ Baseline Site Settings Populated!</p>";
     } else {
         echo "<p style='color: #555;'>ℹ Site Settings already populated.</p>";
+    }
+
+    // 5. Baseline Site Pages
+    $pagesData = [
+        ['page_slug' => 'scholarship', 'page_title' => 'Financial Aid & Scholarship Schemes', 'category' => 'Admissions', 'eyebrow' => '08 · SCHOLARSHIP SCHEMES', 'hero_subtitle' => 'Empowering deserving scholars through government and merit-based financial aid.', 'intro_heading' => 'Government & Merit Scholarships', 'intro_text' => 'RKDF University facilitates financial aid under state & central government welfare portals.'],
+        ['page_slug' => 'patent', 'page_title' => 'Research Patents & Innovation', 'category' => 'Research', 'eyebrow' => '34 · INTELLECTUAL PROPERTY', 'hero_subtitle' => 'Granted and published research patents by RKDF faculty & scholars.', 'intro_heading' => 'University Patent Portfolio', 'intro_text' => 'Highlighting key patents in engineering, clean energy, and healthcare technology.'],
+        ['page_slug' => 'phdsubjects', 'page_title' => 'Ph.D Doctoral Research Subjects', 'category' => 'Research', 'eyebrow' => '12 · DOCTORAL DISCIPLINES', 'hero_subtitle' => '20 Research Disciplines approved for Doctoral Research (Ph.D) intake 2026.', 'intro_heading' => 'Doctoral Research Faculties', 'intro_text' => 'Comprehensive Ph.D disciplines offered across engineering, sciences, law, management and humanities.'],
+        ['page_slug' => 'phd_entrance', 'page_title' => 'Ph.D Entrance Examination 2026', 'category' => 'Admissions', 'eyebrow' => '15 · DOCTORAL ENTRANCE TEST', 'hero_subtitle' => 'Official notification, brochure and entrance application form for Ph.D 2026.', 'intro_heading' => 'Doctoral Entrance 2026', 'intro_text' => 'Complete guidelines and forms for candidates seeking admission into doctoral degree programs.'],
+        ['page_slug' => 'phdstudent', 'page_title' => 'Awarded Ph.D Scholars List', 'category' => 'Research', 'eyebrow' => '22 · DOCTORAL GRADUATES', 'hero_subtitle' => 'Registry of awarded Ph.D research scholars across years (2016 - 2025).', 'intro_heading' => 'Ph.D Scholars Directory', 'intro_text' => 'Official records of doctoral degrees awarded by RKDF University.'],
+        ['page_slug' => 'stafflist', 'page_title' => 'Approved Ph.D Research Supervisors', 'category' => 'Research', 'eyebrow' => '19 · RESEARCH SUPERVISORS', 'hero_subtitle' => 'Complete 70 research supervisors dataset with designation and specialisation.', 'intro_heading' => 'Faculty Research Supervisors', 'intro_text' => 'Guide profiles and specialisation details for doctoral scholars.'],
+        ['page_slug' => 'academic&departments', 'page_title' => 'Faculties & Academic Departments', 'category' => 'Academics', 'eyebrow' => '04 · SCHOOLS & DEPARTMENTS', 'hero_subtitle' => 'Explore 16 constituent colleges and faculties at RKDF University.', 'intro_heading' => 'Academic Directory', 'intro_text' => 'Professional schools offering UG, PG, Diploma, and Ph.D programs.'],
+        ['page_slug' => 'admissionform', 'page_title' => 'Online Admission Application Form', 'category' => 'Admissions', 'eyebrow' => '01 · ONLINE APPLICATION', 'hero_subtitle' => '4-Step registration form for academic session 2026-27.', 'intro_heading' => 'Student Enrollment Form', 'intro_text' => 'Apply online for technical, non-technical, and professional courses.'],
+        ['page_slug' => 'Admission_search', 'page_title' => 'Admission Application Lookup', 'category' => 'Admissions', 'eyebrow' => '02 · REGISTRATION SEARCH', 'hero_subtitle' => 'Track your submitted admission application status using Registration ID.', 'intro_heading' => 'Application Tracker', 'intro_text' => 'Fast status lookup for submitted admission forms.']
+    ];
+
+    $checkPages = $pdo->prepare("SELECT COUNT(*) FROM site_pages");
+    $checkPages->execute();
+    if ($checkPages->fetchColumn() == 0 || $force) {
+        $stmtPage = $pdo->prepare("INSERT INTO site_pages (page_slug, page_title, category, eyebrow, hero_subtitle, intro_heading, intro_text) VALUES (?, ?, ?, ?, ?, ?, ?)");
+        foreach ($pagesData as $p) {
+            $stmtPage->execute([$p['page_slug'], $p['page_title'], $p['category'], $p['eyebrow'], $p['hero_subtitle'], $p['intro_heading'], $p['intro_text']]);
+        }
+        echo "<p style='color: green;'>✔ Baseline Site Pages Populated!</p>";
     }
 
     echo "<h3 style='color: #2e7d32;'>🎉 Database Setup & Baseline Seeding Complete!</h3>";

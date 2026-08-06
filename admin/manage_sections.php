@@ -23,13 +23,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $titleMain = trim($_POST['title_main']);
         $titleAccent = trim($_POST['title_accent']);
         $subtitle = trim($_POST['subtitle']);
+        $extra1 = trim($_POST['extra_text_1'] ?? '');
+        $extra2 = trim($_POST['extra_text_2'] ?? '');
         $isActive = isset($_POST['is_active']) ? 1 : 0;
+        
+        $imagePath = trim($_POST['existing_image_path'] ?? '');
+        $videoPath = trim($_POST['existing_video_path'] ?? '');
 
-        $stmt = $pdo->prepare("INSERT INTO homepage_sections (section_key, tag_number, tag_text, title_main, title_accent, subtitle, is_active)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE tag_number=?, tag_text=?, title_main=?, title_accent=?, subtitle=?, is_active=?");
-        $stmt->execute([$secKey, $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $isActive, $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $isActive]);
+        if (isset($_FILES['section_image']) && $_FILES['section_image']['error'] === UPLOAD_ERR_OK) {
+            $uploadRes = handleImageUpload($_FILES['section_image']);
+            if ($uploadRes['success']) $imagePath = $uploadRes['path'];
+        }
+        if (isset($_FILES['section_video']) && $_FILES['section_video']['error'] === UPLOAD_ERR_OK) {
+            $uploadRes = handleImageUpload($_FILES['section_video']);
+            if ($uploadRes['success']) $videoPath = $uploadRes['path'];
+        }
 
+        $stmt = $pdo->prepare("INSERT INTO homepage_sections (section_key, tag_number, tag_text, title_main, title_accent, subtitle, image_path, video_path, extra_text_1, extra_text_2, is_active)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            ON DUPLICATE KEY UPDATE tag_number=?, tag_text=?, title_main=?, title_accent=?, subtitle=?, image_path=?, video_path=?, extra_text_1=?, extra_text_2=?, is_active=?");
+        $stmt->execute([
+            $secKey, $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $imagePath, $videoPath, $extra1, $extra2, $isActive,
+            $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $imagePath, $videoPath, $extra1, $extra2, $isActive
+        ]);
         header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=section_updated");
         exit();
     }
@@ -114,7 +130,7 @@ $msg = $_GET['msg'] ?? '';
 $error = $_GET['error'] ?? '';
 
 // Determine active section key
-$selectedKey = $_GET['sec'] ?? 'sec_01_numbers';
+$selectedKey = $_GET['sec'] ?? 'sec_00_hero';
 
 // Fetch all section keys for tabs
 $sectionsList = [];
@@ -326,20 +342,23 @@ try {
 
     <?php
     $defaultSecKeys = [
-      'sec_01_numbers' => '01. Institute in Numbers',
-      'sec_02_university' => '02. About RKDF University',
-      'sec_03_gateway' => '03. Student Gateway',
-      'sec_04_schools' => '04. Schools & Faculties',
-      'sec_05_admissions' => '05. Admissions 2026-27',
-      'sec_06_programs' => '06. Featured Programs',
-      'sec_07_campus' => '07. Campus Life',
-      'sec_08_research' => '08. Research & Innovation',
-      'sec_09_placements' => '09. Placement Highlights',
-      'sec_10_voices' => '10. Student Testimonials',
-      'sec_11_news' => '11. News & Announcements',
-      'sec_12_experience' => '12. Campus Experience',
-      'sec_13_recognition' => '13. Recognitions & Approvals',
-      'sec_14_career' => '14. Global Recruiters'
+      'sec_00_hero'        => '00. 🎬 Main Hero Banner',
+      'sec_01_numbers'     => '01. 📊 Institute in Numbers',
+      'sec_02_university'  => '02. 🏛️ About RKDF University',
+      'sec_03_gateway'     => '03. 🔗 Student Gateway',
+      'sec_04_schools'     => '04. 🎓 Schools & Faculties Rail',
+      'sec_05_why'         => '05. ⭐ Why RKDF (Glass Cards)',
+      'sec_06_admissions'  => '06. 📋 Admissions 4-Step Process',
+      'sec_07_programs'    => '07. 📚 Featured Degree Programs',
+      'sec_08_campus'      => '08. 🏟️ Campus Life & Collage',
+      'sec_09_research'    => '09. 🔬 Research & Innovation',
+      'sec_10_placements'  => '10. 💼 Placements & Recruiters',
+      'sec_11_voices'      => '11. 💬 Student Testimonials',
+      'sec_12_news'        => '12. 📰 News & Announcements',
+      'sec_13_gallery'     => '13. 🖼️ Campus Gallery',
+      'sec_14_recognition' => '14. 🏅 Accreditation & Approvals',
+      'sec_15_virtual_tour' => '15. 🎥 Virtual Campus Experience',
+      'sec_16_final_cta'   => '16. 🚀 Final Call to Action',
     ];
 
     foreach ($defaultSecKeys as $sKey => $sLabel):
@@ -354,6 +373,34 @@ try {
 
   <!-- Main Management Area -->
   <div>
+  <!-- CONTEXTUAL SECTION HELP -->
+  <?php
+  $sectionHelp = [
+    'sec_00_hero'        => ['🎬 Hero Banner', 'Tag Text = eyebrow label (EST. 2011 · BHOPAL, MP) | Title Main = 1st headline line | Title Accent = italic gold accent | Extra Text 1 = CTA Button 1 text | Extra Text 2 = CTA Button 2 text | Background Video & Image options below.'],
+    'sec_01_numbers'     => ['📊 Institute in Numbers', 'Items: Each item = 1 counter stat | <b>number_val</b> = display value (e.g. 100+, 25k+) | <b>title / subtitle</b> = stat label'],
+    'sec_02_university'  => ['🏛️ About RKDF', 'Tag/Title/Accent/Subtitle = left text | Extra Text 1 = Founder quote | Extra Text 2 = Founder name | <b>Items</b>: Timeline entries (number_val=year, title=heading, subtitle=desc)'],
+    'sec_03_gateway'     => ['🔗 Student Gateway', 'Tag/Title/Accent/Subtitle = section header | <b>Items</b>: Portal cards (number_val=emoji, title=name, link_url=link)'],
+    'sec_04_schools'     => ['🎓 Schools Rail', 'Tag/Title/Accent = header | Extra Text 1 = Drag hint text | Extra Text 2 = Explore button text | <b>Items</b>: School cards (title=name, subtitle=programs list, badge_text=tag, image_path=photo, link_url=link)'],
+    'sec_05_why'         => ['⭐ Why RKDF (Glass Cards)', 'Tag/Title/Accent/Subtitle = header text | Background Image option below | <b>Items</b>: Glass cards (title=heading, subtitle=description, number_val=step number)'],
+    'sec_06_admissions'  => ['📋 Admissions Steps', 'Tag/Title/Accent/Subtitle = section header | <b>Items</b>: 4 steps (number_val=step number, title=step title, subtitle=description)'],
+    'sec_07_programs'    => ['📚 Featured Programs', 'Tag Text = eyebrow | <b>Items</b>: Item 1 = big featured card (title, subtitle=details, image_path, link_url, badge_text=eyebrow) | Items 2–4 = stack cards (title, subtitle=details, image_path, link_url, badge_text=category)'],
+    'sec_08_campus'      => ['🏟️ Campus Life', 'Tag/Title/Accent/Subtitle = header text | <b>Items</b>: Campus stats (number_val=number, subtitle=label e.g. SPORTS ARENAS)'],
+    'sec_09_research'    => ['🔬 Research & Innovation', 'Tag/Title/Accent/Subtitle = header text | Background Image option below | <b>Items</b>: Stats (number_val=count, subtitle=label) and Lab entries (title=lab name, subtitle=description)'],
+    'sec_10_placements'  => ['💼 Placements & Recruiters', 'Tag/Title/Accent/Subtitle = header text | <b>Items</b>: Stat cards (number_val=value, subtitle=label) and Recruiter companies (item_type=recruiter, title=company name for marquee)'],
+    'sec_11_voices'      => ['💬 Student Testimonials', 'Tag/Title/Accent = header text | <b>Items</b>: Testimonials (title=student name, subtitle=course/year, text_val=quote, image_path=photo)'],
+    'sec_12_news'        => ['📰 News & Events', 'Tag/Title/Accent = header text | <b>Items</b>: Item 1 = featured news (item_type=featured, title, subtitle=description, number_val=date, badge_text=badge) | Items 2–5 = news list (title, number_val=date, badge_text=category)'],
+    'sec_13_gallery'     => ['🖼️ Campus Gallery', 'Tag/Title = header text | <b>Items</b>: Photo items (title=caption, image_path=photo)'],
+    'sec_14_recognition' => ['🏅 Accreditation', 'Tag/Title = header text | <b>Items</b>: Approval badges (title=badge name e.g. NAAC A+)'],
+    'sec_15_virtual_tour'=> ['🎥 Virtual Campus Tour', 'Tag/Title/Accent/Subtitle = header text | Extra Text 1 = Button 1 text | Extra Text 2 = Button 2 text | Video & Poster options below'],
+    'sec_16_final_cta'   => ['🚀 Final Call to Action', 'Tag/Title/Accent = headline | Extra Text 1 = Button label (e.g. Apply Today ↗) | Extra Text 2 = Button link URL (e.g. admissionform.php)'],
+  ];
+  $helpInfo = $sectionHelp[$selectedKey] ?? ['ℹ️ Section', 'Edit the fields below to update content for this section.'];
+  ?>
+  <div style="background: linear-gradient(135deg, #eff6ff, #f0fdf4); border: 1px solid #bfdbfe; border-left: 4px solid #3b82f6; padding: 16px 20px; border-radius: 8px; margin-bottom: 24px;">
+    <div style="font-size: 15px; font-weight: 800; color: #1e40af; margin-bottom: 6px;"><?= $helpInfo[0] ?> — Field Guide</div>
+    <div style="font-size: 13px; color: #374151; line-height: 1.7;"><?= $helpInfo[1] ?></div>
+  </div>
+
     <!-- SECTION METADATA FORM -->
     <div class="cms-card">
       <div class="cms-card-header">
@@ -363,9 +410,11 @@ try {
         </h2>
       </div>
 
-      <form action="manage_sections.php" method="POST">
+      <form action="manage_sections.php" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="action" value="update_section_meta">
         <input type="hidden" name="section_key" value="<?= htmlspecialchars($selectedKey) ?>">
+        <input type="hidden" name="existing_image_path" value="<?= htmlspecialchars($currentSec['image_path'] ?? '') ?>">
+        <input type="hidden" name="existing_video_path" value="<?= htmlspecialchars($currentSec['video_path'] ?? '') ?>">
 
         <div class="form-grid">
           <div>
@@ -388,8 +437,37 @@ try {
             <label>Subtitle / Description</label>
             <textarea name="subtitle" rows="2"><?= htmlspecialchars($currentSec['subtitle'] ?? '') ?></textarea>
           </div>
+          
+          <div class="form-group-full" style="border-top:1px dashed #ccc; margin-top: 10px; padding-top: 15px;">
+            <label style="color:var(--primary);"><i class="fa-solid fa-star"></i> Extended Metadata (For special sections like Hero / Founder's Note)</label>
+          </div>
+          
+          <div class="form-group-full">
+            <label>Extra Text 1 (e.g., Founder's Quote / Primary CTA text)</label>
+            <input type="text" name="extra_text_1" value="<?= htmlspecialchars($currentSec['extra_text_1'] ?? '') ?>">
+          </div>
+          <div class="form-group-full">
+            <label>Extra Text 2 (e.g., Founder Name / Secondary CTA text)</label>
+            <input type="text" name="extra_text_2" value="<?= htmlspecialchars($currentSec['extra_text_2'] ?? '') ?>">
+          </div>
+          
           <div>
-            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none; margin-top: 10px;">
+            <label>Section Main Image</label>
+            <?php if (!empty($currentSec['image_path'])): ?>
+               <div style="margin-bottom:8px;"><img src="../<?= htmlspecialchars($currentSec['image_path']) ?>" style="height:40px;border-radius:4px;"></div>
+            <?php endif; ?>
+            <input type="file" name="section_image" accept="image/*">
+          </div>
+          <div>
+            <label>Section Background Video (MP4)</label>
+            <?php if (!empty($currentSec['video_path'])): ?>
+               <div style="margin-bottom:8px;font-size:12px;color:green;">Video active: <?= htmlspecialchars(basename($currentSec['video_path'])) ?></div>
+            <?php endif; ?>
+            <input type="file" name="section_video" accept="video/mp4">
+          </div>
+
+          <div class="form-group-full" style="margin-top: 10px;">
+            <label style="display: flex; align-items: center; gap: 8px; cursor: pointer; text-transform: none;">
               <input type="checkbox" name="is_active" value="1" <?= ($currentSec['is_active'] ?? 1) ? 'checked' : '' ?>>
               <b>Active on Homepage</b>
             </label>
