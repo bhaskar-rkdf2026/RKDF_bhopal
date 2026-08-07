@@ -5,13 +5,29 @@
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+
+$pdo = getDbConnection();
+$pageSlug = 'scholarship';
+
+$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+$stmt->execute([$pageSlug]);
+$pRow = $stmt->fetch();
+
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : 'ADMISSIONS · SCHOLARSHIPS';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'University Scholarships & Financial Aid';
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Government post-matric scholarships (ST/SC/OBC), MP Medhavi Chhatra Yojana, and Chancellor Merit Scholarships.';
+$heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'images/lovable/rkdf-why-bg.jpg';
+
+$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+$itemStmt->execute([$pageSlug]);
+$allItems = $itemStmt->fetchAll();
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Students Scholarship Information — RKDF University Bhopal</title>
+  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -22,7 +38,7 @@ require_once __DIR__ . '/config/db.php';
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/ai_scholarship/rkdf_sch_banner.jpg') center/cover no-repeat;
+                  url('<?= htmlspecialchars($heroBgImg) ?>') center/cover no-repeat;
       color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }

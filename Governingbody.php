@@ -1,17 +1,40 @@
 <?php
 // ============================================================
-// RKDF University — Governing Body
-// World-Class Premium Design + High-Res Media Assets + 100% Original PDF Links Preserved
+// RKDF University — Governing Body (100% Dynamic CMS)
+// Original Custom Design & Layout 100% Preserved + CMS Connected
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+
+$pdo = getDbConnection();
+$pageSlug = 'governing-body';
+
+// Fetch metadata from site_pages
+$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+$stmt->execute([$pageSlug]);
+$pRow = $stmt->fetch();
+
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '15 · GOVERNANCE';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Governing Body';
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'The supreme statutory authority responsible for university vision, policy direction, and institutional governance.';
+$introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'The Governing Body is the supreme authority of RKDF University, Bhopal. It frames statutes, approves annual budgets, sets strategic growth objectives, ensures statutory compliance with regulatory councils, and provides high-level vision for university expansion and research leadership.';
+
+// Fetch section items from page_sections
+$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+$itemStmt->execute([$pageSlug]);
+$allItems = $itemStmt->fetchAll();
+
+$govCardTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Governing Body Member Directory';
+$govBadge     = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'SUPREME STATUTORY BODY';
+$govPdfLink   = !empty($allItems[0]['link_url']) ? $allItems[0]['link_url'] : 'Content/Documents/governing_body/Governing Body Member 2022.pdf';
+$govSubtitle  = !empty($allItems[0]['subtitle']) ? $allItems[0]['subtitle'] : 'Official statutory constitution and member list of the Governing Body of RKDF University Bhopal.';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Governing Body — RKDF University Bhopal</title>
+  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -22,7 +45,7 @@ require_once __DIR__ . '/config/db.php';
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/ai_governing_body/rkdf_govb_banner.jpg') center/cover no-repeat;
+                  url('<?= !empty($pRow['hero_bg_image']) ? htmlspecialchars($pRow['hero_bg_image']) : "images/ai_governing/rkdf_governing_banner.jpg" ?>') center/cover no-repeat;
       color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
@@ -46,21 +69,16 @@ require_once __DIR__ . '/config/db.php';
     .govb-featured-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
-      border-left: 4px solid #C5A059;
       border-radius: 20px;
-      padding: 32px 36px;
+      padding: 32px;
       box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
-      margin-bottom: 36px;
+      margin-bottom: 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 20px;
-      transition: transform 0.35s ease;
-    }
-    .govb-featured-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 14px 36px rgba(12, 20, 36, 0.08);
+      border-left: 4px solid #E31B23;
     }
 
     .govb-badge {
@@ -71,28 +89,28 @@ require_once __DIR__ . '/config/db.php';
       letter-spacing: 0.15em;
       padding: 5px 14px;
       border-radius: 99px;
-      background: rgba(197, 160, 89, 0.18);
-      color: #C5A059;
-      border: 1px solid rgba(197, 160, 89, 0.3);
+      background: rgba(227, 27, 35, 0.18);
+      color: #E31B23;
+      border: 1px solid rgba(227, 27, 35, 0.3);
+      display: inline-block;
     }
 
     .govb-pdf-btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
       background: #0C1424;
       color: #ffffff !important;
       padding: 14px 24px;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 700;
-      font-size: 14.5px;
+      font-size: 14px;
       text-decoration: none;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 14px rgba(12,20,36,0.12);
+      box-shadow: 0 4px 16px rgba(12,20,36,0.15);
     }
     .govb-pdf-btn:hover {
       background: #E31B23;
-      box-shadow: 0 8px 22px rgba(227,27,35,0.3);
       transform: translateY(-2px);
     }
 
@@ -112,7 +130,7 @@ require_once __DIR__ . '/config/db.php';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 3px solid #C5A059;
+      border-bottom: 3px solid #E31B23;
     }
 
     .govb-card-title {
@@ -124,15 +142,13 @@ require_once __DIR__ . '/config/db.php';
     }
 
     .govb-card-body {
-      padding: 32px 36px;
+      padding: 36px 32px;
     }
 
-    /* Sidebar Links */
     aside {
       position: sticky;
       top: 100px;
     }
-
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
@@ -140,7 +156,6 @@ require_once __DIR__ . '/config/db.php';
       padding: 28px 24px;
       box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
     }
-
     .sidebar-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 20px;
@@ -150,7 +165,6 @@ require_once __DIR__ . '/config/db.php';
       border-bottom: 2px solid #E31B23;
       margin-bottom: 20px;
     }
-
     .sidebar-nav-list {
       list-style: none;
       padding: 0;
@@ -159,7 +173,6 @@ require_once __DIR__ . '/config/db.php';
       flex-direction: column;
       gap: 8px;
     }
-
     .sidebar-link {
       display: flex;
       align-items: center;
@@ -195,10 +208,10 @@ require_once __DIR__ . '/config/db.php';
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">19 · APEX STATUTORY AUTHORITY</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Governing Body</h1>
+      <span class="rk-eyebrow tone-gold"><?= htmlspecialchars($eyebrow) ?></span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;"><?= htmlspecialchars($mainTitle) ?></h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        The supreme statutory authority responsible for university vision, policy direction, and institutional governance.
+        <?= htmlspecialchars($heroSubtitle) ?>
       </p>
     </div>
   </section>
@@ -210,19 +223,18 @@ require_once __DIR__ . '/config/db.php';
         
         <!-- LEFT COLUMN: FEATURED CARD & STATUTORY ROLES -->
         <div>
-
           <!-- FEATURED CARD: GOVERNING BODY MEMBERS -->
           <div class="govb-featured-card">
             <div>
-              <span class="govb-badge">SUPREME STATUTORY BODY</span>
+              <span class="govb-badge"><?= htmlspecialchars($govBadge) ?></span>
               <h2 style="font-family:'Playfair Display',serif;font-size:26px;color:#0C1424;margin-top:10px;margin-bottom:8px;">
-                Governing Body Member Directory
+                <?= htmlspecialchars($govCardTitle) ?>
               </h2>
               <p style="font-size:15px;color:#475569;max-width:560px;margin:0;">
-                Official statutory constitution and member list of the Governing Body of RKDF University Bhopal.
+                <?= htmlspecialchars($govSubtitle) ?>
               </p>
             </div>
-            <a href="Content/Documents/governing_body/Governing Body Member 2022.pdf" target="_blank" class="govb-pdf-btn">
+            <a href="<?= htmlspecialchars($govPdfLink) ?>" target="_blank" class="govb-pdf-btn">
               📄 View Governing Body Members (PDF) ↗
             </a>
           </div>
@@ -235,11 +247,10 @@ require_once __DIR__ . '/config/db.php';
             </div>
             <div class="govb-card-body">
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin:0;">
-                The Governing Body is the supreme authority of RKDF University, Bhopal. It frames statutes, approves annual budgets, sets strategic growth objectives, ensures statutory compliance with regulatory councils, and provides high-level vision for university expansion and research leadership.
+                <?= htmlspecialchars($introText) ?>
               </p>
             </div>
           </article>
-
         </div>
 
         <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->

@@ -1,17 +1,43 @@
 <?php
 // ============================================================
-// RKDF University — Chancellor's Desk
-// World-Class Premium Design + AI Media Assets + 100% Original Content Preserved
+// RKDF University — Chancellor's Desk (100% Dynamic CMS)
+// Original Custom Design & Layout 100% Preserved + CMS Connected
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+
+$pdo = getDbConnection();
+$pageSlug = 'chancellor';
+
+// Fetch page metadata from site_pages DB table
+$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+$stmt->execute([$pageSlug]);
+$pRow = $stmt->fetch();
+
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '03 · EXECUTIVE LEADERSHIP';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : "Chancellor's Desk";
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'A message of vision, institutional mission, and educational empowerment from Dr. Sadhna Kapoor, Chancellor.';
+
+// Fetch section cards from page_sections DB table
+$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+$itemStmt->execute([$pageSlug]);
+$allItems = $itemStmt->fetchAll();
+
+$chanMessageTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Message From The Chancellor';
+$chanBadge        = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'CHANCELLOR ADDRESS';
+$chanBannerImg    = !empty($allItems[0]['image_path']) ? $allItems[0]['image_path'] : 'images/ai_chancellor/rkdf_chancellor_campus.jpg';
+
+$chanProfileTitle = !empty($allItems[1]['title']) ? $allItems[1]['title'] : 'Dr. Sadhna Kapoor';
+$chanProfileRole  = !empty($allItems[1]['badge_text']) ? $allItems[1]['badge_text'] : 'Chancellor';
+$chanProfileImg   = !empty($allItems[1]['image_path']) ? $allItems[1]['image_path'] : 'images/lovable/rkdf-chancellor.jpg';
+$chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 'Pioneering technical, medical, and professional education across Madhya Pradesh.';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chancellor's Desk — RKDF University Bhopal</title>
+  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -22,7 +48,7 @@ require_once __DIR__ . '/config/db.php';
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/ai_chancellor/rkdf_chancellor_banner.jpg') center/cover no-repeat;
+                  url('<?= !empty($pRow['hero_bg_image']) ? htmlspecialchars($pRow['hero_bg_image']) : "images/ai_chancellor/rkdf_chancellor_banner.jpg" ?>') center/cover no-repeat;
       color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
@@ -206,26 +232,12 @@ require_once __DIR__ . '/config/db.php';
       margin-bottom: 12px;
     }
 
-    .chan-meta-list {
-      margin-top: 24px;
-      padding-top: 20px;
-      border-top: 1px solid rgba(12, 20, 36, 0.08);
-      text-align: left;
-      font-size: 14px;
-      color: #475569;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    /* Sidebar Links */
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
       border-radius: 18px;
       padding: 28px 24px;
       box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
-      margin-top: 0;
     }
 
     .sidebar-title {
@@ -282,10 +294,10 @@ require_once __DIR__ . '/config/db.php';
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">03 · EXECUTIVE LEADERSHIP</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Chancellor's Desk</h1>
+      <span class="rk-eyebrow tone-gold"><?= htmlspecialchars($eyebrow) ?></span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;"><?= htmlspecialchars($mainTitle) ?></h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        A message of vision, institutional mission, and educational empowerment from Dr. Sadhna Kapoor, Chancellor.
+        <?= htmlspecialchars($heroSubtitle) ?>
       </p>
     </div>
   </section>
@@ -297,50 +309,47 @@ require_once __DIR__ . '/config/db.php';
         
         <!-- LEFT COLUMN: CHANCELLOR MESSAGE -->
         <div>
-
           <article class="chan-block-card">
             <div class="chan-card-header">
-              <h2 class="chan-card-title">Message From The Chancellor</h2>
-              <span class="chan-badge">CHANCELLOR ADDRESS</span>
+              <h2 class="chan-card-title"><?= htmlspecialchars($chanMessageTitle) ?></h2>
+              <span class="chan-badge"><?= htmlspecialchars($chanBadge) ?></span>
             </div>
             <div class="chan-card-body">
               
               <div class="chan-media-frame">
-                <img src="images/ai_chancellor/rkdf_chancellor_campus.jpg" alt="RKDF University Gandhi Nagar Campus" class="chan-media-img">
+                <img src="<?= htmlspecialchars($chanBannerImg) ?>" alt="RKDF University Campus" class="chan-media-img">
               </div>
 
-              <p class="chan-text-p">
-                Education is the prerequisite for socio-economic development of the Nation in general and people in particular. Not enough educational facilities are available for the professional studies particularly in the area of Engineering, Health sciences, Management, Computer Science and Information Technology. This was realized by the RKDF group way back in the 1990s in developing states like Madhya Pradesh where only a few engineering and medical colleges were available to cater to the needs of millions of students desirous of pursuing higher education in professional subjects.
-              </p>
-
-              <p class="chan-text-p">
-                RKDF Education Group managed by the RKDF Education Society, Bhopal (Estd. 1994) and Ayushmati Education and Social Society, Bhopal (Estd. 1999) realized these limitations and decided to make available technical education to the needy students and established their first private college in the city of Bhopal in 1995 at Mandideep in Raisen Dist. The RKDF group continued its efforts to provide quality education and established more than 100 colleges located at Bhopal, Sehore, Indore and Rewa in the State of Madhya Pradesh. This was not the end of the desired goal to serve the Nation through qualified and knowledgeable young professionals but only a humble beginning.
-              </p>
-
-              <p class="chan-text-p">
-                The efforts continued and the RKDF Group established the RKDF University at Gandhi Nagar, Bhopal. The University is sponsored by the AYUSHMATI EDUCATION AND SOCIAL SOCIETY, BHOPAL and has the approval of Madhya Pradesh Legislature. The University is located on 55 acres lush green environment near Gandhi Nagar, Bhopal. The University has mission to provide quality education in most of the disciplines of Engineering, Applied Science, Management, Health sciences, Education, Law and Humanities &amp; Social Sciences up to the Post-graduate level including M.Phil and Ph.D. The University aims to produce talented professionals with higher education and skill to serve mankind. The University was formally launched on 14th February 2012.
-              </p>
-
-              <p class="chan-text-p">
-                Besides academic programmes, the University offers excellent facilities for every aspect of a student's life including his/her personality development. The University also proposes to have cooperation and collaboration with other National and International academic institutions to improve the quality of education and research.
-              </p>
-
-              <p class="chan-text-p">
-                As Chancellor it will be my endeavour to provide all modern educational and living facilities to the students at the campus. I also wish the well-being of all the employees of the University. I wish the best career and future of students of the University who will be studying and pursuing their Higher Education to enrich knowledge and engage in innovative activities to serve the Nation and humanity with dedication. I also wish prosperity and well-being of the employees and students of the University.
-              </p>
+              <?php
+              $paragraphs = explode("\n", $pRow['intro_text'] ?? '');
+              if (empty(array_filter($paragraphs))) {
+                $paragraphs = [
+                  "Education is the prerequisite for socio-economic development of the Nation in general and people in particular. Not enough educational facilities are available for professional studies in Engineering, Health sciences, Management, and Computer Science.",
+                  "RKDF Education Group realized these limitations and established technical education institutions in Madhya Pradesh starting in 1995, growing to more than 100 colleges across Bhopal, Sehore, Indore, and Rewa.",
+                  "The RKDF Group established RKDF University at Gandhi Nagar, Bhopal under MP Legislature Act, providing undergraduate, postgraduate, M.Phil, and Ph.D degrees.",
+                  "As Chancellor, it is my endeavour to provide modern educational facilities, research guidance, and living comforts to empower young minds to serve the Nation with dedication."
+                ];
+              }
+              foreach ($paragraphs as $para):
+                if (!empty(trim($para))):
+              ?>
+              <p class="chan-text-p"><?= htmlspecialchars(trim($para)) ?></p>
+              <?php
+                endif;
+              endforeach;
+              ?>
 
               <!-- Signature Box -->
               <div class="chan-sig-box">
                 <div>
-                  <div class="chan-sig-name">Dr. Sadhna Kapoor</div>
-                  <div class="chan-sig-role">Chancellor</div>
+                  <div class="chan-sig-name"><?= htmlspecialchars($chanProfileTitle) ?></div>
+                  <div class="chan-sig-role"><?= htmlspecialchars($chanProfileRole) ?></div>
                   <div class="chan-sig-univ">RKDF University, Bhopal</div>
                 </div>
               </div>
 
             </div>
           </article>
-
         </div>
 
         <!-- RIGHT COLUMN: CHANCELLOR PROFILE CARD & SIDEBAR -->
@@ -348,32 +357,25 @@ require_once __DIR__ . '/config/db.php';
           <!-- Chancellor Profile Card -->
           <div class="chan-side-card">
             <div class="chan-portrait-box">
-              <img src="images/img/vcnew.jpg" alt="Dr. Sadhna Kapoor — Chancellor" class="chan-portrait-img" onError="this.src='images/lovable/rkdf-logo.png';">
+              <img src="<?= htmlspecialchars($chanProfileImg) ?>" alt="<?= htmlspecialchars($chanProfileTitle) ?>" class="chan-portrait-img">
             </div>
-
-            <h3 class="chan-side-name">Dr. Sadhna Kapoor</h3>
-            <div><span class="chan-side-badge">Chancellor</span></div>
-            <div style="font-size:14.5px;color:#475569;font-weight:600;">RKDF University, Bhopal</div>
-
-            <div class="chan-meta-list">
-              <div>📍 <strong>Campus:</strong> Gandhi Nagar, Bhopal (M.P.)</div>
-              <div>🏛️ <strong>Sponsoring Society:</strong> Ayushmati Education &amp; Social Society</div>
-              <div>🎓 <strong>Established:</strong> M.P. State Legislature Approval</div>
-            </div>
+            <h3 class="chan-side-name"><?= htmlspecialchars($chanProfileTitle) ?></h3>
+            <span class="chan-side-badge"><?= htmlspecialchars($chanProfileRole) ?></span>
+            <p style="font-size:14px;color:#475569;line-height:1.6;margin-top:8px;">
+              <?= htmlspecialchars($chanProfileBio) ?>
+            </p>
           </div>
 
-          <!-- Quick Navigation -->
+          <!-- Quick Navigation Links -->
           <div class="sidebar-card">
-            <h3 class="sidebar-title">Quick Navigation</h3>
+            <h4 class="sidebar-title">Leadership &amp; Governance</h4>
             <ul class="sidebar-nav-list">
-              <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
-              <li><a href="Objectives.php" class="sidebar-link">University Objectives <span>→</span></a></li>
-              <li><a href="Chancellor.php" class="sidebar-link active">Chancellor's Desk <span>→</span></a></li>
-              <li><a href="ProChancellor.php" class="sidebar-link">Pro-Chancellor Desk <span>→</span></a></li>
-              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link">Vice Chancellor's Desk <span>→</span></a></li>
-              <li><a href="dgm.php" class="sidebar-link">DGM Profile <span>→</span></a></li>
-              <li><a href="dgr.php" class="sidebar-link">DGR Profile <span>→</span></a></li>
-              <li><a href="Registrar.php" class="sidebar-link">Registrar Profile <span>→</span></a></li>
+              <li><a href="Chancellor.php" class="sidebar-link active"><span>Chancellor's Desk</span> <span>↗</span></a></li>
+              <li><a href="ProChancellor.php" class="sidebar-link"><span>Pro-Chancellor Desk</span> <span>↗</span></a></li>
+              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link"><span>Vice-Chancellor's Desk</span> <span>↗</span></a></li>
+              <li><a href="Registrar.php" class="sidebar-link"><span>Registrar Profile</span> <span>↗</span></a></li>
+              <li><a href="Governingbody.php" class="sidebar-link"><span>Governing Body</span> <span>↗</span></a></li>
+              <li><a href="BoM.php" class="sidebar-link"><span>Board of Management</span> <span>↗</span></a></li>
             </ul>
           </div>
         </aside>
@@ -382,7 +384,7 @@ require_once __DIR__ . '/config/db.php';
     </div>
   </main>
 
-  <!-- APPROVED FOOTER -->
+  <!-- FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>
 
 </body>

@@ -1,17 +1,49 @@
 <?php
 // ============================================================
-// RKDF University — Institutional Objectives
-// World-Class Premium Design + AI Media Assets + 100% Original Content Preserved
+// RKDF University — Institutional Objectives (100% Dynamic CMS)
+// Original Custom Design & Layout 100% Preserved + CMS Connected
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+
+$pdo = getDbConnection();
+$pageSlug = 'objectives';
+
+// Fetch metadata from site_pages
+$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+$stmt->execute([$pageSlug]);
+$pRow = $stmt->fetch();
+
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '02 · INSTITUTIONAL STRATEGY';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Institutional Objectives';
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Strategic goals driving academic quality, infrastructure growth, and student success.';
+$introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'RKDF University Bhopal is established with the primary commitment to fulfill key strategic objectives that foster academic excellence, cutting-edge research, industry collaborations, and inclusive societal growth.';
+
+// Fetch section items from page_sections
+$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+$itemStmt->execute([$pageSlug]);
+$allItems = $itemStmt->fetchAll();
+
+$objHeaderTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Strategic Institutional Goals';
+$objBadge       = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'OBJECTIVES';
+$objCardImg     = !empty($allItems[0]['image_path']) ? $allItems[0]['image_path'] : 'images/ai_objectives/rkdf_objectives_card.jpg';
+
+$pillarItems = array_slice($allItems, 1);
+if (empty($pillarItems)) {
+  $pillarItems = [
+    ['number_val'=>'01','title'=>'Human Resource Competence','text_val'=>'To build human resource competence in teaching, research and technology / knowledge sharing.'],
+    ['number_val'=>'02','title'=>'Curriculum & Delivery Systems','text_val'=>'To institutionalize appropriate changes in course curricula and delivery systems to accommodate concerns and aspirations of all stakeholders.'],
+    ['number_val'=>'03','title'=>'Global & National Partnerships','text_val'=>'To strengthen partnership with national and foreign institutions especially south-south cooperation for sustainable higher education and research.'],
+    ['number_val'=>'04','title'=>'Gender Equity & Quality Education','text_val'=>'To promote gender equity and provide quality and relevant education through institutional networks.']
+  ];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>University Objectives — RKDF University Bhopal</title>
+  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -22,7 +54,7 @@ require_once __DIR__ . '/config/db.php';
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/ai_objectives/rkdf_objectives_banner.jpg') center/cover no-repeat;
+                  url('<?= !empty($pRow['hero_bg_image']) ? htmlspecialchars($pRow['hero_bg_image']) : "images/ai_objectives/rkdf_objectives_banner.jpg" ?>') center/cover no-repeat;
       color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
@@ -64,7 +96,7 @@ require_once __DIR__ . '/config/db.php';
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 3px solid #C5A059;
+      border-bottom: 3px solid #E31B23;
     }
 
     .obj-badge {
@@ -75,9 +107,9 @@ require_once __DIR__ . '/config/db.php';
       letter-spacing: 0.15em;
       padding: 5px 14px;
       border-radius: 99px;
-      background: rgba(197, 160, 89, 0.18);
-      color: #C5A059;
-      border: 1px solid rgba(197, 160, 89, 0.3);
+      background: rgba(227, 27, 35, 0.18);
+      color: #E31B23;
+      border: 1px solid rgba(227, 27, 35, 0.3);
     }
 
     .obj-card-title {
@@ -110,34 +142,29 @@ require_once __DIR__ . '/config/db.php';
       transform: scale(1.04);
     }
 
-    /* Pillars Grid */
     .obj-pillars-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
     }
-
     .obj-pillar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
-      border-left: 4px solid #E31B23;
       border-radius: 16px;
-      padding: 28px 32px;
-      box-shadow: 0 4px 18px rgba(12, 20, 36, 0.03);
-      transition: all 0.3s ease;
+      padding: 24px 28px;
       display: flex;
       gap: 24px;
       align-items: flex-start;
+      box-shadow: 0 4px 20px rgba(12, 20, 36, 0.03);
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
     .obj-pillar-card:hover {
       transform: translateX(6px);
-      box-shadow: 0 14px 34px rgba(12, 20, 36, 0.08);
-      border-left-color: #C5A059;
+      border-color: #E31B23;
     }
-
     .obj-num-badge {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 17px;
+      font-size: 22px;
       font-weight: 700;
       color: #E31B23;
       background: rgba(227, 27, 35, 0.08);
@@ -149,32 +176,31 @@ require_once __DIR__ . '/config/db.php';
       justify-content: center;
       flex-shrink: 0;
     }
-
     .obj-item-title {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 700;
       color: #0C1424;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
     .obj-item-desc {
       font-size: 15.5px;
-      line-height: 1.8;
-      color: #334155;
+      line-height: 1.7;
+      color: #475569;
       margin: 0;
     }
 
-    /* Sidebar Styling */
+    aside {
+      position: sticky;
+      top: 100px;
+    }
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
       border-radius: 18px;
       padding: 28px 24px;
       box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
-      position: sticky;
-      top: 100px;
     }
-
     .sidebar-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 20px;
@@ -184,7 +210,6 @@ require_once __DIR__ . '/config/db.php';
       border-bottom: 2px solid #E31B23;
       margin-bottom: 20px;
     }
-
     .sidebar-nav-list {
       list-style: none;
       padding: 0;
@@ -193,7 +218,6 @@ require_once __DIR__ . '/config/db.php';
       flex-direction: column;
       gap: 8px;
     }
-
     .sidebar-link {
       display: flex;
       align-items: center;
@@ -229,10 +253,10 @@ require_once __DIR__ . '/config/db.php';
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">02 · INSTITUTIONAL FRAMEWORK</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">University Objectives</h1>
+      <span class="rk-eyebrow tone-gold"><?= htmlspecialchars($eyebrow) ?></span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;"><?= htmlspecialchars($mainTitle) ?></h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Foundational goals driving academic competence, curriculum innovation, global research partnerships, and gender equity.
+        <?= htmlspecialchars($heroSubtitle) ?>
       </p>
     </div>
   </section>
@@ -242,74 +266,37 @@ require_once __DIR__ . '/config/db.php';
     <div class="rk-container">
       <div class="obj-grid-layout">
         
-        <!-- LEFT COLUMN: OBJECTIVES CONTENT -->
+        <!-- LEFT COLUMN: OBJECTIVES CARDS -->
         <div>
-
-          <!-- ── OVERVIEW CARD ── -->
           <article class="obj-block-card">
             <div class="obj-card-header">
-              <h2 class="obj-card-title">Strategic Institutional Goals</h2>
-              <span class="obj-badge">OBJECTIVES</span>
+              <h2 class="obj-card-title"><?= htmlspecialchars($objHeaderTitle) ?></h2>
+              <span class="obj-badge"><?= htmlspecialchars($objBadge) ?></span>
             </div>
             <div class="obj-card-body">
               <div class="obj-media-frame">
-                <img src="images/ai_objectives/rkdf_objectives_card.jpg" alt="RKDF University Objectives" class="obj-media-img">
+                <img src="<?= htmlspecialchars($objCardImg) ?>" alt="RKDF University Objectives" class="obj-media-img">
               </div>
               <p style="font-size:16.5px;line-height:1.85;color:#334155;margin:0;">
-                RKDF University Bhopal is established with the primary commitment to fulfill key strategic objectives that foster academic excellence, cutting-edge research, industry collaborations, and inclusive societal growth.
+                <?= htmlspecialchars($introText) ?>
               </p>
             </div>
           </article>
 
-          <!-- ── OBJECTIVES PILLARS GRID ── -->
+          <!-- OBJECTIVES PILLARS GRID -->
           <div class="obj-pillars-grid">
-
-            <!-- Objective 1 -->
+            <?php foreach ($pillarItems as $idx => $item): ?>
             <div class="obj-pillar-card">
-              <div class="obj-num-badge">01</div>
+              <div class="obj-num-badge"><?= htmlspecialchars($item['number_val'] ?: sprintf("%02d", $idx+1)) ?></div>
               <div>
-                <h3 class="obj-item-title">Human Resource Competence</h3>
+                <h3 class="obj-item-title"><?= htmlspecialchars($item['title']) ?></h3>
                 <p class="obj-item-desc">
-                  To build human resource competence in teaching, research and technology / knowledge sharing.
+                  <?= htmlspecialchars($item['text_val'] ?: $item['subtitle']) ?>
                 </p>
               </div>
             </div>
-
-            <!-- Objective 2 -->
-            <div class="obj-pillar-card">
-              <div class="obj-num-badge">02</div>
-              <div>
-                <h3 class="obj-item-title">Curriculum &amp; Delivery Systems</h3>
-                <p class="obj-item-desc">
-                  To institutionalize appropriate changes in course curricula and delivery systems to accommodate concerns and aspirations of all stakeholders.
-                </p>
-              </div>
-            </div>
-
-            <!-- Objective 3 -->
-            <div class="obj-pillar-card">
-              <div class="obj-num-badge">03</div>
-              <div>
-                <h3 class="obj-item-title">Global &amp; National Partnerships</h3>
-                <p class="obj-item-desc">
-                  To strengthen partnership with national and foreign institutions especially south–south cooperation for sustainable higher education and research.
-                </p>
-              </div>
-            </div>
-
-            <!-- Objective 4 -->
-            <div class="obj-pillar-card">
-              <div class="obj-num-badge">04</div>
-              <div>
-                <h3 class="obj-item-title">Gender Equity &amp; Quality Education</h3>
-                <p class="obj-item-desc">
-                  To promote gender equity and provide quality and relevant education through institutional networks.
-                </p>
-              </div>
-            </div>
-
+            <?php endforeach; ?>
           </div>
-
         </div>
 
         <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
@@ -321,8 +308,6 @@ require_once __DIR__ . '/config/db.php';
               <li><a href="Objectives.php" class="sidebar-link active">University Objectives <span>→</span></a></li>
               <li><a href="Chancellor.php" class="sidebar-link">Chancellor's Desk <span>→</span></a></li>
               <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link">Vice Chancellor's Desk <span>→</span></a></li>
-              <li><a href="dgm.php" class="sidebar-link">DGM Profile <span>→</span></a></li>
-              <li><a href="dgr.php" class="sidebar-link">DGR Profile <span>→</span></a></li>
               <li><a href="Registrar.php" class="sidebar-link">Registrar Profile <span>→</span></a></li>
             </ul>
           </div>

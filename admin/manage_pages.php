@@ -1,55 +1,80 @@
 <?php
 // ============================================================
-// RKDF University — Admin Page Manager (With Page Dropdown)
-// Allows selecting & editing ANY page from sitemap via Dropdown
+// RKDF University — Admin Page Manager (With Image Upload & Live Preview)
+// Allows selecting, editing, uploading & previewing images for ANY page
 // ============================================================
-$pageTitle = 'Page Content Editor — RKDF CMS';
-require_once 'header.php';
-require_once '../config/db.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
+require_once '../config/db.php';
 $pdo = getDbConnection();
+
+// Ensure hero_bg_image column exists in site_pages
+try {
+    $pdo->exec("ALTER TABLE site_pages ADD COLUMN hero_bg_image VARCHAR(255) DEFAULT NULL");
+} catch (Exception $e) {}
 
 // Fetch all registered site pages for the dropdown
 $allPages = $pdo->query("SELECT page_slug, page_title, category FROM site_pages ORDER BY category, sort_order, page_title")->fetchAll();
+$selectedSlug = $_GET['slug'] ?? ($allPages[0]['page_slug'] ?? 'about');
 
-$selectedSlug = $_GET['slug'] ?? ($allPages[0]['page_slug'] ?? 'scholarship');
-
-// Ensure page exists in DB
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ?");
-$stmt->execute([$selectedSlug]);
-$pageRow = $stmt->fetch();
-
-if (!$pageRow && !empty($allPages)) {
-    $selectedSlug = $allPages[0]['page_slug'];
-    $stmt->execute([$selectedSlug]);
-    $pageRow = $stmt->fetch();
+// Ensure Upload Directory Exists
+$uploadDir = '../images/uploads/';
+if (!file_exists($uploadDir)) {
+    @mkdir($uploadDir, 0777, true);
 }
 
-// ── Handle Form Submissions ───────────────────────────────────────
-$success = $error = '';
+// ── Handle Form Submissions BEFORE Header Output ──────────────────
 $action = $_POST['action'] ?? '';
 
 // Save Page Header / Hero Content
 if ($action === 'save_header') {
-    $pdo->prepare("UPDATE site_pages SET page_title=?, eyebrow=?, hero_subtitle=?, intro_heading=?, intro_text=?, meta_keywords=?, meta_description=?, is_active=? WHERE page_slug=?")
+    $heroBgImg = trim($_POST['hero_bg_image'] ?? '');
+    
+    // Handle File Upload for Hero Image
+    if (!empty($_FILES['hero_bg_file']['name']) && $_FILES['hero_bg_file']['error'] === UPLOAD_ERR_OK) {
+        $ext = strtolower(pathinfo($_FILES['hero_bg_file']['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) {
+            $newFilename = 'hero_' . $selectedSlug . '_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['hero_bg_file']['tmp_name'], $uploadDir . $newFilename)) {
+                $heroBgImg = 'images/uploads/' . $newFilename;
+            }
+        }
+    }
+
+    $pdo->prepare("UPDATE site_pages SET page_title=?, eyebrow=?, hero_subtitle=?, intro_heading=?, intro_text=?, hero_bg_image=?, meta_keywords=?, meta_description=?, is_active=? WHERE page_slug=?")
         ->execute([
             trim($_POST['page_title']),
             trim($_POST['eyebrow']),
             trim($_POST['hero_subtitle']),
             trim($_POST['intro_heading']),
             trim($_POST['intro_text']),
+            $heroBgImg,
             trim($_POST['meta_keywords']),
             trim($_POST['meta_description']),
             isset($_POST['is_active']) ? 1 : 0,
             $selectedSlug
         ]);
-    $success = 'Page header details updated!';
-    $stmt->execute([$selectedSlug]);
-    $pageRow = $stmt->fetch();
+    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=header_saved");
+    exit();
 }
 
 // Add Section Card to selected page
 if ($action === 'add_item') {
+    $imgPath = trim($_POST['image_path'] ?? '');
+    
+    // Handle File Upload for Card Image
+    if (!empty($_FILES['item_img_file']['name']) && $_FILES['item_img_file']['error'] === UPLOAD_ERR_OK) {
+        $ext = strtolower(pathinfo($_FILES['item_img_file']['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'])) {
+            $newFilename = 'card_' . $selectedSlug . '_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['item_img_file']['tmp_name'], $uploadDir . $newFilename)) {
+                $imgPath = 'images/uploads/' . $newFilename;
+            }
+        }
+    }
+
     $pdo->prepare("INSERT INTO page_sections (page_slug, group_key, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order, is_active)
                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)")
         ->execute([
@@ -59,16 +84,30 @@ if ($action === 'add_item') {
             trim($_POST['item_subtitle']),
             trim($_POST['number_val']),
             trim($_POST['item_text']),
-            trim($_POST['image_path']),
+            $imgPath,
             trim($_POST['link_url']),
             trim($_POST['badge_text']),
             (int)($_POST['sort_order'] ?? 99)
         ]);
-    $success = 'Content card added to page!';
+    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_added#itemsTable");
+    exit();
 }
 
 // Update Section Card
 if ($action === 'update_item') {
+    $imgPath = trim($_POST['image_path'] ?? '');
+    
+    // Handle File Upload for Card Image
+    if (!empty($_FILES['item_img_file']['name']) && $_FILES['item_img_file']['error'] === UPLOAD_ERR_OK) {
+        $ext = strtolower(pathinfo($_FILES['item_img_file']['name'], PATHINFO_EXTENSION));
+        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'])) {
+            $newFilename = 'card_' . $selectedSlug . '_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['item_img_file']['tmp_name'], $uploadDir . $newFilename)) {
+                $imgPath = 'images/uploads/' . $newFilename;
+            }
+        }
+    }
+
     $pdo->prepare("UPDATE page_sections SET group_key=?, title=?, subtitle=?, number_val=?, text_val=?, image_path=?, link_url=?, badge_text=?, sort_order=?, is_active=? WHERE id=?")
         ->execute([
             trim($_POST['group_key'] ?? 'general'),
@@ -76,21 +115,44 @@ if ($action === 'update_item') {
             trim($_POST['item_subtitle']),
             trim($_POST['number_val']),
             trim($_POST['item_text']),
-            trim($_POST['image_path']),
+            $imgPath,
             trim($_POST['link_url']),
             trim($_POST['badge_text']),
             (int)($_POST['sort_order'] ?? 0),
             isset($_POST['is_active']) ? 1 : 0,
             (int)$_POST['item_id']
         ]);
-    $success = 'Content card updated!';
+    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_updated#itemsTable");
+    exit();
 }
 
 // Delete Section Card
 if ($action === 'delete_item') {
     $pdo->prepare("DELETE FROM page_sections WHERE id=?")->execute([(int)$_POST['item_id']]);
-    $success = 'Content card deleted!';
+    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_deleted#itemsTable");
+    exit();
 }
+
+// Now include header after handling redirects
+$pageTitle = 'Page Content Editor — RKDF CMS';
+require_once 'header.php';
+
+// Ensure page exists in DB
+$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ?");
+$stmt->execute([$selectedSlug]);
+$pageRow = $stmt->fetch();
+
+if (!$pageRow) {
+    $prettyTitle = ucwords(str_replace(['-', '_'], ' ', $selectedSlug));
+    try {
+        $pdo->prepare("INSERT INTO site_pages (page_slug, page_title, category, is_active) VALUES (?, ?, 'general', 1)")
+            ->execute([$selectedSlug, $prettyTitle]);
+    } catch (Exception $ex) {}
+    $stmt->execute([$selectedSlug]);
+    $pageRow = $stmt->fetch();
+}
+
+$success = isset($_GET['msg']) ? 'Changes saved successfully!' : '';
 
 // Fetch items for selected page
 $itemsStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug=? ORDER BY group_key, sort_order, id");
@@ -108,14 +170,14 @@ $editItemRow = $editItemId ? $pdo->query("SELECT * FROM page_sections WHERE id=$
 
 // Determine live URL
 $liveUrl = "../page.php?slug=" . urlencode($selectedSlug);
-if ($selectedSlug === 'scholarship')  $liveUrl = "../scholarship.php";
-if ($selectedSlug === 'chancellor')   $liveUrl = "../Chancellor.php";
-if ($selectedSlug === 'vc-desk')      $liveUrl = "../Vice-Chancellor-Desk.php";
+if (file_exists("../" . $selectedSlug . ".php")) $liveUrl = "../" . $selectedSlug . ".php";
 if ($selectedSlug === 'vision-mission') $liveUrl = "../Vision&mission.php";
-if ($selectedSlug === 'engineering')  $liveUrl = "../Engineering.php";
-if ($selectedSlug === 'pharmacy')     $liveUrl = "../pharmacy.php";
-if ($selectedSlug === 'management')   $liveUrl = "../Management.php";
-if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
+if ($selectedSlug === 'vc-desk') $liveUrl = "../Vice-Chancellor-Desk.php";
+if ($selectedSlug === 'chancellor') $liveUrl = "../Chancellor.php";
+if ($selectedSlug === 'governing-body') $liveUrl = "../Governingbody.php";
+if ($selectedSlug === 'bom') $liveUrl = "../BoM.php";
+if ($selectedSlug === 'academic-council') $liveUrl = "../Academic_Council.php";
+if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
 ?>
 
 <style>
@@ -154,6 +216,7 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
 }
 
 .pm-card { background:#fff; border-radius:12px; border:1px solid var(--border-color); padding:24px; margin-bottom:24px; }
+.pm-card.editing-mode { border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(217,35,45,0.15); }
 .pm-card-head { font-size:16px; font-weight:800; color:var(--secondary); margin-bottom:20px; display:flex; align-items:center; justify-content:space-between; }
 .pm-card-head i { color:var(--primary); }
 
@@ -180,26 +243,71 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
 .pm-table { width:100%; border-collapse:collapse; font-size:13px; }
 .pm-table th { background:#f8fafc; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.5px;
                color:var(--text-muted); padding:12px 14px; text-align:left; border-bottom:2px solid var(--border-color); }
-.pm-table td { padding:12px 14px; border-bottom:1px solid var(--border-color); vertical-align:top; }
+.pm-table td { padding:12px 14px; border-bottom:1px solid var(--border-color); vertical-align:middle; }
 .pm-badge-active   { background:#dcfce7; color:#166534; padding:2px 8px; border-radius:99px; font-size:11px; font-weight:700; }
 .pm-badge-inactive { background:#fee2e2; color:#991b1b; padding:2px 8px; border-radius:99px; font-size:11px; font-weight:700; }
 
 .pm-alert-ok { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; padding:12px 16px; border-radius:8px; font-weight:600; font-size:14px; margin-bottom:20px; }
+
+/* Image Upload & Live Preview Styles */
+.img-preview-box {
+  width: 100%;
+  height: 120px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  background: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  margin-top: 8px;
+}
+.img-preview-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+.img-preview-empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.table-img-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid var(--border-color);
+  background: #f8fafc;
+}
 </style>
 
 <?php if ($success): ?><div class="pm-alert-ok"><i class="fa-solid fa-circle-check"></i> <?= htmlspecialchars($success) ?></div><?php endif; ?>
 
-<!-- ══════════════════════════════════════════════════════════
-  PAGE NAME DROPDOWN SELECTOR (Like manage_sections.php)
-══════════════════════════════════════════════════════════ -->
+<!-- PAGE NAME DROPDOWN SELECTOR -->
 <div class="page-dropdown-bar">
   <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
     <label for="pageSelect"><i class="fa-solid fa-file-lines" style="color:var(--primary);font-size:18px;"></i> Select Page to Edit:</label>
     <select id="pageSelect" class="page-select-dropdown" onchange="location.href='manage_pages.php?slug='+this.value">
-      <?php foreach ($allPages as $p): ?>
-      <option value="<?= htmlspecialchars($p['page_slug']) ?>" <?= $selectedSlug===$p['page_slug'] ? 'selected':'' ?>>
-        <?= htmlspecialchars($p['page_title']) ?> (<?= htmlspecialchars($p['page_slug']) ?>)
-      </option>
+      <?php 
+      $groupedPages = [];
+      foreach ($allPages as $p) {
+          $catKey = strtoupper($p['category'] ?? 'GENERAL');
+          $groupedPages[$catKey][] = $p;
+      }
+      foreach ($groupedPages as $catLabel => $pList):
+      ?>
+      <optgroup label="── <?= htmlspecialchars($catLabel) ?> (<?= count($pList) ?> Pages) ──">
+        <?php foreach ($pList as $p): ?>
+        <option value="<?= htmlspecialchars($p['page_slug']) ?>" <?= $selectedSlug===$p['page_slug'] ? 'selected':'' ?>>
+          <?= htmlspecialchars($p['page_title']) ?> (<?= htmlspecialchars($p['page_slug']) ?>)
+        </option>
+        <?php endforeach; ?>
+      </optgroup>
       <?php endforeach; ?>
     </select>
   </div>
@@ -210,7 +318,7 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
   </div>
 </div>
 
-<!-- PAGE HEADER & HERO CONTENT EDITOR -->
+<!-- PAGE HEADER & HERO CONTENT EDITOR WITH IMAGE PREVIEW & UPLOAD -->
 <div class="pm-card">
   <div class="pm-card-head">
     <div>
@@ -222,7 +330,7 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
     </span>
   </div>
 
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
     <input type="hidden" name="action" value="save_header">
     <div class="pm-grid2">
       <div class="form-group">
@@ -231,19 +339,47 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
       </div>
       <div class="form-group">
         <label>Eyebrow / Tag Text</label>
-        <input type="text" name="eyebrow" value="<?= htmlspecialchars($pageRow['eyebrow']) ?>" placeholder="01 · Category">
+        <input type="text" name="eyebrow" value="<?= htmlspecialchars($pageRow['eyebrow'] ?? '') ?>" placeholder="01 · Category">
       </div>
       <div class="form-group pm-full">
         <label>Hero Subtitle / Summary</label>
-        <textarea name="hero_subtitle" rows="2"><?= htmlspecialchars($pageRow['hero_subtitle']) ?></textarea>
+        <textarea name="hero_subtitle" rows="2"><?= htmlspecialchars($pageRow['hero_subtitle'] ?? '') ?></textarea>
       </div>
+
+      <!-- Hero Banner Image & Live Preview -->
+      <div class="form-group pm-full">
+        <label><i class="fa-solid fa-image" style="color:var(--primary);"></i> Hero Banner Image (Upload File OR Enter Path)</label>
+        <div style="display:grid;grid-template-columns: 2fr 1fr;gap:16px;align-items:center;">
+          <div>
+            <div style="margin-bottom:8px;">
+              <span style="font-size:11px;font-weight:700;color:var(--text-muted);">OPTION 1: UPLOAD FROM COMPUTER</span>
+              <input type="file" name="hero_bg_file" accept="image/*" onchange="previewFile(this, 'heroPreviewImg', 'heroPreviewText')">
+            </div>
+            <div>
+              <span style="font-size:11px;font-weight:700;color:var(--text-muted);">OPTION 2: EXISTING IMAGE PATH / URL</span>
+              <input type="text" id="heroBgPathInput" name="hero_bg_image" value="<?= htmlspecialchars($pageRow['hero_bg_image'] ?? '') ?>" placeholder="images/lovable/sample-banner.jpg" onkeyup="previewUrl(this.value, 'heroPreviewImg', 'heroPreviewText')">
+            </div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--text-muted);">LIVE IMAGE PREVIEW</label>
+            <div class="img-preview-box">
+              <?php $heroPath = !empty($pageRow['hero_bg_image']) ? '../' . $pageRow['hero_bg_image'] : ''; ?>
+              <img id="heroPreviewImg" src="<?= htmlspecialchars($heroPath) ?>" style="<?= empty($pageRow['hero_bg_image']) ? 'display:none;' : '' ?>">
+              <span id="heroPreviewText" class="img-preview-empty" style="<?= !empty($pageRow['hero_bg_image']) ? 'display:none;' : '' ?>">
+                <i class="fa-solid fa-file-image"></i> No Banner Image
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <div class="form-group pm-full">
         <label>Intro Section Heading</label>
-        <input type="text" name="intro_heading" value="<?= htmlspecialchars($pageRow['intro_heading']) ?>" placeholder="Main introduction heading">
+        <input type="text" name="intro_heading" value="<?= htmlspecialchars($pageRow['intro_heading'] ?? '') ?>" placeholder="Main introduction heading">
       </div>
       <div class="form-group pm-full">
         <label>Intro Section Paragraph Text</label>
-        <textarea name="intro_text" rows="3"><?= htmlspecialchars($pageRow['intro_text']) ?></textarea>
+        <textarea name="intro_text" rows="3"><?= htmlspecialchars($pageRow['intro_text'] ?? '') ?></textarea>
       </div>
       <div class="form-group">
         <label>Meta Keywords (SEO)</label>
@@ -261,28 +397,35 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
       </div>
     </div>
     <div style="margin-top:20px;text-align:right;">
-      <button type="submit" class="btn-save"><i class="fa-solid fa-floppy-disk"></i> Save Header &amp; Metadata</button>
+      <button type="submit" class="btn-save"><i class="fa-solid fa-floppy-disk"></i> Save Header, Banner Image &amp; Metadata</button>
     </div>
   </form>
 </div>
 
-<!-- ADD / EDIT SECTION CARDS & ITEMS -->
-<div class="pm-card">
+<!-- ADD / EDIT SECTION CARDS WITH IMAGE UPLOAD & PREVIEW -->
+<div id="itemEditor" class="pm-card <?= $editItemRow ? 'editing-mode' : '' ?>">
   <div class="pm-card-head">
     <div>
       <i class="fa-solid fa-<?= $editItemRow ? 'pen' : 'plus' ?>"></i>
-      <?= $editItemRow ? 'Edit Content Card / Item' : 'Add Content Card / Item to ' . htmlspecialchars($pageRow['page_title']) ?>
+      <?php if ($editItemRow): ?>
+        <span style="color:var(--primary);">Editing Item #<?= $editItemRow['id'] ?>: "<?= htmlspecialchars($editItemRow['title']) ?>"</span>
+      <?php else: ?>
+        Add Content Card / Item to: <span style="color:var(--primary);"><?= htmlspecialchars($pageRow['page_title']) ?></span>
+      <?php endif; ?>
     </div>
+    <?php if ($editItemRow): ?>
+      <a href="manage_pages.php?slug=<?= $selectedSlug ?>#itemsTable" class="btn-ghost" style="font-size:12px;padding:4px 12px;">Cancel Edit ✕</a>
+    <?php endif; ?>
   </div>
 
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
     <input type="hidden" name="action" value="<?= $editItemRow ? 'update_item' : 'add_item' ?>">
     <?php if ($editItemRow): ?><input type="hidden" name="item_id" value="<?= $editItemRow['id'] ?>"><?php endif; ?>
 
     <div class="pm-grid3">
       <div class="form-group">
         <label>Section Group Key *</label>
-        <input type="text" name="group_key" required value="<?= htmlspecialchars($editItemRow['group_key'] ?? 'schemes') ?>" placeholder="e.g. schemes, portals, docs, faculties">
+        <input type="text" name="group_key" required value="<?= htmlspecialchars($editItemRow['group_key'] ?? 'general') ?>" placeholder="e.g. vision, mission, values, general">
         <small style="font-size:11px;color:#64748b;">Groups items on the page</small>
       </div>
       <div class="form-group">
@@ -299,23 +442,47 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
       </div>
       <div class="form-group">
         <label>Badge / Tag Text</label>
-        <input type="text" name="badge_text" value="<?= htmlspecialchars($editItemRow['badge_text'] ?? '') ?>" placeholder="e.g. State Sponsored">
+        <input type="text" name="badge_text" value="<?= htmlspecialchars($editItemRow['badge_text'] ?? '') ?>" placeholder="e.g. OUR VISION, CORE VALUE">
       </div>
       <div class="form-group">
-        <label>Link URL (if clickable)</label>
-        <input type="text" name="link_url" value="<?= htmlspecialchars($editItemRow['link_url'] ?? '') ?>" placeholder="http://example.com">
+        <label>Link / PDF URL</label>
+        <input type="text" name="link_url" value="<?= htmlspecialchars($editItemRow['link_url'] ?? '') ?>" placeholder="About_Us.pdf or http://...">
       </div>
+
+      <!-- Card Image & Preview Field -->
       <div class="form-group pm-full">
-        <label>Image Path (optional)</label>
-        <input type="text" name="image_path" value="<?= htmlspecialchars($editItemRow['image_path'] ?? '') ?>" placeholder="images/lovable/sample.jpg">
+        <label><i class="fa-solid fa-image" style="color:var(--primary);"></i> Card / Profile Image (Upload File OR Path)</label>
+        <div style="display:grid;grid-template-columns: 2fr 1fr;gap:16px;align-items:center;">
+          <div>
+            <div style="margin-bottom:8px;">
+              <span style="font-size:11px;font-weight:700;color:var(--text-muted);">OPTION 1: UPLOAD FROM COMPUTER</span>
+              <input type="file" name="item_img_file" accept="image/*" onchange="previewFile(this, 'cardPreviewImg', 'cardPreviewText')">
+            </div>
+            <div>
+              <span style="font-size:11px;font-weight:700;color:var(--text-muted);">OPTION 2: EXISTING IMAGE PATH / URL</span>
+              <input type="text" id="cardImgPathInput" name="image_path" value="<?= htmlspecialchars($editItemRow['image_path'] ?? '') ?>" placeholder="images/lovable/sample.jpg" onkeyup="previewUrl(this.value, 'cardPreviewImg', 'cardPreviewText')">
+            </div>
+          </div>
+          <div>
+            <label style="font-size:11px;font-weight:700;color:var(--text-muted);">CARD IMAGE PREVIEW</label>
+            <div class="img-preview-box">
+              <?php $cardImgPath = !empty($editItemRow['image_path']) ? '../' . $editItemRow['image_path'] : ''; ?>
+              <img id="cardPreviewImg" src="<?= htmlspecialchars($cardImgPath) ?>" style="<?= empty($editItemRow['image_path']) ? 'display:none;' : '' ?>">
+              <span id="cardPreviewText" class="img-preview-empty" style="<?= !empty($editItemRow['image_path']) ? 'display:none;' : '' ?>">
+                <i class="fa-solid fa-image"></i> No Image Selected
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="form-group pm-full">
         <label>Description / Detailed Text</label>
-        <textarea name="item_text" rows="3" placeholder="Full card text or details"><?= htmlspecialchars($editItemRow['text_val'] ?? '') ?></textarea>
+        <textarea name="item_text" rows="4" placeholder="Full card text, profile bio, or details"><?= htmlspecialchars($editItemRow['text_val'] ?? '') ?></textarea>
       </div>
       <div class="form-group">
         <label>Sort Order</label>
-        <input type="number" name="sort_order" value="<?= htmlspecialchars($editItemRow['sort_order'] ?? 99) ?>">
+        <input type="number" name="sort_order" value="<?= htmlspecialchars($editItemRow['sort_order'] ?? 1) ?>">
       </div>
       <?php if ($editItemRow): ?>
       <div class="form-group">
@@ -331,13 +498,14 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
     <div style="margin-top:20px;display:flex;gap:10px;">
       <button type="submit" class="btn-save"><i class="fa-solid fa-floppy-disk"></i> <?= $editItemRow ? 'Update Item' : 'Add Item' ?></button>
       <?php if ($editItemRow): ?>
-      <a href="manage_pages.php?slug=<?= $selectedSlug ?>" class="btn-ghost">Cancel</a>
+      <a href="manage_pages.php?slug=<?= $selectedSlug ?>#itemsTable" class="btn-ghost">Cancel Edit</a>
       <?php endif; ?>
     </div>
   </form>
 </div>
 
-<!-- GROUPED CONTENT CARDS TABLE -->
+<!-- GROUPED CONTENT CARDS TABLE WITH LIVE IMAGE THUMBNAILS -->
+<div id="itemsTable">
 <?php if (empty($groupedItems)): ?>
 <div class="pm-card">
   <p style="color:var(--text-muted);text-align:center;padding:24px;">No content cards/items added to this page yet. Use the form above to add your first item!</p>
@@ -354,13 +522,20 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
     <table class="pm-table">
       <thead>
         <tr>
-          <th>#</th><th>Num</th><th>Title / Subtitle</th><th>Description</th><th>Badge / Link</th><th>Order</th><th>Status</th><th>Actions</th>
+          <th>#</th><th>Preview</th><th>Num</th><th>Title / Subtitle</th><th>Description</th><th>Badge / Link</th><th>Order</th><th>Status</th><th>Actions</th>
         </tr>
       </thead>
       <tbody>
         <?php foreach ($gItems as $it): ?>
-        <tr>
+        <tr style="<?= ($editItemId == $it['id']) ? 'background:#fff1f2;' : '' ?>">
           <td><?= $it['id'] ?></td>
+          <td>
+            <?php if (!empty($it['image_path'])): ?>
+              <img src="../<?= htmlspecialchars($it['image_path']) ?>" class="table-img-thumb" alt="Preview">
+            <?php else: ?>
+              <div class="table-img-thumb" style="display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:11px;">No Img</div>
+            <?php endif; ?>
+          </td>
           <td><b><?= htmlspecialchars($it['number_val']) ?></b></td>
           <td>
             <b><?= htmlspecialchars($it['title']) ?></b><br>
@@ -374,7 +549,7 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
           <td><?= $it['sort_order'] ?></td>
           <td><?= $it['is_active'] ? '<span class="pm-badge-active">Active</span>' : '<span class="pm-badge-inactive">Hidden</span>' ?></td>
           <td>
-            <a href="manage_pages.php?slug=<?= $selectedSlug ?>&edit_item=<?= $it['id'] ?>" class="btn-edit">Edit</a>
+            <a href="manage_pages.php?slug=<?= $selectedSlug ?>&edit_item=<?= $it['id'] ?>#itemEditor" class="btn-edit">Edit</a>
             <form method="POST" style="display:inline;" onsubmit="return confirm('Delete this card item?')">
               <input type="hidden" name="action" value="delete_item">
               <input type="hidden" name="item_id" value="<?= $it['id'] ?>">
@@ -388,5 +563,50 @@ if ($selectedSlug === 'contact')      $liveUrl = "../Contact_us.php";
   </div>
   <?php endforeach; ?>
 <?php endif; ?>
+</div>
+
+<script>
+// JavaScript Live Image Preview Handlers
+function previewFile(input, imgId, textId) {
+  var file = input.files[0];
+  var img = document.getElementById(imgId);
+  var txt = document.getElementById(textId);
+  if (file && img && txt) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      img.src = e.target.result;
+      img.style.display = 'block';
+      txt.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
+function previewUrl(url, imgId, textId) {
+  var img = document.getElementById(imgId);
+  var txt = document.getElementById(textId);
+  if (img && txt) {
+    if (url.trim() !== '') {
+      var src = url.startsWith('http') || url.startsWith('data:') ? url : '../' + url;
+      img.src = src;
+      img.style.display = 'block';
+      txt.style.display = 'none';
+    } else {
+      img.style.display = 'none';
+      txt.style.display = 'flex';
+    }
+  }
+}
+
+// Auto-scroll to editor if editing item
+<?php if ($editItemRow): ?>
+document.addEventListener("DOMContentLoaded", function() {
+  var editor = document.getElementById("itemEditor");
+  if (editor) {
+    editor.scrollIntoView({ behavior: 'smooth' });
+  }
+});
+<?php endif; ?>
+</script>
 
 <?php require_once 'footer.php'; ?>

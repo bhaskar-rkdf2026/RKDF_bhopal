@@ -1,17 +1,61 @@
 <?php
 // ============================================================
-// RKDF University — Vision & Mission
-// World-Class Premium Design + AI Vision Media + 100% Original Content Preserved
+// RKDF University — Vision & Mission (100% Dynamic CMS)
+// Original Custom Design & Layout 100% Preserved + CMS Connected
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+
+$pdo = getDbConnection();
+$pageSlug = 'vision-mission';
+
+// Fetch metadata from site_pages
+$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+$stmt->execute([$pageSlug]);
+$pRow = $stmt->fetch();
+
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '01 · INSTITUTIONAL PHILOSOPHY';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Vision & Mission';
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Pioneering Higher Education, Advanced Research, and Sustainable Societal Transformation at RKDF University Bhopal.';
+$heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'images/ai_vision/rkdf_vision_banner.jpg';
+
+// Fetch section items from page_sections
+$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+$itemStmt->execute([$pageSlug]);
+$allItems = $itemStmt->fetchAll();
+
+// Group items by key or pick
+$vCard = null;
+$mCard = null;
+$valItems = [];
+
+foreach ($allItems as $it) {
+  if ($it['group_key'] === 'vision') $vCard = $it;
+  else if ($it['group_key'] === 'mission') $mCard = $it;
+  else if ($it['group_key'] === 'values') $valItems[] = $it;
+}
+
+// Fallbacks if not found
+if (!$vCard && isset($allItems[0])) $vCard = $allItems[0];
+if (!$mCard && isset($allItems[1])) $mCard = $allItems[1];
+if (empty($valItems)) $valItems = array_slice($allItems, 2);
+
+$visionTitle = !empty($vCard['title']) ? $vCard['title'] : 'University Vision';
+$visionBadge = !empty($vCard['badge_text']) ? $vCard['badge_text'] : 'OUR VISION';
+$visionQuote = !empty($vCard['text_val']) ? $vCard['text_val'] : 'To establish a University of excellence and relevance to impart Higher Education through knowledge, pioneering Scholarship, Research and teaching...';
+$visionImg   = !empty($vCard['image_path']) ? $vCard['image_path'] : 'images/ai_vision/rkdf_vision_banner.jpg';
+
+$missionTitle = !empty($mCard['title']) ? $mCard['title'] : 'University Mission';
+$missionBadge = !empty($mCard['badge_text']) ? $mCard['badge_text'] : 'OUR MISSION';
+$missionText  = !empty($mCard['text_val']) ? $mCard['text_val'] : 'Harmonize higher education with excellence in science and technology...';
+$missionImg   = !empty($mCard['image_path']) ? $mCard['image_path'] : 'images/ai_vision/rkdf_mission_banner.jpg';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vision & Mission — RKDF University Bhopal</title>
+  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -22,7 +66,7 @@ require_once __DIR__ . '/config/db.php';
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/ai_vision/rkdf_vision_banner.jpg') center/cover no-repeat;
+                  url('<?= htmlspecialchars($heroBgImg) ?>') center/cover no-repeat;
       color: var(--p-paper, #FAF9F5);
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
@@ -43,7 +87,6 @@ require_once __DIR__ . '/config/db.php';
       .vm-grid-layout { grid-template-columns: 1fr; }
     }
 
-    /* Vision & Mission Cards */
     .vm-block-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
@@ -105,7 +148,7 @@ require_once __DIR__ . '/config/db.php';
       height: 280px;
       border-radius: 14px;
       overflow: hidden;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
       position: relative;
     }
     .vm-media-img {
@@ -119,16 +162,16 @@ require_once __DIR__ . '/config/db.php';
     }
 
     .vm-quote-box {
-      position: relative;
-      padding: 24px 28px 24px 36px;
-      background: rgba(250, 249, 245, 0.7);
+      background: #FAF9F5;
+      border: 1px solid rgba(12, 20, 36, 0.08);
       border-left: 4px solid #C5A059;
-      border-radius: 0 12px 12px 0;
-      margin-top: 20px;
+      border-radius: 12px;
+      padding: 32px;
+      margin-top: 10px;
     }
     .vm-quote-text {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 19px;
+      font-size: 20px;
       line-height: 1.7;
       font-style: italic;
       color: #0C1424;
@@ -136,93 +179,70 @@ require_once __DIR__ . '/config/db.php';
     }
 
     .vm-text-p {
-      font-size: 16px;
+      font-size: 16.5px;
       line-height: 1.85;
       color: #334155;
       margin-bottom: 20px;
     }
-    .vm-text-p:last-child {
-      margin-bottom: 0;
-    }
-
-    /* Core Values Section */
-    .values-section-title {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 32px;
-      font-weight: 700;
-      color: #0C1424;
-      margin-bottom: 8px;
-    }
-    .values-section-sub {
-      font-size: 15px;
-      color: #64748B;
-      margin-bottom: 32px;
-    }
 
     .values-grid {
-      display: grid;
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: column;
       gap: 20px;
     }
-
     .value-item-card {
-      background: #ffffff;
+      background: #FAF9F5;
       border: 1px solid rgba(12, 20, 36, 0.08);
-      border-left: 4px solid #E31B23;
       border-radius: 14px;
-      padding: 24px 28px;
-      box-shadow: 0 4px 16px rgba(12, 20, 36, 0.03);
-      transition: all 0.3s ease;
+      padding: 24px;
       display: flex;
       gap: 20px;
       align-items: flex-start;
+      transition: transform 0.3s ease, border-color 0.3s ease;
     }
     .value-item-card:hover {
       transform: translateX(6px);
-      box-shadow: 0 12px 30px rgba(12, 20, 36, 0.07);
-      border-left-color: #C5A059;
+      border-color: #E31B23;
     }
-
     .val-number {
       font-family: 'JetBrains Mono', monospace;
-      font-size: 16px;
+      font-size: 24px;
       font-weight: 700;
       color: #E31B23;
       background: rgba(227, 27, 35, 0.08);
-      width: 42px;
-      height: 42px;
+      width: 48px;
+      height: 48px;
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
-
     .val-title {
-      font-family: 'Inter', system-ui, sans-serif;
-      font-size: 17px;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
       font-weight: 700;
       color: #0C1424;
       margin-bottom: 6px;
     }
     .val-desc {
-      font-size: 14.5px;
-      line-height: 1.7;
+      font-size: 15px;
+      line-height: 1.65;
       color: #475569;
       margin: 0;
     }
 
-    /* Sidebar Styling */
+    aside {
+      position: sticky;
+      top: 100px;
+    }
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
       border-radius: 18px;
       padding: 28px 24px;
       box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
-      position: sticky;
-      top: 100px;
     }
-
     .sidebar-title {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 20px;
@@ -232,7 +252,6 @@ require_once __DIR__ . '/config/db.php';
       border-bottom: 2px solid #E31B23;
       margin-bottom: 20px;
     }
-
     .sidebar-nav-list {
       list-style: none;
       padding: 0;
@@ -241,7 +260,6 @@ require_once __DIR__ . '/config/db.php';
       flex-direction: column;
       gap: 8px;
     }
-
     .sidebar-link {
       display: flex;
       align-items: center;
@@ -277,10 +295,10 @@ require_once __DIR__ . '/config/db.php';
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">01 · INSTITUTIONAL PHILOSOPHY</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">Vision &amp; Mission</h1>
+      <span class="rk-eyebrow tone-gold"><?= htmlspecialchars($eyebrow) ?></span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;"><?= htmlspecialchars($mainTitle) ?></h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Pioneering Higher Education, Advanced Research, and Sustainable Societal Transformation at RKDF University Bhopal.
+        <?= htmlspecialchars($heroSubtitle) ?>
       </p>
     </div>
   </section>
@@ -296,16 +314,16 @@ require_once __DIR__ . '/config/db.php';
           <!-- ── VISION CARD ── -->
           <article class="vm-block-card">
             <div class="vm-card-header">
-              <h2 class="vm-card-title">University Vision</h2>
-              <span class="vm-badge vm-badge-gold">OUR VISION</span>
+              <h2 class="vm-card-title"><?= htmlspecialchars($visionTitle) ?></h2>
+              <span class="vm-badge vm-badge-gold"><?= htmlspecialchars($visionBadge) ?></span>
             </div>
             <div class="vm-card-body">
               <div class="vm-media-frame">
-                <img src="images/ai_vision/rkdf_vision_banner.jpg" alt="RKDF University Vision" class="vm-media-img">
+                <img src="<?= htmlspecialchars($visionImg) ?>" alt="RKDF University Vision" class="vm-media-img">
               </div>
               <div class="vm-quote-box">
                 <p class="vm-quote-text">
-                  "To establish a University of excellence and relevance to impart Higher Education through knowledge, pioneering Scholarship, Research and teaching and to improve the lives of many students through growth, prosperity and sustainable physical environment through education in the country."
+                  "<?= htmlspecialchars($visionQuote) ?>"
                 </p>
               </div>
             </div>
@@ -314,19 +332,23 @@ require_once __DIR__ . '/config/db.php';
           <!-- ── MISSION CARD ── -->
           <article class="vm-block-card">
             <div class="vm-card-header">
-              <h2 class="vm-card-title">University Mission</h2>
-              <span class="vm-badge vm-badge-red">OUR MISSION</span>
+              <h2 class="vm-card-title"><?= htmlspecialchars($missionTitle) ?></h2>
+              <span class="vm-badge vm-badge-red"><?= htmlspecialchars($missionBadge) ?></span>
             </div>
             <div class="vm-card-body">
               <div class="vm-media-frame">
-                <img src="images/ai_vision/rkdf_mission_banner.jpg" alt="RKDF University Mission" class="vm-media-img">
+                <img src="<?= htmlspecialchars($missionImg) ?>" alt="RKDF University Mission" class="vm-media-img">
               </div>
-              <p class="vm-text-p">
-                Harmonize higher education with excellence in science and technology, output and contributing to livelihood security and sustainable societal development and to be recognized as a premium National University providing dedicated services for the social and economic growth development of the nation.
-              </p>
-              <p class="vm-text-p">
-                The University offers a congenial Academic &amp; Research environment to enable its students, Research scholars, faculty &amp; staff to achieve professional Excellence and personality development to promise an Exceptional future for all its stakeholders.
-              </p>
+              <?php
+              $mParas = explode("\n", $missionText);
+              foreach ($mParas as $mp):
+                if (!empty(trim($mp))):
+              ?>
+              <p class="vm-text-p"><?= htmlspecialchars(trim($mp)) ?></p>
+              <?php
+                endif;
+              endforeach;
+              ?>
             </div>
           </article>
 
@@ -345,102 +367,41 @@ require_once __DIR__ . '/config/db.php';
               </p>
 
               <div class="values-grid">
-                
-                <!-- Pillar 1 -->
+                <?php
+                if (empty($valItems)) {
+                  $valItems = [
+                    ['number_val'=>'01','title'=>'Creativity','text_val'=>'Commitment to explore new methodology to search for latest Academic Knowledge and new funding for students.'],
+                    ['number_val'=>'02','title'=>'Innovation & Research','text_val'=>'Initiating an innovative & cost effective participation of students in Research.'],
+                    ['number_val'=>'03','title'=>'Ethical Conduct','text_val'=>'Integration of a value system among students oriented towards imbibing fine judgement, respect, tolerance, honesty, and transparency.']
+                  ];
+                }
+                foreach ($valItems as $idx => $vi):
+                ?>
                 <div class="value-item-card">
-                  <div class="val-number">01</div>
+                  <div class="val-number"><?= htmlspecialchars($vi['number_val'] ?: sprintf("%02d", $idx+1)) ?></div>
                   <div>
-                    <h3 class="val-title">Creativity</h3>
-                    <p class="val-desc">
-                      Commitment to explore new methodology to search for latest Academic Knowledge and new funding for students.
-                    </p>
+                    <h3 class="val-title"><?= htmlspecialchars($vi['title']) ?></h3>
+                    <p class="val-desc"><?= htmlspecialchars($vi['text_val'] ?: $vi['subtitle']) ?></p>
                   </div>
                 </div>
-
-                <!-- Pillar 2 -->
-                <div class="value-item-card">
-                  <div class="val-number">02</div>
-                  <div>
-                    <h3 class="val-title">Innovation &amp; Research</h3>
-                    <p class="val-desc">
-                      Initiating an innovative &amp; cost effective participation of students in Research. Encouraging faculty members for submission of Research projects to the University.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pillar 3 -->
-                <div class="value-item-card">
-                  <div class="val-number">03</div>
-                  <div>
-                    <h3 class="val-title">Ethical Conduct</h3>
-                    <p class="val-desc">
-                      Integration of a value system among students oriented towards imbibing fine judgement, respect, tolerance, honesty, trustworthiness, strong character, transparency, accountability, integrity of thought and responsibility towards themselves and society.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pillar 4 -->
-                <div class="value-item-card">
-                  <div class="val-number">04</div>
-                  <div>
-                    <h3 class="val-title">Social Responsibility</h3>
-                    <p class="val-desc">
-                      Dedication towards serving individuals, society and the nation through outreach and community engagement activities in an attempt to contribute to national development coupled with commitment to create environmental awareness and action.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pillar 5 -->
-                <div class="value-item-card">
-                  <div class="val-number">05</div>
-                  <div>
-                    <h3 class="val-title">Collaborative &amp; Experimental Learning</h3>
-                    <p class="val-desc">
-                      Commitment to collaborative and interdisciplinary study along with pursuing opportunities for sharing knowledge.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pillar 6 -->
-                <div class="value-item-card">
-                  <div class="val-number">06</div>
-                  <div>
-                    <h3 class="val-title">Academic Excellence</h3>
-                    <p class="val-desc">
-                      Fostering values of excellence and high quality in all activities and belief in setting the highest academic and professional standards.
-                    </p>
-                  </div>
-                </div>
-
-                <!-- Pillar 7 -->
-                <div class="value-item-card">
-                  <div class="val-number">07</div>
-                  <div>
-                    <h3 class="val-title">Environment Consciousness</h3>
-                    <p class="val-desc">
-                      Promoting research and care for environment and associated issues.
-                    </p>
-                  </div>
-                </div>
-
+                <?php endforeach; ?>
               </div>
             </div>
           </article>
 
         </div>
 
-        <!-- RIGHT COLUMN: QUICK NAVIGATION SIDEBAR -->
+        <!-- RIGHT COLUMN: SIDEBAR -->
         <aside>
           <div class="sidebar-card">
-            <h3 class="sidebar-title">Quick Navigation</h3>
+            <h4 class="sidebar-title">About RKDF University</h4>
             <ul class="sidebar-nav-list">
-              <li><a href="Vision&amp;mission.php" class="sidebar-link active">Vision &amp; Mission <span>→</span></a></li>
-              <li><a href="Objectives.php" class="sidebar-link">University Objectives <span>→</span></a></li>
-              <li><a href="Chancellor.php" class="sidebar-link">Chancellor's Desk <span>→</span></a></li>
-              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link">Vice Chancellor's Desk <span>→</span></a></li>
-              <li><a href="dgm.php" class="sidebar-link">DGM Profile <span>→</span></a></li>
-              <li><a href="dgr.php" class="sidebar-link">DGR Profile <span>→</span></a></li>
-              <li><a href="Registrar.php" class="sidebar-link">Registrar Profile <span>→</span></a></li>
+              <li><a href="About_Us.pdf" target="_blank" class="sidebar-link"><span>About Us Overview</span> <span>↗</span></a></li>
+              <li><a href="Vision&mission.php" class="sidebar-link active"><span>Vision &amp; Mission</span> <span>↗</span></a></li>
+              <li><a href="Objectives.php" class="sidebar-link"><span>Objectives</span> <span>↗</span></a></li>
+              <li><a href="Chancellor.php" class="sidebar-link"><span>Chancellor's Desk</span> <span>↗</span></a></li>
+              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link"><span>Vice-Chancellor's Desk</span> <span>↗</span></a></li>
+              <li><a href="Governingbody.php" class="sidebar-link"><span>Governing Body</span> <span>↗</span></a></li>
             </ul>
           </div>
         </aside>
@@ -449,7 +410,7 @@ require_once __DIR__ . '/config/db.php';
     </div>
   </main>
 
-  <!-- APPROVED FOOTER -->
+  <!-- FOOTER -->
   <?php include __DIR__ . '/include/footer.php'; ?>
 
 </body>

@@ -1,7 +1,6 @@
 <?php
 // ============================================================
-// RKDF University — Dynamic Subpage Router
-// Renders any site_pages slug dynamically using subpage_template.php
+// RKDF University — Organizational Structure (100% Dynamic CMS)
 // ============================================================
-$pageKey = $_GET['slug'] ?? 'about';
+$pageKey = 'org-structure';
 require_once __DIR__ . '/include/subpage_template.php';
