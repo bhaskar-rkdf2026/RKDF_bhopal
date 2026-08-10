@@ -1,234 +1,388 @@
 <?php
+// ============================================================
+// RKDF University — Modern Careers & Recruitment Page
+// 100% Dynamic CMS Integration (Connected to admin/manage_pages.php?slug=careers)
+// ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+
+$pageSlug = 'careers';
+$pdo = getDbConnection();
+
+// Fetch dynamic page header content from site_pages table
+$stmtPage = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+$stmtPage->execute([$pageSlug]);
+$pageData = $stmtPage->fetch();
+
+// Default Fallbacks
+$eyebrow       = $pageData['eyebrow'] ?? 'CAREERS · RKDF UNIVERSITY BHOPAL';
+$pageTitle     = $pageData['page_title'] ?? 'Careers & Academic Recruitment';
+$heroSubtitle  = $pageData['hero_subtitle'] ?? 'Join the academic and research faculty at RKDF University Bhopal. Explore current walk-in interviews, research project fellowships, and faculty openings.';
+$heroBgImage   = !empty($pageData['hero_bg_image']) ? $pageData['hero_bg_image'] : 'images/lovable/rkdf-campus-hero.jpg';
+$introHeading  = $pageData['intro_heading'] ?? 'Current Openings & Walk-In Interviews';
+$introText     = $pageData['intro_text'] ?? 'RKDF University invites applications from dynamic, qualified scholars and faculty for teaching and research positions across diverse faculties including Agriculture, Engineering, Science, Law, Management, Ayurveda, and Homeopathy.';
+
+// Fetch dynamic section items grouped by group_key
+$stmtItems = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key, sort_order ASC, id ASC");
+$stmtItems->execute([$pageSlug]);
+$allItems = $stmtItems->fetchAll();
+
+$groupedItems = [];
+foreach ($allItems as $it) {
+    $groupedItems[$it['group_key']][] = $it;
+}
+
+$openingItems = $groupedItems['openings'] ?? [];
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>EDUCATION GLORIFIES NATION — RKDF University Bhopal</title>
-  <link rel="stylesheet" href="css/rkdf-home.css">
+  <title><?= htmlspecialchars($pageTitle) ?> — RKDF University Bhopal</title>
+  <meta name="description" content="<?= htmlspecialchars(strip_tags($heroSubtitle)) ?>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/rkdf-home.css?v=<?= time() ?>">
+  <link rel="stylesheet" href="css/rkdf-navbar.css?v=<?= time() ?>">
+  
   <style>
-    .subpage-hero {
+    /* ── Subpage Hero Section ── */
+    .careers-hero {
       position: relative;
-      padding: 160px 0 90px;
-      background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/lovable/rkdf-why-bg.jpg') center/cover no-repeat;
-      color: var(--p-paper);
+      padding: 140px 0 80px;
+      background: linear-gradient(135deg, rgba(12,20,36,0.92) 0%, rgba(21,34,56,0.88) 60%, rgba(12,20,36,0.95) 100%), 
+                  url('<?= htmlspecialchars($heroBgImage) ?>') center/cover no-repeat;
+      color: #ffffff;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
-    .sp-main-box {
-      padding: 80px 0;
-      background: var(--p-paper);
-      color: var(--p-navy-deep);
-      font-size: 16px;
-      line-height: 1.8;
+    .careers-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      color: #C5A059;
+      text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 12px;
     }
-    .sp-main-box table {
-      width: 100%;
-      border-collapse: collapse;
-      margin: 28px 0;
-      background: #ffffff;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-      border: 1px solid var(--p-hairline);
-    }
-    .sp-main-box th {
-      background: var(--p-navy-deep);
+    .careers-hero-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: clamp(2.6rem, 5vw, 4.5rem);
+      font-weight: 400;
+      line-height: 1.1;
       color: #ffffff;
-      padding: 16px 20px;
-      font-family: var(--p-font-mono);
-      font-size: 13.5px;
+      margin-bottom: 16px;
+    }
+    .careers-hero-sub {
+      font-size: 17px;
+      max-width: 780px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.6;
+    }
+
+    /* ── Main Layout Container ── */
+    .careers-section {
+      padding: 60px 0 90px;
+      background: #fafafa;
+      color: #1e293b;
+    }
+    .careers-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    @media (min-width: 1024px) {
+      .careers-grid {
+        grid-template-columns: 1fr 340px;
+      }
+    }
+
+    /* ── Main Section Cards ── */
+    .careers-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      padding: 32px;
+      box-shadow: 0 4px 20px rgba(12,20,36,0.04);
+      margin-bottom: 32px;
+    }
+    .section-heading-sm {
+      font-size: 22px;
+      font-weight: 800;
+      color: #0C1424;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-heading-sm::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 20px;
+      background: #E31B23;
+      border-radius: 2px;
+    }
+
+    /* ── Job Openings Notification List ── */
+    .jobs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .job-item-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    @media (min-width: 640px) {
+      .job-item-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+    .job-item-card:hover {
+      border-color: #E31B23;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(12,20,36,0.08);
+    }
+    .job-info-col {
+      flex: 1;
+    }
+    .job-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #E31B23;
+      background: rgba(227,27,35,0.08);
+      padding: 3px 10px;
+      border-radius: 99px;
+      display: inline-block;
+      margin-bottom: 8px;
+    }
+    .job-title-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: #0C1424;
+      line-height: 1.4;
+      margin-bottom: 4px;
+    }
+    .job-sub-text {
+      font-size: 13px;
+      color: #64748b;
+    }
+    .job-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 9px 18px;
+      background: #0C1424;
+      color: #ffffff !important;
+      text-decoration: none !important;
+      font-size: 13px;
+      font-weight: 700;
+      border-radius: 6px;
+      transition: background 0.25s ease;
+      white-space: nowrap;
+    }
+    .job-action-btn:hover {
+      background: #E31B23;
+    }
+
+    /* How to Apply Card */
+    .apply-instructions-box {
+      background: linear-gradient(135deg, rgba(227,27,35,0.04) 0%, rgba(12,20,36,0.04) 100%);
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 24px;
+      margin-top: 24px;
+    }
+    .apply-instructions-box h4 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0C1424;
+      margin-bottom: 8px;
+    }
+
+    /* Sidebar Cards */
+    .sidebar-card {
+      background: #ffffff;
+      border-radius: 16px;
+      border: 1px solid #e2e8f0;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+      margin-bottom: 24px;
+    }
+    .sidebar-card-title {
+      font-size: 17px;
+      font-weight: 800;
+      color: #0C1424;
+      padding-bottom: 12px;
+      border-bottom: 2px solid #E31B23;
+      margin-bottom: 18px;
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    .sp-main-box td {
-      padding: 16px 20px;
-      border-bottom: 1px solid var(--p-hairline);
-      font-size: 15px;
-    }
-    .sp-main-box tr:hover td {
-      background: rgba(220,38,38,0.03);
-    }
-    .sp-main-box a {
-      color: var(--p-gold);
-      font-weight: 700;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .sp-main-box a:hover {
-      text-decoration: underline;
-      color: #b91c1c;
-    }
-    .sp-main-box img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      object-fit: contain;
-    }
-    .glossymenu a.menuitem {
-      display: inline-block;
-      padding: 10px 18px;
-      margin: 4px;
-      background: #ffffff;
-      border: 1px solid var(--p-hairline);
+    .sidebar-link-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
       border-radius: 8px;
-      color: var(--p-navy-deep);
-      font-weight: 700;
-      text-decoration: none;
-      transition: all 0.25s;
+      color: #0C1424;
+      text-decoration: none !important;
+      font-size: 13.5px;
+      font-weight: 600;
+      margin-bottom: 10px;
+      transition: all 0.25s ease;
     }
-    .glossymenu a.menuitem:hover {
-      background: var(--p-gold);
-      color: #ffffff;
-      border-color: var(--p-gold);
+    .sidebar-link-btn:hover {
+      background: #E31B23;
+      color: #ffffff !important;
+      border-color: #E31B23;
+      transform: translateX(3px);
     }
   </style>
 </head>
 <body>
-  <!-- APPROVED NAVBAR -->
+
+  <!-- APPROVED HEADER & NAVBAR -->
   <?php include __DIR__ . '/include/new_navbar.php'; ?>
 
-  <!-- HERO SECTION -->
-  <section class="subpage-hero">
+  <!-- DYNAMIC SUBPAGE HERO SECTION -->
+  <section class="careers-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">RKDF University Bhopal</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">EDUCATION GLORIFIES NATION</h1>
+      <span class="careers-eyebrow"><?= htmlspecialchars($eyebrow) ?></span>
+      <h1 class="careers-hero-title"><?= htmlspecialchars($pageTitle) ?></h1>
+      <p class="careers-hero-sub"><?= htmlspecialchars($heroSubtitle) ?></p>
     </div>
   </section>
 
-  <!-- MAIN CONTENT SECTION (100% Exact Original Inner Content & Links Preserved) -->
-  <section class="sp-main-box">
+  <!-- MAIN CAREERS CONTENT SECTION -->
+  <section class="careers-section">
     <div class="rk-container">
-<section id="content" class="wrapper ">
-        <!--- spotlight -->
-        <section id="contentLeft">
-            <div id="collegeDetail">
-                <h2 class="titleDescription"><a href="Careers.php"><span>&nbsp;</span> Careers</a></h2>
-                <p class="titleDescription">&nbsp;</p>
-                <p class="titleDescription"> </p>
-                <p class="titleDescription">&nbsp; </p>
-                <p><a href="#"></a></p>
+      <div class="careers-grid">
 
+        <!-- LEFT COLUMN: JOB NOTIFICATIONS LIST -->
+        <div class="careers-left">
 
-                <p>
-                    <a href="Content/Documents/Careers_22_May_2026/MPCST Project Position.pdf" target="_blank">
-                        <strong><img src="images/bullet.png" style="width: 20px;height: 20px;" /> Walk-in Interview on 04/05/2026 - Project Fellow – Precision Farming and Sustainable Agriculture @ RKDF University, Bhopal - Apply </strong></a>
-                </p>
+          <!-- Overview & Job Notifications Card -->
+          <div class="careers-card">
+            <h2 class="section-heading-sm"><?= htmlspecialchars($introHeading) ?></h2>
+            <p style="font-size:15px;line-height:1.7;color:#334155;margin-bottom:24px;"><?= nl2br(htmlspecialchars($introText)) ?></p>
 
-                <p>
-                    <a href="Content/Documents/Careers_30April2026/JRF MPCST Project Position.pdf" target="_blank">
-                        <strong><img src="images/bullet.png" style="width: 20px;height: 20px;" /> Walk In Interview for MPCST Sponsored Project Positions @ RKDF University, Bhopal  30-April-2026 - Apply </strong></a>
-                </p>
-
-                <p>
-                    <a href="Content/Documents/Careers_30April2026/AD For MPCST Project Position JRF - Design and Development of AI-Based Smart Agriculture Drone.pdf" target="_blank">
-                        <strong><img src="images/bullet.png" style="width: 20px;height: 20px;" /> Walk In Interview for MPCST Sponsored Project Positions For AI-Based Smart Agriculture Drone @ RKDF University, Bhopal  02-April-2026 - Apply </strong></a>
-                </p>
-
-                <p>
-                    <a href="Content/Documents/Careers_27Mar2026/Dainik Jagran Bhopal - 27 Mar 2026 - Page05.pdf" target="_blank">
-                        <strong><img src="images/bullet.png" style="width: 20px;height: 20px;" /> Various Faculty
-                            Positions required in the Department(s) @ RKDF University, Bhopal of RKDF University,
-                            Bhopal - 27-Mar-2026 - Apply </strong></a>
-                </p>
-
-                <p><a href="circular/Faculity Requirement by 26-May-2025.pdf" target="_blank"><strong><img
-                                src="images/bullet.png" style="width: 20px;height: 20px;" /> Various Faculty
-                            Positions required in the Department(s) of Faculty of Agriculture, Science, Social Science,
-                            Law,
-                            Management, Education, Commerce, Agriculture, Ayurveda and Homeopathy of RKDF University,
-                            Bhopal -
-                            Apply </strong></a> </p>
-
-                <p><a href="circular/Faculty Required.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Faculty Required in Different
-                            Department of University </strong></a> </p>
-                <p><a href="circular/Advertisement_Application Form.pdf" target="_blank"><strong><img
-                                src="images/bullet.png" style="width: 20px;height: 20px;" /> POST DOCTORAL
-                            FELLOWSHIP on LIVE PROJECTS June-2022(Advertisment & Application Form) </strong></a> </p>
-                <p><a href="circular/ADV Bio-diesel Revised.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview Revised
-                            (Technician for Bio-diesel Plant) </strong></a></p>
-                <p><a href="circular/ADV Bio-diesel.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview (Technician for
-                            Bio-diesel Plant) </strong></a></p>
-                <p><a href="circular/Revised Add Ayurveda.pdf" target="_blank"><strong> <img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview In Ayurveda
-                            College (Revised Schedule) </strong></a></p>
-                <p><a href="circular/Ayurveda Requirement.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview In Ayurveda
-                            College</strong></a></p>
-                <p><a href="images/add/architect.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Faculty Required for M.Arch and B.Arch
-                        </strong></a></p>
-                <p><a href="images/add/Latter.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview (VACANCY) </strong></a></p>
-                <p><a href="images/add/vacancy.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview (VACANCY).</strong></a>
-                </p>
-                <p><a href="images/add/add_2017.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview (VACANCY).</strong></a>
-                </p>
-                <p><a href="homeopathy add.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview in Homoeopathy.</strong></a>
-                </p>
-                <p><a href="images/add/add_int.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Walk-In Interview in Life
-                            Science.</strong></a></p>
-                <p><a href="images/add/urgently_required.pdf" target="_blank"><strong><img src="images/bullet.png"
-                                style="width: 20px;height: 20px;" /> Application Invited for the
-                            Faculty of Commerce & Management. </strong></a></p>
-                <!--<p><a href="images/add/adfasdf.jpg" target="_blank"><strong>Walk-In  Interview 20.04.2015</strong></a></p>
-	<p><a href="images/add/Add_-_RKDF_Univ.pdf" target="_blank"><strong>Application Invited for the Posts of Proff., Ast. Proff.,Associate proff. 2015-16</strong></a></p>-->
-
-                <p>&nbsp;</p>
-                <blockquote>
-
-                    <p class="style14">&nbsp;</p>
-                </blockquote>
+            <div class="jobs-list">
+              <?php if (!empty($openingItems)): ?>
+                <?php foreach ($openingItems as $job): ?>
+                  <div class="job-item-card">
+                    <div class="job-info-col">
+                      <span class="job-badge"><?= htmlspecialchars($job['badge_text'] ?: 'RECRUITMENT') ?></span>
+                      <div class="job-title-text"><?= htmlspecialchars($job['title']) ?></div>
+                      <?php if (!empty($job['subtitle'])): ?>
+                        <div class="job-sub-text"><?= htmlspecialchars($job['subtitle']) ?></div>
+                      <?php endif; ?>
+                    </div>
+                    <?php if (!empty($job['link_url'])): ?>
+                      <a href="<?= htmlspecialchars($job['link_url']) ?>" target="_blank" class="job-action-btn">
+                        <span>Apply / View PDF</span>
+                        <span>↗</span>
+                      </a>
+                    <?php endif; ?>
+                  </div>
+                <?php endforeach; ?>
+              <?php else: ?>
+                <!-- Default Baseline Job Notifications -->
+                <div class="job-item-card">
+                  <div class="job-info-col">
+                    <span class="job-badge">WALK-IN · 04 MAY 2026</span>
+                    <div class="job-title-text">Project Fellow – Precision Farming &amp; Sustainable Agriculture</div>
+                    <div class="job-sub-text">Walk-in Interview @ RKDF University, Bhopal</div>
+                  </div>
+                  <a href="Content/Documents/Careers_22_May_2026/MPCST Project Position.pdf" target="_blank" class="job-action-btn">
+                    <span>Apply / View PDF</span>
+                    <span>↗</span>
+                  </a>
+                </div>
+                <div class="job-item-card">
+                  <div class="job-info-col">
+                    <span class="job-badge">PROJECT FELLOW</span>
+                    <div class="job-title-text">Walk-in Interview for MPCST Sponsored Project Positions</div>
+                    <div class="job-sub-text">JRF Position 30-April-2026 @ RKDF University, Bhopal</div>
+                  </div>
+                  <a href="Content/Documents/Careers_30April2026/JRF MPCST Project Position.pdf" target="_blank" class="job-action-btn">
+                    <span>Apply / View PDF</span>
+                    <span>↗</span>
+                  </a>
+                </div>
+                <div class="job-item-card">
+                  <div class="job-info-col">
+                    <span class="job-badge">FACULTY POSITIONS</span>
+                    <div class="job-title-text">Various Faculty Positions in Agriculture, Science, Law, Management &amp; Ayurveda</div>
+                    <div class="job-sub-text">Professor, Associate Professor &amp; Assistant Professor Requirements</div>
+                  </div>
+                  <a href="circular/Faculity Requirement by 26-May-2025.pdf" target="_blank" class="job-action-btn">
+                    <span>Apply / View PDF</span>
+                    <span>↗</span>
+                  </a>
+                </div>
+              <?php endif; ?>
             </div>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <p>&nbsp;</p>
-            <div align="justify"></div>
-        </section>
-        <!--- contentLeft -->
-        <section id="sideBar">
-            <aside id="customMenu" class="sidebarWidget">
-                <h2>Careers </h2>
-                <div class="glossymenu">
-                    <a class="menuitem" href="index.php"><img src="images/bullet.png" /> Home </a>
-                    <a class="menuitem" href="https://rkdf.ac.in/images/Alumni-form.pdf" target="_blank"><img
-                            src="images/bullet.png" /> Alumni Form </a>
-                    <a class="menuitem" href="Careers.php"><img src="images/bullet.png" /> Careers </a>
-                    <a class="menuitem" href="contact-us.php"><img src="images/bullet.png" /> Contact Us </a>
-                    <!--<a name="ex1" id="ex1"></a>
-        			-->
 
-        </section>
-        <!--- sideBar -->
-        <br class="clear" />
-    </section>
-    </div>
-    <!--- content -->
-    <script type="text/javascript">
-    jQuery(document).ready(function($) {
-        $('#mainNav li').hover(
-            function() {
-                jQuery(this).find('.dropdown').fadeIn(300);
-            },
-            function() {
-                jQuery(this).find('.dropdown').fadeOut(200);
-            }
-        );
-    });
-    </script>
-    </div>
+            <!-- Application Instructions Box -->
+            <div class="apply-instructions-box">
+              <h4>📧 How to Apply for Faculty &amp; Staff Positions</h4>
+              <p style="font-size:14px;color:#475569;line-height:1.6;margin-top:6px;">
+                Interested candidates may submit their updated CV along with copies of academic testimonials, research publications, and passport-size photographs to <strong>career@rkdf.ac.in</strong> or <strong>info@rkdf.ac.in</strong> mentioning the post applied for in the subject line.
+              </p>
+            </div>
+          </div>
+
+        </div><!-- /careers-left -->
+
+        <!-- RIGHT SIDEBAR: QUICK LINKS -->
+        <div class="careers-sidebar">
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card-title">Quick Links</h3>
+            <a href="index.php" class="sidebar-link-btn">
+              <span>🏠 Live Site Home</span>
+              <span>→</span>
+            </a>
+            <a href="contact-us.php" class="sidebar-link-btn">
+              <span>📞 Contact HR Desk</span>
+              <span>→</span>
+            </a>
+            <a href="images/Alumni-form.pdf" target="_blank" class="sidebar-link-btn">
+              <span>📝 Alumni Registration Form</span>
+              <span>PDF ↗</span>
+            </a>
+          </div>
+
+          <div class="sidebar-card">
+            <h3 class="sidebar-card-title">HR Contact</h3>
+            <div style="font-size:14px;color:#334155;line-height:1.6;">
+              <p><strong>HR &amp; Recruitment Cell</strong></p>
+              <p>RKDF University, Airport Bypass Road, Gandhi Nagar, Bhopal (MP) 462033</p>
+              <p style="margin-top:8px;"><strong>Email:</strong> career@rkdf.ac.in</p>
+              <p><strong>Phone:</strong> +91-755-2740395</p>
+            </div>
+          </div>
+
+        </div><!-- /careers-sidebar -->
+
+      </div><!-- /careers-grid -->
+    </div><!-- /rk-container -->
   </section>
 
   <!-- APPROVED FOOTER -->

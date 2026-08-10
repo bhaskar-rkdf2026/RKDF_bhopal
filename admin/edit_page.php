@@ -21,7 +21,7 @@ if (!$pageRow) {
     exit();
 }
 
-$pageTitle = 'Edit Page: ' . $pageRow['page_title'] . ' — RKDF CMS';
+$pageTitle = 'Edit Page: ' . $pageRow['page_title'] . ' — RKDF Admin Portal';
 
 // ── Handle Form Submissions ───────────────────────────────────────
 $success = $error = '';

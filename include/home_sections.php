@@ -1070,25 +1070,25 @@ if (!$sec14 || ($sec14['is_active'] ?? 1)):
     }
   }
 ?>
-<section class="rk-accred" id="recognitions">
+<section class="rk-accred" id="recognitions" style="background:#fafafa;padding:70px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
   <div class="rk-container">
-    <div class="rk-accred-inner">
+    <div class="rk-accred-inner" style="display:grid;grid-template-columns:1fr;gap:40px;align-items:center;">
       <div class="rk-accred-left rk-reveal">
-        <div class="rk-eyebrow"><?= $sec14Tag ?></div>
-        <h3 class="rk-accred-title"><?= htmlspecialchars($sec14Title) ?></h3>
-        <p style="font-size:14px;color:rgba(250,249,246,0.7);margin-top:12px;line-height:1.6;">
-          RKDF University holds national accreditations and approvals from central statutory councils, ensuring highest quality standards.
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;letter-spacing:0.1em;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $sec14Tag ?></div>
+        <h3 class="rk-accred-title" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(2.2rem,4vw,3.2rem);color:#0C1424;margin-bottom:12px;line-height:1.2;"><?= htmlspecialchars($sec14Title) ?></h3>
+        <p style="font-size:15px;color:#475569;margin-top:12px;line-height:1.7;max-width:540px;">
+          RKDF University holds national accreditations and statutory approvals from central regulatory councils, ensuring highest academic &amp; quality standards.
         </p>
       </div>
-      <div class="rk-accred-badges rk-reveal" style="--delay:0.1s">
+      <div class="rk-accred-badges rk-reveal" style="--delay:0.1s;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
         <?php foreach ($approvals as $app): ?>
         <a href="<?= htmlspecialchars($app['url']) ?>" target="_blank" class="rk-accred-badge-card" style="text-decoration:none;">
           <div class="rk-accred-badge-img-wrap">
-            <img src="<?= htmlspecialchars($app['img']) ?>" alt="<?= htmlspecialchars($app['name']) ?>" onError="this.style.display='none';">
+            <img src="<?= htmlspecialchars($app['img']) ?>" alt="<?= htmlspecialchars($app['name']) ?>" onError="this.src='images/rkdflogo.JPG';">
           </div>
           <div>
-            <div class="rk-accred-badge-name"><?= htmlspecialchars($app['name']) ?></div>
-            <div style="font-size:11px;color:rgba(250,249,246,0.6);margin-top:2px;"><?= htmlspecialchars($app['sub']) ?></div>
+            <div class="rk-accred-badge-name" style="font-size:14px;font-weight:700;color:#0C1424;"><?= htmlspecialchars($app['name']) ?></div>
+            <div style="font-size:12px;color:#64748b;margin-top:2px;font-weight:500;"><?= htmlspecialchars($app['sub']) ?></div>
           </div>
         </a>
         <?php endforeach; ?>
@@ -1097,31 +1097,40 @@ if (!$sec14 || ($sec14['is_active'] ?? 1)):
   </div>
 </section>
 <style>
+@media (min-width: 992px) {
+  .rk-accred-inner {
+    grid-template-columns: 360px 1fr !important;
+  }
+}
 .rk-accred-badge-card {
   display: flex;
   align-items: center;
   gap: 14px;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.12);
-  padding: 12px 18px;
-  border-radius: 10px;
-  transition: all 0.25s;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+  transition: all 0.25s ease;
 }
 .rk-accred-badge-card:hover {
-  background: rgba(255,255,255,0.14);
-  border-color: #D9232D;
-  transform: translateY(-2px);
+  background: #ffffff;
+  border-color: #E31B23;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 24px rgba(12,20,36,0.08);
 }
 .rk-accred-badge-img-wrap {
-  width: 44px;
-  height: 44px;
-  background: #ffffff;
-  border-radius: 6px;
+  width: 48px;
+  height: 48px;
+  background: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
+  padding: 4px;
 }
 .rk-accred-badge-img-wrap img {
   max-width: 100%;

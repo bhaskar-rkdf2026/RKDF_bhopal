@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Render Page HTML
-$pageTitle = 'Global Site Settings — RKDF CMS';
+$pageTitle = 'Global Site Settings — RKDF Admin Portal';
 require_once __DIR__ . '/header.php';
 
 $msg = $_GET['msg'] ?? '';

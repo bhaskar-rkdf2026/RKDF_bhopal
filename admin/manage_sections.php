@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // -------------------------------------------------------------
 // PAGE RENDERING & DATA FETCHING
 // -------------------------------------------------------------
-$pageTitle = 'Manage Homepage Sections — RKDF CMS';
+$pageTitle = 'Manage Homepage Sections — RKDF Admin Portal';
 require_once __DIR__ . '/header.php';
 
 $msg = $_GET['msg'] ?? '';

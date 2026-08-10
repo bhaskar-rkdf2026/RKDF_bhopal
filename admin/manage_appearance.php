@@ -3,7 +3,7 @@
 // RKDF University — Admin Appearance Manager
 // Manages: Logo | Header | Nav Menu | Footer Links | Social
 // ============================================================
-$pageTitle = 'Appearance Manager — RKDF CMS';
+$pageTitle = 'Appearance Manager — RKDF Admin Portal';
 require_once 'header.php';
 require_once '../config/db.php';
 require_once __DIR__ . '/upload_handler.php';

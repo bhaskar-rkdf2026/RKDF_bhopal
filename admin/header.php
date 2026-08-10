@@ -70,8 +70,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       z-index: 100;
       display: flex;
       flex-direction: column;
+      overflow: hidden !important;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
     }
-    
+
     .sidebar-brand {
       padding: 24px 20px;
       border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -98,9 +101,31 @@ $currentPage = basename($_SERVER['PHP_SELF']);
     }
 
     .sidebar-menu {
-      padding: 20px 12px;
+      padding: 20px 12px 20px 12px;
+      margin-right: -20px;
+      padding-right: 32px;
       flex: 1;
-      overflow-y: auto;
+      overflow-y: scroll;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+
+    .admin-sidebar::-webkit-scrollbar,
+    .sidebar-menu::-webkit-scrollbar,
+    .admin-sidebar *::-webkit-scrollbar,
+    .sidebar-menu *::-webkit-scrollbar {
+      display: none !important;
+      width: 0 !important;
+      height: 0 !important;
+      background: transparent !important;
+    }
+
+    .admin-sidebar::-webkit-scrollbar-track,
+    .sidebar-menu::-webkit-scrollbar-track,
+    .admin-sidebar::-webkit-scrollbar-thumb,
+    .sidebar-menu::-webkit-scrollbar-thumb {
+      display: none !important;
+      background: transparent !important;
     }
 
     .menu-category {
@@ -320,8 +345,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <!-- Admin Sidebar -->
   <aside class="admin-sidebar">
     <div class="sidebar-brand">
-      <i class="fa-solid fa-graduation-cap" style="color: var(--primary); font-size: 24px;"></i>
-      <span>RKDF <em>CMS</em></span>
+      <img src="../images/lovable/rkdf-logo.png" alt="RKDF University Logo" style="height:36px;max-height:40px;width:auto;object-fit:contain;display:block;" onError="this.src='../images/rkdflogo.JPG';">
+      <span>RKDF <em>Admin Portal</em></span>
     </div>
 
     <nav class="sidebar-menu">
@@ -347,7 +372,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
       <!-- 3. ABOUT US (Dropdown) -->
       <?php
-      $aboutSlugs = ['about','vision-mission','objectives','idp','org-structure','chancellor','pro-chancellor','vc-desk','dgm','dgr','registrar','other-officers','dean','hod','governing-body','bom','academic-council','bos','national-advisory','local-advisory','public-disclosure','imggallery'];
+      $aboutSlugs = ['about','vision-mission','objectives','idp','org-structure','chancellor','pro-chancellor','vc-desk','dgm','dgr','registrar','other-officers','dean','hod','governing-body','bom','academic-council','bos','national-advisory','local-advisory','public-disclosure','imggallery','alumni'];
       $isAboutActive = in_array($activeSlug, $aboutSlugs);
       ?>
       <div id="btn-about" class="menu-item menu-dropdown-toggle <?= $isAboutActive ? 'active open' : '' ?>" onclick="toggleSubmenu('about')">
@@ -359,6 +384,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       </div>
       <div id="sub-about" class="menu-submenu <?= $isAboutActive ? 'open' : '' ?>">
         <a href="manage_pages.php?slug=about" class="submenu-item <?= ($activeSlug == 'about') ? 'active' : '' ?>">About Us Overview</a>
+        <a href="manage_pages.php?slug=alumni" class="submenu-item <?= ($activeSlug == 'alumni') ? 'active' : '' ?>" style="color:var(--primary);font-weight:700;">Alumni Page Manager ★</a>
+        <a href="manage_pages.php?slug=careers" class="submenu-item <?= ($activeSlug == 'careers') ? 'active' : '' ?>" style="color:var(--primary);font-weight:700;">Careers Manager ★</a>
         <a href="manage_pages.php?slug=vision-mission" class="submenu-item <?= ($activeSlug == 'vision-mission') ? 'active' : '' ?>">Vision &amp; Mission</a>
         <a href="manage_pages.php?slug=objectives" class="submenu-item <?= ($activeSlug == 'objectives') ? 'active' : '' ?>">Objectives</a>
         <a href="manage_pages.php?slug=idp" class="submenu-item <?= ($activeSlug == 'idp') ? 'active' : '' ?>">Institutional Development Plan</a>
@@ -384,7 +411,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
 
       <!-- 4. ACADEMIC (Dropdown) -->
       <?php
-      $academicSlugs = ['management','science','commerce','engineering','pharmacy','computer-application','education','social-science','agriculture','architect','law','bhms','bams','nursing','paramedical','library','constituent-units','fee-structure','fee-submission-notice','syllabus','e-resources','value-added-courses','calendar','collaborations','feedback','skills-enhancement','annual-report','staff','lms','convocation-2023-24','convocation-2024-25'];
+      $academicSlugs = ['t&p','management','science','commerce','engineering','pharmacy','computer-application','education','social-science','agriculture','architect','law','bhms','bams','nursing','paramedical','library','constituent-units','fee-structure','fee-submission-notice','syllabus','e-resources','value-added-courses','calendar','collaborations','feedback','skills-enhancement','annual-report','staff','lms','convocation-2023-24','convocation-2024-25'];
       $isAcadActive = in_array($activeSlug, $academicSlugs);
       ?>
       <div id="btn-academic" class="menu-item menu-dropdown-toggle <?= $isAcadActive ? 'active open' : '' ?>" onclick="toggleSubmenu('academic')">
@@ -395,6 +422,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <i class="fa-solid fa-chevron-down chev"></i>
       </div>
       <div id="sub-academic" class="menu-submenu <?= $isAcadActive ? 'open' : '' ?>">
+        <a href="manage_pages.php?slug=t%26p" class="submenu-item <?= ($activeSlug == 't&p') ? 'active' : '' ?>" style="color:var(--primary);font-weight:700;">T&amp;P Cell Manager ★</a>
+        <a href="manage_pages.php?slug=ncc" class="submenu-item <?= ($activeSlug == 'ncc') ? 'active' : '' ?>" style="color:var(--primary);font-weight:700;">NCC Unit Manager ★</a>
         <a href="manage_pages.php?slug=management" class="submenu-item <?= ($activeSlug == 'management') ? 'active' : '' ?>">Management</a>
         <a href="manage_pages.php?slug=science" class="submenu-item <?= ($activeSlug == 'science') ? 'active' : '' ?>">Science</a>
         <a href="manage_pages.php?slug=commerce" class="submenu-item <?= ($activeSlug == 'commerce') ? 'active' : '' ?>">Commerce</a>
@@ -523,7 +552,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <a href="manage_pages.php?slug=admission-notice" class="submenu-item <?= ($activeSlug == 'admission-notice') ? 'active' : '' ?>">Admission Notice, Courses &amp; Last Date</a>
         <a href="manage_pages.php?slug=admission-rules" class="submenu-item <?= ($activeSlug == 'admission-rules') ? 'active' : '' ?>">Admission Rules 2026-27</a>
         <a href="manage_pages.php?slug=cuet-mapping" class="submenu-item <?= ($activeSlug == 'cuet-mapping') ? 'active' : '' ?>">Mapping list for CUET(UG)</a>
-        <a href="manage_pages.php?slug=prospectus" class="submenu-item <?= ($activeSlug == 'prospectus') ? 'active' : '' ?>">University Prospectus</a>
+        <a href="manage_pages.php?slug=prospectus" class="submenu-item <?= ($activeSlug == 'prospectus') ? 'active' : '' ?>" style="color:var(--primary);font-weight:700;">Prospectus Manager ★</a>
         <a href="manage_pages.php?slug=international-admissions" class="submenu-item <?= ($activeSlug == 'international-admissions') ? 'active' : '' ?>">For International Admissions</a>
         <a href="manage_pages.php?slug=academic-departments" class="submenu-item <?= ($activeSlug == 'academic-departments') ? 'active' : '' ?>">Faculties and Departments</a>
         <a href="manage_pages.php?slug=bank-details" class="submenu-item <?= ($activeSlug == 'bank-details') ? 'active' : '' ?>">University Bank Account Details</a>

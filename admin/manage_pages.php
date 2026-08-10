@@ -134,7 +134,7 @@ if ($action === 'delete_item') {
 }
 
 // Now include header after handling redirects
-$pageTitle = 'Page Content Editor — RKDF CMS';
+$pageTitle = 'Page Content Editor — RKDF Admin Portal';
 require_once 'header.php';
 
 // Ensure page exists in DB
