@@ -358,7 +358,7 @@ try {
       'sec_13_gallery'     => '13. 🖼️ Campus Gallery',
       'sec_14_recognition' => '14. 🏅 Accreditation & Approvals',
       'sec_15_virtual_tour' => '15. 🎥 Virtual Campus Experience',
-      'sec_16_final_cta'   => '16. 🚀 Final Call to Action',
+      'sec_16_final_cta'   => '16. 🚀 Final Call to Action & Enrollment',
     ];
 
     foreach ($defaultSecKeys as $sKey => $sLabel):

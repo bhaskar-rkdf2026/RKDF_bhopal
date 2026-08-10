@@ -65,7 +65,7 @@ if (!$sec0 || ($sec0['is_active'] ?? 1)):
 
   $dbHeroItems = $cmsItems['sec_00_hero'] ?? [];
   $heroBtn1Text = $sec0['extra_text_1'] ?? "APPLY NOW — ADMISSIONS $admYear";
-  $heroBtn1Url  = $policyPdf;
+  $heroBtn1Url  = "admissionform.php";
   $heroBtn2Text = $sec0['extra_text_2'] ?? "EXPLORE CAMPUS";
   $heroBtn2Url  = "videogallery.php";
 
@@ -99,7 +99,7 @@ if (!$sec0 || ($sec0['is_active'] ?? 1)):
         <em class="rk-italic-gold"><?= htmlspecialchars($heroAccent) ?></em>
       </h1>
       <div class="rk-hero-ctas">
-        <a href="<?= htmlspecialchars($heroBtn1Url) ?>" target="_blank" class="rk-btn-gold rk-hero-apply">
+        <a href="<?= htmlspecialchars($heroBtn1Url) ?>" class="rk-btn-gold rk-hero-apply">
           <?= htmlspecialchars($heroBtn1Text) ?>
           <span class="rk-btn-arrow">↗</span>
         </a>
@@ -786,7 +786,7 @@ if (!$sec10 || ($sec10['is_active'] ?? 1)):
     ['num'=>'8 LPA', 'label'=>'AVERAGE PACKAGE','to'=>8],
     ['num'=>'300+',  'label'=>'RECRUITERS',     'to'=>300],
   ];
-  $recruiters = ['Tata Consultancy Services','Infosys','Wipro','Accenture','Deloitte','HDFC Bank','Reliance','L&T','Cognizant','IBM','Amazon','Capgemini'];
+  $recruiters = array_values(array_unique(['Tata Consultancy Services','Infosys','Wipro','Accenture','Deloitte','HDFC Bank','Reliance','L&T','Cognizant','IBM','Amazon','Capgemini']));
 
   $dbPlacementItems = $cmsItems['sec_10_placements'] ?? [];
   if (!empty($dbPlacementItems)) {
@@ -805,7 +805,7 @@ if (!$sec10 || ($sec10['is_active'] ?? 1)):
       }
     }
     if (!empty($dbRecs)) {
-      $recruiters = $dbRecs;
+      $recruiters = array_values(array_unique($dbRecs));
     }
   }
 ?>
@@ -909,29 +909,36 @@ if (!$sec12 || ($sec12['is_active'] ?? 1)):
     'desc'  => "Chancellor Sunil Kapoor conferred degrees on the largest graduating cohort in RKDF's history.",
     'date'  => '28 August 2024',
     'tag'   => 'Featured',
-    'img'   => $sec12Img
+    'img'   => $sec12Img,
+    'url'   => 'news_detail.php?id=1'
   ];
 
   $newsItems = [
-    ['date'=>'26 Aug 2024','cat'=>'RESEARCH',   'title'=>'Physics dept. wins DST grant for quantum sensing research'],
-    ['date'=>'22 Aug 2024','cat'=>'PLACEMENTS', 'title'=>'Placements open: Deloitte, Cognizant, HDFC on campus next week'],
-    ['date'=>'18 Aug 2024','cat'=>'GLOBAL',     'title'=>'International summer school with Politecnico di Milano concludes'],
-    ['date'=>'14 Aug 2024','cat'=>'CULTURE',    'title'=>'Independence Day: RKDF Cultural Society stages \'Rang Bharat\''],
+    ['date'=>'26 Aug 2024','cat'=>'RESEARCH',   'title'=>'Physics dept. wins DST grant for quantum sensing research', 'url'=>'r&d.php'],
+    ['date'=>'22 Aug 2024','cat'=>'PLACEMENTS', 'title'=>'Placements open: Deloitte, Cognizant, HDFC on campus next week', 'url'=>'t&p.php'],
+    ['date'=>'18 Aug 2024','cat'=>'GLOBAL',     'title'=>'International summer school with Politecnico di Milano concludes', 'url'=>'international-relation.php'],
+    ['date'=>'14 Aug 2024','cat'=>'CULTURE',    'title'=>'Independence Day: RKDF Cultural Society stages \'Rang Bharat\'', 'url'=>'imggallery.php'],
   ];
   $dbNews = $cmsItems['sec_12_news'] ?? [];
   if (!empty($dbNews)) {
     $newsItems = [];
-    foreach ($dbNews as $i) {
+    foreach ($dbNews as $idx => $i) {
       if ($i['item_type'] === 'featured') {
         $featuredArticle = [
           'title' => $i['title'],
           'desc'  => $i['subtitle'] ?: $i['text_val'],
           'date'  => $i['number_val'] ?: '2026',
           'tag'   => $i['badge_text'] ?: 'Featured',
-          'img'   => $i['image_path'] ?: $sec12Img
+          'img'   => $i['image_path'] ?: $sec12Img,
+          'url'   => $i['link_url'] ?: ('news_detail.php?id=' . ($i['id'] ?? 1))
         ];
       } else {
-        $newsItems[] = ['date'=>$i['number_val']?:'', 'cat'=>strtoupper($i['badge_text']?:'NEWS'), 'title'=>$i['title']];
+        $newsItems[] = [
+          'date'  => $i['number_val'] ?: '',
+          'cat'   => strtoupper($i['badge_text'] ?: 'NEWS'),
+          'title' => $i['title'],
+          'url'   => $i['link_url'] ?: ('news_detail.php?id=' . ($i['id'] ?? ($idx + 1)))
+        ];
       }
     }
   }
@@ -945,28 +952,30 @@ if (!$sec12 || ($sec12['is_active'] ?? 1)):
           <?= htmlspecialchars($sec12Title) ?> <em class="rk-italic-plain"><?= htmlspecialchars($sec12Accent) ?></em>
         </h2>
       </div>
-      <a href="exam.php" class="rk-news-all-link rk-reveal" style="--delay:0.1s">All updates ↗</a>
+      <a href="Announcements.php" class="rk-news-all-link rk-reveal" style="--delay:0.1s">All updates ↗</a>
     </div>
 
     <div class="rk-news-layout">
       <!-- Left: big featured article -->
-      <article class="rk-news-featured rk-reveal">
-        <div class="rk-news-featured-img">
-          <img src="<?= (strpos($featuredArticle['img'], '/') !== false) ? htmlspecialchars($featuredArticle['img']) : 'images/lovable/' . htmlspecialchars($featuredArticle['img']) ?>" alt="<?= htmlspecialchars($featuredArticle['title']) ?>" loading="lazy">
-        </div>
-        <div class="rk-news-featured-meta">
-          <span class="rk-news-meta-tag"><?= htmlspecialchars($featuredArticle['tag']) ?></span>
-          <span class="rk-news-meta-divider"></span>
-          <span class="rk-news-meta-date"><?= htmlspecialchars($featuredArticle['date']) ?></span>
-        </div>
-        <h3 class="rk-news-featured-title"><?= htmlspecialchars($featuredArticle['title']) ?></h3>
-        <p class="rk-news-featured-desc"><?= htmlspecialchars($featuredArticle['desc']) ?></p>
-      </article>
+      <a href="<?= htmlspecialchars($featuredArticle['url']) ?>" class="rk-news-featured-link" style="text-decoration:none;color:inherit;">
+        <article class="rk-news-featured rk-reveal">
+          <div class="rk-news-featured-img">
+            <img src="<?= (strpos($featuredArticle['img'], '/') !== false) ? htmlspecialchars($featuredArticle['img']) : 'images/lovable/' . htmlspecialchars($featuredArticle['img']) ?>" alt="<?= htmlspecialchars($featuredArticle['title']) ?>" loading="lazy">
+          </div>
+          <div class="rk-news-featured-meta">
+            <span class="rk-news-meta-tag"><?= htmlspecialchars($featuredArticle['tag']) ?></span>
+            <span class="rk-news-meta-divider"></span>
+            <span class="rk-news-meta-date"><?= htmlspecialchars($featuredArticle['date']) ?></span>
+          </div>
+          <h3 class="rk-news-featured-title"><?= htmlspecialchars($featuredArticle['title']) ?></h3>
+          <p class="rk-news-featured-desc"><?= htmlspecialchars($featuredArticle['desc']) ?></p>
+        </article>
+      </a>
 
       <!-- Right: stacked news items -->
       <div class="rk-news-list">
         <?php foreach ($newsItems as $idx => $n): ?>
-        <a href="exam.php" class="rk-news-item rk-reveal" style="--delay:<?= $idx * 0.06 ?>s">
+        <a href="<?= htmlspecialchars($n['url']) ?>" class="rk-news-item rk-reveal" style="--delay:<?= $idx * 0.06 ?>s">
           <div class="rk-news-item-date"><?= htmlspecialchars($n['date']) ?></div>
           <div class="rk-news-item-body">
             <div class="rk-news-item-cat"><?= htmlspecialchars($n['cat']) ?></div>
@@ -1033,7 +1042,7 @@ if (!$sec13 || ($sec13['is_active'] ?? 1)):
 
 
 <!-- ══════════════════════════════════════════════════════════
-  §14. RECOGNITION — Accreditation Badges
+  §14. RECOGNITION — Accreditation & Statutory Approvals
 ══════════════════════════════════════════════════════════ -->
 <?php
 $sec14 = $cmsSections['sec_14_recognition'] ?? null;
@@ -1041,14 +1050,23 @@ if (!$sec14 || ($sec14['is_active'] ?? 1)):
   $sec14Tag   = format_eyebrow_tag($sec14 ?: ['tag_number'=>'14','tag_text'=>'ACCREDITATION & RECOGNITION']);
   $sec14Title = $sec14['title_main'] ?? 'Recognised where it counts.';
   $approvals = [
-    ['name'=>'NAAC A+'],['name'=>'UGC RECOGNISED'],['name'=>'AICTE APPROVED'],
-    ['name'=>'NBA ACCREDITED'],['name'=>'NIRF RANKED'],['name'=>'ISO 9001:2015'],
+    ['name'=>'NAAC A+ ACCREDITED', 'sub'=>'Grade A+ Accreditation', 'img'=>'images/img/NaccLogo.jpg', 'url'=>'Content/Documents/NAAC-Certificate-of-Accrediation-RKDF-University-Bhopal.pdf'],
+    ['name'=>'ICAR ACCREDITED', 'sub'=>'Indian Council of Agr. Research', 'img'=>'images/img/icarlogo.png', 'url'=>'images/Accreditation/ICAR Accreditation.jpeg'],
+    ['name'=>'UGC RECOGNISED', 'sub'=>'Under Sec 2(f) & 12(B)', 'img'=>'images/img/approval.gif', 'url'=>'ugcfile.php'],
+    ['name'=>'AICTE APPROVED', 'sub'=>'Technical Courses Approved', 'img'=>'images/img/approval.gif', 'url'=>'aicte_approval.php'],
+    ['name'=>'PCI APPROVED', 'sub'=>'Pharmacy Council of India', 'img'=>'images/img/approval.gif', 'url'=>'pci_approval.php'],
+    ['name'=>'ISO 9001:2015', 'sub'=>'Quality Management System', 'img'=>'images/img/approval.gif', 'url'=>'approvals.php'],
   ];
   $dbApprovals = $cmsItems['sec_14_recognition'] ?? [];
   if (!empty($dbApprovals)) {
     $approvals = [];
     foreach ($dbApprovals as $i) {
-      $approvals[] = ['name'=>$i['title']];
+      $approvals[] = [
+        'name' => $i['title'],
+        'sub'  => $i['subtitle'] ?: 'Statutory Approval',
+        'img'  => $i['image_path'] ?: 'images/img/approval.gif',
+        'url'  => $i['link_url'] ?: 'approvals.php'
+      ];
     }
   }
 ?>
@@ -1058,18 +1076,59 @@ if (!$sec14 || ($sec14['is_active'] ?? 1)):
       <div class="rk-accred-left rk-reveal">
         <div class="rk-eyebrow"><?= $sec14Tag ?></div>
         <h3 class="rk-accred-title"><?= htmlspecialchars($sec14Title) ?></h3>
+        <p style="font-size:14px;color:rgba(250,249,246,0.7);margin-top:12px;line-height:1.6;">
+          RKDF University holds national accreditations and approvals from central statutory councils, ensuring highest quality standards.
+        </p>
       </div>
       <div class="rk-accred-badges rk-reveal" style="--delay:0.1s">
         <?php foreach ($approvals as $app): ?>
-        <div class="rk-accred-badge">
-          <div class="rk-accred-badge-icon">✦</div>
-          <div class="rk-accred-badge-name"><?= htmlspecialchars($app['name']) ?></div>
-        </div>
+        <a href="<?= htmlspecialchars($app['url']) ?>" target="_blank" class="rk-accred-badge-card" style="text-decoration:none;">
+          <div class="rk-accred-badge-img-wrap">
+            <img src="<?= htmlspecialchars($app['img']) ?>" alt="<?= htmlspecialchars($app['name']) ?>" onError="this.style.display='none';">
+          </div>
+          <div>
+            <div class="rk-accred-badge-name"><?= htmlspecialchars($app['name']) ?></div>
+            <div style="font-size:11px;color:rgba(250,249,246,0.6);margin-top:2px;"><?= htmlspecialchars($app['sub']) ?></div>
+          </div>
+        </a>
         <?php endforeach; ?>
       </div>
     </div>
   </div>
 </section>
+<style>
+.rk-accred-badge-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 12px 18px;
+  border-radius: 10px;
+  transition: all 0.25s;
+}
+.rk-accred-badge-card:hover {
+  background: rgba(255,255,255,0.14);
+  border-color: #D9232D;
+  transform: translateY(-2px);
+}
+.rk-accred-badge-img-wrap {
+  width: 44px;
+  height: 44px;
+  background: #ffffff;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.rk-accred-badge-img-wrap img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+</style>
 <?php endif; ?>
 
 
@@ -1123,7 +1182,7 @@ if (!$sec15 || ($sec15['is_active'] ?? 1)):
 <?php
 $sec16 = $cmsSections['sec_16_final_cta'] ?? null;
 if (!$sec16 || ($sec16['is_active'] ?? 1)):
-  $sec16Tag    = format_eyebrow_tag($sec16 ?: ['tag_number'=>'16','tag_text'=>"ADMISSIONS $admYear"]);
+  $sec16Tag    = format_eyebrow_tag($sec16 ?: ['tag_number'=>'16','tag_text'=>'JOIN RKDF TODAY']);
   $sec16Title  = $sec16['title_main']   ?? 'Your next chapter';
   $sec16Accent = $sec16['title_accent'] ?? 'starts here.';
   $sec16BtnText= $sec16['extra_text_1'] ?? 'Apply Today ↗';

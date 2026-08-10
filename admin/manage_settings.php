@@ -211,13 +211,24 @@ try {
       </div>
     </div>
 
-    <!-- 4. Announcement Ticker & Footer -->
+    <!-- 4. Announcement Ticker, Popup & Footer -->
     <div class="settings-section-title">
       <i class="fa-solid fa-bullhorn" style="color: var(--primary);"></i>
-      Global Announcement Ticker &amp; Footer
+      Homepage Popup Modal &amp; Global Announcement Ticker
     </div>
 
     <div class="form-grid-2">
+      <div>
+        <label>Homepage Notice Popup Modal Status</label>
+        <select name="settings[popup_notice_active]">
+          <option value="1" <?= (($currentSettings['popup_notice_active'] ?? '1') === '1') ? 'selected' : '' ?>>Enabled (Active on Homepage)</option>
+          <option value="0" <?= (($currentSettings['popup_notice_active'] ?? '1') === '0') ? 'selected' : '' ?>>Disabled (Hidden)</option>
+        </select>
+      </div>
+      <div>
+        <label>Popup Modal Headline Title</label>
+        <input type="text" name="settings[popup_notice_title]" value="<?= htmlspecialchars($currentSettings['popup_notice_title'] ?? 'RKDF University — Important Notices & Circulars') ?>">
+      </div>
       <div class="form-group-full">
         <label>Top Scrolling Announcement Banner Text</label>
         <textarea name="settings[ticker_text]" rows="2"><?= htmlspecialchars($currentSettings['ticker_text'] ?? 'Admissions Open 2026-27 for B.Tech, MBA, B.Pharm, Ph.D and Nursing Programs!') ?></textarea>

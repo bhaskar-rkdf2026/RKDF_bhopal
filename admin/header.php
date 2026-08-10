@@ -46,6 +46,11 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       font-family: 'Plus Jakarta Sans', sans-serif;
     }
     
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+    }
+    
     body {
       background-color: var(--bg-light);
       color: var(--text-main);
@@ -237,6 +242,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       display: flex;
       flex-direction: column;
       min-width: 0;
+      max-width: calc(100vw - var(--sidebar-width));
+      overflow-x: hidden;
     }
 
     .top-header {
@@ -536,7 +543,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       </a>
 
       <div class="menu-category">System</div>
-      <a href="../database/seed_data.php" target="_blank" class="menu-item">
+      <a href="../database/seed_data.php" target="_blank" class="menu-item" onclick="return confirm('⚠️ WARNING: Are you sure you want to Re-Seed the database? This will reset all homepage sections, items, settings and page definitions to baseline defaults. Continue?');">
         <i class="fa-solid fa-database"></i>
         <span>Re-Seed Database</span>
       </a>

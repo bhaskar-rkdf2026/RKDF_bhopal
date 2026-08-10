@@ -6,6 +6,7 @@
 $pageTitle = 'Appearance Manager — RKDF CMS';
 require_once 'header.php';
 require_once '../config/db.php';
+require_once __DIR__ . '/upload_handler.php';
 
 $pdo = getDbConnection();
 
@@ -87,6 +88,20 @@ $action = $_POST['action'] ?? '';
 
 // -- Logo / Header settings --
 if ($action === 'save_appearance') {
+    // Check for direct image file uploads for logos
+    if (isset($_FILES['file_logo_crest']) && $_FILES['file_logo_crest']['error'] === UPLOAD_ERR_OK) {
+        $upRes = handleImageUpload($_FILES['file_logo_crest']);
+        if ($upRes['success']) $_POST['logo_crest'] = $upRes['path'];
+    }
+    if (isset($_FILES['file_logo_name']) && $_FILES['file_logo_name']['error'] === UPLOAD_ERR_OK) {
+        $upRes = handleImageUpload($_FILES['file_logo_name']);
+        if ($upRes['success']) $_POST['logo_name'] = $upRes['path'];
+    }
+    if (isset($_FILES['file_logo_footer']) && $_FILES['file_logo_footer']['error'] === UPLOAD_ERR_OK) {
+        $upRes = handleImageUpload($_FILES['file_logo_footer']);
+        if ($upRes['success']) $_POST['footer_logo'] = $upRes['path'];
+    }
+
     $keys = ['logo_crest','logo_name','footer_logo','site_title',
              'footer_address','footer_phone','footer_email',
              'social_facebook','social_instagram','social_twitter',
@@ -220,9 +235,9 @@ $editFooterRow = $editFooterId ? $pdo->query("SELECT * FROM footer_links WHERE i
 .ap-alert-ok  { background:#dcfce7; color:#166534; border:1px solid #bbf7d0; padding:12px 16px; border-radius:8px; font-weight:600; font-size:14px; margin-bottom:20px; }
 .ap-alert-err { background:#fee2e2; color:#991b1b; border:1px solid #fecaca; padding:12px 16px; border-radius:8px; font-weight:600; font-size:14px; margin-bottom:20px; }
 
-.logo-preview { display:flex; align-items:center; gap:16px; padding:16px; background:#f8fafc; border-radius:8px; border:1px solid var(--border-color); }
-.logo-preview img { height:50px; width:auto; object-fit:contain; }
-.logo-preview .logo-preview-label { font-size:12px; color:var(--text-muted); font-weight:600; }
+.logo-preview { display:flex; align-items:center; gap:16px; padding:18px; background:#0f172a; border-radius:10px; border:1px solid #334155; box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); }
+.logo-preview img { height:50px; width:auto; object-fit:contain; background: rgba(255,255,255,0.05); padding: 4px; border-radius: 4px; }
+.logo-preview .logo-preview-label { font-size:12px; color:#f8fafc; font-weight:700; }
 </style>
 
 <?php if ($success): ?><div class="ap-alert-ok"><i class="fa-solid fa-circle-check"></i> <?= htmlspecialchars($success) ?></div><?php endif; ?>
@@ -240,7 +255,7 @@ $editFooterRow = $editFooterId ? $pdo->query("SELECT * FROM footer_links WHERE i
   TAB 1: Logo & Branding
 ════════════════════════════════════════════════════════ -->
 <div class="ap-pane active" id="pane-logos">
-  <form method="POST">
+  <form method="POST" enctype="multipart/form-data">
     <input type="hidden" name="action" value="save_appearance">
 
 <?php
@@ -255,22 +270,22 @@ function admin_img_url($path) {
 ?>
 
     <div class="ap-card">
-      <div class="ap-card-head"><i class="fa-solid fa-image"></i> Site Logo Files</div>
+      <div class="ap-card-head"><i class="fa-solid fa-image"></i> Site Logo Files & File Uploaders</div>
 
-      <!-- Live preview -->
+      <!-- Live preview (Dark background for crisp visibility of white logos) -->
       <div class="logo-preview" style="margin-bottom:20px;">
         <img id="prevCrest" src="<?= htmlspecialchars(admin_img_url($aSettings['logo_crest'])) ?>" alt="Crest">
         <div>
           <div class="logo-preview-label">Crest / Badge (logo33)</div>
           <div style="font-size:11px;color:#94a3b8;">Left side of navbar</div>
         </div>
-        <div style="width:1px;height:40px;background:#e2e8f0;margin:0 8px;"></div>
+        <div style="width:1px;height:40px;background:#334155;margin:0 8px;"></div>
         <img id="prevName" src="<?= htmlspecialchars(admin_img_url($aSettings['logo_name'])) ?>" alt="Name Logo">
         <div>
           <div class="logo-preview-label">Name / Text Logo (logo22)</div>
           <div style="font-size:11px;color:#94a3b8;">Right side of crest in navbar</div>
         </div>
-        <div style="width:1px;height:40px;background:#e2e8f0;margin:0 8px;"></div>
+        <div style="width:1px;height:40px;background:#334155;margin:0 8px;"></div>
         <img id="prevFooter" src="<?= htmlspecialchars(admin_img_url($aSettings['footer_logo'])) ?>" alt="Footer Logo">
         <div>
           <div class="logo-preview-label">Footer Logo</div>
@@ -280,20 +295,31 @@ function admin_img_url($path) {
 
       <div class="ap-grid3">
         <div class="form-group">
-          <label>Navbar Crest Logo (logo33) Path</label>
-          <input type="text" name="logo_crest" value="<?= htmlspecialchars($aSettings['logo_crest']) ?>"
+          <label>Navbar Crest Logo (logo33)</label>
+          <input type="text" name="logo_crest" id="input_logo_crest" value="<?= htmlspecialchars($aSettings['logo_crest']) ?>"
                  placeholder="images/img/logo33.png" oninput="updatePrev('prevCrest', this.value)">
-          <small style="color:#94a3b8;font-size:11px;">Relative path from site root</small>
+          <div style="margin-top:6px;">
+            <span style="font-size:11px;color:#64748b;display:block;margin-bottom:2px;">Upload New Image File:</span>
+            <input type="file" name="file_logo_crest" accept="image/*" style="font-size:12px;">
+          </div>
         </div>
         <div class="form-group">
-          <label>Navbar Name Logo (logo22) Path</label>
-          <input type="text" name="logo_name" value="<?= htmlspecialchars($aSettings['logo_name']) ?>"
+          <label>Navbar Name Logo (logo22)</label>
+          <input type="text" name="logo_name" id="input_logo_name" value="<?= htmlspecialchars($aSettings['logo_name']) ?>"
                  placeholder="images/img/logo22.png" oninput="updatePrev('prevName', this.value)">
+          <div style="margin-top:6px;">
+            <span style="font-size:11px;color:#64748b;display:block;margin-bottom:2px;">Upload New Image File:</span>
+            <input type="file" name="file_logo_name" accept="image/*" style="font-size:12px;">
+          </div>
         </div>
         <div class="form-group">
-          <label>Footer Logo Path</label>
-          <input type="text" name="footer_logo" value="<?= htmlspecialchars($aSettings['footer_logo']) ?>"
+          <label>Footer Logo</label>
+          <input type="text" name="footer_logo" id="input_footer_logo" value="<?= htmlspecialchars($aSettings['footer_logo']) ?>"
                  placeholder="images/lovable/rkdf-logo.png" oninput="updatePrev('prevFooter', this.value)">
+          <div style="margin-top:6px;">
+            <span style="font-size:11px;color:#64748b;display:block;margin-bottom:2px;">Upload New Image File:</span>
+            <input type="file" name="file_logo_footer" accept="image/*" style="font-size:12px;">
+          </div>
         </div>
       </div>
     </div>

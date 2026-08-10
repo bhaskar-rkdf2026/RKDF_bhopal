@@ -34,5 +34,11 @@ require_once __DIR__ . '/config/db.php';
   <!-- APPROVED FOOTER (Dynamic Footer Links & Contacts from Admin) -->
   <?php include __DIR__ . '/include/footer.php'; ?>
 
+  <!-- IMPORTANT NOTICE POPUP MODAL DIALOG -->
+  <?php include __DIR__ . '/include/notice_modal.php'; ?>
+
+  <!-- FLOATING QUICK ACTION TOOLBAR (Right edge) -->
+  <?php include __DIR__ . '/include/floating_widgets.php'; ?>
+
 </body>
 </html>

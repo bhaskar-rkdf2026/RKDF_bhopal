@@ -52,7 +52,7 @@ try {
             'extra_text_2' => 'EXPLORE CAMPUS',
             'sort' => 0,
             'items' => [
-                ['type' => 'cta', 'title' => 'Apply Now — Admissions 2026-27', 'link_url' => 'ADMISSION POLICY 2026-27.pdf', 'badge_text' => 'PRIMARY'],
+                ['type' => 'cta', 'title' => 'Apply Now — Admissions 2026-27', 'link_url' => 'admissionform.php', 'badge_text' => 'PRIMARY'],
                 ['type' => 'cta', 'title' => 'Explore Campus Virtual Tour', 'link_url' => 'videogallery.php', 'badge_text' => 'SECONDARY']
             ]
         ],
@@ -223,10 +223,10 @@ try {
             'subtitle' => 'Latest news and announcements from around the campus',
             'sort' => 11,
             'items' => [
-                ['type' => 'news', 'title' => '14th Annual Convocation honours 4,200 graduates across 11 schools', 'subtitle' => 'Chancellor Sunil Kapoor conferred degrees on the largest graduating cohort in RKDF\'s history.', 'badge_text' => 'FEATURED · 28 AUG 2024', 'link_url' => 'exam.php'],
-                ['type' => 'news', 'title' => 'Physics dept. wins DST grant for quantum sensing research', 'subtitle' => 'Research grant awarded by Department of Science and Technology.', 'badge_text' => 'RESEARCH · 26 AUG 2024', 'link_url' => 'exam.php'],
+                ['type' => 'news', 'title' => '14th Annual Convocation honours 4,200 graduates across 11 schools', 'subtitle' => 'Chancellor Sunil Kapoor conferred degrees on the largest graduating cohort in RKDF\'s history.', 'badge_text' => 'FEATURED · 28 AUG 2024', 'link_url' => 'news_detail.php?id=1'],
+                ['type' => 'news', 'title' => 'Physics dept. wins DST grant for quantum sensing research', 'subtitle' => 'Research grant awarded by Department of Science and Technology.', 'badge_text' => 'RESEARCH · 26 AUG 2024', 'link_url' => 'r&d.php'],
                 ['type' => 'news', 'title' => 'Placements open: Deloitte, Cognizant, HDFC on campus next week', 'subtitle' => 'Annual campus recruitment drive commences for final year students.', 'badge_text' => 'PLACEMENTS · 22 AUG 2024', 'link_url' => 't&p.php'],
-                ['type' => 'news', 'title' => 'International summer school with Politecnico di Milano concludes', 'subtitle' => 'Collaborative workshop on sustainable urban design.', 'badge_text' => 'GLOBAL · 18 AUG 2024', 'link_url' => 'contact-us.php'],
+                ['type' => 'news', 'title' => 'International summer school with Politecnico di Milano concludes', 'subtitle' => 'Collaborative workshop on sustainable urban design.', 'badge_text' => 'GLOBAL · 18 AUG 2024', 'link_url' => 'international-relation.php'],
                 ['type' => 'news', 'title' => 'Independence Day: RKDF Cultural Society stages \'Rang Bharat\'', 'subtitle' => 'Cultural performances and patriotic tribute on campus.', 'badge_text' => 'CULTURE · 14 AUG 2024', 'link_url' => 'imggallery.php']
             ]
         ],

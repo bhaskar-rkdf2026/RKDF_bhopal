@@ -22,6 +22,29 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
 <!--  RKDF STICKY NAVBAR                                         -->
 <!-- ══════════════════════════════════════════════════════════ -->
 <div class="rkdf-navbar-wrap">
+
+<!-- ── UTILITY HEADER STRIP (TOP OF HEADER) ── -->
+<div class="rkdf-top-utility-bar">
+  <div class="rkdf-utility-inner">
+    <div class="rkdf-utility-left">
+      <a href="https://vps.rkdfu.org:2096/" target="_blank" class="rkdf-util-link highlight-mail">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        WebMail Login ↗
+      </a>
+      <span class="rkdf-util-divider">|</span>
+      <span class="rkdf-util-org">RAM KRISHNA DHARMARTH FOUNDATION (RKDF)</span>
+    </div>
+
+    <div class="rkdf-utility-right">
+      <a href="imggallery.php" class="rkdf-util-link">Photo Gallery</a>
+      <a href="alumni.php" class="rkdf-util-link">Alumni</a>
+      <a href="t&amp;p.php" class="rkdf-util-link">T&amp;P Cell</a>
+      <a href="Careers.php" class="rkdf-util-link">Careers</a>
+      <a href="Announcements.php?cat=tender" class="rkdf-util-link highlight-tender">⚡ E-Tenders</a>
+    </div>
+  </div>
+</div>
+
 <nav class="rkdf-nav-bar" id="rkdfNavBar" role="navigation" aria-label="Main navigation">
   <div class="rkdf-nav-inner">
 
@@ -217,13 +240,13 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
 
     <!-- ── RIGHT ACTIONS: SEARCH + STUDENT LOGIN + RED APPLY NOW ── -->
     <div class="rkdf-nav-right">
-      <!-- Search Button -->
-      <a href="academic&departments.php" class="rkdf-search-btn" aria-label="Search" title="Search">
+      <!-- Interactive Search Trigger Button -->
+      <button type="button" class="rkdf-search-btn" id="rkdfSearchBtn" aria-label="Toggle Search" title="Click to open search">
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-search">
           <circle cx="11" cy="11" r="8"></circle>
           <path d="m21 21-4.3-4.3"></path>
         </svg>
-      </a>
+      </button>
 
       <!-- Student Login Button -->
       <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" class="rkdf-login-btn">
@@ -250,26 +273,52 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
     </div>
 
   </div><!-- /rkdf-nav-inner -->
+
+  <!-- Expandable Active Search Overlay Bar -->
+  <div class="rkdf-search-overlay" id="rkdfSearchOverlay">
+    <div class="rkdf-search-box">
+      <form action="Admission_search.php" method="GET" class="rkdf-search-form">
+        <input type="text" name="q" id="rkdfSearchInput" placeholder="Search programs, admissions, results, syllabus..." autocomplete="off">
+        <button type="submit" class="rkdf-search-submit">Search ↵</button>
+        <button type="button" class="rkdf-search-close" id="rkdfSearchClose" aria-label="Close search">✕</button>
+      </form>
+      <div class="rkdf-search-tags">
+        <span>Popular:</span>
+        <a href="Admission_search.php?q=B.Tech">B.Tech</a>
+        <a href="Admission_search.php?q=MBA">MBA</a>
+        <a href="Admission_search.php?q=Pharmacy">Pharmacy</a>
+        <a href="Result.php">Exam Results</a>
+        <a href="University_Fees_Structure.pdf" target="_blank">Fee Structure</a>
+      </div>
+    </div>
+  </div>
+
 </nav><!-- /rkdf-nav-bar -->
 
 <!-- Mobile Navigation Drawer -->
 <div class="rkdf-mobile-drawer" id="rkdfMobileDrawer">
-  <a href="About_Us.pdf" target="_blank" class="rkdf-mobile-link">About Us</a>
+  <a href="about.php" class="rkdf-mobile-link">About Us</a>
   <a href="academic&amp;departments.php" class="rkdf-mobile-link">Academic</a>
-  <a href="exam.php" class="rkdf-mobile-link">Examination</a>
-  <a href="r&amp;d.php" class="rkdf-mobile-link">R&amp;D Activities</a>
-  <a href="phd.php" class="rkdf-mobile-link">Research Section (Ph.D)</a>
+  <a href="page.php?slug=exam-notice" class="rkdf-mobile-link">Examination</a>
+  <a href="page.php?slug=rnd-projects" class="rkdf-mobile-link">R&amp;D Activities</a>
+  <a href="page.php?slug=phd-subjects" class="rkdf-mobile-link">Research Section (Ph.D)</a>
   <a href="admissionform.php" class="rkdf-mobile-link">Admissions</a>
   <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" class="rkdf-mobile-link" style="color:var(--nav-red);margin-top:12px;">Student Login →</a>
 </div>
 </div><!-- /rkdf-navbar-wrap -->
 
-<!-- Dynamic Scroll Handler & Mobile Toggle Script -->
+
+
+<!-- Dynamic Scroll Handler & Mobile/Search Toggle Script -->
 <script>
 (function() {
   const navBar = document.getElementById('rkdfNavBar');
   const burger = document.getElementById('rkdfBurger');
   const drawer = document.getElementById('rkdfMobileDrawer');
+  const searchBtn = document.getElementById('rkdfSearchBtn');
+  const searchOverlay = document.getElementById('rkdfSearchOverlay');
+  const searchClose = document.getElementById('rkdfSearchClose');
+  const searchInput = document.getElementById('rkdfSearchInput');
 
   function updateNavScroll() {
     if (window.scrollY > 20) {
@@ -280,7 +329,7 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
   }
 
   window.addEventListener('scroll', updateNavScroll, { passive: true });
-  updateNavScroll(); // Initialize on page load
+  updateNavScroll();
 
   if (burger && drawer) {
     burger.addEventListener('click', function() {
@@ -288,6 +337,28 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
       burger.setAttribute('aria-expanded', isOpen);
     });
   }
+
+  if (searchBtn && searchOverlay) {
+    searchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const isActive = searchOverlay.classList.toggle('active');
+      if (isActive && searchInput) {
+        setTimeout(function() { searchInput.focus(); }, 100);
+      }
+    });
+  }
+
+  if (searchClose && searchOverlay) {
+    searchClose.addEventListener('click', function() {
+      searchOverlay.classList.remove('active');
+    });
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && searchOverlay && searchOverlay.classList.contains('active')) {
+      searchOverlay.classList.remove('active');
+    }
+  });
 })();
 </script>
 
