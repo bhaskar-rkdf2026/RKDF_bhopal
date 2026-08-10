@@ -241,6 +241,60 @@ if (!$sec2 || ($sec2['is_active'] ?? 1)):
 
 
 <!-- ══════════════════════════════════════════════════════════
+  §02B. ACADEMIC LEADERSHIP — Chancellor, VC & Governor Messages
+══════════════════════════════════════════════════════════ -->
+<?php
+$secLead = $cmsSections['sec_02_leadership'] ?? null;
+if (!$secLead || ($secLead['is_active'] ?? 1)):
+  $secLeadTag   = format_eyebrow_tag($secLead ?: ['tag_number'=>'02B','tag_text'=>'ACADEMIC LEADERSHIP']);
+  $secLeadTitle = $secLead['title_main']   ?? 'Guiding vision &';
+  $secLeadAccent= $secLead['title_accent'] ?? 'leadership.';
+  $secLeadSub   = $secLead['subtitle']     ?? 'Inspiring mentorship from our Chancellor, Vice-Chancellor and Hon\'ble Governor of MP.';
+
+  $leaders = $cmsItems['sec_02_leadership'] ?? [];
+?>
+<section class="rk-leadership" id="leadership" style="background:#ffffff;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="rk-container">
+    <div class="rk-section-header rk-reveal">
+      <div>
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secLeadTag ?></div>
+        <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
+          <?= htmlspecialchars($secLeadTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secLeadAccent) ?></em>
+        </h2>
+      </div>
+      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secLeadSub) ?></p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;margin-top:40px;">
+      <?php foreach ($leaders as $l): ?>
+      <div class="rk-reveal" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:32px;box-shadow:0 6px 20px rgba(12,20,36,0.04);display:flex;flex-direction:column;justify-content:space-between;transition:all 0.3s ease;">
+        <div>
+          <div style="display:flex;align-items:center;gap:18px;margin-bottom:20px;">
+            <img src="<?= htmlspecialchars($l['image_path'] ?: 'images/rkdflogo.JPG') ?>" alt="<?= htmlspecialchars($l['title']) ?>" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #C5A059;box-shadow:0 4px 12px rgba(0,0,0,0.1);" onError="this.src='images/rkdflogo.JPG';">
+            <div>
+              <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#E31B23;background:rgba(227,27,35,0.08);padding:3px 8px;border-radius:99px;"><?= htmlspecialchars($l['badge_text'] ?: 'LEADERSHIP') ?></span>
+              <h3 style="font-size:19px;font-weight:800;color:#0C1424;margin-top:4px;margin-bottom:2px;"><?= htmlspecialchars($l['title']) ?></h3>
+              <div style="font-size:13px;color:#64748b;font-weight:500;"><?= htmlspecialchars($l['subtitle']) ?></div>
+            </div>
+          </div>
+          <p style="font-size:14.5px;color:#334155;line-height:1.7;font-style:italic;margin-bottom:24px;">
+            "<?= htmlspecialchars($l['text_val']) ?>"
+          </p>
+        </div>
+        <div>
+          <?php if (!empty($l['link_url'])): ?>
+          <a href="<?= htmlspecialchars($l['link_url']) ?>" class="rk-link-arrow" style="font-weight:700;color:#0C1424;text-decoration:none;">Read Full Message <span>↗</span></a>
+          <?php endif; ?>
+        </div>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+
+<!-- ══════════════════════════════════════════════════════════
   §03. GATEWAY — Student Gateway
 ══════════════════════════════════════════════════════════ -->
 <?php
@@ -506,6 +560,52 @@ if (!$sec6 || ($sec6['is_active'] ?? 1)):
         <a href="admissionform.php" class="rk-btn-navy">START APPLICATION ↗</a>
         <a href="<?= $prospectus ?>" target="_blank" class="rk-btn-outline-navy">DOWNLOAD PROSPECTUS</a>
       </div>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+
+<!-- ══════════════════════════════════════════════════════════
+  §06B. KEY CAMPUS SERVICES — Youth Wings & Portals
+══════════════════════════════════════════════════════════ -->
+<?php
+$secServ = $cmsSections['sec_06_key_services'] ?? null;
+if (!$secServ || ($secServ['is_active'] ?? 1)):
+  $secServTag   = format_eyebrow_tag($secServ ?: ['tag_number'=>'06B','tag_text'=>'CAMPUS SERVICES & WINGS']);
+  $secServTitle = $secServ['title_main']   ?? 'Key Campus Units &';
+  $secServAccent= $secServ['title_accent'] ?? 'Portals.';
+  $secServSub   = $secServ['subtitle']     ?? 'Explore national service programs, research activities, admissions and results.';
+
+  $services = $cmsItems['sec_06_key_services'] ?? [];
+?>
+<section class="rk-services" id="services" style="background:#fafafa;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="rk-container">
+    <div class="rk-section-header rk-reveal">
+      <div>
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secServTag ?></div>
+        <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
+          <?= htmlspecialchars($secServTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secServAccent) ?></em>
+        </h2>
+      </div>
+      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secServSub) ?></p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px;">
+      <?php foreach ($services as $s): ?>
+      <a href="<?= htmlspecialchars($s['link_url'] ?: '#') ?>" class="rk-reveal" style="text-decoration:none;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(12,20,36,0.04);transition:all 0.3s ease;display:block;">
+        <div style="height:180px;overflow:hidden;position:relative;">
+          <img src="<?= htmlspecialchars($s['image_path'] ?: 'images/lovable/rkdf-building-enhanced.jpg') ?>" alt="<?= htmlspecialchars($s['title']) ?>" style="width:100%;height:100%;object-fit:cover;transition:transform 0.4s ease;" onError="this.src='images/rkdflogo.JPG';">
+          <span style="position:absolute;top:12px;left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#ffffff;background:#E31B23;padding:4px 10px;border-radius:99px;"><?= htmlspecialchars($s['badge_text'] ?: 'PORTAL') ?></span>
+        </div>
+        <div style="padding:24px;">
+          <h3 style="font-size:18px;font-weight:800;color:#0C1424;margin-bottom:6px;"><?= htmlspecialchars($s['title']) ?></h3>
+          <div style="font-size:13px;color:#C5A059;font-weight:600;margin-bottom:8px;"><?= htmlspecialchars($s['subtitle']) ?></div>
+          <p style="font-size:14px;color:#475569;line-height:1.6;margin:0;"><?= htmlspecialchars($s['text_val']) ?></p>
+          <div style="margin-top:16px;font-size:13px;font-weight:700;color:#0C1424;display:flex;align-items:center;gap:6px;">Explore Portal <span style="color:#E31B23;">↗</span></div>
+        </div>
+      </a>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -843,6 +943,49 @@ if (!$sec10 || ($sec10['is_active'] ?? 1)):
 
 
 <!-- ══════════════════════════════════════════════════════════
+  §09B. SHINING STARS — Placed Alumni Showcase
+══════════════════════════════════════════════════════════ -->
+<?php
+$secStar = $cmsSections['sec_09_shining_stars'] ?? null;
+if (!$secStar || ($secStar['is_active'] ?? 1)):
+  $secStarTag   = format_eyebrow_tag($secStar ?: ['tag_number'=>'09B','tag_text'=>'ALUMNI PLACEMENT STARS']);
+  $secStarTitle = $secStar['title_main']   ?? 'Placed Students —';
+  $secStarAccent= $secStar['title_accent'] ?? 'Shining Stars.';
+  $secStarSub   = $secStar['subtitle']     ?? 'RKDF graduates securing top corporate packages in Fortune 500 companies.';
+
+  $stars = $cmsItems['sec_09_shining_stars'] ?? [];
+?>
+<section class="rk-stars" id="shining-stars" style="background:#ffffff;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="rk-container">
+    <div class="rk-section-header rk-reveal">
+      <div>
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secStarTag ?></div>
+        <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
+          <?= htmlspecialchars($secStarTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secStarAccent) ?></em>
+        </h2>
+      </div>
+      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secStarSub) ?></p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:40px;">
+      <?php foreach ($stars as $st): ?>
+      <div class="rk-reveal" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(12,20,36,0.04);text-align:center;">
+        <div style="width:90px;height:90px;margin:0 auto 16px;border-radius:50%;overflow:hidden;border:3px solid #E31B23;box-shadow:0 4px 12px rgba(227,27,35,0.15);">
+          <img src="<?= htmlspecialchars($st['image_path'] ?: 'images/rkdflogo.JPG') ?>" alt="<?= htmlspecialchars($st['title']) ?>" style="width:100%;height:100%;object-fit:cover;" onError="this.src='images/rkdflogo.JPG';">
+        </div>
+        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#ffffff;background:#0C1424;padding:4px 12px;border-radius:99px;display:inline-block;margin-bottom:10px;"><?= htmlspecialchars($st['badge_text'] ?: 'PLACED') ?></span>
+        <h4 style="font-size:17px;font-weight:800;color:#0C1424;margin-bottom:4px;"><?= htmlspecialchars($st['title']) ?></h4>
+        <div style="font-size:13px;color:#C5A059;font-weight:600;margin-bottom:8px;"><?= htmlspecialchars($st['subtitle']) ?></div>
+        <p style="font-size:13.5px;color:#475569;line-height:1.5;margin:0;"><?= htmlspecialchars($st['text_val']) ?></p>
+      </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+
+<!-- ══════════════════════════════════════════════════════════
   §11. VOICES — Student Testimonials
 ══════════════════════════════════════════════════════════ -->
 <?php
@@ -985,6 +1128,50 @@ if (!$sec12 || ($sec12['is_active'] ?? 1)):
         </a>
         <?php endforeach; ?>
       </div>
+    </div>
+  </div>
+</section>
+<?php endif; ?>
+
+
+<!-- ══════════════════════════════════════════════════════════
+  §11B. ART GALLERY — Fine Arts & Campus Life Showcase
+══════════════════════════════════════════════════════════ -->
+<?php
+$secArt = $cmsSections['sec_11_art_gallery'] ?? null;
+if (!$secArt || ($secArt['is_active'] ?? 1)):
+  $secArtTag   = format_eyebrow_tag($secArt ?: ['tag_number'=>'11B','tag_text'=>'CAMPUS ART & CREATIVITY']);
+  $secArtTitle = $secArt['title_main']   ?? 'Campus Life &';
+  $secArtAccent= $secArt['title_accent'] ?? 'Art Gallery.';
+  $secArtSub   = $secArt['subtitle']     ?? 'Glimpses of fine arts, cultural events, campus fests, and student creations.';
+
+  $artItems = $cmsItems['sec_11_art_gallery'] ?? [];
+?>
+<section class="rk-art-gallery" id="art-gallery" style="background:#fafafa;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="rk-container">
+    <div class="rk-section-header rk-reveal">
+      <div>
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secArtTag ?></div>
+        <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
+          <?= htmlspecialchars($secArtTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secArtAccent) ?></em>
+        </h2>
+      </div>
+      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secArtSub) ?></p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-top:40px;">
+      <?php foreach ($artItems as $a): ?>
+      <a href="<?= htmlspecialchars($a['link_url'] ?: 'imggallery.php') ?>" class="rk-reveal" style="text-decoration:none;background:#ffffff;border:1px solid #e2e8f0;border-radius:16px;overflow:hidden;box-shadow:0 4px 16px rgba(12,20,36,0.04);display:block;transition:all 0.3s ease;">
+        <div style="height:220px;overflow:hidden;position:relative;">
+          <img src="<?= htmlspecialchars($a['image_path'] ?: 'images/lovable/rkdf-building-enhanced.jpg') ?>" alt="<?= htmlspecialchars($a['title']) ?>" style="width:100%;height:100%;object-fit:cover;" onError="this.src='images/rkdflogo.JPG';">
+          <span style="position:absolute;top:12px;left:12px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#ffffff;background:#0C1424;padding:4px 10px;border-radius:99px;"><?= htmlspecialchars($a['badge_text'] ?: 'GALLERY') ?></span>
+        </div>
+        <div style="padding:20px;">
+          <h4 style="font-size:17px;font-weight:800;color:#0C1424;margin-bottom:4px;"><?= htmlspecialchars($a['title']) ?></h4>
+          <p style="font-size:13.5px;color:#64748b;margin:0;"><?= htmlspecialchars($a['subtitle']) ?></p>
+        </div>
+      </a>
+      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -1138,6 +1325,48 @@ if (!$sec14 || ($sec14['is_active'] ?? 1)):
   object-fit: contain;
 }
 </style>
+<?php endif; ?>
+
+
+<!-- ══════════════════════════════════════════════════════════
+  §14B. IMPORTANT LINKS — Statutory Approvals & Quick Links Matrix
+══════════════════════════════════════════════════════════ -->
+<?php
+$secImp = $cmsSections['sec_14_important_links'] ?? null;
+if (!$secImp || ($secImp['is_active'] ?? 1)):
+  $secImpTag   = format_eyebrow_tag($secImp ?: ['tag_number'=>'14B','tag_text'=>'STATUTORY & QUICK LINKS']);
+  $secImpTitle = $secImp['title_main']   ?? 'Statutory Approvals &';
+  $secImpAccent= $secImp['title_accent'] ?? 'Quick Links.';
+  $secImpSub   = $secImp['subtitle']     ?? 'Direct access to official university certificates, committees, ordinances, webmail, and e-tenders.';
+
+  $impLinks = $cmsItems['sec_14_important_links'] ?? [];
+?>
+<section class="rk-imp-links" id="important-links" style="background:#ffffff;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+  <div class="rk-container">
+    <div class="rk-section-header rk-reveal">
+      <div>
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secImpTag ?></div>
+        <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
+          <?= htmlspecialchars($secImpTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secImpAccent) ?></em>
+        </h2>
+      </div>
+      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secImpSub) ?></p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px;">
+      <?php foreach ($impLinks as $link): ?>
+      <a href="<?= htmlspecialchars($link['link_url'] ?: '#') ?>" target="_blank" class="rk-reveal" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;padding:16px 20px;border-radius:12px;transition:all 0.25s ease;">
+        <div>
+          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#E31B23;background:rgba(227,27,35,0.08);padding:2px 8px;border-radius:99px;"><?= htmlspecialchars($link['badge_text'] ?: 'LINK') ?></span>
+          <h4 style="font-size:14.5px;font-weight:700;color:#0C1424;margin-top:6px;margin-bottom:2px;"><?= htmlspecialchars($link['title']) ?></h4>
+          <div style="font-size:12px;color:#64748b;"><?= htmlspecialchars($link['subtitle']) ?></div>
+        </div>
+        <span style="font-size:16px;color:#0C1424;font-weight:700;">↗</span>
+      </a>
+      <?php endforeach; ?>
+    </div>
+  </div>
+</section>
 <?php endif; ?>
 
 
