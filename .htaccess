@@ -1,84 +1,42 @@
 
 RewriteOptions inherit
+RewriteEngine On
 
-RewriteEngine on
-
-# ── CORS: Allow fonts for staging subdomain ──
+# ── CORS: Allow fonts and styles for subdomains ──
 <IfModule mod_headers.c>
-    <FilesMatch "\.(woff|woff2|eot|ttf|otf|svg|css)$">
+    <FilesMatch "\.(woff|woff2|eot|ttf|otf|svg|css|js)$">
         Header set Access-Control-Allow-Origin "*"
         Header set Access-Control-Allow-Methods "GET, OPTIONS"
         Header set Access-Control-Allow-Headers "Origin, X-Requested-With, Content-Type, Accept"
     </FilesMatch>
 </IfModule>
 
-# RewriteOptions inherit
-# Header set content-Security-Policy: upgrade-insecure-requests
-# RewriteEngine On
-# RewriteCond %{HTTPS} off
-# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
+# Disable Directory Index Browsing for Security
 Options -Indexes
 
-#RewriteRule .*\.(jpg|jpeg|gif|png|bmp|tiff|psd|pdf|eps|ai|indd|raw|mp4|mov|wmv|avi|avchd|flv|f4v|swf|webm|mpeg-2)$ https://rkdf.ac.in/nolink [R,NC]
-
-# BEGIN cPanel-generated php ini directives, do not edit
-# Manual editing of this file may result in unexpected behavior.
-# To make changes to this file, use the cPanel MultiPHP INI Editor (Home >> Software >> MultiPHP INI Editor)
-# For more information, read our documentation (https://go.cpanel.net/EA4ModifyINI)
-<IfModule php5_module>
-   php_flag display_errors Off
-   php_value max_execution_time 300
-   php_value max_input_time 600
-   php_value max_input_vars 2000
-   php_value memory_limit 512M
-   php_value post_max_size 516M
-   php_value session.gc_maxlifetime 1440
-   php_value session.save_path "/var/cpanel/php/sessions/ea-php56"
-   php_value upload_max_filesize 512M
-   php_flag zlib.output_compression Off
-</IfModule>
-<IfModule lsapi_module>
-   php_flag display_errors Off
-   php_value max_execution_time 300
-   php_value max_input_time 600
-   php_value max_input_vars 2000
-   php_value memory_limit 512M
-   php_value post_max_size 516M
-   php_value session.gc_maxlifetime 1440
-   php_value session.save_path "/var/cpanel/php/sessions/ea-php56"
-   php_value upload_max_filesize 512M
-   php_flag zlib.output_compression Off
-</IfModule>
-# END cPanel-generated php ini directives, do not edit
-
-# Block specific bots by User-Agent
+# Block Malicious / Spam Crawlers (Googlebot & Bingbot ALLOWED for SEO)
 SetEnvIf User-Agent "BadBot" BlockBadBots
 SetEnvIf User-Agent "AhrefsBot" BlockBadBots
 SetEnvIf User-Agent "SemrushBot" BlockBadBots
 SetEnvIf User-Agent "MJ12bot" BlockBadBots
-SetEnvIf User-Agent "Googlebot" BlockBadBots
-SetEnvIf User-Agent "Bingbot" BlockBadBots
 SetEnvIf User-Agent "YandexBot" BlockBadBots
 SetEnvIf User-Agent "DotBot" BlockBadBots
 SetEnvIf User-Agent "Screaming Frog" BlockBadBots
 SetEnvIf User-Agent "OpenLinkProfilerBot" BlockBadBots
 SetEnvIf User-Agent "SpamBot" BlockBadBots
 SetEnvIf User-Agent "Xenu Link Sleuth" BlockBadBots
-SetEnvIf User-Agent "curl" BlockBadBots
-SetEnvIf User-Agent "Wget" BlockBadBots
-SetEnvIf User-Agent "Indy Library" BlockBadBots
 SetEnvIf User-Agent "BLEXBot" BlockBadBots
 SetEnvIf User-Agent "CreepBot" BlockBadBots
 SetEnvIf User-Agent "SlurpBot" BlockBadBots
 SetEnvIf User-Agent "Dotcom-Monitor" BlockBadBots
 SetEnvIf User-Agent "SitelinerBot" BlockBadBots
-SetEnvIf User-Agent "Dalvik" BlockBadBots
 
-# Deny access from blocked bots
-Deny from env=BlockBadBots
-RewriteCond %{HTTP_HOST} ^.*$
-RewriteRule ^homoeopathy$ "https\:\/\/rkchms\.in\/" [R=301,L]
+<IfModule mod_authz_host.c>
+    Deny from env=BlockBadBots
+</IfModule>
+
+# Redirect Legacy Subpages
+RewriteRule ^homoeopathy$ "https://rkchms.in/" [R=301,L]
 
 # php -- BEGIN cPanel-generated handler, do not edit
 # Set the “ea-php83” package as the default “PHP” programming language.
@@ -86,3 +44,4 @@ RewriteRule ^homoeopathy$ "https\:\/\/rkchms\.in\/" [R=301,L]
   AddHandler application/x-httpd-ea-php83 .php .php8 .phtml
 </IfModule>
 # php -- END cPanel-generated handler, do not edit
+
