@@ -1,5 +1,0 @@
-User-agent: *
-Disallow: /
-Disallow: /*/Documents/
-Disallow: /Documents/*
-Disallow: /Documents/

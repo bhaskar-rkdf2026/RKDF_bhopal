@@ -1709,3 +1709,146 @@ a { text-decoration: none; color: inherit; }
 }
 .rk-footer-legal a:hover { color: var(--p-paper); }
 
+/* ══════════════════════════════════════════════════
+   HOMEPAGE SLIDER CAROUSEL CONTROLS (§04 & §09B)
+══════════════════════════════════════════════════ */
+.rk-slider-nav-btns {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.rk-slider-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid #cbd5e1;
+  background: #ffffff;
+  color: #0c1424;
+  font-size: 20px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  user-select: none;
+  box-shadow: 0 2px 8px rgba(12,20,36,0.06);
+  outline: none;
+}
+.rk-slider-btn:hover {
+  background: #0c1424;
+  color: #ffffff;
+  border-color: #0c1424;
+  box-shadow: 0 4px 12px rgba(12,20,36,0.2);
+  transform: translateY(-2px);
+}
+.rk-slider-btn:active {
+  transform: scale(0.95);
+}
+
+/* Section 04 Schools Slider Additions */
+.rk-schools-rail {
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+.rk-schools-rail.is-dragging {
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+.rk-school-card {
+  scroll-snap-align: start;
+}
+
+/* Section 09B Shining Stars Alumni Slider */
+.rk-stars-outer {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.rk-stars-rail {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 24px;
+  padding-top: 8px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+}
+.rk-stars-rail.is-dragging {
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  cursor: grabbing;
+}
+.rk-star-card {
+  width: 280px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 16px rgba(12,20,36,0.04);
+  text-align: center;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+@media (min-width: 768px) {
+  .rk-star-card {
+    width: 310px;
+  }
+}
+.rk-star-card:hover {
+  transform: translateY(-6px);
+  border-color: #c5a059;
+  box-shadow: 0 12px 28px rgba(12,20,36,0.1);
+  background: #ffffff;
+}
+.rk-star-avatar {
+  width: 90px;
+  height: 90px;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #E31B23;
+  box-shadow: 0 4px 12px rgba(227,27,35,0.15);
+}
+.rk-star-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.rk-star-badge {
+  font-family: var(--p-font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+  background: #0C1424;
+  padding: 4px 12px;
+  border-radius: 99px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+.rk-star-name {
+  font-size: 17px;
+  font-weight: 800;
+  color: #0C1424;
+  margin-bottom: 4px;
+}
+.rk-star-sub {
+  font-size: 13px;
+  color: #C5A059;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.rk-star-desc {
+  font-size: 13.5px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+

@@ -539,7 +539,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       <!-- 8. ADMISSIONS (Dropdown) -->
       <?php
       $admSlugs = ['admission-notice','admission-rules','cuet-mapping','prospectus','international-admissions','academic-departments','bank-details','fee-structure','campus-facility','scholarship','pay-paytm','inhouse-scheme','meritorious-scheme','admission-apply'];
-      $isAdmActive = in_array($activeSlug, $admSlugs);
+      $isAdmActive = in_array($activeSlug, $admSlugs) || $currentPage == 'manage_applications.php';
       ?>
       <div id="btn-admissions" class="menu-item menu-dropdown-toggle <?= $isAdmActive ? 'active open' : '' ?>" onclick="toggleSubmenu('admissions')">
         <span style="display:flex;align-items:center;gap:12px;">
@@ -549,6 +549,7 @@ $currentPage = basename($_SERVER['PHP_SELF']);
         <i class="fa-solid fa-chevron-down chev"></i>
       </div>
       <div id="sub-admissions" class="menu-submenu <?= $isAdmActive ? 'open' : '' ?>">
+        <a href="manage_applications.php" class="submenu-item <?= ($currentPage == 'manage_applications.php') ? 'active' : '' ?>" style="color:var(--primary);font-weight:800;background:rgba(217,35,45,0.06);border-radius:6px;margin-bottom:4px;">📋 Student Applications Manager ★</a>
         <a href="manage_pages.php?slug=admission-notice" class="submenu-item <?= ($activeSlug == 'admission-notice') ? 'active' : '' ?>">Admission Notice, Courses &amp; Last Date</a>
         <a href="manage_pages.php?slug=admission-rules" class="submenu-item <?= ($activeSlug == 'admission-rules') ? 'active' : '' ?>">Admission Rules 2026-27</a>
         <a href="manage_pages.php?slug=cuet-mapping" class="submenu-item <?= ($activeSlug == 'cuet-mapping') ? 'active' : '' ?>">Mapping list for CUET(UG)</a>

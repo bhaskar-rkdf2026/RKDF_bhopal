@@ -232,13 +232,13 @@
   padding: 6px 0;
 }
 
-/* Red Hover & Active Underline Indicator */
+/* Red Hover & Active Underline Indicator (Positioned beneath text) */
 .rkdf-nav-link::after {
   content: '';
   position: absolute;
   left: 0;
-  bottom: 12px;
-  height: 2px;
+  bottom: -4px;
+  height: 3px;
   width: 0;
   background-color: var(--nav-red);
   transition: width 0.25s ease;

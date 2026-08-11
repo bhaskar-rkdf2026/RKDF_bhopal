@@ -396,15 +396,21 @@ if (!$sec4 || ($sec4['is_active'] ?? 1)):
           <?= htmlspecialchars($sec4Title) ?> <em class="rk-italic-plain"><?= htmlspecialchars($sec4Accent) ?></em>
         </h2>
       </div>
-      <div class="rk-drag-hint rk-reveal" style="--delay:0.15s">
-        <span><?= htmlspecialchars($sec4DragText) ?></span>
-        <span class="rk-chevron">›</span>
+      <div class="rk-slider-header-controls" style="display:flex;align-items:center;gap:16px;">
+        <div class="rk-drag-hint rk-reveal" style="--delay:0.15s">
+          <span><?= htmlspecialchars($sec4DragText) ?></span>
+          <span class="rk-chevron">›</span>
+        </div>
+        <div class="rk-slider-nav-btns" style="display:flex;gap:8px;">
+          <button type="button" class="rk-slider-btn rk-slider-prev" id="sec4-prev" aria-label="Previous School">‹</button>
+          <button type="button" class="rk-slider-btn rk-slider-next" id="sec4-next" aria-label="Next School">›</button>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="rk-schools-outer">
-    <div class="rk-schools-rail no-scrollbar">
+    <div class="rk-schools-rail no-scrollbar" id="sec4-rail">
       <?php foreach ($schools as $i => $s): ?>
       <a href="<?= htmlspecialchars($s['url']) ?>" class="rk-school-card rk-reveal" style="--delay:<?= $i * 0.06 ?>s">
         <div class="rk-school-aspect">
@@ -954,34 +960,121 @@ if (!$secStar || ($secStar['is_active'] ?? 1)):
   $secStarSub   = $secStar['subtitle']     ?? 'RKDF graduates securing top corporate packages in Fortune 500 companies.';
 
   $stars = $cmsItems['sec_09_shining_stars'] ?? [];
+  if (empty($stars)) {
+    $stars = [
+      ['title'=>'Aman Sharma',    'subtitle'=>'Package: ₹44.5 LPA · Amazon',        'badge_text'=>'B.Tech CSE 2024',  'text_val'=>'Software Development Engineer at Amazon AWS Cloud Team.', 'image_path'=>'images/lovable/rkdf-student-1.jpg'],
+      ['title'=>'Pooja Verma',    'subtitle'=>'Package: ₹38.0 LPA · Microsoft',     'badge_text'=>'B.Tech AI 2024',   'text_val'=>'Data Scientist at Microsoft Azure AI & Machine Learning.', 'image_path'=>'images/lovable/rkdf-student-2.jpg'],
+      ['title'=>'Rohan Gupta',    'subtitle'=>'Package: ₹32.0 LPA · Google',        'badge_text'=>'B.Tech ECE 2023',  'text_val'=>'System Architect at Google India Technology Center.',    'image_path'=>'images/lovable/rkdf-student-3.jpg'],
+      ['title'=>'Shreya Mishra',  'subtitle'=>'Package: ₹28.5 LPA · Goldman Sachs', 'badge_text'=>'MBA Finance 2024',  'text_val'=>'Financial Risk Analyst at Goldman Sachs Global division.', 'image_path'=>'images/lovable/rkdf-student-1.jpg'],
+      ['title'=>'Vikram Singh',   'subtitle'=>'Package: ₹24.0 LPA · TCS Digital',   'badge_text'=>'M.Tech CS 2023',   'text_val'=>'Lead Full-Stack Architect at Tata Consultancy Services.',   'image_path'=>'images/lovable/rkdf-student-2.jpg'],
+      ['title'=>'Ananya Patel',   'subtitle'=>'Package: ₹22.0 LPA · Deloitte',      'badge_text'=>'B.Pharm 2024',     'text_val'=>'Healthcare & Pharma Consultant at Deloitte Strategy.',     'image_path'=>'images/lovable/rkdf-student-3.jpg'],
+    ];
+  }
 ?>
 <section class="rk-stars" id="shining-stars" style="background:#ffffff;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
   <div class="rk-container">
-    <div class="rk-section-header rk-reveal">
+    <div class="rk-section-header rk-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:32px;flex-wrap:wrap;gap:16px;">
       <div>
         <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secStarTag ?></div>
         <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
           <?= htmlspecialchars($secStarTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secStarAccent) ?></em>
         </h2>
+        <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;margin-top:8px;margin-bottom:0;"><?= htmlspecialchars($secStarSub) ?></p>
       </div>
-      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secStarSub) ?></p>
+      <div class="rk-slider-nav-btns" style="display:flex;gap:8px;">
+        <button type="button" class="rk-slider-btn rk-slider-prev" id="secStar-prev" aria-label="Previous Alumni Star">‹</button>
+        <button type="button" class="rk-slider-btn rk-slider-next" id="secStar-next" aria-label="Next Alumni Star">›</button>
+      </div>
     </div>
+  </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;margin-top:40px;">
+  <div class="rk-stars-outer">
+    <div class="rk-stars-rail no-scrollbar" id="secStar-rail">
       <?php foreach ($stars as $st): ?>
-      <div class="rk-reveal" style="background:#f8fafc;border:1px solid #e2e8f0;border-radius:16px;padding:24px;box-shadow:0 4px 16px rgba(12,20,36,0.04);text-align:center;">
-        <div style="width:90px;height:90px;margin:0 auto 16px;border-radius:50%;overflow:hidden;border:3px solid #E31B23;box-shadow:0 4px 12px rgba(227,27,35,0.15);">
-          <img src="<?= htmlspecialchars($st['image_path'] ?: 'images/rkdflogo.JPG') ?>" alt="<?= htmlspecialchars($st['title']) ?>" style="width:100%;height:100%;object-fit:cover;" onError="this.src='images/rkdflogo.JPG';">
+      <div class="rk-star-card rk-reveal">
+        <div class="rk-star-avatar">
+          <img src="<?= htmlspecialchars($st['image_path'] ?: 'images/rkdflogo.JPG') ?>" alt="<?= htmlspecialchars($st['title']) ?>" onError="this.src='images/rkdflogo.JPG';">
         </div>
-        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#ffffff;background:#0C1424;padding:4px 12px;border-radius:99px;display:inline-block;margin-bottom:10px;"><?= htmlspecialchars($st['badge_text'] ?: 'PLACED') ?></span>
-        <h4 style="font-size:17px;font-weight:800;color:#0C1424;margin-bottom:4px;"><?= htmlspecialchars($st['title']) ?></h4>
-        <div style="font-size:13px;color:#C5A059;font-weight:600;margin-bottom:8px;"><?= htmlspecialchars($st['subtitle']) ?></div>
-        <p style="font-size:13.5px;color:#475569;line-height:1.5;margin:0;"><?= htmlspecialchars($st['text_val']) ?></p>
+        <span class="rk-star-badge"><?= htmlspecialchars($st['badge_text'] ?: 'PLACED') ?></span>
+        <h4 class="rk-star-name"><?= htmlspecialchars($st['title']) ?></h4>
+        <div class="rk-star-sub"><?= htmlspecialchars($st['subtitle']) ?></div>
+        <p class="rk-star-desc"><?= htmlspecialchars($st['text_val']) ?></p>
       </div>
       <?php endforeach; ?>
     </div>
   </div>
 </section>
+
+<!-- Slider JavaScript Engine for Section 04 and Section 09B -->
+<script>
+(function() {
+  function initRkSlider(railId, prevBtnId, nextBtnId) {
+    const rail = document.getElementById(railId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    if (!rail) return;
+
+    function getScrollStep() {
+      const card = rail.querySelector('.rk-school-card, .rk-star-card');
+      return card ? (card.offsetWidth + 24) * 2 : 600;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        rail.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        rail.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+      });
+    }
+
+    // Mouse Drag Scroll
+    let isDown = false;
+    let startX;
+    let scrollLeft;
+
+    rail.addEventListener('mousedown', function(e) {
+      isDown = true;
+      rail.classList.add('is-dragging');
+      startX = e.pageX - rail.offsetLeft;
+      scrollLeft = rail.scrollLeft;
+    });
+
+    rail.addEventListener('mouseleave', function() {
+      isDown = false;
+      rail.classList.remove('is-dragging');
+    });
+
+    rail.addEventListener('mouseup', function() {
+      isDown = false;
+      rail.classList.remove('is-dragging');
+    });
+
+    rail.addEventListener('mousemove', function(e) {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - rail.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      rail.scrollLeft = scrollLeft - walk;
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initRkSlider('sec4-rail', 'sec4-prev', 'sec4-next');
+      initRkSlider('secStar-rail', 'secStar-prev', 'secStar-next');
+    });
+  } else {
+    initRkSlider('sec4-rail', 'sec4-prev', 'sec4-next');
+    initRkSlider('secStar-rail', 'secStar-prev', 'secStar-next');
+  }
+})();
+</script>
 <?php endif; ?>
 
 
