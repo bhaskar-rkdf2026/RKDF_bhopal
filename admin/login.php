@@ -19,11 +19,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($username) && !empty($password)) {
         try {
             $pdo = getDbConnection();
-            
-            // Check admin_users table
-            $stmt = $pdo->prepare("SELECT * FROM admin_users WHERE username = ? LIMIT 1");
-            $stmt->execute([$username]);
-            $user = $stmt->fetch();
+            $user = null;
+            if ($pdo) {
+                try {
+                    $stmt = $pdo->prepare("SELECT * FROM admin_users WHERE username = ? LIMIT 1");
+                    $stmt->execute([$username]);
+                    $user = $stmt->fetch();
+                } catch (Throwable $exDb) {}
+            }
 
             if ($user && password_verify($password, $user['password_hash'])) {
                 $_SESSION['admin_logged_in'] = true;
@@ -46,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
                 $errorMsg = 'Invalid username or password!';
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             // Hardcoded fallback if DB connection fails
             if ($username === 'admin' && $password === 'admin123') {
                 $_SESSION['admin_logged_in'] = true;

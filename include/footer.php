@@ -1,11 +1,10 @@
 <?php
-// RKDF University — Footer (v4 — Prototype Exact Match)
+// RKDF University — Footer Component (100% Valid Clean Links & CMS Sync)
 require_once __DIR__ . '/site_settings.php';
-$footAddr = htmlspecialchars(get_site_setting('footer_address', 'Airport Bypass Road, Gandhi Nagar, Bhopal, Madhya Pradesh 462033'));
+$footAddr  = htmlspecialchars(get_site_setting('footer_address', 'RKDF University, Airport Bypass Road, Gandhi Nagar, Bhopal, Madhya Pradesh 462033'));
 $footPhone = htmlspecialchars(get_site_setting('footer_phone', '+91 755 2751 000'));
 $footEmail = htmlspecialchars(get_site_setting('footer_email', 'admissions@rkdf.ac.in'));
 $socFb     = htmlspecialchars(get_site_setting('social_facebook',  'https://www.facebook.com/rkdfuniversitybhopal/'));
-$socTw     = htmlspecialchars(get_site_setting('social_twitter',   'https://x.com/rkdfuniversity'));
 $socInsta  = htmlspecialchars(get_site_setting('social_instagram', 'https://www.instagram.com/rkdfuniversitybhopal/'));
 $socLnkd   = htmlspecialchars(get_site_setting('social_linkedin',  'https://www.linkedin.com/school/rkdf-university-bhopal/'));
 $socYt     = htmlspecialchars(get_site_setting('social_youtube',   'https://www.youtube.com/@rkdfuniversitybhopal'));
@@ -13,7 +12,7 @@ $copyYear  = date('Y');
 ?>
 
 <!-- ══════════════════════════════════════════════════════════
-  FOOTER — Prototype Exact Match (navy-deep bg)
+  FOOTER — Approved RKDF Design System
 ══════════════════════════════════════════════════════════ -->
 <footer class="rk-footer" id="rk-footer">
   <div class="rk-container">
@@ -24,7 +23,7 @@ $copyYear  = date('Y');
       <!-- Brand column -->
       <div class="rk-footer-brand">
         <div class="rk-footer-logo-wrap">
-          <img src="images/lovable/rkdf-logo.png" alt="RKDF University" class="rk-footer-logo">
+          <img src="images/lovable/rkdf-logo.png" alt="RKDF University Logo" class="rk-footer-logo">
           <div>
             <div class="rk-footer-brand-name">RKDF University</div>
             <div class="rk-footer-brand-loc">Bhopal, MP</div>
@@ -37,9 +36,6 @@ $copyYear  = date('Y');
         <div class="rk-footer-social">
           <a href="<?= $socFb ?>" target="_blank" rel="noopener" class="rk-footer-social-link" aria-label="Facebook">
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-          </a>
-          <a href="<?= $socTw ?>" target="_blank" rel="noopener" class="rk-footer-social-link" aria-label="Twitter/X">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round"/></svg>
           </a>
           <a href="<?= $socInsta ?>" target="_blank" rel="noopener" class="rk-footer-social-link" aria-label="Instagram">
             <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
@@ -70,7 +66,7 @@ $copyYear  = date('Y');
         <div class="rk-footer-col-head">Admissions</div>
         <ul class="rk-footer-col-links">
           <li><a href="admissionform.php">Apply Online</a></li>
-          <li><a href="academic&departments.php">Programs</a></li>
+          <li><a href="academic&amp;departments.php">Programs</a></li>
           <li><a href="University_Fees_Structure.pdf" target="_blank">Fee Structure</a></li>
           <li><a href="scholarship.php">Scholarships</a></li>
           <li><a href="foreign_stud/index.html" target="_blank">International</a></li>
@@ -81,9 +77,9 @@ $copyYear  = date('Y');
       <div>
         <div class="rk-footer-col-head">Academics</div>
         <ul class="rk-footer-col-links">
-          <li><a href="academic&departments.php">Schools</a></li>
-          <li><a href="academic&departments.php">Departments</a></li>
-          <li><a href="r&d.php">Research</a></li>
+          <li><a href="academic&amp;departments.php">Schools</a></li>
+          <li><a href="academic&amp;departments.php">Departments</a></li>
+          <li><a href="r&amp;d.php">Research</a></li>
           <li><a href="Library.php">Library</a></li>
           <li><a href="acadmiccalander.php">Calendar</a></li>
         </ul>
@@ -123,29 +119,36 @@ $copyYear  = date('Y');
         </div>
       </div>
 
-      <!-- Email + newsletter -->
+      <!-- Email -->
       <div class="rk-footer-contact-item">
         <span class="rk-footer-contact-icon">✉️</span>
         <div>
           <div class="rk-footer-contact-label">Enquiries</div>
           <div class="rk-footer-contact-val"><?= $footEmail ?></div>
-          <form class="rk-footer-newsletter" onsubmit="return false;">
-            <input type="email" placeholder="Newsletter email" aria-label="Email for newsletter">
-            <button type="submit">Join</button>
-          </form>
         </div>
       </div>
     </div><!-- /rk-footer-contact -->
 
-    <!-- Bottom: copyright + legal -->
-    <div class="rk-footer-bottom">
-      <div class="rk-footer-copy">© <?= $copyYear ?> RKDF University · All rights reserved</div>
-      <div class="rk-footer-legal">
-        <a href="privacy.php">Privacy</a>
-        <a href="terms&condition.php">Terms</a>
-        <a href="policies.php#accessibility">Accessibility</a>
-        <a href="sitemap.php">Sitemap</a>
+    <!-- Bottom: space-between layout (Left: Copyright | Center: Designed By | Right: Legal Links) -->
+    <div class="rk-footer-bottom" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,0.08);">
+      
+      <!-- LEFT: Copyright -->
+      <div class="rk-footer-copy" style="margin: 0; text-align: left;">
+        © <?= $copyYear ?> RKDF University · All rights reserved
       </div>
+      
+      <!-- CENTER: Designed By Crescent Digital Solutions -->
+      <div class="rk-footer-credit" style="font-family: var(--p-font-mono, monospace); font-size: 11px; text-transform: uppercase; letter-spacing: 0.15em; color: rgba(250,249,246,0.5); text-align: center;">
+        Designed By <a href="https://wecrescent.com/" target="_blank" rel="noopener" style="color: rgba(250,249,246,0.85); font-weight: 700; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#C5A059'" onmouseout="this.style.color='rgba(250,249,246,0.85)'">Crescent Digital Solutions</a>
+      </div>
+
+      <!-- RIGHT: Legal Links -->
+      <div class="rk-footer-legal" style="display: flex; gap: 16px; justify-content: flex-end;">
+        <a href="privacy.php">Privacy</a>
+        <a href="terms&amp;condition.php">Terms</a>
+        <a href="policies.php#accessibility">Accessibility</a>
+      </div>
+
     </div>
 
   </div><!-- /rk-container -->

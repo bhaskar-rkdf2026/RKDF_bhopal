@@ -8,21 +8,25 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'objectives';
+$pRow = [];
+$allItems = [];
 
-// Fetch metadata from site_pages
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '02 · INSTITUTIONAL STRATEGY';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Institutional Objectives';
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Strategic goals driving academic quality, infrastructure growth, and student success.';
 $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'RKDF University Bhopal is established with the primary commitment to fulfill key strategic objectives that foster academic excellence, cutting-edge research, industry collaborations, and inclusive societal growth.';
-
-// Fetch section items from page_sections
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
-$itemStmt->execute([$pageSlug]);
-$allItems = $itemStmt->fetchAll();
 
 $objHeaderTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Strategic Institutional Goals';
 $objBadge       = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'OBJECTIVES';

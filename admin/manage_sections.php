@@ -134,28 +134,30 @@ $selectedKey = $_GET['sec'] ?? 'sec_00_hero';
 
 // Fetch all section keys for tabs
 $sectionsList = [];
-try {
-    $stmtSec = $pdo->query("SELECT * FROM homepage_sections ORDER BY sort_order ASC");
-    $sectionsList = $stmtSec->fetchAll();
-} catch (Exception $e) {
-    // If table doesn't exist yet, handle gracefully
-}
-
-// Fetch current active section details & items
 $currentSec = null;
 $currentItems = [];
 
-try {
-    $stmt = $pdo->prepare("SELECT * FROM homepage_sections WHERE section_key = ? LIMIT 1");
-    $stmt->execute([$selectedKey]);
+if ($pdo) {
+    try {
+        $stmtSec = $pdo->query("SELECT * FROM homepage_sections ORDER BY sort_order ASC");
+        if ($stmtSec) {
+            $sectionsList = $stmtSec->fetchAll();
+        }
+    } catch (Throwable $e) {
+        // If table doesn't exist yet, handle gracefully
+    }
 
-    $currentSec = $stmt->fetch();
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM homepage_sections WHERE section_key = ? LIMIT 1");
+        $stmt->execute([$selectedKey]);
+        $currentSec = $stmt->fetch() ?: null;
 
-    $stmtItems = $pdo->prepare("SELECT * FROM homepage_items WHERE section_key = ? ORDER BY sort_order ASC, id ASC");
-    $stmtItems->execute([$selectedKey]);
-    $currentItems = $stmtItems->fetchAll();
-} catch (Exception $e) {
-    // Ignore error if empty
+        $stmtItems = $pdo->prepare("SELECT * FROM homepage_items WHERE section_key = ? ORDER BY sort_order ASC, id ASC");
+        $stmtItems->execute([$selectedKey]);
+        $currentItems = $stmtItems->fetchAll() ?: [];
+    } catch (Throwable $e) {
+        // Ignore error if empty
+    }
 }
 ?>
 

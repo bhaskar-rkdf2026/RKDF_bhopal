@@ -30,13 +30,17 @@ $msg = $_GET['msg'] ?? '';
 
 // Fetch current site settings
 $currentSettings = [];
-try {
-    $stmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings");
-    while ($row = $stmt->fetch()) {
-        $currentSettings[$row['setting_key']] = $row['setting_value'];
+if ($pdo) {
+    try {
+        $stmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings");
+        if ($stmt) {
+            while ($row = $stmt->fetch()) {
+                $currentSettings[$row['setting_key']] = $row['setting_value'];
+            }
+        }
+    } catch (Throwable $e) {
+        // Ignore error
     }
-} catch (Exception $e) {
-    // Ignore error
 }
 ?>
 

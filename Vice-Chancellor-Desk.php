@@ -8,21 +8,25 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'vc-desk';
+$pRow = [];
+$allItems = [];
 
-// Fetch metadata from site_pages
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '05 · EXECUTIVE LEADERSHIP';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : "Vice-Chancellor's Desk";
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'A message of academic vision, research innovation, and institutional development from Prof. Vijay K. Agrawal, Vice-Chancellor.';
 $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'RKDF University is marching towards meeting these challenges to become a Global Knowledge Enterprise...';
-
-// Fetch section items from page_sections
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
-$itemStmt->execute([$pageSlug]);
-$allItems = $itemStmt->fetchAll();
 
 $vcMsgTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Message From The Vice-Chancellor';
 $vcBadge    = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'VICE-CHANCELLOR ADDRESS';

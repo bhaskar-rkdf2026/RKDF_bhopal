@@ -1,142 +1,83 @@
 <?php
 // ============================================================
-// RKDF University — University Staff Directory
-// World-Class Premium Design + High-Res Media Assets + 100% Dynamic DB Logic & Hierarchy Preserved
+// RKDF University — University Staff Directory (100% Dynamic CMS)
+// World-Class Premium Design + High-Res Media Assets + 100% Dynamic DB Logic
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 
-// Define pagination constant
-const ITEMS_PER_PAGE = 10;
+if (!defined('ITEMS_PER_PAGE')) {
+    define('ITEMS_PER_PAGE', 10);
+}
 
-// Initialize variables for selected department and current page
-$selectedDepartmentId = filter_input(INPUT_GET, 'department_id', FILTER_VALIDATE_INT);
-$currentPage = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
+$pdo = getDbConnection();
+$pageSlug = 'staff';
+$pRow = [];
+$allItems = [];
 
-// Default to page 1 if not provided or invalid
+$selectedDepartment = isset($_GET['department_id']) ? trim($_GET['department_id']) : (isset($_GET['dept']) ? trim($_GET['dept']) : '');
+$currentPage        = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT);
 if ($currentPage === false || $currentPage === null || $currentPage <= 0) {
     $currentPage = 1;
 }
 
-$departments = []; // Array to hold department data for dropdown
-$staffData = [];   // Array to hold teaching staff data
-$totalStaff = 0;   // Total staff count for pagination
-$totalPages = 0;   // Total pages for pagination
-$errorMessage = null; // Initialize error message
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
 
-/**
- * Builds a hierarchical list of departments for the dropdown
- */
-function buildDepartmentHierarchy(array $flatDepartments, $parentId = null, $level = 0, array &$indexedDepartments = []): array {
-    $result = [];
-    $indent = str_repeat('--- ', $level);
-
-    if (empty($indexedDepartments)) {
-        foreach ($flatDepartments as $dept) {
-            $indexedDepartments[$dept['id']] = $dept;
-        }
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {
+        $pRow = [];
+        $allItems = [];
     }
-
-    foreach ($flatDepartments as $dept) {
-        if (($dept['parent_department_id'] === null && $parentId === null) || ($dept['parent_department_id'] == $parentId)) {
-            $dept['display_name'] = $indent . htmlspecialchars($dept['name']);
-            $result[] = $dept;
-            $children = buildDepartmentHierarchy($flatDepartments, $dept['id'], $level + 1, $indexedDepartments);
-            $result = array_merge($result, $children);
-        }
-    }
-    return $result;
 }
 
-try {
-    $pdo = getDbConnection();
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : 'FACULTY & ACADEMIC DIRECTORY';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'University Teaching Staff Directory';
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Comprehensive directory of professors, associate professors, and department teaching staff across RKDF University Bhopal.';
 
-    // Fetch active departments for dropdown
-    $stmtDepartments = $pdo->prepare(
-        "SELECT d.id, d.name, d.parent_department_id, pd.name AS parent_name, u.name AS university_name
-         FROM departments d
-         JOIN universities u ON d.university_id = u.id
-         LEFT JOIN departments pd ON d.parent_department_id = pd.id AND pd.IsActive = 1
-         WHERE d.IsActive = 1 AND u.IsActive = 1
-         ORDER BY university_name ASC, d.name ASC"
-    );
-    $stmtDepartments->execute();
-    $rawDepartments = $stmtDepartments->fetchAll(PDO::FETCH_ASSOC);
-    $departments = buildDepartmentHierarchy($rawDepartments);
-
-    // Fetch active teaching staff if department is selected
-    if ($selectedDepartmentId !== null && $selectedDepartmentId > 0) {
-        $offset = ($currentPage - 1) * ITEMS_PER_PAGE;
-
-        $countStmt = $pdo->prepare(
-            "SELECT COUNT(*)
-             FROM staff s
-             JOIN departments d ON s.department_id = d.id
-             JOIN universities u ON d.university_id = u.id
-             WHERE s.department_id = :department_id
-               AND s.is_teaching_staff = 1
-               AND s.IsActive = 1
-               AND d.IsActive = 1
-               AND u.IsActive = 1"
-        );
-        $countStmt->bindParam(':department_id', $selectedDepartmentId, PDO::PARAM_INT);
-        $countStmt->execute();
-        $totalStaff = $countStmt->fetchColumn();
-
-        $totalPages = ceil($totalStaff / ITEMS_PER_PAGE);
-
-        if ($currentPage > $totalPages && $totalPages > 0) {
-            $currentPage = $totalPages;
-            $offset = ($currentPage - 1) * ITEMS_PER_PAGE;
-        } elseif ($totalPages == 0) {
-            $currentPage = 1;
-            $offset = 0;
-        }
-
-        $stmtStaff = $pdo->prepare(
-            "SELECT s.id, s.department_id, s.name, s.designation, s.subject_discipline, s.photo_url, s.profile_details, s.is_teaching_staff, s.IsActive, s.displayorder
-             FROM staff s
-             JOIN departments d ON s.department_id = d.id
-             JOIN universities u ON d.university_id = u.id
-             WHERE s.department_id = :department_id
-               AND s.is_teaching_staff = 1
-               AND s.IsActive = 1
-               AND d.IsActive = 1
-               AND u.IsActive = 1
-             ORDER BY s.displayorder ASC
-             LIMIT :limit OFFSET :offset"
-        );
-        $stmtStaff->bindParam(':department_id', $selectedDepartmentId, PDO::PARAM_INT);
-        $stmtStaff->bindValue(':limit', ITEMS_PER_PAGE, PDO::PARAM_INT);
-        $stmtStaff->bindValue(':offset', $offset, PDO::PARAM_INT);
-        $stmtStaff->execute();
-        $staffData = $stmtStaff->fetchAll(PDO::FETCH_ASSOC);
-
-        $s_no_start = $offset + 1;
-        foreach ($staffData as $key => &$member) {
-            $member['s_no'] = $s_no_start + $key;
-        }
-        unset($member);
+// Extract unique departments for dropdown filter
+$departmentsMap = [];
+foreach ($allItems as $it) {
+    $deptGroup = !empty($it['group_key']) ? trim($it['group_key']) : 'General Faculty';
+    if (!isset($departmentsMap[$deptGroup])) {
+        $departmentsMap[$deptGroup] = $deptGroup;
     }
-
-} catch (PDOException $e) {
-    error_log("Database error: " . $e->getMessage());
-    $errorMessage = 'A database error occurred. Please try again later.';
-    $departments = [];
-    $staffData = [];
-} catch (Exception $e) {
-    error_log("General error: " . $e->getMessage());
-    $errorMessage = 'An unexpected error occurred. Please try again later.';
-    $departments = [];
-    $staffData = [];
 }
+ksort($departmentsMap);
+
+// Filter staff Data by selected department if provided
+$filteredStaff = [];
+if (!empty($selectedDepartment) && strtolower($selectedDepartment) !== 'all') {
+    foreach ($allItems as $it) {
+        if (strcasecmp($it['group_key'], $selectedDepartment) === 0 || strcasecmp($it['subtitle'], $selectedDepartment) === 0) {
+            $filteredStaff[] = $it;
+        }
+    }
+} else {
+    $filteredStaff = $allItems;
+}
+
+// Calculate Pagination
+$totalStaff  = count($filteredStaff);
+$totalPages  = ceil($totalStaff / ITEMS_PER_PAGE);
+if ($currentPage > $totalPages && $totalPages > 0) {
+    $currentPage = $totalPages;
+}
+$offset     = ($currentPage - 1) * ITEMS_PER_PAGE;
+$pageStaff  = array_slice($filteredStaff, $offset, ITEMS_PER_PAGE);
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>University Staff Directory — RKDF University Bhopal</title>
+  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
@@ -147,7 +88,7 @@ try {
       position: relative;
       padding: 160px 0 90px;
       background: linear-gradient(135deg, rgba(12,20,36,0.94) 0%, rgba(21,34,56,0.90) 60%, rgba(12,20,36,0.96) 100%), 
-                  url('images/ai_staff/rkdf_staff_banner.jpg') center/cover no-repeat;
+                  url('<?= !empty($pRow['hero_bg_image']) ? htmlspecialchars($pRow['hero_bg_image']) : "images/lovable/rkdf-students-quad.jpg" ?>') center/cover no-repeat;
       color: #FAF9F5;
       box-shadow: inset 0 -30px 60px rgba(0,0,0,0.4);
     }
@@ -178,7 +119,6 @@ try {
       transition: transform 0.35s ease, box-shadow 0.35s ease;
     }
     .stf-block-card:hover {
-      transform: translateY(-4px);
       box-shadow: 0 16px 40px rgba(12, 20, 36, 0.08);
     }
 
@@ -276,10 +216,11 @@ try {
       border-bottom: 2px solid rgba(12, 20, 36, 0.08);
     }
     .stf-table td {
-      padding: 14px 18px;
+      padding: 16px 18px;
       border-bottom: 1px solid rgba(12, 20, 36, 0.06);
-      font-size: 14px;
+      font-size: 14.5px;
       color: #334155;
+      vertical-align: middle;
     }
     .stf-table tr:hover td {
       background: rgba(227, 27, 35, 0.02);
@@ -291,6 +232,7 @@ try {
       border-radius: 50%;
       object-fit: cover;
       border: 2px solid #C5A059;
+      box-shadow: 0 2px 8px rgba(12,20,36,0.1);
     }
 
     /* Pagination */
@@ -392,10 +334,10 @@ try {
   <!-- HERO SECTION -->
   <section class="subpage-hero">
     <div class="rk-container">
-      <span class="rk-eyebrow tone-gold">46 · FACULTY &amp; STAFF DIRECTORY</span>
-      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;">University Staff Directory</h1>
+      <span class="rk-eyebrow tone-gold"><?= htmlspecialchars($eyebrow) ?></span>
+      <h1 class="rk-h1" style="font-size:clamp(2.5rem, 5.5vw, 5.2rem);margin-top:12px;"><?= htmlspecialchars($mainTitle) ?></h1>
       <p style="margin-top:18px;font-size:18px;line-height:1.7;color:rgba(250,249,245,0.85);max-width:720px;">
-        Explore faculty profiles, academic designations, subject disciplines, and department teaching staff across RKDF University Bhopal.
+        <?= htmlspecialchars($heroSubtitle) ?>
       </p>
     </div>
   </section>
@@ -415,24 +357,18 @@ try {
             </div>
             <div class="stf-card-body">
 
-              <?php if (isset($errorMessage)): ?>
-                <div style="background:#FEE2E2;border:1px solid #FCA5A5;color:#991B1B;padding:16px 20px;border-radius:10px;margin-bottom:24px;font-weight:600;">
-                  <?php echo htmlspecialchars($errorMessage); ?>
-                </div>
-              <?php endif; ?>
-
-              <!-- DEPARTMENT SELECTOR -->
+              <!-- DEPARTMENT SELECTOR FORM -->
               <form action="staffLnew.php" method="GET" class="filter-bar">
-                <label for="departmentSelect" style="font-weight:700;color:#0C1424;white-space:nowrap;">Select Department:</label>
+                <label for="departmentSelect" style="font-weight:700;color:#0C1424;white-space:nowrap;">Faculty / Department:</label>
                 <select id="departmentSelect" name="department_id" class="filter-select">
-                  <option value="">-- Select Department --</option>
-                  <?php foreach ($departments as $department): ?>
-                    <option value="<?php echo htmlspecialchars($department['id']); ?>" <?php echo ($selectedDepartmentId == $department['id']) ? 'selected' : ''; ?>>
-                      <?php echo $department['display_name']; ?>
+                  <option value="all">-- All University Faculties --</option>
+                  <?php foreach ($departmentsMap as $dKey => $dVal): ?>
+                    <option value="<?php echo htmlspecialchars($dKey); ?>" <?php echo (strcasecmp($selectedDepartment, $dKey) === 0) ? 'selected' : ''; ?>>
+                      <?php echo htmlspecialchars($dVal); ?>
                     </option>
                   <?php endforeach; ?>
                 </select>
-                <button type="submit" class="filter-btn">View Staff</button>
+                <button type="submit" class="filter-btn">Filter Staff</button>
               </form>
 
               <!-- STAFF TABLE -->
@@ -440,40 +376,49 @@ try {
                 <table class="stf-table">
                   <thead>
                     <tr>
-                      <th>S.No.</th>
-                      <th>Photo</th>
-                      <th>Faculty Name</th>
-                      <th>Designation</th>
-                      <th>Subject / Discipline</th>
+                      <th style="width:60px;">S.No.</th>
+                      <th style="width:70px;">Photo</th>
+                      <th>Faculty Member Name</th>
+                      <th>Designation &amp; Role</th>
+                      <th>Faculty Department &amp; Specialization</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <?php if ($selectedDepartmentId === null || $selectedDepartmentId <= 0): ?>
+                    <?php if (empty($pageStaff)): ?>
                       <tr>
-                        <td colspan="5" style="text-align:center;padding:36px;color:#64748B;font-weight:600;">
-                          Please select a department from the dropdown above to view teaching staff.
-                        </td>
-                      </tr>
-                    <?php elseif (empty($staffData)): ?>
-                      <tr>
-                        <td colspan="5" style="text-align:center;padding:36px;color:#64748B;font-weight:600;">
-                          No active teaching staff members found for the selected department.
+                        <td colspan="5" style="text-align:center;padding:40px;color:#64748B;font-weight:600;">
+                          No teaching staff members found for the selected department.
                         </td>
                       </tr>
                     <?php else: ?>
-                      <?php foreach ($staffData as $member): ?>
+                      <?php foreach ($pageStaff as $index => $member): ?>
                         <tr>
-                          <td style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#C5A059;"><?php echo htmlspecialchars($member['s_no']); ?></td>
+                          <td style="font-family:'JetBrains Mono',monospace;font-weight:700;color:#C5A059;">
+                            <?php echo sprintf('%02d', $offset + $index + 1); ?>
+                          </td>
                           <td>
-                            <?php if (!empty($member['photo_url'])): ?>
-                              <img src="images/Staff_Photos/<?php echo htmlspecialchars($member['photo_url']); ?>" alt="Photo of <?php echo htmlspecialchars($member['name']); ?>" class="staff-avatar" onerror="this.onerror=null;this.src='images/lovable/rkdf-student-2.jpg';">
-                            <?php else: ?>
-                              <img src="images/lovable/rkdf-student-2.jpg" alt="Default Avatar" class="staff-avatar">
+                            <?php 
+                              $photo = !empty($member['image_path']) ? htmlspecialchars($member['image_path']) : 'images/lovable/rkdf-student-2.jpg';
+                            ?>
+                            <img src="<?php echo $photo; ?>" alt="Photo of <?php echo htmlspecialchars($member['title']); ?>" class="staff-avatar" onerror="this.onerror=null;this.src='images/lovable/rkdf-student-2.jpg';">
+                          </td>
+                          <td>
+                            <strong style="font-family:'Playfair Display',Georgia,serif;font-size:16.5px;color:#0C1424;"><?php echo htmlspecialchars($member['title']); ?></strong>
+                            <?php if (!empty($member['badge_text'])): ?>
+                              <div style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#C5A059;text-transform:uppercase;margin-top:2px;">
+                                <?php echo htmlspecialchars($member['badge_text']); ?>
+                              </div>
                             <?php endif; ?>
                           </td>
-                          <td style="font-weight:700;color:#0C1424;"><?php echo htmlspecialchars($member['name']); ?></td>
-                          <td style="color:#475569;"><?php echo htmlspecialchars($member['designation']); ?></td>
-                          <td style="color:#E31B23;font-weight:600;"><?php echo htmlspecialchars($member['subject_discipline']); ?></td>
+                          <td style="color:#334155;font-weight:600;">
+                            <?php echo htmlspecialchars($member['subtitle']); ?>
+                          </td>
+                          <td>
+                            <span style="font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;color:#E31B23;background:rgba(227,27,35,0.08);padding:3px 8px;border-radius:6px;display:inline-block;margin-bottom:4px;">
+                              <?php echo htmlspecialchars($member['group_key']); ?>
+                            </span>
+                            <div style="font-size:13.5px;color:#64748B;line-height:1.4;"><?php echo htmlspecialchars($member['text_val']); ?></div>
+                          </td>
                         </tr>
                       <?php endforeach; ?>
                     <?php endif; ?>
@@ -482,10 +427,10 @@ try {
               </div>
 
               <!-- PAGINATION -->
-              <?php if ($selectedDepartmentId !== null && $selectedDepartmentId > 0 && $totalPages > 0): ?>
+              <?php if ($totalPages > 1): ?>
                 <div class="pagination-box">
                   <?php if ($currentPage > 1): ?>
-                    <a href="staffLnew.php?department_id=<?php echo htmlspecialchars($selectedDepartmentId); ?>&amp;page=<?php echo ($currentPage - 1); ?>" class="pg-btn active-btn">← Previous</a>
+                    <a href="staffLnew.php?department_id=<?php echo urlencode($selectedDepartment); ?>&amp;page=<?php echo ($currentPage - 1); ?>" class="pg-btn active-btn">← Previous</a>
                   <?php else: ?>
                     <span class="pg-btn disabled-btn">← Previous</span>
                   <?php endif; ?>
@@ -495,7 +440,7 @@ try {
                   </span>
 
                   <?php if ($currentPage < $totalPages): ?>
-                    <a href="staffLnew.php?department_id=<?php echo htmlspecialchars($selectedDepartmentId); ?>&amp;page=<?php echo ($currentPage + 1); ?>" class="pg-btn active-btn">Next →</a>
+                    <a href="staffLnew.php?department_id=<?php echo urlencode($selectedDepartment); ?>&amp;page=<?php echo ($currentPage + 1); ?>" class="pg-btn active-btn">Next →</a>
                   <?php else: ?>
                     <span class="pg-btn disabled-btn">Next →</span>
                   <?php endif; ?>
@@ -512,12 +457,13 @@ try {
           <div class="sidebar-card">
             <h3 class="sidebar-title">Faculty &amp; Staff Links</h3>
             <ul class="sidebar-nav-list">
-              <li><a href="staffLnew.php" class="sidebar-link active">Staff Directory <span>→</span></a></li>
-              <li><a href="dean.php" class="sidebar-link">Faculty Deans <span>→</span></a></li>
-              <li><a href="hod.php" class="sidebar-link">Heads of Department (HOD) <span>→</span></a></li>
-              <li><a href="Syllabus.php" class="sidebar-link">Course Syllabus <span>→</span></a></li>
-              <li><a href="Vision&amp;mission.php" class="sidebar-link">Vision &amp; Mission <span>→</span></a></li>
-              <li><a href="Feedback_Analysis.php" class="sidebar-link">Feedback &amp; Analysis <span>→</span></a></li>
+              <li><a href="staffLnew.php" class="sidebar-link active"><span>Staff Directory</span> <span>↗</span></a></li>
+              <li><a href="dean.php" class="sidebar-link"><span>Faculty Deans</span> <span>↗</span></a></li>
+              <li><a href="hod.php" class="sidebar-link"><span>Heads of Department (HOD)</span> <span>↗</span></a></li>
+              <li><a href="other-officers.php" class="sidebar-link"><span>Other Officers</span> <span>↗</span></a></li>
+              <li><a href="Syllabus.php" class="sidebar-link"><span>Course Syllabus</span> <span>↗</span></a></li>
+              <li><a href="Vision&amp;mission.php" class="sidebar-link"><span>Vision &amp; Mission</span> <span>↗</span></a></li>
+              <li><a href="Feedback_Analysis.php" class="sidebar-link"><span>Feedback &amp; Analysis</span> <span>↗</span></a></li>
             </ul>
           </div>
         </aside>

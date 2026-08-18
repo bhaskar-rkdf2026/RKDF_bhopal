@@ -1,6 +1,6 @@
 <?php
 // ============================================================
-// RKDF University — Statutory Bodies & National Core Advisory (100% Dynamic CMS)
+// RKDF University — Statutory & Advisory Bodies (100% Dynamic CMS)
 // Original Custom Design & Layout 100% Preserved + CMS Connected
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
@@ -8,16 +8,41 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'national-advisory';
+$pRow = [];
+$allItems = [];
 
-// Fetch metadata from site_pages
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
 
-$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '19 · ADVISORY GROUP';
-$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'National Core Advisory Group';
-$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'National experts providing strategic guidance on academic innovation, research, and national rankings.';
-$introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'Comprising former Vice-Chancellors, IIT/IIM professors, and industry leaders guiding RKDF University on NAAC accreditation, NIRF ranking strategies, and national research grants.';
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
+
+$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '19 · ADVISORY & GOVERNANCE';
+$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Statutory & National Core Advisory Bodies';
+$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Eminent national academicians, scientists, and industry leaders guiding RKDF University Bhopal.';
+
+$defaultMessage = "The National Core Advisory Group and Statutory Advisory Bodies of RKDF University Bhopal comprise eminent academicians, scientists, former Vice-Chancellors, UGC/ICAR/IAUA experts, and senior industry leaders.\n\nThe Advisory Council provides strategic direction, research governance, national ranking frameworks (NIRF), accreditation standards (NAAC), and academic innovation across all university faculties.";
+
+$introHeading = !empty($pRow['intro_heading']) ? $pRow['intro_heading'] : "National Core Advisory Group";
+$introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defaultMessage;
+
+// Separate Core Advisors from Eminent Invitees
+$coreAdvisors = [];
+$invitees = [];
+
+foreach ($allItems as $it) {
+    if ($it['group_key'] === 'eminent_invitee') {
+        $invitees[] = $it;
+    } else {
+        $coreAdvisors[] = $it;
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -42,15 +67,70 @@ $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'Compr
     .sb-main-section { padding: 80px 0 100px; background: #FAF9F5; color: #0C1424; }
     .sb-grid-layout { display: grid; grid-template-columns: 8.5fr 3.5fr; gap: 48px; align-items: start; }
     @media (max-width: 992px) { .sb-grid-layout { grid-template-columns: 1fr; } }
-    .sb-block-card { background: #ffffff; border: 1px solid rgba(12,20,36,0.08); border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(12,20,36,0.04); margin-bottom: 36px; }
-    .sb-card-header { background: #0C1424; color: #ffffff; padding: 24px 32px; display: flex; align-items: center; justify-content: space-between; border-bottom: 3px solid #E31B23; }
-    .sb-card-title { font-family: 'Playfair Display', Georgia, serif; font-size: 24px; font-weight: 700; color: #ffffff; margin: 0; }
-    .sb-card-body { padding: 36px 32px; }
+
+    .sb-intro-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 20px;
+      padding: 32px 36px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      margin-bottom: 36px;
+      border-left: 4px solid #C5A059;
+    }
+    .sb-intro-title { font-family: 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; color: #0C1424; margin-bottom: 12px; }
+    .sb-intro-text { font-size: 16.5px; line-height: 1.8; color: #334155; margin: 0; }
+
+    .sb-members-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .sb-member-card {
+      background: #ffffff;
+      border: 1px solid rgba(12, 20, 36, 0.08);
+      border-radius: 18px;
+      padding: 24px 22px;
+      box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .sb-member-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 36px rgba(12, 20, 36, 0.08);
+      border-color: #C5A059;
+    }
+
+    .sb-badge {
+      display: inline-block;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      padding: 4px 12px;
+      border-radius: 99px;
+      background: rgba(197, 160, 89, 0.18);
+      color: #C5A059;
+      margin-bottom: 10px;
+      align-self: flex-start;
+    }
+    .sb-badge-invitee {
+      background: rgba(227, 27, 35, 0.1);
+      color: #E31B23;
+    }
+
+    .sb-name { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; color: #0C1424; margin: 0 0 4px 0; }
+    .sb-domain { font-size: 13.5px; font-weight: 700; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+    .sb-desc { font-size: 14.5px; line-height: 1.6; color: #475569; margin: 0; }
+
     aside { position: sticky; top: 100px; }
-    .sidebar-card { background: #ffffff; border: 1px solid rgba(12,20,36,0.08); border-radius: 18px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(12,20,36,0.04); }
+    .sidebar-card { background: #ffffff; border: 1px solid rgba(12, 20, 36, 0.08); border-radius: 18px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04); }
     .sidebar-title { font-family: 'Playfair Display', Georgia, serif; font-size: 20px; font-weight: 700; color: #0C1424; padding-bottom: 14px; border-bottom: 2px solid #E31B23; margin-bottom: 20px; }
     .sidebar-nav-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; }
-    .sidebar-link { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; color: #334155; font-size: 14px; font-weight: 600; text-decoration: none; background: #FAF9F5; border: 1px solid rgba(12,20,36,0.05); transition: all 0.25s ease; }
+    .sidebar-link { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-radius: 8px; color: #334155; font-size: 14px; font-weight: 600; text-decoration: none; background: #FAF9F5; border: 1px solid rgba(12, 20, 36, 0.05); transition: all 0.25s ease; }
     .sidebar-link:hover, .sidebar-link.active { background: #0C1424; color: #ffffff !important; border-color: #0C1424; transform: translateX(4px); }
     .sidebar-link.active { background: #E31B23; border-color: #E31B23; }
   </style>
@@ -76,31 +156,74 @@ $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'Compr
     <div class="rk-container">
       <div class="sb-grid-layout">
         
-        <!-- LEFT COLUMN -->
+        <!-- LEFT COLUMN: NATIONAL ADVISORY MEMBERS & INVITEES -->
         <div>
-          <article class="sb-block-card">
-            <div class="sb-card-header">
-              <h2 class="sb-card-title"><?= htmlspecialchars($mainTitle) ?></h2>
-              <span style="background:rgba(227,27,35,0.18);color:#E31B23;padding:4px 12px;border-radius:99px;font-size:11px;font-weight:700;">ADVISORY</span>
-            </div>
-            <div class="sb-card-body">
-              <p style="font-size:16.5px;line-height:1.85;color:#334155;margin:0;">
-                <?= htmlspecialchars($introText) ?>
-              </p>
-            </div>
-          </article>
+          
+          <div class="sb-intro-card">
+            <h2 class="sb-intro-title"><?= htmlspecialchars($introHeading) ?></h2>
+            <?php
+            $introParas = explode("\n", $introText);
+            foreach ($introParas as $ipara):
+              $itrim = trim($ipara);
+              if (!empty($itrim)):
+            ?>
+            <p class="sb-intro-text"><?= htmlspecialchars($itrim) ?></p>
+            <?php
+              endif;
+            endforeach;
+            ?>
+          </div>
+
+          <!-- SECTION 1: NATIONAL CORE ADVISORY GROUP -->
+          <div style="margin-bottom:24px;">
+            <span class="rk-eyebrow tone-gold">Strategic Academic Leadership</span>
+            <h2 class="rk-h2" style="font-size:28px;margin-top:6px;">National Core Advisory Group</h2>
+          </div>
+
+          <div class="sb-members-grid">
+            <?php foreach ($coreAdvisors as $ca): ?>
+            <article class="sb-member-card">
+              <span class="sb-badge"><?= htmlspecialchars($ca['badge_text'] ?: 'CORE ADVISOR') ?></span>
+              <h3 class="sb-name"><?= htmlspecialchars($ca['title']) ?></h3>
+              <div class="sb-domain"><?= htmlspecialchars($ca['subtitle']) ?></div>
+              <p class="sb-desc"><?= htmlspecialchars($ca['text_val']) ?></p>
+            </article>
+            <?php endforeach; ?>
+          </div>
+
+          <!-- SECTION 2: EMINENT SPECIAL INVITEES -->
+          <?php if (!empty($invitees)): ?>
+          <div style="margin-bottom:24px;">
+            <span class="rk-eyebrow tone-gold">National Research &amp; Accreditation Mentors</span>
+            <h2 class="rk-h2" style="font-size:28px;margin-top:6px;">Eminent Invitees</h2>
+          </div>
+
+          <div class="sb-members-grid">
+            <?php foreach ($invitees as $inv): ?>
+            <article class="sb-member-card">
+              <span class="sb-badge sb-badge-invitee"><?= htmlspecialchars($inv['badge_text'] ?: 'EMINENT INVITEE') ?></span>
+              <h3 class="sb-name"><?= htmlspecialchars($inv['title']) ?></h3>
+              <div class="sb-domain" style="color:#E31B23;"><?= htmlspecialchars($inv['subtitle']) ?></div>
+              <p class="sb-desc"><?= htmlspecialchars($inv['text_val']) ?></p>
+            </article>
+            <?php endforeach; ?>
+          </div>
+          <?php endif; ?>
+
         </div>
 
         <!-- RIGHT COLUMN: SIDEBAR -->
         <aside>
           <div class="sidebar-card">
-            <h3 class="sidebar-title">Statutory Governance</h3>
+            <h4 class="sidebar-title">Statutory Governance</h4>
             <ul class="sidebar-nav-list">
-              <li><a href="Academic_Council.php" class="sidebar-link">Academic Council <span>→</span></a></li>
-              <li><a href="BOS.php" class="sidebar-link">Board of Studies (BOS) <span>→</span></a></li>
-              <li><a href="BoM.php" class="sidebar-link">Board of Management <span>→</span></a></li>
-              <li><a href="Governingbody.php" class="sidebar-link">Governing Body <span>→</span></a></li>
-              <li><a href="Statuary-Bodies.php" class="sidebar-link active">Statutory Bodies <span>→</span></a></li>
+              <li><a href="Statuary-Bodies.php" class="sidebar-link active"><span>Statutory Bodies &amp; Advisory</span> <span>↗</span></a></li>
+              <li><a href="Governingbody.php" class="sidebar-link"><span>Governing Body</span> <span>↗</span></a></li>
+              <li><a href="BoM.php" class="sidebar-link"><span>Board of Management (BoM)</span> <span>↗</span></a></li>
+              <li><a href="Academic_Council.php" class="sidebar-link"><span>Academic Council</span> <span>↗</span></a></li>
+              <li><a href="BOS.php" class="sidebar-link"><span>Board of Studies (BOS)</span> <span>↗</span></a></li>
+              <li><a href="Chancellor.php" class="sidebar-link"><span>Chancellor's Desk</span> <span>↗</span></a></li>
+              <li><a href="Vice-Chancellor-Desk.php" class="sidebar-link"><span>Vice-Chancellor's Desk</span> <span>↗</span></a></li>
             </ul>
           </div>
         </aside>

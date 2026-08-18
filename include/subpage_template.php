@@ -11,23 +11,120 @@ require_once __DIR__ . '/site_settings.php';
 require_once __DIR__ . '/../config/db.php';
 
 $pdo = getDbConnection();
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageKey]);
-$pRow = $stmt->fetch();
+$pRow = [];
+$allItems = [];
 
-$pageTitle     = !empty($pRow['page_title'])    ? $pRow['page_title'] . ' — RKDF University Bhopal' : ($defaultTitle ?? 'RKDF University Bhopal');
-$eyebrow       = !empty($pRow['eyebrow'])       ? $pRow['eyebrow'] : ($defaultEyebrow ?? '01 · Overview');
-$mainTitle     = !empty($pRow['page_title'])    ? $pRow['page_title'] : ($defaultMainTitle ?? 'RKDF University');
-$heroSubtitle  = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : ($defaultHeroSubtitle ?? '');
-$introHeading  = !empty($pRow['intro_heading']) ? $pRow['intro_heading'] : ($defaultIntroHeading ?? '');
-$introText     = !empty($pRow['intro_text'])    ? $pRow['intro_text'] : ($defaultIntroText ?? '');
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageKey]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key, sort_order, id");
+        $itemStmt->execute([$pageKey]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
+
+$pageDefaults = [
+    'idp' => [
+        'title' => 'Institutional Development Plan (IDP)',
+        'eyebrow' => 'ACADEMIC PLANNING & STRATEGY',
+        'subtitle' => 'Comprehensive strategic roadmap driving academic excellence, research expansion, infrastructure growth, and NEP-2020 implementation.',
+        'heading' => 'RKDF Institutional Development Plan (IDP)',
+        'text' => "The Institutional Development Plan (IDP) of RKDF University Bhopal outlines the long-term vision and strategic priorities for institutional transformation. Grounded in NEP-2020 guidelines, the plan focuses on skill-based education, digital learning infrastructure, multidisciplinary research, faculty empowerment, and global academic collaborations.",
+        'items' => [
+            'documents' => [
+                [
+                    'number_val' => 1,
+                    'title' => 'RKDF University Institutional Development Plan (IDP)',
+                    'badge_text' => 'STRATEGIC DOCUMENT',
+                    'text_val' => 'Official strategic plan detailing academic roadmap, NEP-2020 goals, infrastructure development, and research targets.',
+                    'link_url' => 'IDP.pdf'
+                ]
+            ]
+        ]
+    ],
+    'org-structure' => [
+        'title' => 'Organizational Structure & Governance Chart',
+        'eyebrow' => 'ADMINISTRATIVE FRAMEWORK',
+        'subtitle' => 'Hierarchical organogram detailing administrative, academic, and executive governance bodies at RKDF University.',
+        'heading' => 'University Administrative Organogram',
+        'text' => "RKDF University operates under a transparent, multi-tiered organizational hierarchy led by the Governing Body, Board of Management, Academic Council, and Officers of the University.",
+        'items' => [
+            'governance' => [
+                [
+                    'number_val' => 1,
+                    'title' => 'Administrative Hierarchy & Organogram Chart',
+                    'badge_text' => 'ORGANIZATION CHART',
+                    'text_val' => 'Complete structural chart illustrating the reporting lines from Chancellor, Vice-Chancellor, Registrar to Deans and Department Heads.',
+                    'link_url' => 'Content/Documents/org_structure.pdf'
+                ]
+            ]
+        ]
+    ],
+    'public-disclosure' => [
+        'title' => 'Mandatory Public Disclosures & Regulatory Approvals',
+        'eyebrow' => 'STATUTORY TRANSPARENCY',
+        'subtitle' => 'Official statutory disclosures, UGC approvals, AICTE EOA, PCI, BCI, and NCTE recognition documents.',
+        'heading' => 'Statutory Public Disclosures',
+        'text' => "In compliance with UGC and Regulatory Council mandates, RKDF University publishes all statutory approvals, land certificates, infrastructure affidavits, and academic disclosures for public inspection.",
+        'items' => [
+            'approvals' => [
+                [
+                    'number_val' => 1,
+                    'title' => 'UGC 2(f) Recognition & Statutory Gazette',
+                    'badge_text' => 'UGC APPROVAL',
+                    'text_val' => 'Official University Grants Commission (UGC) Gazette Notification establishing RKDF University under Section 2(f) of UGC Act 1956.',
+                    'link_url' => 'Content/Documents/UGC_Approval.pdf'
+                ],
+                [
+                    'number_val' => 2,
+                    'title' => 'AICTE Extension of Approval (EOA) 2024-25',
+                    'badge_text' => 'AICTE APPROVAL',
+                    'text_val' => 'All India Council for Technical Education approval for Engineering, MBA, and MCA courses.',
+                    'link_url' => 'Content/Documents/AICTE_EOA.pdf'
+                ],
+                [
+                    'number_val' => 3,
+                    'title' => 'Pharmacy Council of India (PCI) Approvals',
+                    'badge_text' => 'PCI APPROVAL',
+                    'text_val' => 'PCI approval certificates for B.Pharm, M.Pharm, and D.Pharm programs.',
+                    'link_url' => 'Content/Documents/PCI_Approval.pdf'
+                ]
+            ]
+        ]
+    ],
+    'dean' => [
+        'title' => 'Deans of Faculties & Heads of Departments',
+        'eyebrow' => 'ACADEMIC LEADERSHIP',
+        'subtitle' => 'Prominent academic deans overseeing engineering, pharmacy, management, science, agriculture, and humanities faculties.',
+        'heading' => 'Deans & Faculty Leadership',
+        'text' => "The Deans of RKDF University provide academic leadership, curriculum oversight, research mentorship, and student mentorship across all faculties.",
+        'items' => [
+            'leadership' => [
+                [
+                    'number_val' => 1,
+                    'title' => 'Faculty Deans & Department Heads Directory',
+                    'badge_text' => 'ACADEMIC DEANS',
+                    'text_val' => 'List of Deans across Engineering, Pharmacy, Management, Nursing, Agriculture, Computer Applications, and Basic Sciences.',
+                    'link_url' => 'page.php?slug=faculty-directory'
+                ]
+            ]
+        ]
+    ]
+];
+
+$keyDef = $pageDefaults[$pageKey] ?? [];
+
+$pageTitle     = !empty($pRow['page_title'])    ? $pRow['page_title'] . ' — RKDF University Bhopal' : ($defaultTitle ?? ($keyDef['title'] ?? 'RKDF University Bhopal'));
+$eyebrow       = !empty($pRow['eyebrow'])       ? $pRow['eyebrow'] : ($defaultEyebrow ?? ($keyDef['eyebrow'] ?? '01 · Overview'));
+$mainTitle     = !empty($pRow['page_title'])    ? $pRow['page_title'] : ($defaultMainTitle ?? ($keyDef['title'] ?? 'RKDF University'));
+$heroSubtitle  = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : ($defaultHeroSubtitle ?? ($keyDef['subtitle'] ?? ''));
+$introHeading  = !empty($pRow['intro_heading']) ? $pRow['intro_heading'] : ($defaultIntroHeading ?? ($keyDef['heading'] ?? ''));
+$introText     = !empty($pRow['intro_text'])    ? $pRow['intro_text'] : ($defaultIntroText ?? ($keyDef['text'] ?? ''));
 $heroBgImg     = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'images/lovable/rkdf-why-bg.jpg';
 $metaDesc      = !empty($pRow['meta_description']) ? $pRow['meta_description'] : $heroSubtitle;
-
-// Fetch page items
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key, sort_order, id");
-$itemStmt->execute([$pageKey]);
-$allItems = $itemStmt->fetchAll();
 
 // Check if any item has a featured portrait image
 $featuredImgItem = null;
@@ -44,8 +141,12 @@ foreach ($allItems as $it) {
     $groupedItems[$it['group_key']][] = $it;
 }
 
-if (empty($groupedItems) && !empty($defaultGroupedItems)) {
-    $groupedItems = $defaultGroupedItems;
+if (empty($groupedItems)) {
+    if (!empty($defaultGroupedItems)) {
+        $groupedItems = $defaultGroupedItems;
+    } elseif (!empty($keyDef['items'])) {
+        $groupedItems = $keyDef['items'];
+    }
 }
 ?>
 <!DOCTYPE html>

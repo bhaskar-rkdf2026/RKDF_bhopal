@@ -1,7 +1,101 @@
 <?php
 // ============================================================
 // RKDF University — Dynamic Subpage Router
-// Renders any site_pages slug dynamically using subpage_template.php
+// Renders any site_pages slug dynamically using subpage_template.php or custom target page
 // ============================================================
+require_once __DIR__ . '/include/mysql_compat.php';
 $pageKey = $_GET['slug'] ?? 'about';
+
+$standaloneMap = [
+    'pro-chancellor'    => __DIR__ . '/ProChancellor.php',
+    'chancellor'        => __DIR__ . '/Chancellor.php',
+    'vc-desk'           => __DIR__ . '/Vice-Chancellor-Desk.php',
+    'scholarship'       => __DIR__ . '/scholarship.php',
+    'dgm'               => __DIR__ . '/dgm.php',
+    'dgr'               => __DIR__ . '/dgr.php',
+    'registrar'         => __DIR__ . '/Registrar.php',
+    'other-officers'    => __DIR__ . '/other-officers.php',
+    'dean'              => __DIR__ . '/dean.php',
+    'bom'               => __DIR__ . '/BoM.php',
+    'academic-council'  => __DIR__ . '/Academic_Council.php',
+    'bos'               => __DIR__ . '/BOS.php',
+    'national-advisory' => __DIR__ . '/Statuary-Bodies.php',
+    'local-advisory'    => __DIR__ . '/localadvisory.php',
+    'eresource-login'   => __DIR__ . '/eresourse_login.php',
+    'staff'             => __DIR__ . '/staffLnew.php',
+    'lms'               => __DIR__ . '/LMS.php',
+    'exam-notice'       => __DIR__ . '/Exam_Notice.php',
+    'exam-timetable'    => __DIR__ . '/examtimetable.php',
+    'result'            => __DIR__ . '/Result.php',
+    'results'           => __DIR__ . '/Result.php',
+    'verification-form'    => __DIR__ . '/Verification_Form.php',
+    'marksheet-form'       => __DIR__ . '/Marksheet_Form.php',
+    'name-correction-form' => __DIR__ . '/Name_Correction_Form.php',
+    'migration-hindi'      => __DIR__ . '/Migration_Hindi.php',
+    'migration-english'    => __DIR__ . '/Migration_English.php',
+    'migration-form'       => __DIR__ . '/Migration_English.php',
+    'alumni-form'          => __DIR__ . '/Alumni_Form.php',
+    'alumni'               => __DIR__ . '/alumni.php',
+    't&p'                  => __DIR__ . '/t&p.php',
+    'tnp'                  => __DIR__ . '/t&p.php',
+    'placement'            => __DIR__ . '/t&p.php',
+    'placements'           => __DIR__ . '/t&p.php',
+    'training-placement'   => __DIR__ . '/t&p.php',
+    't-and-p'              => __DIR__ . '/t&p.php',
+    'careers'              => __DIR__ . '/Careers.php',
+    'career'               => __DIR__ . '/Careers.php',
+    'policies'             => __DIR__ . '/policies.php',
+    'accessibility'        => __DIR__ . '/policies.php',
+    'terms&condition'      => __DIR__ . '/terms&condition.php',
+    'terms-and-conditions' => __DIR__ . '/terms&condition.php',
+    'terms'                => __DIR__ . '/terms&condition.php',
+    'terms-condition'      => __DIR__ . '/terms&condition.php',
+    'privacy'              => __DIR__ . '/privacy.php',
+    'privacy-policy'       => __DIR__ . '/privacy.php',
+    'contact-us'           => __DIR__ . '/contact-us.php',
+    'contact'              => __DIR__ . '/contact-us.php',
+    'Contact_Us'           => __DIR__ . '/contact-us.php',
+    'student-portal'       => __DIR__ . '/Student_Portal.php',
+    'rnd-projects'         => __DIR__ . '/RnD_Projects.php',
+    'rnd-glance'           => __DIR__ . '/RnD_Projects.php',
+    'journals'             => __DIR__ . '/RnD_Projects.php',
+    'rnd-presentation'     => __DIR__ . '/RnD_Projects.php',
+    'rnd-formats'          => __DIR__ . '/RnD_Projects.php',
+    'funding-agencies'     => __DIR__ . '/RnD_Projects.php',
+    'publications'         => __DIR__ . '/RnD_Projects.php',
+    'mou-list'             => __DIR__ . '/RnD_Projects.php',
+    'patents'              => __DIR__ . '/RnD_Projects.php',
+    'conferences'          => __DIR__ . '/RnD_Projects.php',
+    'rnd-videos'           => __DIR__ . '/RnD_Projects.php',
+    'phd-subjects'         => __DIR__ . '/RnD_Projects.php',
+    'phd-admission'        => __DIR__ . '/RnD_Projects.php',
+    'phd-syllabus'         => __DIR__ . '/RnD_Projects.php',
+    'phd-students'         => __DIR__ . '/RnD_Projects.php',
+    'phd-admissions-2026'   => __DIR__ . '/RnD_Projects.php',
+    'supervisors'          => __DIR__ . '/RnD_Projects.php',
+    'research-policy'      => __DIR__ . '/RnD_Projects.php',
+    'consultancy-policy'   => __DIR__ . '/RnD_Projects.php',
+    'institutional-distinctiveness' => __DIR__ . '/RnD_Projects.php',
+    'govt-projects'        => __DIR__ . '/RnD_Projects.php',
+    'csir-projects'        => __DIR__ . '/RnD_Projects.php',
+    'solar-carbon-report'  => __DIR__ . '/RnD_Projects.php',
+    'incubation'           => __DIR__ . '/RnD_Projects.php',
+    'admission-notice'     => __DIR__ . '/RnD_Projects.php',
+    'admission-rules'      => __DIR__ . '/RnD_Projects.php',
+    'cuet-mapping'         => __DIR__ . '/RnD_Projects.php',
+    'international-admissions' => __DIR__ . '/RnD_Projects.php',
+    'academic-departments' => __DIR__ . '/RnD_Projects.php',
+    'bank-details'         => __DIR__ . '/RnD_Projects.php',
+    'fee-structure'        => __DIR__ . '/RnD_Projects.php',
+    'campus-facility'      => __DIR__ . '/RnD_Projects.php',
+    'pay-paytm'            => __DIR__ . '/RnD_Projects.php',
+    'inhouse-scheme'       => __DIR__ . '/RnD_Projects.php',
+    'meritorious-scheme'   => __DIR__ . '/RnD_Projects.php'
+];
+
+if (isset($standaloneMap[$pageKey]) && file_exists($standaloneMap[$pageKey])) {
+    require_once $standaloneMap[$pageKey];
+    exit;
+}
+
 require_once __DIR__ . '/include/subpage_template.php';

@@ -4,21 +4,20 @@
 // Edits content, hero, and cards for a specific page slug
 // ============================================================
 $pageTitle = 'Edit Page — RKDF CMS';
-require_once 'header.php';
-require_once '../config/db.php';
+require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../config/db.php';
 
 $pdo = getDbConnection();
 $slug = $_GET['slug'] ?? 'scholarship';
+$pageRow = null;
 
-// Fetch target page
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ?");
-$stmt->execute([$slug]);
-$pageRow = $stmt->fetch();
-
-if (!$pageRow) {
-    echo "<div class='content-container'><div class='alert alert-danger'>Page '{$slug}' not found. <a href='manage_pages.php'>Return to Pages Directory</a></div></div>";
-    require_once 'footer.php';
-    exit();
+if ($pdo) {
+    try {
+        // Fetch target page
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ?");
+        $stmt->execute([$slug]);
+        $pageRow = $stmt->fetch() ?: null;
+    } catch (Throwable $e) {}
 }
 
 $pageTitle = 'Edit Page: ' . $pageRow['page_title'] . ' — RKDF Admin Portal';
@@ -116,7 +115,92 @@ foreach ($allItems as $it) {
 $editItemId = isset($_GET['edit_item']) ? (int)$_GET['edit_item'] : 0;
 $editItemRow = $editItemId ? $pdo->query("SELECT * FROM page_sections WHERE id=$editItemId")->fetch() : null;
 
-$liveUrl = ($slug === 'scholarship' || $slug === 'chancellor') ? "../{$slug}.php" : "../page.php?slug={$slug}";
+$liveUrlMap = [
+    'pro-chancellor'    => '../ProChancellor.php',
+    'chancellor'        => '../Chancellor.php',
+    'vc-desk'           => '../Vice-Chancellor-Desk.php',
+    'scholarship'       => '../scholarship.php',
+    'dgm'               => '../dgm.php',
+    'dgr'               => '../dgr.php',
+    'registrar'         => '../Registrar.php',
+    'other-officers'    => '../other-officers.php',
+    'dean'              => '../dean.php',
+    'bom'               => '../BoM.php',
+    'academic-council'  => '../Academic_Council.php',
+    'bos'               => '../BOS.php',
+    'national-advisory' => '../Statuary-Bodies.php',
+    'local-advisory'    => '../localadvisory.php',
+    'eresource-login'   => '../eresourse_login.php',
+    'staff'             => '../staffLnew.php',
+    'lms'               => '../LMS.php',
+    'exam-notice'       => '../Exam_Notice.php',
+    'exam-timetable'    => '../examtimetable.php',
+    'result'            => '../Result.php',
+    'verification-form'    => '../Verification_Form.php',
+    'marksheet-form'       => '../Marksheet_Form.php',
+    'name-correction-form' => '../Name_Correction_Form.php',
+    'migration-hindi'      => '../Migration_Hindi.php',
+    'migration-english'    => '../Migration_English.php',
+    'migration-form'       => '../Migration_English.php',
+    'alumni-form'          => '../Alumni_Form.php',
+    'alumni'               => '../alumni.php',
+    't&p'                  => '../t&p.php',
+    'tnp'                  => '../t&p.php',
+    'placement'            => '../t&p.php',
+    'placements'           => '../t&p.php',
+    'training-placement'   => '../t&p.php',
+    't-and-p'              => '../t&p.php',
+    'careers'              => '../Careers.php',
+    'career'               => '../Careers.php',
+    'policies'             => '../policies.php',
+    'accessibility'        => '../policies.php',
+    'terms&condition'      => '../terms&condition.php',
+    'terms-and-conditions' => '../terms&condition.php',
+    'terms'                => '../terms&condition.php',
+    'terms-condition'      => '../terms&condition.php',
+    'privacy'              => '../privacy.php',
+    'privacy-policy'       => '../privacy.php',
+    'contact-us'           => '../contact-us.php',
+    'contact'              => '../contact-us.php',
+    'Contact_Us'           => '../contact-us.php',
+    'student-portal'       => '../Student_Portal.php',
+    'rnd-projects'         => '../RnD_Projects.php',
+    'rnd-glance'           => '../RnD_Projects.php',
+    'journals'             => '../RnD_Projects.php',
+    'rnd-presentation'     => '../RnD_Projects.php',
+    'rnd-formats'          => '../RnD_Projects.php',
+    'funding-agencies'     => '../RnD_Projects.php',
+    'publications'         => '../RnD_Projects.php',
+    'mou-list'             => '../RnD_Projects.php',
+    'patents'              => '../RnD_Projects.php',
+    'conferences'          => '../RnD_Projects.php',
+    'rnd-videos'           => '../RnD_Projects.php',
+    'phd-subjects'         => '../RnD_Projects.php',
+    'phd-admission'        => '../RnD_Projects.php',
+    'phd-syllabus'         => '../RnD_Projects.php',
+    'phd-students'         => '../RnD_Projects.php',
+    'phd-admissions-2026'   => '../RnD_Projects.php',
+    'supervisors'          => '../RnD_Projects.php',
+    'research-policy'      => '../RnD_Projects.php',
+    'consultancy-policy'   => '../RnD_Projects.php',
+    'institutional-distinctiveness' => '../RnD_Projects.php',
+    'govt-projects'        => '../RnD_Projects.php',
+    'csir-projects'        => '../RnD_Projects.php',
+    'solar-carbon-report'  => '../RnD_Projects.php',
+    'incubation'           => '../RnD_Projects.php',
+    'admission-notice'     => '../RnD_Projects.php',
+    'admission-rules'      => '../RnD_Projects.php',
+    'cuet-mapping'         => '../RnD_Projects.php',
+    'international-admissions' => '../RnD_Projects.php',
+    'academic-departments' => '../RnD_Projects.php',
+    'bank-details'         => '../RnD_Projects.php',
+    'fee-structure'        => '../RnD_Projects.php',
+    'campus-facility'      => '../RnD_Projects.php',
+    'pay-paytm'            => '../RnD_Projects.php',
+    'inhouse-scheme'       => '../RnD_Projects.php',
+    'meritorious-scheme'   => '../RnD_Projects.php'
+];
+$liveUrl = $liveUrlMap[$slug] ?? "../page.php?slug={$slug}";
 ?>
 
 <style>

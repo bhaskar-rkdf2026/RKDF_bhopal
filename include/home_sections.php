@@ -11,15 +11,21 @@ $cmsSections = [];
 $cmsItems = [];
 try {
     $pdo = getDbConnection();
-    $stmtSec = $pdo->query("SELECT * FROM homepage_sections WHERE is_active = 1 ORDER BY sort_order ASC");
-    while ($sec = $stmtSec->fetch(PDO::FETCH_ASSOC)) {
-        $cmsSections[$sec['section_key']] = $sec;
+    if ($pdo) {
+        $stmtSec = $pdo->query("SELECT * FROM homepage_sections WHERE is_active = 1 ORDER BY sort_order ASC");
+        if ($stmtSec) {
+            while ($sec = $stmtSec->fetch(PDO::FETCH_ASSOC)) {
+                $cmsSections[$sec['section_key']] = $sec;
+            }
+        }
+        $stmtItems = $pdo->query("SELECT * FROM homepage_items WHERE is_active = 1 ORDER BY sort_order ASC, id ASC");
+        if ($stmtItems) {
+            while ($item = $stmtItems->fetch(PDO::FETCH_ASSOC)) {
+                $cmsItems[$item['section_key']][] = $item;
+            }
+        }
     }
-    $stmtItems = $pdo->query("SELECT * FROM homepage_items WHERE is_active = 1 ORDER BY sort_order ASC, id ASC");
-    while ($item = $stmtItems->fetch(PDO::FETCH_ASSOC)) {
-        $cmsItems[$item['section_key']][] = $item;
-    }
-} catch (Exception $e) { /* DB optional fallback */ }
+} catch (Throwable $e) { /* DB optional fallback */ }
 
 // Helper function to format eyebrow tag text with section number
 if (!function_exists('format_eyebrow_tag')) {

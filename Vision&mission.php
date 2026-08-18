@@ -8,21 +8,25 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'vision-mission';
+$pRow = [];
+$allItems = [];
 
-// Fetch metadata from site_pages
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '01 · INSTITUTIONAL PHILOSOPHY';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Vision & Mission';
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Pioneering Higher Education, Advanced Research, and Sustainable Societal Transformation at RKDF University Bhopal.';
 $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'images/ai_vision/rkdf_vision_banner.jpg';
-
-// Fetch section items from page_sections
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
-$itemStmt->execute([$pageSlug]);
-$allItems = $itemStmt->fetchAll();
 
 // Group items by key or pick
 $vCard = null;

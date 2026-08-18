@@ -8,20 +8,24 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'chancellor';
+$pRow = [];
+$allItems = [];
 
-// Fetch page metadata from site_pages DB table
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '03 · EXECUTIVE LEADERSHIP';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : "Chancellor's Desk";
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'A message of vision, institutional mission, and educational empowerment from Dr. Sadhna Kapoor, Chancellor.';
-
-// Fetch section cards from page_sections DB table
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
-$itemStmt->execute([$pageSlug]);
-$allItems = $itemStmt->fetchAll();
 
 $chanMessageTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Message From The Chancellor';
 $chanBadge        = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'CHANCELLOR ADDRESS';

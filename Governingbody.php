@@ -8,21 +8,25 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'governing-body';
+$pRow = [];
+$allItems = [];
 
-// Fetch metadata from site_pages
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '15 · GOVERNANCE';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'Governing Body';
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'The supreme statutory authority responsible for university vision, policy direction, and institutional governance.';
 $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : 'The Governing Body is the supreme authority of RKDF University, Bhopal. It frames statutes, approves annual budgets, sets strategic growth objectives, ensures statutory compliance with regulatory councils, and provides high-level vision for university expansion and research leadership.';
-
-// Fetch section items from page_sections
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
-$itemStmt->execute([$pageSlug]);
-$allItems = $itemStmt->fetchAll();
 
 $govCardTitle = !empty($allItems[0]['title']) ? $allItems[0]['title'] : 'Governing Body Member Directory';
 $govBadge     = !empty($allItems[0]['badge_text']) ? $allItems[0]['badge_text'] : 'SUPREME STATUTORY BODY';

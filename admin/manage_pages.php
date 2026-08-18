@@ -7,16 +7,24 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once '../config/db.php';
+require_once __DIR__ . '/../config/db.php';
 $pdo = getDbConnection();
 
-// Ensure hero_bg_image column exists in site_pages
-try {
-    $pdo->exec("ALTER TABLE site_pages ADD COLUMN hero_bg_image VARCHAR(255) DEFAULT NULL");
-} catch (Exception $e) {}
+$allPages = [];
+if ($pdo) {
+    // Ensure hero_bg_image column exists in site_pages
+    try {
+        $pdo->exec("ALTER TABLE site_pages ADD COLUMN hero_bg_image VARCHAR(255) DEFAULT NULL");
+    } catch (Throwable $e) {}
 
-// Fetch all registered site pages for the dropdown
-$allPages = $pdo->query("SELECT page_slug, page_title, category FROM site_pages ORDER BY category, sort_order, page_title")->fetchAll();
+    // Fetch all registered site pages for the dropdown
+    try {
+        $stmtPages = $pdo->query("SELECT page_slug, page_title, category FROM site_pages ORDER BY category, sort_order, page_title");
+        if ($stmtPages) {
+            $allPages = $stmtPages->fetchAll() ?: [];
+        }
+    } catch (Throwable $e) {}
+}
 $selectedSlug = $_GET['slug'] ?? ($allPages[0]['page_slug'] ?? 'about');
 
 // Ensure Upload Directory Exists

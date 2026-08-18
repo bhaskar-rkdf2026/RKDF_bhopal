@@ -10,12 +10,12 @@ $article = null;
 
 try {
     $pdo = getDbConnection();
-    if ($newsId > 0) {
+    if ($pdo && $newsId > 0) {
         $stmt = $pdo->prepare("SELECT * FROM homepage_items WHERE id = ? AND section_key IN ('sec_11_news', 'sec_12_news') LIMIT 1");
         $stmt->execute([$newsId]);
         $article = $stmt->fetch(PDO::FETCH_ASSOC);
     }
-} catch (Exception $e) { /* fallback */ }
+} catch (Throwable $e) { /* fallback */ }
 
 // Baseline fallback articles if not found by ID
 if (!$article) {

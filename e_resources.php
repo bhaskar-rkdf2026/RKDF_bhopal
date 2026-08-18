@@ -202,31 +202,6 @@ require_once __DIR__ . '/config/db.php';
 			</tr>
 			<tr>
 				<td width="273"><a href="https://oyc.yale.edu/courses" target="_blank"><img src="images/img/Yale.jpg" width="155" /></a></td>
-				<td width="273"><a href="https://www.mooc.org" target="_blank"><img src="images/img/mooc.jpg" width="155" /></a></td>
-				<td width="273"><a href="https://www.open.ac.uk" target="_blank"><img src="images/img/Open_University_OG_Image.png" width="155" /></a></td>
-			</tr>
-			<tr>
-				<td>&nbsp;
-					<?php
-
-					//$con=mysql_connect($host,$user,$pass);
-					$con = mysql_connect("localhost", "rkhare_prashant", "Vcwbtbcpii09");
-					mysql_select_db("rkhare_result2013", $con);
-					$qry = " insert into eresourc ( rollno, date) 
-	        values('" . $rollno . "','" . $date . "')";
-
-					//echo $qry;
-					//exit;		
-					mysql_query($qry);
-					mysql_close($con);
-					//echo "One record inserted";
-					
-					?>
-
-				</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
-				<td>&nbsp;</td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>

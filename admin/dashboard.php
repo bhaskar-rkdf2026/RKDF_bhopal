@@ -11,22 +11,26 @@ $sectionsList = [];
 
 try {
     $pdo = getDbConnection();
-    
-    // Count active sections
-    $stmtSec = $pdo->query("SELECT * FROM homepage_sections ORDER BY sort_order ASC");
-    $sectionsList = $stmtSec->fetchAll();
-    $totalSections = count($sectionsList);
+    if ($pdo) {
+        // Count active sections
+        $stmtSec = $pdo->query("SELECT * FROM homepage_sections ORDER BY sort_order ASC");
+        if ($stmtSec) {
+            $sectionsList = $stmtSec->fetchAll();
+            $totalSections = count($sectionsList);
 
-    foreach ($sectionsList as $sec) {
-        if ($sec['is_active']) $activeSections++;
+            foreach ($sectionsList as $sec) {
+                if (!empty($sec['is_active'])) $activeSections++;
+            }
+        }
+
+        // Count items
+        $stmtItems = $pdo->query("SELECT COUNT(*) FROM homepage_items WHERE is_active = 1");
+        if ($stmtItems) {
+            $totalItems = $stmtItems->fetchColumn();
+        }
     }
-
-    // Count items
-    $stmtItems = $pdo->query("SELECT COUNT(*) FROM homepage_items WHERE is_active = 1");
-    $totalItems = $stmtItems->fetchColumn();
-
-} catch (Exception $e) {
-    // If DB tables not yet seeded, default values apply
+} catch (Throwable $e) {
+    // If DB tables not yet seeded or DB offline, default values apply
 }
 ?>
 

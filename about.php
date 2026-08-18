@@ -8,32 +8,37 @@ require_once __DIR__ . '/config/db.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'about';
+$pRow = [];
+$stats = [];
+$brochure = null;
 
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
+
+        $secStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key DESC, sort_order ASC");
+        $secStmt->execute([$pageSlug]);
+        $allSections = $secStmt->fetchAll() ?: [];
+        foreach ($allSections as $s) {
+            if ($s['group_key'] === 'stats') {
+                $stats[] = $s;
+            } else {
+                $brochure = $s;
+            }
+        }
+    } catch (Throwable $e) {}
+}
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '01 · OVERVIEW';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'About RKDF University';
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Education Glorifies the Nation — Pioneer in Skill-Based, Technology-Driven Higher Education and Advanced Research.';
+$defaultIntroText = "Ram Krishna Dharmarth Foundation (RKDF) University, Bhopal was established in the year 2011 by an Act of Madhya Pradesh State Legislature under the MP Niji Vishwavidyalaya Adhiniyam, 2007.\n\nThe University is sponsored by the RKDF Education Society, which has been a pioneer in higher education since 1995. Over the years, RKDF Group has grown into one of the largest educational groups in Central India, operating multiple campuses, colleges, and research institutes across engineering, management, pharmacy, medical sciences, agriculture, and humanities.\n\nRKDF University Bhopal is recognized by the University Grants Commission (UGC) under Section 2(f) of the UGC Act 1956 and is approved by respective statutory bodies including AICTE, PCI, BCI, NCTE, and INC. The University is committed to fostering academic excellence, industry alignment, multidisciplinary research, and holistic student development.";
+
 $introHeading = !empty($pRow['intro_heading']) ? $pRow['intro_heading'] : 'About RKDF University Bhopal';
-$introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : '';
+$introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defaultIntroText;
 $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'images/lovable/rkdf-why-bg.jpg';
-
-// Fetch sections (Stats counters and Brochure PDF card)
-$secStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key DESC, sort_order ASC");
-$secStmt->execute([$pageSlug]);
-$allSections = $secStmt->fetchAll();
-
-$stats = [];
-$brochure = null;
-foreach ($allSections as $s) {
-    if ($s['group_key'] === 'stats') {
-        $stats[] = $s;
-    } else {
-        $brochure = $s;
-    }
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

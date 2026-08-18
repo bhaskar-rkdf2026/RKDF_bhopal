@@ -4,40 +4,48 @@
 // Manages: Logo | Header | Nav Menu | Footer Links | Social
 // ============================================================
 $pageTitle = 'Appearance Manager — RKDF Admin Portal';
-require_once 'header.php';
-require_once '../config/db.php';
+require_once __DIR__ . '/header.php';
+require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/upload_handler.php';
 
 $pdo = getDbConnection();
 
 // ── Auto-create tables if not exist ──────────────────────────
-$pdo->exec("
-CREATE TABLE IF NOT EXISTS `nav_menu_items` (
-  `id`         INT AUTO_INCREMENT PRIMARY KEY,
-  `label`      VARCHAR(100) NOT NULL,
-  `url`        VARCHAR(255) DEFAULT '#',
-  `target`     VARCHAR(20)  DEFAULT '_self',
-  `parent_id`  INT          DEFAULT NULL,
-  `sort_order` INT          DEFAULT 0,
-  `is_active`  TINYINT(1)   DEFAULT 1,
-  `updated_at` DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+if ($pdo) {
+    try {
+        $pdo->exec("
+        CREATE TABLE IF NOT EXISTS `nav_menu_items` (
+          `id`         INT AUTO_INCREMENT PRIMARY KEY,
+          `label`      VARCHAR(100) NOT NULL,
+          `url`        VARCHAR(255) DEFAULT '#',
+          `target`     VARCHAR(20)  DEFAULT '_self',
+          `parent_id`  INT          DEFAULT NULL,
+          `sort_order` INT          DEFAULT 0,
+          `is_active`  TINYINT(1)   DEFAULT 1,
+          `updated_at` DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE IF NOT EXISTS `footer_links` (
-  `id`         INT AUTO_INCREMENT PRIMARY KEY,
-  `column_key` VARCHAR(50)  NOT NULL DEFAULT 'col1',
-  `column_label` VARCHAR(100) NOT NULL DEFAULT 'Column',
-  `label`      VARCHAR(150) NOT NULL,
-  `url`        VARCHAR(255) DEFAULT '#',
-  `target`     VARCHAR(20)  DEFAULT '_self',
-  `sort_order` INT          DEFAULT 0,
-  `is_active`  TINYINT(1)   DEFAULT 1,
-  `updated_at` DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-");
+        CREATE TABLE IF NOT EXISTS `footer_links` (
+          `id`         INT AUTO_INCREMENT PRIMARY KEY,
+          `column_key` VARCHAR(50)  NOT NULL DEFAULT 'col1',
+          `column_label` VARCHAR(100) NOT NULL DEFAULT 'Column',
+          `label`      VARCHAR(150) NOT NULL,
+          `url`        VARCHAR(255) DEFAULT '#',
+          `target`     VARCHAR(20)  DEFAULT '_self',
+          `sort_order` INT          DEFAULT 0,
+          `is_active`  TINYINT(1)   DEFAULT 1,
+          `updated_at` DATETIME     DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+        ");
+    } catch (Throwable $e) {}
 
-// ── Seed default nav items if table empty ────────────────────
-$navCount = $pdo->query("SELECT COUNT(*) FROM nav_menu_items")->fetchColumn();
+    // ── Seed default nav items if table empty ────────────────────
+    try {
+        $navCount = $pdo->query("SELECT COUNT(*) FROM nav_menu_items")->fetchColumn();
+    } catch (Throwable $e) { $navCount = 0; }
+} else {
+    $navCount = 0;
+}
 if ($navCount == 0) {
     $seeds = [
         ['Admissions',    'admissionform.php',          '_self', null, 1],
@@ -158,9 +166,17 @@ if ($action === 'delete_footer') {
 }
 
 // ── Fetch current data ────────────────────────────────────────
-require_once '../include/site_settings.php';
-$navItems    = $pdo->query("SELECT * FROM nav_menu_items ORDER BY sort_order,id")->fetchAll();
-$footerLinks = $pdo->query("SELECT * FROM footer_links ORDER BY column_key,sort_order,id")->fetchAll();
+$navItems    = [];
+$footerLinks = [];
+if ($pdo) {
+    try {
+        $stmtNav = $pdo->query("SELECT * FROM nav_menu_items ORDER BY sort_order,id");
+        if ($stmtNav) $navItems = $stmtNav->fetchAll() ?: [];
+
+        $stmtFoot = $pdo->query("SELECT * FROM footer_links ORDER BY column_key,sort_order,id");
+        if ($stmtFoot) $footerLinks = $stmtFoot->fetchAll() ?: [];
+    } catch (Throwable $e) {}
+}
 
 // Group footer links by column
 $footerCols = [];

@@ -33,6 +33,31 @@ foreach ($allItems as $it) {
 }
 
 $openingItems = $groupedItems['openings'] ?? [];
+
+$formMsg = '';
+$formErr = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['apply_career'])) {
+    $reqId        = 'CAR' . date('Y') . rand(10000, 99999);
+    $name         = trim($_POST['applicant_name'] ?? '');
+    $email        = trim($_POST['email_id'] ?? '');
+    $mobile       = trim($_POST['mobile_no'] ?? '');
+    $postApplied  = trim($_POST['post_applied'] ?? '');
+    $department   = trim($_POST['department'] ?? '');
+    $qual         = trim($_POST['qualification'] ?? '');
+    $exp          = trim($_POST['experience_years'] ?? '');
+
+    if (!empty($name) && !empty($mobile) && !empty($postApplied)) {
+        if ($pdo) {
+            try {
+                $stmtCar = $pdo->prepare("INSERT INTO career_applications (req_id, applicant_name, email_id, mobile_no, post_applied, department, qualification, experience_years, status) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'RECEIVED')");
+                $stmtCar->execute([$reqId, $name, $email, $mobile, $postApplied, $department, $qual, $exp]);
+            } catch (Throwable $ex) {}
+        }
+        $formMsg = "Application Submitted Successfully! Your Reference ID is {$reqId}.";
+    } else {
+        $formErr = "Please enter your name, mobile number, and position applied for.";
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -350,8 +375,61 @@ $openingItems = $groupedItems['openings'] ?? [];
 
         </div><!-- /careers-left -->
 
-        <!-- RIGHT SIDEBAR: QUICK LINKS -->
-        <div class="careers-sidebar">
+          <!-- Online Job Application Form Card -->
+          <div class="sidebar-card" style="margin-bottom:24px;">
+            <h3 class="sidebar-card-title">Apply Online for Job</h3>
+            
+            <?php if (!empty($formMsg)): ?>
+            <div style="background:#dcfce7;color:#166534;padding:12px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:16px;">
+              <?= htmlspecialchars($formMsg) ?>
+            </div>
+            <?php endif; ?>
+
+            <?php if (!empty($formErr)): ?>
+            <div style="background:#fee2e2;color:#991b1b;padding:12px 14px;border-radius:8px;font-size:13px;font-weight:700;margin-bottom:16px;">
+              <?= htmlspecialchars($formErr) ?>
+            </div>
+            <?php endif; ?>
+
+            <form method="post" action="Careers.php">
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Full Name *</label>
+                <input type="text" name="applicant_name" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" required placeholder="YOUR FULL NAME" />
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Email Address</label>
+                <input type="email" name="email_id" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" placeholder="YOUR EMAIL ADDRESS" />
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Mobile Number *</label>
+                <input type="text" name="mobile_no" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" required placeholder="10-DIGIT MOBILE NUMBER" />
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Position Applied For *</label>
+                <input type="text" name="post_applied" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" required placeholder="e.g. Assistant Professor, JRF" />
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Department / Discipline</label>
+                <input type="text" name="department" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" placeholder="e.g. Agriculture, Computer Science" />
+              </div>
+
+              <div style="margin-bottom:12px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Highest Qualification</label>
+                <input type="text" name="qualification" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" placeholder="e.g. Ph.D, M.Tech, M.Sc" />
+              </div>
+
+              <div style="margin-bottom:16px;">
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Experience (Years)</label>
+                <input type="text" name="experience_years" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" placeholder="e.g. 3 Years" />
+              </div>
+
+              <button type="submit" name="apply_career" style="width:100%;background:#0C1424;color:#ffffff;border:none;padding:12px;border-radius:8px;font-weight:700;font-size:14px;cursor:pointer;">Submit Application ↗</button>
+            </form>
+          </div>
 
           <div class="sidebar-card">
             <h3 class="sidebar-card-title">Quick Links</h3>

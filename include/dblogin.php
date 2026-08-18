@@ -1,6 +1,6 @@
 <?php
- $host="localhost";
- $user="rkhare_prashant";
- $pass="Vcwbtbcpii09";
- $db="rkhare_result2013";
-?>
+require_once __DIR__ . '/mysql_compat.php';
+$host = DB_HOST;
+$user = DB_USER;
+$pass = DB_PASS;
+$db   = DB_NAME;

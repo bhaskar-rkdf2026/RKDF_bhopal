@@ -1,8 +1,5 @@
 <?php
 // ============================================================
-// RKDF University — Official Student ERP Portal Redirect
-// Redirects student-portal.php directly to https://erplive.rkdf.ac.in/
+// RKDF University — Student ERP & Digital Services Gateway Router
 // ============================================================
-header("Location: https://erplive.rkdf.ac.in/", true, 301);
-exit();
-?>
+require_once __DIR__ . '/Student_Portal.php';

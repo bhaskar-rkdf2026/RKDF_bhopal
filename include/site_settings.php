@@ -20,16 +20,20 @@ $siteSettings = [
     'copyright_text' => '© ' . date('Y') . ' RKDF University Bhopal. All rights reserved.'
 ];
 
-try {
-    $pdo = getDbConnection();
-    $stmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings");
-    while ($row = $stmt->fetch()) {
-        if (!empty($row['setting_key'])) {
-            $siteSettings[$row['setting_key']] = $row['setting_value'];
+$pdo = getDbConnection();
+if ($pdo) {
+    try {
+        $stmt = $pdo->query("SELECT setting_key, setting_value FROM site_settings");
+        if ($stmt) {
+            while ($row = $stmt->fetch()) {
+                if (!empty($row['setting_key'])) {
+                    $siteSettings[$row['setting_key']] = $row['setting_value'];
+                }
+            }
         }
+    } catch (Throwable $e) {
+        // Fallback gracefully to defaults if DB query fails
     }
-} catch (Exception $e) {
-    // Fallback gracefully to defaults if DB query fails
 }
 
 /**
