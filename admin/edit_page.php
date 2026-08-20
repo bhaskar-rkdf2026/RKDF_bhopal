@@ -9,111 +9,147 @@ require_once __DIR__ . '/../config/db.php';
 
 $pdo = getDbConnection();
 $slug = $_GET['slug'] ?? 'scholarship';
-$pageRow = null;
+$prettySlugTitle = ucwords(str_replace(['-', '_'], ' ', $slug));
+
+$pageRow = [
+    'id' => 0,
+    'page_slug' => $slug,
+    'page_title' => $prettySlugTitle,
+    'eyebrow' => '01 · OVERVIEW',
+    'hero_subtitle' => 'Education Glorifies the Nation — Pioneer in Skill-Based, Technology-Driven Higher Education and Advanced Research.',
+    'intro_heading' => 'About ' . $prettySlugTitle,
+    'intro_text' => 'Official information and academic framework for ' . $prettySlugTitle . ' at RKDF University Bhopal.',
+    'meta_keywords' => 'rkdf, university, ' . str_replace('-', ' ', $slug),
+    'meta_description' => 'Official page for ' . $prettySlugTitle . ' at RKDF University Bhopal.',
+    'is_active' => 1
+];
 
 if ($pdo) {
     try {
         // Fetch target page
         $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ?");
         $stmt->execute([$slug]);
-        $pageRow = $stmt->fetch() ?: null;
+        $fetched = $stmt->fetch();
+        if ($fetched) {
+            $pageRow = array_merge($pageRow, $fetched);
+        }
     } catch (Throwable $e) {}
 }
 
-$pageTitle = 'Edit Page: ' . $pageRow['page_title'] . ' — RKDF Admin Portal';
+$pageTitle = 'Edit Page: ' . htmlspecialchars($pageRow['page_title'] ?? $prettySlugTitle) . ' — RKDF Admin Portal';
 
 // ── Handle Form Submissions ───────────────────────────────────────
 $success = $error = '';
 $action = $_POST['action'] ?? '';
 
-// Update Header / Hero / Meta
-if ($action === 'save_header') {
-    $pdo->prepare("UPDATE site_pages SET page_title=?, eyebrow=?, hero_subtitle=?, intro_heading=?, intro_text=?, meta_keywords=?, meta_description=?, is_active=? WHERE id=?")
-        ->execute([
-            trim($_POST['page_title']),
-            trim($_POST['eyebrow']),
-            trim($_POST['hero_subtitle']),
-            trim($_POST['intro_heading']),
-            trim($_POST['intro_text']),
-            trim($_POST['meta_keywords']),
-            trim($_POST['meta_description']),
-            isset($_POST['is_active']) ? 1 : 0,
-            $pageRow['id']
-        ]);
-    $success = 'Page details & header updated successfully!';
-    $stmt->execute([$slug]);
-    $pageRow = $stmt->fetch();
-}
+if ($pdo && !empty($action)) {
+    try {
+        // Update Header / Hero / Meta
+        if ($action === 'save_header') {
+            $upd = $pdo->prepare("UPDATE site_pages SET page_title=?, eyebrow=?, hero_subtitle=?, intro_heading=?, intro_text=?, meta_keywords=?, meta_description=?, is_active=? WHERE page_slug=?");
+            $upd->execute([
+                trim($_POST['page_title']),
+                trim($_POST['eyebrow']),
+                trim($_POST['hero_subtitle']),
+                trim($_POST['intro_heading']),
+                trim($_POST['intro_text']),
+                trim($_POST['meta_keywords']),
+                trim($_POST['meta_description']),
+                isset($_POST['is_active']) ? 1 : 0,
+                $slug
+            ]);
+            $success = 'Page details & header updated successfully!';
+            $stmt->execute([$slug]);
+            $fetched = $stmt->fetch();
+            if ($fetched) $pageRow = array_merge($pageRow, $fetched);
+        }
 
-// Add Card / Section Item
-if ($action === 'add_item') {
-    $pdo->prepare("INSERT INTO page_sections (page_slug, group_key, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order, is_active)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)")
-        ->execute([
-            $slug,
-            trim($_POST['group_key'] ?? 'general'),
-            trim($_POST['item_title']),
-            trim($_POST['item_subtitle']),
-            trim($_POST['number_val']),
-            trim($_POST['item_text']),
-            trim($_POST['image_path']),
-            trim($_POST['link_url']),
-            trim($_POST['badge_text']),
-            (int)($_POST['sort_order'] ?? 99)
-        ]);
-    $success = 'Content card added successfully!';
-}
+        // Add Card / Section Item
+        if ($action === 'add_item') {
+            $pdo->prepare("INSERT INTO page_sections (page_slug, group_key, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order, is_active)
+                           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)")
+                ->execute([
+                    $slug,
+                    trim($_POST['group_key'] ?? 'general'),
+                    trim($_POST['item_title']),
+                    trim($_POST['item_subtitle']),
+                    trim($_POST['number_val']),
+                    trim($_POST['item_text']),
+                    trim($_POST['image_path']),
+                    trim($_POST['link_url']),
+                    trim($_POST['badge_text']),
+                    (int)($_POST['sort_order'] ?? 99)
+                ]);
+            $success = 'Content card added successfully!';
+        }
 
-// Update Card / Section Item
-if ($action === 'update_item') {
-    $pdo->prepare("UPDATE page_sections SET group_key=?, title=?, subtitle=?, number_val=?, text_val=?, image_path=?, link_url=?, badge_text=?, sort_order=?, is_active=? WHERE id=?")
-        ->execute([
-            trim($_POST['group_key'] ?? 'general'),
-            trim($_POST['item_title']),
-            trim($_POST['item_subtitle']),
-            trim($_POST['number_val']),
-            trim($_POST['item_text']),
-            trim($_POST['image_path']),
-            trim($_POST['link_url']),
-            trim($_POST['badge_text']),
-            (int)($_POST['sort_order'] ?? 0),
-            isset($_POST['is_active']) ? 1 : 0,
-            (int)$_POST['item_id']
-        ]);
-    $success = 'Content card updated successfully!';
-}
+        // Update Card / Section Item
+        if ($action === 'update_item') {
+            $pdo->prepare("UPDATE page_sections SET group_key=?, title=?, subtitle=?, number_val=?, text_val=?, image_path=?, link_url=?, badge_text=?, sort_order=?, is_active=? WHERE id=?")
+                ->execute([
+                    trim($_POST['group_key'] ?? 'general'),
+                    trim($_POST['item_title']),
+                    trim($_POST['item_subtitle']),
+                    trim($_POST['number_val']),
+                    trim($_POST['item_text']),
+                    trim($_POST['image_path']),
+                    trim($_POST['link_url']),
+                    trim($_POST['badge_text']),
+                    (int)($_POST['sort_order'] ?? 0),
+                    isset($_POST['is_active']) ? 1 : 0,
+                    (int)$_POST['item_id']
+                ]);
+            $success = 'Content card updated successfully!';
+        }
 
-// Delete Card Item
-if ($action === 'delete_item') {
-    $pdo->prepare("DELETE FROM page_sections WHERE id=?")->execute([(int)$_POST['item_id']]);
-    $success = 'Content card deleted.';
+        // Delete Card Item
+        if ($action === 'delete_item') {
+            $pdo->prepare("DELETE FROM page_sections WHERE id=?")->execute([(int)$_POST['item_id']]);
+            $success = 'Content card deleted.';
+        }
+    } catch (Throwable $eForm) {
+        $error = "Action error: " . $eForm->getMessage();
+    }
 }
 
 // Fetch all items for this page
-$itemsStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug=? ORDER BY group_key, sort_order, id");
-$itemsStmt->execute([$slug]);
-$allItems = $itemsStmt->fetchAll();
-
-// Also fetch old subpage_items if scholarship or migrated page
-if (empty($allItems) && $slug === 'scholarship') {
-    $oldItems = $pdo->query("SELECT * FROM subpage_items WHERE page_key='scholarship' ORDER BY group_key, sort_order, id")->fetchAll();
-    if (!empty($oldItems)) {
-        $ins = $pdo->prepare("INSERT INTO page_sections (page_slug, group_key, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order, is_active) VALUES ('scholarship', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        foreach ($oldItems as $oi) {
-            $ins->execute([$oi['group_key'], $oi['title'], $oi['subtitle'], $oi['number_val'], $oi['text_val'], $oi['image_path'], $oi['link_url'], $oi['badge_text'], $oi['sort_order'], $oi['is_active']]);
-        }
+$allItems = [];
+if ($pdo) {
+    try {
+        $itemsStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug=? ORDER BY group_key, sort_order, id");
         $itemsStmt->execute([$slug]);
-        $allItems = $itemsStmt->fetchAll();
-    }
+        $allItems = $itemsStmt->fetchAll() ?: [];
+
+        // Also fetch old subpage_items if scholarship or migrated page
+        if (empty($allItems) && $slug === 'scholarship') {
+            $oldItems = $pdo->query("SELECT * FROM subpage_items WHERE page_key='scholarship' ORDER BY group_key, sort_order, id")->fetchAll();
+            if (!empty($oldItems)) {
+                $ins = $pdo->prepare("INSERT INTO page_sections (page_slug, group_key, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order, is_active) VALUES ('scholarship', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                foreach ($oldItems as $oi) {
+                    $ins->execute([$oi['group_key'], $oi['title'], $oi['subtitle'], $oi['number_val'], $oi['text_val'], $oi['image_path'], $oi['link_url'], $oi['badge_text'], $oi['sort_order'], $oi['is_active']]);
+                }
+                $itemsStmt->execute([$slug]);
+                $allItems = $itemsStmt->fetchAll() ?: [];
+            }
+        }
+    } catch (Throwable $eItems) {}
 }
 
 $groupedItems = [];
 foreach ($allItems as $it) {
-    $groupedItems[$it['group_key']][] = $it;
+    $groupKey = !empty($it['group_key']) ? $it['group_key'] : 'general';
+    $groupedItems[$groupKey][] = $it;
 }
 
 $editItemId = isset($_GET['edit_item']) ? (int)$_GET['edit_item'] : 0;
-$editItemRow = $editItemId ? $pdo->query("SELECT * FROM page_sections WHERE id=$editItemId")->fetch() : null;
+$editItemRow = null;
+if ($pdo && $editItemId > 0) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM page_sections WHERE id=?");
+        $stmt->execute([$editItemId]);
+        $editItemRow = $stmt->fetch() ?: null;
+    } catch (Throwable $eEdit) {}
+}
 
 $liveUrlMap = [
     'pro-chancellor'    => '../ProChancellor.php',

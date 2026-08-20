@@ -38,69 +38,73 @@ if (isset($_GET['export']) && $_GET['export'] === 'csv') {
     $output = fopen('php://output', 'w');
     fputs($output, "\xEF\xBB\xBF"); // Excel UTF-8 BOM
 
-    if ($type === 'admission') {
-        fputcsv($output, ['S.No', 'Reg ID', 'Student Name', 'Father Name', 'Aadhaar', 'Mobile', 'Email', 'Course', 'Branch', 'Gender', 'Category', 'Domicile', 'Submitted Date']);
-        $sql = "SELECT * FROM online_applications ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['reg_id']??'', $r['student_name']??'', $r['father_name']??'', $r['aadhaar_no']??'', $r['mobile_no']??'', $r['email_id']??'', $r['course']??'', $r['branch']??'', $r['gender']??'', $r['category']??'', $r['domicile']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'alumni') {
-        fputcsv($output, ['S.No', 'Name', 'Father Name', 'Gender', 'Mobile', 'Email', 'Enrollment', 'College', 'Course', 'Branch', 'Occupation', 'Company', 'City', 'Submitted Date']);
-        $sql = "SELECT * FROM alumni ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['name']??'', $r['fname']??'', $r['gender']??'', $r['mobile']??'', $r['email']??'', $r['enrollment']??'', $r['college']??'', $r['course']??'', $r['branch']??'', $r['occupation']??'', $r['company']??'', $r['city']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'verification') {
-        fputcsv($output, ['S.No', 'Req ID', 'Candidate Name', 'Agency/Org', 'Enrollment No', 'Roll No', 'Course', 'Passing Year', 'Mobile', 'Email', 'Status', 'Date']);
-        $sql = "SELECT * FROM verification_requests ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['req_id']??'', $r['candidate_name']??'', $r['agency_or_student_name']??'', $r['enrollment_no']??'', $r['roll_no']??'', $r['course']??'', $r['passing_year']??'', $r['mobile_no']??'', $r['email_id']??'', $r['status']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'marksheet') {
-        fputcsv($output, ['S.No', 'Req ID', 'Student Name', 'Father Name', 'Enrollment No', 'Course', 'Semester', 'Mobile', 'Email', 'Reason', 'Status', 'Date']);
-        $sql = "SELECT * FROM marksheet_requests ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['req_id']??'', $r['student_name']??'', $r['father_name']??'', $r['enrollment_no']??'', $r['course']??'', $r['semester']??'', $r['mobile_no']??'', $r['email_id']??'', $r['reason']??'', $r['status']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'name_correction') {
-        fputcsv($output, ['S.No', 'Req ID', 'Current Name', 'Corrected Name', 'Father Name', 'Enrollment No', 'Course', 'Mobile', 'Email', 'Correction Type', 'Status', 'Date']);
-        $sql = "SELECT * FROM name_correction_requests ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['req_id']??'', $r['current_name']??'', $r['corrected_name']??'', $r['father_name']??'', $r['enrollment_no']??'', $r['course']??'', $r['mobile_no']??'', $r['email_id']??'', $r['correction_type']??'', $r['status']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'migration') {
-        fputcsv($output, ['S.No', 'Req ID', 'Student Name', 'Father Name', 'Enrollment No', 'Course', 'Language', 'Mobile', 'Email', 'Dispatch Address', 'Status', 'Date']);
-        $sql = "SELECT * FROM migration_requests ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['req_id']??'', $r['student_name']??'', $r['father_name']??'', $r['enrollment_no']??'', $r['course']??'', $r['language']??'', $r['mobile_no']??'', $r['email_id']??'', $r['postal_address']??'', $r['status']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'contact') {
-        fputcsv($output, ['S.No', 'Name', 'Phone', 'Email', 'Message', 'WhatsApp Consent', 'Source', 'Date']);
-        $sql = "SELECT * FROM contact_submissions ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['name']??'', $r['phone']??'', $r['email']??'', $r['message']??'', $r['channel_consent']?'YES':'NO', $r['source']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'feedback') {
-        fputcsv($output, ['S.No', 'Name', 'Phone', 'Email', 'User Type', 'Message / Query', 'Status', 'Date']);
-        $sql = "SELECT * FROM feedback_submissions ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['name']??'', $r['phone']??'', $r['email']??'', $r['user_type']??'', $r['feedback_text']??'', $r['status']??'', $r['created_at']??'']);
-        }
-    } else if ($type === 'career') {
-        fputcsv($output, ['S.No', 'Req ID', 'Applicant Name', 'Email', 'Mobile', 'Post Applied', 'Department', 'Qualification', 'Experience', 'Status', 'Date']);
-        $sql = "SELECT * FROM career_applications ORDER BY id DESC";
-        $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-        foreach ($rows as $i => $r) {
-            fputcsv($output, [$i+1, $r['req_id']??'', $r['applicant_name']??'', $r['email_id']??'', $r['mobile_no']??'', $r['post_applied']??'', $r['department']??'', $r['qualification']??'', $r['experience_years']??'', $r['status']??'', $r['created_at']??'']);
-        }
+    if ($pdo) {
+        try {
+            if ($type === 'admission') {
+                fputcsv($output, ['S.No', 'Reg ID', 'Student Name', 'Father Name', 'Aadhaar', 'Mobile', 'Email', 'Course', 'Branch', 'Gender', 'Category', 'Domicile', 'Submitted Date']);
+                $sql = "SELECT * FROM online_applications ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['reg_id']??'', $r['student_name']??'', $r['father_name']??'', $r['aadhaar_no']??'', $r['mobile_no']??'', $r['email_id']??'', $r['course']??'', $r['branch']??'', $r['gender']??'', $r['category']??'', $r['domicile']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'alumni') {
+                fputcsv($output, ['S.No', 'Name', 'Father Name', 'Gender', 'Mobile', 'Email', 'Enrollment', 'College', 'Course', 'Branch', 'Occupation', 'Company', 'City', 'Submitted Date']);
+                $sql = "SELECT * FROM alumni ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['name']??'', $r['fname']??'', $r['gender']??'', $r['mobile']??'', $r['email']??'', $r['enrollment']??'', $r['college']??'', $r['course']??'', $r['branch']??'', $r['occupation']??'', $r['company']??'', $r['city']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'verification') {
+                fputcsv($output, ['S.No', 'Req ID', 'Candidate Name', 'Agency/Org', 'Enrollment No', 'Roll No', 'Course', 'Passing Year', 'Mobile', 'Email', 'Status', 'Date']);
+                $sql = "SELECT * FROM verification_requests ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['req_id']??'', $r['candidate_name']??'', $r['agency_or_student_name']??'', $r['enrollment_no']??'', $r['roll_no']??'', $r['course']??'', $r['passing_year']??'', $r['mobile_no']??'', $r['email_id']??'', $r['status']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'marksheet') {
+                fputcsv($output, ['S.No', 'Req ID', 'Student Name', 'Father Name', 'Enrollment No', 'Course', 'Semester', 'Mobile', 'Email', 'Reason', 'Status', 'Date']);
+                $sql = "SELECT * FROM marksheet_requests ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['req_id']??'', $r['student_name']??'', $r['father_name']??'', $r['enrollment_no']??'', $r['course']??'', $r['semester']??'', $r['mobile_no']??'', $r['email_id']??'', $r['reason']??'', $r['status']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'name_correction') {
+                fputcsv($output, ['S.No', 'Req ID', 'Current Name', 'Corrected Name', 'Father Name', 'Enrollment No', 'Course', 'Mobile', 'Email', 'Correction Type', 'Status', 'Date']);
+                $sql = "SELECT * FROM name_correction_requests ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['req_id']??'', $r['current_name']??'', $r['corrected_name']??'', $r['father_name']??'', $r['enrollment_no']??'', $r['course']??'', $r['mobile_no']??'', $r['email_id']??'', $r['correction_type']??'', $r['status']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'migration') {
+                fputcsv($output, ['S.No', 'Req ID', 'Student Name', 'Father Name', 'Enrollment No', 'Course', 'Language', 'Mobile', 'Email', 'Dispatch Address', 'Status', 'Date']);
+                $sql = "SELECT * FROM migration_requests ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['req_id']??'', $r['student_name']??'', $r['father_name']??'', $r['enrollment_no']??'', $r['course']??'', $r['language']??'', $r['mobile_no']??'', $r['email_id']??'', $r['postal_address']??'', $r['status']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'contact') {
+                fputcsv($output, ['S.No', 'Name', 'Phone', 'Email', 'Message', 'WhatsApp Consent', 'Source', 'Date']);
+                $sql = "SELECT * FROM contact_submissions ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['name']??'', $r['phone']??'', $r['email']??'', $r['message']??'', $r['channel_consent']?'YES':'NO', $r['source']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'feedback') {
+                fputcsv($output, ['S.No', 'Name', 'Phone', 'Email', 'User Type', 'Message / Query', 'Status', 'Date']);
+                $sql = "SELECT * FROM feedback_submissions ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['name']??'', $r['phone']??'', $r['email']??'', $r['user_type']??'', $r['feedback_text']??'', $r['status']??'', $r['created_at']??'']);
+                }
+            } else if ($type === 'career') {
+                fputcsv($output, ['S.No', 'Req ID', 'Applicant Name', 'Email', 'Mobile', 'Post Applied', 'Department', 'Qualification', 'Experience', 'Status', 'Date']);
+                $sql = "SELECT * FROM career_applications ORDER BY id DESC";
+                $rows = $pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+                foreach ($rows as $i => $r) {
+                    fputcsv($output, [$i+1, $r['req_id']??'', $r['applicant_name']??'', $r['email_id']??'', $r['mobile_no']??'', $r['post_applied']??'', $r['department']??'', $r['qualification']??'', $r['experience_years']??'', $r['status']??'', $r['created_at']??'']);
+                }
+            }
+        } catch (Throwable $eCsv) {}
     }
 
     fclose($output);
@@ -127,43 +131,46 @@ $tableMap = [
 ];
 
 foreach ($tableMap as $tKey => $tbl) {
-    try {
-        $st = $pdo->query("SELECT COUNT(*) FROM `{$tbl}`");
-        $counts[$tKey] = $st ? (int)$st->fetchColumn() : 0;
-    } catch (Throwable $e) {
-        $counts[$tKey] = 0;
+    $counts[$tKey] = 0;
+    if ($pdo) {
+        try {
+            $st = $pdo->query("SELECT COUNT(*) FROM `{$tbl}`");
+            $counts[$tKey] = $st ? (int)$st->fetchColumn() : 0;
+        } catch (Throwable $e) {}
     }
 }
 
 // Fetch current tab records
 $records = [];
 $currentTable = $tableMap[$type];
-try {
-    $where = ["1=1"];
-    $params = [];
-    if (!empty($search)) {
-        if ($type === 'admission') {
-            $where[] = "(reg_id LIKE ? OR student_name LIKE ? OR mobile_no LIKE ? OR email_id LIKE ?)";
-        } else if ($type === 'alumni') {
-            $where[] = "(name LIKE ? OR enrollment LIKE ? OR mobile LIKE ? OR email LIKE ?)";
-        } else if ($type === 'contact') {
-            $where[] = "(name LIKE ? OR phone LIKE ? OR email LIKE ?)";
-        } else if ($type === 'feedback') {
-            $where[] = "(name LIKE ? OR phone LIKE ? OR email LIKE ?)";
-        } else if ($type === 'career') {
-            $where[] = "(applicant_name LIKE ? OR mobile_no LIKE ? OR post_applied LIKE ?)";
-        } else {
-            $where[] = "(req_id LIKE ? OR student_name LIKE ? OR enrollment_no LIKE ? OR mobile_no LIKE ?)";
+if ($pdo) {
+    try {
+        $where = ["1=1"];
+        $params = [];
+        if (!empty($search)) {
+            if ($type === 'admission') {
+                $where[] = "(reg_id LIKE ? OR student_name LIKE ? OR mobile_no LIKE ? OR email_id LIKE ?)";
+            } else if ($type === 'alumni') {
+                $where[] = "(name LIKE ? OR enrollment LIKE ? OR mobile LIKE ? OR email LIKE ?)";
+            } else if ($type === 'contact') {
+                $where[] = "(name LIKE ? OR phone LIKE ? OR email LIKE ?)";
+            } else if ($type === 'feedback') {
+                $where[] = "(name LIKE ? OR phone LIKE ? OR email LIKE ?)";
+            } else if ($type === 'career') {
+                $where[] = "(applicant_name LIKE ? OR mobile_no LIKE ? OR post_applied LIKE ?)";
+            } else {
+                $where[] = "(req_id LIKE ? OR student_name LIKE ? OR enrollment_no LIKE ? OR mobile_no LIKE ?)";
+            }
+            $term = "%{$search}%";
+            $params = [$term, $term, $term, $term];
         }
-        $term = "%{$search}%";
-        $params = [$term, $term, $term, $term];
+        $sql = "SELECT * FROM `{$currentTable}` WHERE " . implode(" AND ", $where) . " ORDER BY id DESC";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute($params);
+        $records = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+    } catch (Throwable $exRec) {
+        $records = [];
     }
-    $sql = "SELECT * FROM `{$currentTable}` WHERE " . implode(" AND ", $where) . " ORDER BY id DESC";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute($params);
-    $records = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
-} catch (Throwable $exRec) {
-    $records = [];
 }
 ?>
 

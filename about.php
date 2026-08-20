@@ -4,31 +4,20 @@
 // Authentic Content from About_Us.pdf + Original Design & Styling
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
-require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/include/cms_engine.php';
 
-$pdo = getDbConnection();
 $pageSlug = 'about';
-$pRow = [];
+$pRow = cms_get_page($pageSlug);
+$allSections = cms_get_page_sections($pageSlug);
 $stats = [];
 $brochure = null;
 
-if ($pdo) {
-    try {
-        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-        $stmt->execute([$pageSlug]);
-        $pRow = $stmt->fetch() ?: [];
-
-        $secStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key DESC, sort_order ASC");
-        $secStmt->execute([$pageSlug]);
-        $allSections = $secStmt->fetchAll() ?: [];
-        foreach ($allSections as $s) {
-            if ($s['group_key'] === 'stats') {
-                $stats[] = $s;
-            } else {
-                $brochure = $s;
-            }
-        }
-    } catch (Throwable $e) {}
+foreach ($allSections as $s) {
+    if (($s['group_key'] ?? '') === 'stats') {
+        $stats[] = $s;
+    } else {
+        $brochure = $s;
+    }
 }
 
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '01 · OVERVIEW';
@@ -45,6 +34,7 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

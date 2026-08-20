@@ -1,0 +1,222 @@
+[
+    {
+        "id": 1,
+        "column_key": "university",
+        "column_label": "University",
+        "label": "About RKDF",
+        "url": "About_Us.pdf",
+        "target": "_blank",
+        "sort_order": 1,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 2,
+        "column_key": "university",
+        "column_label": "University",
+        "label": "Chancellor's Desk",
+        "url": "Chancellor.php",
+        "target": "_self",
+        "sort_order": 2,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 3,
+        "column_key": "university",
+        "column_label": "University",
+        "label": "Vice Chancellor",
+        "url": "Vice-Chancellor-Desk.php",
+        "target": "_self",
+        "sort_order": 3,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 4,
+        "column_key": "university",
+        "column_label": "University",
+        "label": "Leadership",
+        "url": "Governingbody.php",
+        "target": "_self",
+        "sort_order": 4,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 5,
+        "column_key": "university",
+        "column_label": "University",
+        "label": "Careers",
+        "url": "Careers.php",
+        "target": "_self",
+        "sort_order": 5,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 6,
+        "column_key": "admissions",
+        "column_label": "Admissions",
+        "label": "Apply Online",
+        "url": "admissionform.php",
+        "target": "_self",
+        "sort_order": 1,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 7,
+        "column_key": "admissions",
+        "column_label": "Admissions",
+        "label": "Programs",
+        "url": "academic&departments.php",
+        "target": "_self",
+        "sort_order": 2,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 8,
+        "column_key": "admissions",
+        "column_label": "Admissions",
+        "label": "Fee Structure",
+        "url": "University_Fees_Structure.pdf",
+        "target": "_blank",
+        "sort_order": 3,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 9,
+        "column_key": "admissions",
+        "column_label": "Admissions",
+        "label": "Scholarships",
+        "url": "scholarship.php",
+        "target": "_self",
+        "sort_order": 4,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 10,
+        "column_key": "admissions",
+        "column_label": "Admissions",
+        "label": "International",
+        "url": "foreign_stud\/index.html",
+        "target": "_blank",
+        "sort_order": 5,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 11,
+        "column_key": "academics",
+        "column_label": "Academics",
+        "label": "Schools",
+        "url": "academic&departments.php",
+        "target": "_self",
+        "sort_order": 1,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 12,
+        "column_key": "academics",
+        "column_label": "Academics",
+        "label": "Departments",
+        "url": "academic&departments.php",
+        "target": "_self",
+        "sort_order": 2,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 13,
+        "column_key": "academics",
+        "column_label": "Academics",
+        "label": "Research",
+        "url": "r&d.php",
+        "target": "_self",
+        "sort_order": 3,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 14,
+        "column_key": "academics",
+        "column_label": "Academics",
+        "label": "Library",
+        "url": "Library.php",
+        "target": "_self",
+        "sort_order": 4,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 15,
+        "column_key": "academics",
+        "column_label": "Academics",
+        "label": "Calendar",
+        "url": "acadmiccalander.php",
+        "target": "_self",
+        "sort_order": 5,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 16,
+        "column_key": "resources",
+        "column_label": "Resources",
+        "label": "Student Portal",
+        "url": "https:\/\/erplive.rkdf.ac.in\/",
+        "target": "_blank",
+        "sort_order": 1,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 17,
+        "column_key": "resources",
+        "column_label": "Resources",
+        "label": "Downloads",
+        "url": "Announcements.php",
+        "target": "_self",
+        "sort_order": 2,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 18,
+        "column_key": "resources",
+        "column_label": "Resources",
+        "label": "Results",
+        "url": "Result.php",
+        "target": "_self",
+        "sort_order": 3,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 19,
+        "column_key": "resources",
+        "column_label": "Resources",
+        "label": "Alumni",
+        "url": "Contact_us.php",
+        "target": "_self",
+        "sort_order": 4,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 20,
+        "column_key": "resources",
+        "column_label": "Resources",
+        "label": "Sitemap",
+        "url": "sitemap.php",
+        "target": "_self",
+        "sort_order": 5,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    }
+]

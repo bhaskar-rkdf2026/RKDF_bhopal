@@ -4,6 +4,8 @@
 // Manages: Logo | Header | Nav Menu | Footer Links | Social
 // ============================================================
 $pageTitle = 'Appearance Manager — RKDF Admin Portal';
+require_once __DIR__ . '/../include/site_settings.php';
+require_once __DIR__ . '/../include/cms_engine.php';
 require_once __DIR__ . '/header.php';
 require_once __DIR__ . '/../config/db.php';
 require_once __DIR__ . '/upload_handler.php';
@@ -38,131 +40,139 @@ if ($pdo) {
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
         ");
     } catch (Throwable $e) {}
+}
 
-    // ── Seed default nav items if table empty ────────────────────
+// ── Seed default nav items if table empty ────────────────────
+if ($pdo) {
     try {
-        $navCount = $pdo->query("SELECT COUNT(*) FROM nav_menu_items")->fetchColumn();
-    } catch (Throwable $e) { $navCount = 0; }
-} else {
-    $navCount = 0;
-}
-if ($navCount == 0) {
-    $seeds = [
-        ['Admissions',    'admissionform.php',          '_self', null, 1],
-        ['Academics',     'academic&departments.php',   '_self', null, 2],
-        ['Schools',       'Engineering.php',            '_self', null, 3],
-        ['Research',      'r&d.php',                    '_self', null, 4],
-        ['Student Life',  'Hostel.php',                 '_self', null, 5],
-        ['About',         'About_Us.pdf',               '_blank', null, 6],
-        ['Contact',       'Contact_us.php',             '_self', null, 7],
-        ['Apply Now',     'admissionform.php',          '_self', null, 8],
-    ];
-    $ins = $pdo->prepare("INSERT INTO nav_menu_items (label,url,target,parent_id,sort_order) VALUES (?,?,?,?,?)");
-    foreach ($seeds as $s) { $ins->execute($s); }
-}
+        $navCount = (int)$pdo->query("SELECT COUNT(*) FROM nav_menu_items")->fetchColumn();
+        if ($navCount == 0) {
+            $seeds = [
+                ['Admissions',    'admissionform.php',          '_self', null, 1],
+                ['Academics',     'academic&departments.php',   '_self', null, 2],
+                ['Schools',       'Engineering.php',            '_self', null, 3],
+                ['Research',      'r&d.php',                    '_self', null, 4],
+                ['Student Life',  'Hostel.php',                 '_self', null, 5],
+                ['About',         'About_Us.pdf',               '_blank', null, 6],
+                ['Contact',       'Contact_us.php',             '_self', null, 7],
+                ['Apply Now',     'admissionform.php',          '_self', null, 8],
+            ];
+            $ins = $pdo->prepare("INSERT INTO nav_menu_items (label,url,target,parent_id,sort_order) VALUES (?,?,?,?,?)");
+            foreach ($seeds as $s) { $ins->execute($s); }
+        }
+    } catch (Throwable $e) {}
 
-// ── Seed default footer links if table empty ─────────────────
-$footCount = $pdo->query("SELECT COUNT(*) FROM footer_links")->fetchColumn();
-if ($footCount == 0) {
-    $fseeds = [
-        ['university','University','About RKDF','About_Us.pdf','_blank',1],
-        ['university','University','Chancellor\'s Desk','Chancellor.php','_self',2],
-        ['university','University','Vice Chancellor','Vice-Chancellor-Desk.php','_self',3],
-        ['university','University','Leadership','Governingbody.php','_self',4],
-        ['university','University','Careers','Careers.php','_self',5],
-        ['admissions','Admissions','Apply Online','admissionform.php','_self',1],
-        ['admissions','Admissions','Programs','academic&departments.php','_self',2],
-        ['admissions','Admissions','Fee Structure','University_Fees_Structure.pdf','_blank',3],
-        ['admissions','Admissions','Scholarships','scholarship.php','_self',4],
-        ['admissions','Admissions','International','foreign_stud/index.html','_blank',5],
-        ['academics','Academics','Schools','academic&departments.php','_self',1],
-        ['academics','Academics','Departments','academic&departments.php','_self',2],
-        ['academics','Academics','Research','r&d.php','_self',3],
-        ['academics','Academics','Library','Library.php','_self',4],
-        ['academics','Academics','Calendar','acadmiccalander.php','_self',5],
-        ['resources','Resources','Student Portal','https://erplive.rkdf.ac.in/','_blank',1],
-        ['resources','Resources','Downloads','Announcements.php','_self',2],
-        ['resources','Resources','Results','Result.php','_self',3],
-        ['resources','Resources','Alumni','Contact_us.php','_self',4],
-        ['resources','Resources','Sitemap','sitemap.php','_self',5],
-    ];
-    $fins = $pdo->prepare("INSERT INTO footer_links (column_key,column_label,label,url,target,sort_order) VALUES (?,?,?,?,?,?)");
-    foreach ($fseeds as $fs) { $fins->execute($fs); }
+    // ── Seed default footer links if table empty ─────────────────
+    try {
+        $footCount = (int)$pdo->query("SELECT COUNT(*) FROM footer_links")->fetchColumn();
+        if ($footCount == 0) {
+            $fseeds = [
+                ['university','University','About RKDF','About_Us.pdf','_blank',1],
+                ['university','University','Chancellor\'s Desk','Chancellor.php','_self',2],
+                ['university','University','Vice Chancellor','Vice-Chancellor-Desk.php','_self',3],
+                ['university','University','Leadership','Governingbody.php','_self',4],
+                ['university','University','Careers','Careers.php','_self',5],
+                ['admissions','Admissions','Apply Online','admissionform.php','_self',1],
+                ['admissions','Admissions','Programs','academic&departments.php','_self',2],
+                ['admissions','Admissions','Fee Structure','University_Fees_Structure.pdf','_blank',3],
+                ['admissions','Admissions','Scholarships','scholarship.php','_self',4],
+                ['admissions','Admissions','International','foreign_stud/index.html','_blank',5],
+                ['academics','Academics','Schools','academic&departments.php','_self',1],
+                ['academics','Academics','Departments','academic&departments.php','_self',2],
+                ['academics','Academics','Research','r&d.php','_self',3],
+                ['academics','Academics','Library','Library.php','_self',4],
+                ['academics','Academics','Calendar','acadmiccalander.php','_self',5],
+                ['resources','Resources','Student Portal','https://erplive.rkdf.ac.in/','_blank',1],
+                ['resources','Resources','Downloads','Announcements.php','_self',2],
+                ['resources','Resources','Results','Result.php','_self',3],
+                ['resources','Resources','Alumni','Contact_us.php','_self',4],
+                ['resources','Resources','Sitemap','sitemap.php','_self',5],
+            ];
+            $fins = $pdo->prepare("INSERT INTO footer_links (column_key,column_label,label,url,target,sort_order) VALUES (?,?,?,?,?,?)");
+            foreach ($fseeds as $fs) { $fins->execute($fs); }
+        }
+    } catch (Throwable $e) {}
 }
 
 // ── Handle FORM SUBMISSIONS ───────────────────────────────────
 $success = $error = '';
 $action = $_POST['action'] ?? '';
 
-// -- Logo / Header settings --
-if ($action === 'save_appearance') {
-    // Check for direct image file uploads for logos
-    if (isset($_FILES['file_logo_crest']) && $_FILES['file_logo_crest']['error'] === UPLOAD_ERR_OK) {
-        $upRes = handleImageUpload($_FILES['file_logo_crest']);
-        if ($upRes['success']) $_POST['logo_crest'] = $upRes['path'];
-    }
-    if (isset($_FILES['file_logo_name']) && $_FILES['file_logo_name']['error'] === UPLOAD_ERR_OK) {
-        $upRes = handleImageUpload($_FILES['file_logo_name']);
-        if ($upRes['success']) $_POST['logo_name'] = $upRes['path'];
-    }
-    if (isset($_FILES['file_logo_footer']) && $_FILES['file_logo_footer']['error'] === UPLOAD_ERR_OK) {
-        $upRes = handleImageUpload($_FILES['file_logo_footer']);
-        if ($upRes['success']) $_POST['footer_logo'] = $upRes['path'];
-    }
+if ($pdo && !empty($action)) {
+    try {
+        // -- Logo / Header settings --
+        if ($action === 'save_appearance') {
+            // Check for direct image file uploads for logos
+            if (isset($_FILES['file_logo_crest']) && $_FILES['file_logo_crest']['error'] === UPLOAD_ERR_OK) {
+                $upRes = handleImageUpload($_FILES['file_logo_crest']);
+                if ($upRes['success']) $_POST['logo_crest'] = $upRes['path'];
+            }
+            if (isset($_FILES['file_logo_name']) && $_FILES['file_logo_name']['error'] === UPLOAD_ERR_OK) {
+                $upRes = handleImageUpload($_FILES['file_logo_name']);
+                if ($upRes['success']) $_POST['logo_name'] = $upRes['path'];
+            }
+            if (isset($_FILES['file_logo_footer']) && $_FILES['file_logo_footer']['error'] === UPLOAD_ERR_OK) {
+                $upRes = handleImageUpload($_FILES['file_logo_footer']);
+                if ($upRes['success']) $_POST['footer_logo'] = $upRes['path'];
+            }
 
-    $keys = ['logo_crest','logo_name','footer_logo','site_title',
-             'footer_address','footer_phone','footer_email',
-             'social_facebook','social_instagram','social_twitter',
-             'social_linkedin','social_youtube',
-             'footer_copyright_extra'];
-    $up = $pdo->prepare("INSERT INTO site_settings (setting_key,setting_value,setting_group)
-                         VALUES (?,?,?)
-                         ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value)");
-    foreach ($keys as $k) {
-        $val = trim($_POST[$k] ?? '');
-        $up->execute([$k, $val, 'appearance']);
+            $keys = ['logo_crest','logo_name','footer_logo','site_title',
+                     'footer_address','footer_phone','footer_email',
+                     'social_facebook','social_instagram','social_twitter',
+                     'social_linkedin','social_youtube',
+                     'footer_copyright_extra'];
+            $up = $pdo->prepare("INSERT INTO site_settings (setting_key,setting_value,setting_group)
+                                 VALUES (?,?,?)
+                                 ON DUPLICATE KEY UPDATE setting_value=VALUES(setting_value)");
+            foreach ($keys as $k) {
+                $val = trim($_POST[$k] ?? '');
+                $up->execute([$k, $val, 'appearance']);
+            }
+            $success = 'Appearance settings saved!';
+        }
+
+        // -- Add Nav Menu Item --
+        if ($action === 'add_nav') {
+            $pdo->prepare("INSERT INTO nav_menu_items (label,url,target,sort_order,is_active) VALUES (?,?,?,?,1)")
+                ->execute([trim($_POST['nav_label']), trim($_POST['nav_url']), $_POST['nav_target']??'_self', (int)($_POST['nav_sort']??99)]);
+            $success = 'Nav item added!';
+        }
+        // -- Update Nav Item --
+        if ($action === 'update_nav') {
+            $pdo->prepare("UPDATE nav_menu_items SET label=?,url=?,target=?,sort_order=?,is_active=? WHERE id=?")
+                ->execute([trim($_POST['nav_label']), trim($_POST['nav_url']), $_POST['nav_target']??'_self',
+                           (int)($_POST['nav_sort']??0), isset($_POST['nav_active'])?1:0, (int)$_POST['nav_id']]);
+            $success = 'Nav item updated!';
+        }
+        // -- Delete Nav Item --
+        if ($action === 'delete_nav') {
+            $pdo->prepare("DELETE FROM nav_menu_items WHERE id=?")->execute([(int)$_POST['nav_id']]);
+            $success = 'Nav item deleted!';
+        }
+
+        // -- Add Footer Link --
+        if ($action === 'add_footer') {
+            $pdo->prepare("INSERT INTO footer_links (column_key,column_label,label,url,target,sort_order,is_active) VALUES (?,?,?,?,?,?,1)")
+                ->execute([trim($_POST['fc_key']), trim($_POST['fc_label']), trim($_POST['fl_label']),
+                           trim($_POST['fl_url']), $_POST['fl_target']??'_self', (int)($_POST['fl_sort']??99)]);
+            $success = 'Footer link added!';
+        }
+        // -- Update Footer Link --
+        if ($action === 'update_footer') {
+            $pdo->prepare("UPDATE footer_links SET column_key=?,column_label=?,label=?,url=?,target=?,sort_order=?,is_active=? WHERE id=?")
+                ->execute([trim($_POST['fc_key']), trim($_POST['fc_label']), trim($_POST['fl_label']),
+                           trim($_POST['fl_url']), $_POST['fl_target']??'_self', (int)($_POST['fl_sort']??0),
+                           isset($_POST['fl_active'])?1:0, (int)$_POST['fl_id']]);
+            $success = 'Footer link updated!';
+        }
+        // -- Delete Footer Link --
+        if ($action === 'delete_footer') {
+            $pdo->prepare("DELETE FROM footer_links WHERE id=?")->execute([(int)$_POST['fl_id']]);
+            $success = 'Footer link deleted!';
+        }
+    } catch (Throwable $eForm) {
+        $error = "Action error: " . $eForm->getMessage();
     }
-    $success = 'Appearance settings saved!';
-}
-
-// -- Add Nav Menu Item --
-if ($action === 'add_nav') {
-    $pdo->prepare("INSERT INTO nav_menu_items (label,url,target,sort_order,is_active) VALUES (?,?,?,?,1)")
-        ->execute([trim($_POST['nav_label']), trim($_POST['nav_url']), $_POST['nav_target']??'_self', (int)($_POST['nav_sort']??99)]);
-    $success = 'Nav item added!';
-}
-// -- Update Nav Item --
-if ($action === 'update_nav') {
-    $pdo->prepare("UPDATE nav_menu_items SET label=?,url=?,target=?,sort_order=?,is_active=? WHERE id=?")
-        ->execute([trim($_POST['nav_label']), trim($_POST['nav_url']), $_POST['nav_target']??'_self',
-                   (int)($_POST['nav_sort']??0), isset($_POST['nav_active'])?1:0, (int)$_POST['nav_id']]);
-    $success = 'Nav item updated!';
-}
-// -- Delete Nav Item --
-if ($action === 'delete_nav') {
-    $pdo->prepare("DELETE FROM nav_menu_items WHERE id=?")->execute([(int)$_POST['nav_id']]);
-    $success = 'Nav item deleted!';
-}
-
-// -- Add Footer Link --
-if ($action === 'add_footer') {
-    $pdo->prepare("INSERT INTO footer_links (column_key,column_label,label,url,target,sort_order,is_active) VALUES (?,?,?,?,?,?,1)")
-        ->execute([trim($_POST['fc_key']), trim($_POST['fc_label']), trim($_POST['fl_label']),
-                   trim($_POST['fl_url']), $_POST['fl_target']??'_self', (int)($_POST['fl_sort']??99)]);
-    $success = 'Footer link added!';
-}
-// -- Update Footer Link --
-if ($action === 'update_footer') {
-    $pdo->prepare("UPDATE footer_links SET column_key=?,column_label=?,label=?,url=?,target=?,sort_order=?,is_active=? WHERE id=?")
-        ->execute([trim($_POST['fc_key']), trim($_POST['fc_label']), trim($_POST['fl_label']),
-                   trim($_POST['fl_url']), $_POST['fl_target']??'_self', (int)($_POST['fl_sort']??0),
-                   isset($_POST['fl_active'])?1:0, (int)$_POST['fl_id']]);
-    $success = 'Footer link updated!';
-}
-// -- Delete Footer Link --
-if ($action === 'delete_footer') {
-    $pdo->prepare("DELETE FROM footer_links WHERE id=?")->execute([(int)$_POST['fl_id']]);
-    $success = 'Footer link deleted!';
 }
 
 // ── Fetch current data ────────────────────────────────────────
@@ -204,8 +214,23 @@ $aSettings = [
 
 $editNavId    = isset($_GET['edit_nav'])    ? (int)$_GET['edit_nav']    : 0;
 $editFooterId = isset($_GET['edit_footer']) ? (int)$_GET['edit_footer'] : 0;
-$editNavRow    = $editNavId    ? $pdo->query("SELECT * FROM nav_menu_items WHERE id=$editNavId")->fetch() : null;
-$editFooterRow = $editFooterId ? $pdo->query("SELECT * FROM footer_links WHERE id=$editFooterId")->fetch() : null;
+$editNavRow    = null;
+$editFooterRow = null;
+
+if ($pdo) {
+    try {
+        if ($editNavId > 0) {
+            $stmt = $pdo->prepare("SELECT * FROM nav_menu_items WHERE id=?");
+            $stmt->execute([$editNavId]);
+            $editNavRow = $stmt->fetch() ?: null;
+        }
+        if ($editFooterId > 0) {
+            $stmt = $pdo->prepare("SELECT * FROM footer_links WHERE id=?");
+            $stmt->execute([$editFooterId]);
+            $editFooterRow = $stmt->fetch() ?: null;
+        }
+    } catch (Throwable $eEdit) {}
+}
 ?>
 
 <style>

@@ -2,6 +2,11 @@
 // include/site_settings.php
 // Global site settings loader for RKDF University Website
 
+// Global SEO No-Index / No-Follow Header (Blocks search engine crawling site-wide)
+if (!headers_sent()) {
+    header("X-Robots-Tag: noindex, nofollow", true);
+}
+
 require_once __DIR__ . '/../config/db.php';
 
 $siteSettings = [

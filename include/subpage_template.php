@@ -8,23 +8,10 @@ if (!isset($pageKey)) {
 }
 
 require_once __DIR__ . '/site_settings.php';
-require_once __DIR__ . '/../config/db.php';
+require_once __DIR__ . '/cms_engine.php';
 
-$pdo = getDbConnection();
-$pRow = [];
-$allItems = [];
-
-if ($pdo) {
-    try {
-        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-        $stmt->execute([$pageKey]);
-        $pRow = $stmt->fetch() ?: [];
-
-        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY group_key, sort_order, id");
-        $itemStmt->execute([$pageKey]);
-        $allItems = $itemStmt->fetchAll() ?: [];
-    } catch (Throwable $e) {}
-}
+$pRow = cms_get_page($pageKey);
+$allItems = cms_get_page_sections($pageKey);
 
 $pageDefaults = [
     'idp' => [
@@ -154,6 +141,7 @@ if (empty($groupedItems)) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title><?= htmlspecialchars($pageTitle) ?></title>
   <meta name="description" content="<?= htmlspecialchars($metaDesc) ?>">
   <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -9,17 +9,21 @@ require_once __DIR__ . '/../config/db.php';
 $pdo = getDbConnection();
 
 // Handle Settings Update POST (Executed before any HTML output)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $settings = $_POST['settings'] ?? [];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
+    try {
+        $settings = $_POST['settings'] ?? [];
 
-    $stmt = $pdo->prepare("INSERT INTO site_settings (setting_key, setting_value, setting_group) VALUES (?, ?, 'general') ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)");
+        $stmt = $pdo->prepare("INSERT INTO site_settings (setting_key, setting_value, setting_group) VALUES (?, ?, 'general') ON DUPLICATE KEY UPDATE setting_value = VALUES(setting_value)");
 
-    foreach ($settings as $key => $value) {
-        $stmt->execute([trim($key), trim($value)]);
+        foreach ($settings as $key => $value) {
+            $stmt->execute([trim($key), trim($value)]);
+        }
+
+        header('Location: manage_settings.php?msg=settings_updated');
+        exit();
+    } catch (Throwable $ePost) {
+        // Continue to render page with notice
     }
-
-    header('Location: manage_settings.php?msg=settings_updated');
-    exit();
 }
 
 // Render Page HTML

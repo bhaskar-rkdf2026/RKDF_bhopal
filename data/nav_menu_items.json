@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "label": "Admissions",
+        "url": "admissionform.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 1,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 2,
+        "label": "Academics",
+        "url": "academic&departments.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 2,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 3,
+        "label": "Schools",
+        "url": "Engineering.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 3,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 4,
+        "label": "Research",
+        "url": "r&d.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 4,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 5,
+        "label": "Student Life",
+        "url": "Hostel.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 5,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 6,
+        "label": "About",
+        "url": "About_Us.pdf",
+        "target": "_blank",
+        "parent_id": null,
+        "sort_order": 6,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 7,
+        "label": "Contact",
+        "url": "Contact_us.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 7,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    },
+    {
+        "id": 8,
+        "label": "Apply Now",
+        "url": "admissionform.php",
+        "target": "_self",
+        "parent_id": null,
+        "sort_order": 8,
+        "is_active": 1,
+        "updated_at": "2026-08-04 12:03:28"
+    }
+]

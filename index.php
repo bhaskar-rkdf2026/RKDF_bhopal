@@ -11,6 +11,7 @@ require_once __DIR__ . '/config/db.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
   <title><?php echo htmlspecialchars(get_site_setting('site_title', 'RKDF University Bhopal — Education Glorifies Nation')); ?></title>
   <meta name="description" content="RKDF University Bhopal — Premier Private State University in Madhya Pradesh offering UG, PG, Diploma, and Ph.D. degree programs.">
   <meta name="keywords" content="RKDF, RKDF University Bhopal, Best University in MP, B.Tech, MBA, Pharmacy, Ph.D, Admissions 2026-27">

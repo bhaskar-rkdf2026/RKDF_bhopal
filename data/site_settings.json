@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "setting_key": "general_phone",
+        "setting_value": "0755-4075800",
+        "setting_group": "contact",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 2,
+        "setting_key": "general_email",
+        "setting_value": "info@rkdf.ac.in",
+        "setting_group": "contact",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 3,
+        "setting_key": "university_address",
+        "setting_value": "Airport Bypass Road, Gandhi Nagar, Bhopal, Madhya Pradesh 462033",
+        "setting_group": "contact",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 4,
+        "setting_key": "admission_year",
+        "setting_value": "2026–27",
+        "setting_group": "admissions",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 5,
+        "setting_key": "admission_status",
+        "setting_value": "Open",
+        "setting_group": "admissions",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 6,
+        "setting_key": "policy_pdf_link",
+        "setting_value": "ADMISSION POLICY 2026-27.pdf",
+        "setting_group": "admissions",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 7,
+        "setting_key": "fee_pdf_link",
+        "setting_value": "University_Fees_Structure.pdf",
+        "setting_group": "admissions",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 8,
+        "setting_key": "prospectus_pdf_link",
+        "setting_value": "Download\/JOB_ORIENTED_PROG.pdf",
+        "setting_group": "admissions",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 9,
+        "setting_key": "ticker_text",
+        "setting_value": "Admissions Open for Academic Session 2026–27 | Apply Online for Engineering, Pharmacy, Management & Paramedical Programs | UGC Recognized Private State University",
+        "setting_group": "homepage",
+        "updated_at": "2026-08-05 17:29:22"
+    },
+    {
+        "id": 10,
+        "setting_key": "footer_copyright",
+        "setting_value": "RKDF University, Bhopal. All rights reserved.",
+        "setting_group": "footer",
+        "updated_at": "2026-08-05 17:29:22"
+    }
+]

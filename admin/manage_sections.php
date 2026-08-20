@@ -12,111 +12,115 @@ $pdo = getDbConnection();
 // -------------------------------------------------------------
 // POST HANDLERS FOR SECTION UPDATE & ITEM CRUD (Executed before any HTML output)
 // -------------------------------------------------------------
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $pdo) {
     $action = $_POST['action'] ?? '';
 
-    // 1. UPDATE SECTION HEADER METADATA
-    if ($action === 'update_section_meta') {
-        $secKey = trim($_POST['section_key']);
-        $tagNum = trim($_POST['tag_number']);
-        $tagText = trim($_POST['tag_text']);
-        $titleMain = trim($_POST['title_main']);
-        $titleAccent = trim($_POST['title_accent']);
-        $subtitle = trim($_POST['subtitle']);
-        $extra1 = trim($_POST['extra_text_1'] ?? '');
-        $extra2 = trim($_POST['extra_text_2'] ?? '');
-        $isActive = isset($_POST['is_active']) ? 1 : 0;
-        
-        $imagePath = trim($_POST['existing_image_path'] ?? '');
-        $videoPath = trim($_POST['existing_video_path'] ?? '');
+    try {
+        // 1. UPDATE SECTION HEADER METADATA
+        if ($action === 'update_section_meta') {
+            $secKey = trim($_POST['section_key']);
+            $tagNum = trim($_POST['tag_number']);
+            $tagText = trim($_POST['tag_text']);
+            $titleMain = trim($_POST['title_main']);
+            $titleAccent = trim($_POST['title_accent']);
+            $subtitle = trim($_POST['subtitle']);
+            $extra1 = trim($_POST['extra_text_1'] ?? '');
+            $extra2 = trim($_POST['extra_text_2'] ?? '');
+            $isActive = isset($_POST['is_active']) ? 1 : 0;
+            
+            $imagePath = trim($_POST['existing_image_path'] ?? '');
+            $videoPath = trim($_POST['existing_video_path'] ?? '');
 
-        if (isset($_FILES['section_image']) && $_FILES['section_image']['error'] === UPLOAD_ERR_OK) {
-            $uploadRes = handleImageUpload($_FILES['section_image']);
-            if ($uploadRes['success']) $imagePath = $uploadRes['path'];
-        }
-        if (isset($_FILES['section_video']) && $_FILES['section_video']['error'] === UPLOAD_ERR_OK) {
-            $uploadRes = handleImageUpload($_FILES['section_video']);
-            if ($uploadRes['success']) $videoPath = $uploadRes['path'];
-        }
-
-        $stmt = $pdo->prepare("INSERT INTO homepage_sections (section_key, tag_number, tag_text, title_main, title_accent, subtitle, image_path, video_path, extra_text_1, extra_text_2, is_active)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-            ON DUPLICATE KEY UPDATE tag_number=?, tag_text=?, title_main=?, title_accent=?, subtitle=?, image_path=?, video_path=?, extra_text_1=?, extra_text_2=?, is_active=?");
-        $stmt->execute([
-            $secKey, $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $imagePath, $videoPath, $extra1, $extra2, $isActive,
-            $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $imagePath, $videoPath, $extra1, $extra2, $isActive
-        ]);
-        header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=section_updated");
-        exit();
-    }
-
-    // 2. ADD NEW SECTION ITEM
-    if ($action === 'add_item') {
-        $secKey = trim($_POST['section_key']);
-        $itemType = trim($_POST['item_type']);
-        $title = trim($_POST['title']);
-        $subtitle = trim($_POST['subtitle']);
-        $numVal = trim($_POST['number_val']);
-        $textVal = trim($_POST['text_val']);
-        $linkUrl = trim($_POST['link_url']);
-        $badgeText = trim($_POST['badge_text']);
-        $sortOrder = (int)($_POST['sort_order'] ?? 0);
-        $imagePath = '';
-
-        // File upload check
-        if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
-            $uploadRes = handleImageUpload($_FILES['item_image']);
-            if ($uploadRes['success']) {
-                $imagePath = $uploadRes['path'];
+            if (isset($_FILES['section_image']) && $_FILES['section_image']['error'] === UPLOAD_ERR_OK) {
+                $uploadRes = handleImageUpload($_FILES['section_image']);
+                if ($uploadRes['success']) $imagePath = $uploadRes['path'];
             }
-        }
-
-        $stmt = $pdo->prepare("INSERT INTO homepage_items (section_key, item_type, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $stmt->execute([$secKey, $itemType, $title, $subtitle, $numVal, $textVal, $imagePath, $linkUrl, $badgeText, $sortOrder]);
-
-        header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=item_added");
-        exit();
-    }
-
-    // 3. EDIT EXISTING ITEM
-    if ($action === 'edit_item') {
-        $itemId = (int)$_POST['item_id'];
-        $secKey = trim($_POST['section_key']);
-        $itemType = trim($_POST['item_type']);
-        $title = trim($_POST['title']);
-        $subtitle = trim($_POST['subtitle']);
-        $numVal = trim($_POST['number_val']);
-        $textVal = trim($_POST['text_val']);
-        $linkUrl = trim($_POST['link_url']);
-        $badgeText = trim($_POST['badge_text']);
-        $sortOrder = (int)$_POST['sort_order'];
-        $imagePath = trim($_POST['existing_image']);
-
-        // Check if new image uploaded
-        if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
-            $uploadRes = handleImageUpload($_FILES['item_image']);
-            if ($uploadRes['success']) {
-                $imagePath = $uploadRes['path'];
+            if (isset($_FILES['section_video']) && $_FILES['section_video']['error'] === UPLOAD_ERR_OK) {
+                $uploadRes = handleImageUpload($_FILES['section_video']);
+                if ($uploadRes['success']) $videoPath = $uploadRes['path'];
             }
+
+            $stmt = $pdo->prepare("INSERT INTO homepage_sections (section_key, tag_number, tag_text, title_main, title_accent, subtitle, image_path, video_path, extra_text_1, extra_text_2, is_active)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE tag_number=?, tag_text=?, title_main=?, title_accent=?, subtitle=?, image_path=?, video_path=?, extra_text_1=?, extra_text_2=?, is_active=?");
+            $stmt->execute([
+                $secKey, $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $imagePath, $videoPath, $extra1, $extra2, $isActive,
+                $tagNum, $tagText, $titleMain, $titleAccent, $subtitle, $imagePath, $videoPath, $extra1, $extra2, $isActive
+            ]);
+            header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=section_updated");
+            exit();
         }
 
-        $stmt = $pdo->prepare("UPDATE homepage_items SET item_type=?, title=?, subtitle=?, number_val=?, text_val=?, image_path=?, link_url=?, badge_text=?, sort_order=? WHERE id=?");
-        $stmt->execute([$itemType, $title, $subtitle, $numVal, $textVal, $imagePath, $linkUrl, $badgeText, $sortOrder, $itemId]);
+        // 2. ADD NEW SECTION ITEM
+        if ($action === 'add_item') {
+            $secKey = trim($_POST['section_key']);
+            $itemType = trim($_POST['item_type']);
+            $title = trim($_POST['title']);
+            $subtitle = trim($_POST['subtitle']);
+            $numVal = trim($_POST['number_val']);
+            $textVal = trim($_POST['text_val']);
+            $linkUrl = trim($_POST['link_url']);
+            $badgeText = trim($_POST['badge_text']);
+            $sortOrder = (int)($_POST['sort_order'] ?? 0);
+            $imagePath = '';
 
-        header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=item_updated");
-        exit();
-    }
+            // File upload check
+            if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
+                $uploadRes = handleImageUpload($_FILES['item_image']);
+                if ($uploadRes['success']) {
+                    $imagePath = $uploadRes['path'];
+                }
+            }
 
-    // 4. DELETE ITEM
-    if ($action === 'delete_item') {
-        $itemId = (int)$_POST['item_id'];
-        $secKey = trim($_POST['section_key']);
+            $stmt = $pdo->prepare("INSERT INTO homepage_items (section_key, item_type, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->execute([$secKey, $itemType, $title, $subtitle, $numVal, $textVal, $imagePath, $linkUrl, $badgeText, $sortOrder]);
 
-        $stmt = $pdo->prepare("DELETE FROM homepage_items WHERE id=?");
-        $stmt->execute([$itemId]);
+            header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=item_added");
+            exit();
+        }
 
-        header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=item_deleted");
-        exit();
+        // 3. EDIT EXISTING ITEM
+        if ($action === 'edit_item') {
+            $itemId = (int)$_POST['item_id'];
+            $secKey = trim($_POST['section_key']);
+            $itemType = trim($_POST['item_type']);
+            $title = trim($_POST['title']);
+            $subtitle = trim($_POST['subtitle']);
+            $numVal = trim($_POST['number_val']);
+            $textVal = trim($_POST['text_val']);
+            $linkUrl = trim($_POST['link_url']);
+            $badgeText = trim($_POST['badge_text']);
+            $sortOrder = (int)$_POST['sort_order'];
+            $imagePath = trim($_POST['existing_image']);
+
+            // Check if new image uploaded
+            if (isset($_FILES['item_image']) && $_FILES['item_image']['error'] === UPLOAD_ERR_OK) {
+                $uploadRes = handleImageUpload($_FILES['item_image']);
+                if ($uploadRes['success']) {
+                    $imagePath = $uploadRes['path'];
+                }
+            }
+
+            $stmt = $pdo->prepare("UPDATE homepage_items SET item_type=?, title=?, subtitle=?, number_val=?, text_val=?, image_path=?, link_url=?, badge_text=?, sort_order=? WHERE id=?");
+            $stmt->execute([$itemType, $title, $subtitle, $numVal, $textVal, $imagePath, $linkUrl, $badgeText, $sortOrder, $itemId]);
+
+            header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=item_updated");
+            exit();
+        }
+
+        // 4. DELETE ITEM
+        if ($action === 'delete_item') {
+            $itemId = (int)$_POST['item_id'];
+            $secKey = trim($_POST['section_key']);
+
+            $stmt = $pdo->prepare("DELETE FROM homepage_items WHERE id=?");
+            $stmt->execute([$itemId]);
+
+            header("Location: manage_sections.php?sec=" . urlencode($secKey) . "&msg=item_deleted");
+            exit();
+        }
+    } catch (Throwable $eForm) {
+        $error = "Action notice: " . $eForm->getMessage();
     }
 }
 

@@ -2,29 +2,16 @@
 // ============================================================
 // RKDF University — Admin Page Manager (With Image Upload & Live Preview)
 // Allows selecting, editing, uploading & previewing images for ANY page
+// 100% Bulletproof & Resilient across Local and Live Production Environments
+// Powered by Dual-Engine (MySQL + JSON Cache High Availability)
 // ============================================================
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-require_once __DIR__ . '/../config/db.php';
-$pdo = getDbConnection();
+require_once __DIR__ . '/../include/cms_engine.php';
 
-$allPages = [];
-if ($pdo) {
-    // Ensure hero_bg_image column exists in site_pages
-    try {
-        $pdo->exec("ALTER TABLE site_pages ADD COLUMN hero_bg_image VARCHAR(255) DEFAULT NULL");
-    } catch (Throwable $e) {}
-
-    // Fetch all registered site pages for the dropdown
-    try {
-        $stmtPages = $pdo->query("SELECT page_slug, page_title, category FROM site_pages ORDER BY category, sort_order, page_title");
-        if ($stmtPages) {
-            $allPages = $stmtPages->fetchAll() ?: [];
-        }
-    } catch (Throwable $e) {}
-}
+$allPages = cms_get_all_pages();
 $selectedSlug = $_GET['slug'] ?? ($allPages[0]['page_slug'] ?? 'about');
 
 // Ensure Upload Directory Exists
@@ -36,145 +23,142 @@ if (!file_exists($uploadDir)) {
 // ── Handle Form Submissions BEFORE Header Output ──────────────────
 $action = $_POST['action'] ?? '';
 
-// Save Page Header / Hero Content
-if ($action === 'save_header') {
-    $heroBgImg = trim($_POST['hero_bg_image'] ?? '');
-    
-    // Handle File Upload for Hero Image
-    if (!empty($_FILES['hero_bg_file']['name']) && $_FILES['hero_bg_file']['error'] === UPLOAD_ERR_OK) {
-        $ext = strtolower(pathinfo($_FILES['hero_bg_file']['name'], PATHINFO_EXTENSION));
-        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) {
-            $newFilename = 'hero_' . $selectedSlug . '_' . time() . '.' . $ext;
-            if (move_uploaded_file($_FILES['hero_bg_file']['tmp_name'], $uploadDir . $newFilename)) {
-                $heroBgImg = 'images/uploads/' . $newFilename;
+if (!empty($action)) {
+    try {
+        // Save Page Header / Hero Content
+        if ($action === 'save_header') {
+            $heroBgImg = trim($_POST['hero_bg_image'] ?? '');
+            
+            // Handle File Upload for Hero Image
+            if (!empty($_FILES['hero_bg_file']['name']) && $_FILES['hero_bg_file']['error'] === UPLOAD_ERR_OK) {
+                $ext = strtolower(pathinfo($_FILES['hero_bg_file']['name'], PATHINFO_EXTENSION));
+                if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif'])) {
+                    $newFilename = 'hero_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', $selectedSlug) . '_' . time() . '.' . $ext;
+                    if (move_uploaded_file($_FILES['hero_bg_file']['tmp_name'], $uploadDir . $newFilename)) {
+                        $heroBgImg = 'images/uploads/' . $newFilename;
+                    }
+                }
             }
+
+            cms_save_page($selectedSlug, [
+                'page_title'       => trim($_POST['page_title']),
+                'eyebrow'          => trim($_POST['eyebrow']),
+                'hero_subtitle'    => trim($_POST['hero_subtitle']),
+                'intro_heading'    => trim($_POST['intro_heading']),
+                'intro_text'       => trim($_POST['intro_text']),
+                'hero_bg_image'    => $heroBgImg,
+                'meta_keywords'    => trim($_POST['meta_keywords']),
+                'meta_description' => trim($_POST['meta_description']),
+                'is_active'        => isset($_POST['is_active']) ? 1 : 0
+            ]);
+
+            header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=header_saved");
+            exit();
         }
-    }
 
-    $pdo->prepare("UPDATE site_pages SET page_title=?, eyebrow=?, hero_subtitle=?, intro_heading=?, intro_text=?, hero_bg_image=?, meta_keywords=?, meta_description=?, is_active=? WHERE page_slug=?")
-        ->execute([
-            trim($_POST['page_title']),
-            trim($_POST['eyebrow']),
-            trim($_POST['hero_subtitle']),
-            trim($_POST['intro_heading']),
-            trim($_POST['intro_text']),
-            $heroBgImg,
-            trim($_POST['meta_keywords']),
-            trim($_POST['meta_description']),
-            isset($_POST['is_active']) ? 1 : 0,
-            $selectedSlug
-        ]);
-    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=header_saved");
-    exit();
-}
-
-// Add Section Card to selected page
-if ($action === 'add_item') {
-    $imgPath = trim($_POST['image_path'] ?? '');
-    
-    // Handle File Upload for Card Image
-    if (!empty($_FILES['item_img_file']['name']) && $_FILES['item_img_file']['error'] === UPLOAD_ERR_OK) {
-        $ext = strtolower(pathinfo($_FILES['item_img_file']['name'], PATHINFO_EXTENSION));
-        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'])) {
-            $newFilename = 'card_' . $selectedSlug . '_' . time() . '.' . $ext;
-            if (move_uploaded_file($_FILES['item_img_file']['tmp_name'], $uploadDir . $newFilename)) {
-                $imgPath = 'images/uploads/' . $newFilename;
+        // Add Section Card to selected page
+        if ($action === 'add_item') {
+            $imgPath = trim($_POST['image_path'] ?? '');
+            
+            // Handle File Upload for Card Image
+            if (!empty($_FILES['item_img_file']['name']) && $_FILES['item_img_file']['error'] === UPLOAD_ERR_OK) {
+                $ext = strtolower(pathinfo($_FILES['item_img_file']['name'], PATHINFO_EXTENSION));
+                if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'])) {
+                    $newFilename = 'card_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', $selectedSlug) . '_' . time() . '.' . $ext;
+                    if (move_uploaded_file($_FILES['item_img_file']['tmp_name'], $uploadDir . $newFilename)) {
+                        $imgPath = 'images/uploads/' . $newFilename;
+                    }
+                }
             }
+
+            cms_save_section_item($selectedSlug, [
+                'group_key'   => trim($_POST['group_key'] ?? 'general'),
+                'title'       => trim($_POST['item_title']),
+                'subtitle'    => trim($_POST['item_subtitle']),
+                'number_val'  => trim($_POST['number_val']),
+                'text_val'    => trim($_POST['item_text']),
+                'image_path'  => $imgPath,
+                'link_url'    => trim($_POST['link_url']),
+                'badge_text'  => trim($_POST['badge_text']),
+                'sort_order'  => (int)($_POST['sort_order'] ?? 99),
+                'is_active'   => 1
+            ]);
+
+            header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_added#itemsTable");
+            exit();
         }
-    }
 
-    $pdo->prepare("INSERT INTO page_sections (page_slug, group_key, title, subtitle, number_val, text_val, image_path, link_url, badge_text, sort_order, is_active)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)")
-        ->execute([
-            $selectedSlug,
-            trim($_POST['group_key'] ?? 'general'),
-            trim($_POST['item_title']),
-            trim($_POST['item_subtitle']),
-            trim($_POST['number_val']),
-            trim($_POST['item_text']),
-            $imgPath,
-            trim($_POST['link_url']),
-            trim($_POST['badge_text']),
-            (int)($_POST['sort_order'] ?? 99)
-        ]);
-    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_added#itemsTable");
-    exit();
-}
-
-// Update Section Card
-if ($action === 'update_item') {
-    $imgPath = trim($_POST['image_path'] ?? '');
-    
-    // Handle File Upload for Card Image
-    if (!empty($_FILES['item_img_file']['name']) && $_FILES['item_img_file']['error'] === UPLOAD_ERR_OK) {
-        $ext = strtolower(pathinfo($_FILES['item_img_file']['name'], PATHINFO_EXTENSION));
-        if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'])) {
-            $newFilename = 'card_' . $selectedSlug . '_' . time() . '.' . $ext;
-            if (move_uploaded_file($_FILES['item_img_file']['tmp_name'], $uploadDir . $newFilename)) {
-                $imgPath = 'images/uploads/' . $newFilename;
+        // Update Section Card
+        if ($action === 'update_item') {
+            $imgPath = trim($_POST['image_path'] ?? '');
+            
+            // Handle File Upload for Card Image
+            if (!empty($_FILES['item_img_file']['name']) && $_FILES['item_img_file']['error'] === UPLOAD_ERR_OK) {
+                $ext = strtolower(pathinfo($_FILES['item_img_file']['name'], PATHINFO_EXTENSION));
+                if (in_array($ext, ['jpg', 'jpeg', 'png', 'webp', 'gif', 'svg'])) {
+                    $newFilename = 'card_' . preg_replace('/[^a-zA-Z0-9_-]/', '_', $selectedSlug) . '_' . time() . '.' . $ext;
+                    if (move_uploaded_file($_FILES['item_img_file']['tmp_name'], $uploadDir . $newFilename)) {
+                        $imgPath = 'images/uploads/' . $newFilename;
+                    }
+                }
             }
+
+            cms_save_section_item($selectedSlug, [
+                'group_key'   => trim($_POST['group_key'] ?? 'general'),
+                'title'       => trim($_POST['item_title']),
+                'subtitle'    => trim($_POST['item_subtitle']),
+                'number_val'  => trim($_POST['number_val']),
+                'text_val'    => trim($_POST['item_text']),
+                'image_path'  => $imgPath,
+                'link_url'    => trim($_POST['link_url']),
+                'badge_text'  => trim($_POST['badge_text']),
+                'sort_order'  => (int)($_POST['sort_order'] ?? 0),
+                'is_active'   => isset($_POST['is_active']) ? 1 : 0
+            ], (int)$_POST['item_id']);
+
+            header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_updated#itemsTable");
+            exit();
         }
+
+        // Delete Section Card
+        if ($action === 'delete_item') {
+            cms_delete_section_item((int)$_POST['item_id']);
+            header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_deleted#itemsTable");
+            exit();
+        }
+    } catch (Throwable $eForm) {
+        $formError = "Action error: " . $eForm->getMessage();
     }
-
-    $pdo->prepare("UPDATE page_sections SET group_key=?, title=?, subtitle=?, number_val=?, text_val=?, image_path=?, link_url=?, badge_text=?, sort_order=?, is_active=? WHERE id=?")
-        ->execute([
-            trim($_POST['group_key'] ?? 'general'),
-            trim($_POST['item_title']),
-            trim($_POST['item_subtitle']),
-            trim($_POST['number_val']),
-            trim($_POST['item_text']),
-            $imgPath,
-            trim($_POST['link_url']),
-            trim($_POST['badge_text']),
-            (int)($_POST['sort_order'] ?? 0),
-            isset($_POST['is_active']) ? 1 : 0,
-            (int)$_POST['item_id']
-        ]);
-    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_updated#itemsTable");
-    exit();
-}
-
-// Delete Section Card
-if ($action === 'delete_item') {
-    $pdo->prepare("DELETE FROM page_sections WHERE id=?")->execute([(int)$_POST['item_id']]);
-    header("Location: manage_pages.php?slug=" . urlencode($selectedSlug) . "&msg=item_deleted#itemsTable");
-    exit();
 }
 
 // Now include header after handling redirects
 $pageTitle = 'Page Content Editor — RKDF Admin Portal';
 require_once 'header.php';
 
-// Ensure page exists in DB
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ?");
-$stmt->execute([$selectedSlug]);
-$pageRow = $stmt->fetch();
+// Fetch Current Page Data & Sections using unified CMS engine
+$pageRow = cms_get_page($selectedSlug);
+$allItems = cms_get_page_sections($selectedSlug);
 
-if (!$pageRow) {
-    $prettyTitle = ucwords(str_replace(['-', '_'], ' ', $selectedSlug));
-    try {
-        $pdo->prepare("INSERT INTO site_pages (page_slug, page_title, category, is_active) VALUES (?, ?, 'general', 1)")
-            ->execute([$selectedSlug, $prettyTitle]);
-    } catch (Exception $ex) {}
-    $stmt->execute([$selectedSlug]);
-    $pageRow = $stmt->fetch();
+// Find edit item row if requested
+$editItemId = isset($_GET['edit_item']) ? (int)$_GET['edit_item'] : 0;
+$editItemRow = null;
+if ($editItemId > 0) {
+    foreach ($allItems as $it) {
+        if (($it['id'] ?? 0) == $editItemId) {
+            $editItemRow = $it;
+            break;
+        }
+    }
 }
-
-$success = isset($_GET['msg']) ? 'Changes saved successfully!' : '';
-
-// Fetch items for selected page
-$itemsStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug=? ORDER BY group_key, sort_order, id");
-$itemsStmt->execute([$selectedSlug]);
-$allItems = $itemsStmt->fetchAll();
 
 // Group items
 $groupedItems = [];
 foreach ($allItems as $it) {
-    $groupedItems[$it['group_key']][] = $it;
+    $groupKey = !empty($it['group_key']) ? $it['group_key'] : 'general';
+    $groupedItems[$groupKey][] = $it;
 }
 
-$editItemId = isset($_GET['edit_item']) ? (int)$_GET['edit_item'] : 0;
-$editItemRow = $editItemId ? $pdo->query("SELECT * FROM page_sections WHERE id=$editItemId")->fetch() : null;
+$success = isset($_GET['msg']) ? 'Changes saved successfully!' : '';
 
 // Determine live URL
 $liveUrl = "../page.php?slug=" . urlencode($selectedSlug);
@@ -182,10 +166,18 @@ if (file_exists("../" . $selectedSlug . ".php")) $liveUrl = "../" . $selectedSlu
 if ($selectedSlug === 'vision-mission') $liveUrl = "../Vision&mission.php";
 if ($selectedSlug === 'vc-desk') $liveUrl = "../Vice-Chancellor-Desk.php";
 if ($selectedSlug === 'chancellor') $liveUrl = "../Chancellor.php";
+if ($selectedSlug === 'pro-chancellor') $liveUrl = "../ProChancellor.php";
 if ($selectedSlug === 'governing-body') $liveUrl = "../Governingbody.php";
 if ($selectedSlug === 'bom') $liveUrl = "../BoM.php";
+if ($selectedSlug === 'bos') $liveUrl = "../BOS.php";
 if ($selectedSlug === 'academic-council') $liveUrl = "../Academic_Council.php";
 if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
+if ($selectedSlug === 'objectives') $liveUrl = "../Objectives.php";
+if ($selectedSlug === 'dean') $liveUrl = "../Dean.php";
+if ($selectedSlug === 'registrar') $liveUrl = "../Registrar.php";
+if ($selectedSlug === 'dgm') $liveUrl = "../dgm.php";
+if ($selectedSlug === 'dgr') $liveUrl = "../dgr.php";
+if ($selectedSlug === 'other-officers') $liveUrl = "../other-officers.php";
 ?>
 
 <style>
@@ -300,7 +292,7 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
 <div class="page-dropdown-bar">
   <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
     <label for="pageSelect"><i class="fa-solid fa-file-lines" style="color:var(--primary);font-size:18px;"></i> Select Page to Edit:</label>
-    <select id="pageSelect" class="page-select-dropdown" onchange="location.href='manage_pages.php?slug='+this.value">
+    <select id="pageSelect" class="page-select-dropdown" onchange="location.href='manage_pages.php?slug='+encodeURIComponent(this.value)">
       <?php 
       $groupedPages = [];
       foreach ($allPages as $p) {
@@ -319,8 +311,8 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
       <?php endforeach; ?>
     </select>
   </div>
-  <div>
-    <a href="<?= $liveUrl ?>" target="_blank" class="btn-ghost">
+  <div style="display:flex;gap:10px;align-items:center;">
+    <a href="<?= htmlspecialchars($liveUrl) ?>" target="_blank" class="btn-ghost">
       <i class="fa-solid fa-globe"></i> View Live Page ↗
     </a>
   </div>
@@ -331,10 +323,10 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
   <div class="pm-card-head">
     <div>
       <i class="fa-solid fa-heading"></i>
-      Header &amp; Hero Content for: <span style="color:var(--primary);"><?= htmlspecialchars($pageRow['page_title']) ?></span>
+      Header &amp; Hero Content for: <span style="color:var(--primary);"><?= htmlspecialchars($pageRow['page_title'] ?? '') ?></span>
     </div>
     <span style="font-size:12px;color:var(--text-muted);font-weight:600;background:#f1f5f9;padding:4px 10px;border-radius:6px;">
-      Slug: <?= htmlspecialchars($pageRow['page_slug']) ?>
+      Slug: <?= htmlspecialchars($pageRow['page_slug'] ?? $selectedSlug) ?>
     </span>
   </div>
 
@@ -343,7 +335,7 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
     <div class="pm-grid2">
       <div class="form-group">
         <label>Page Title (H1) *</label>
-        <input type="text" name="page_title" required value="<?= htmlspecialchars($pageRow['page_title']) ?>">
+        <input type="text" name="page_title" required value="<?= htmlspecialchars($pageRow['page_title'] ?? '') ?>">
       </div>
       <div class="form-group">
         <label>Eyebrow / Tag Text</label>
@@ -399,7 +391,7 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
       </div>
       <div class="form-group pm-full">
         <label style="display:flex;align-items:center;gap:8px;cursor:pointer;text-transform:none;font-size:14px;">
-          <input type="checkbox" name="is_active" value="1" <?= $pageRow['is_active'] ? 'checked':'' ?>>
+          <input type="checkbox" name="is_active" value="1" <?= (!isset($pageRow['is_active']) || $pageRow['is_active']) ? 'checked':'' ?>>
           <b>Page Active / Published on Live Website</b>
         </label>
       </div>
@@ -416,13 +408,13 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
     <div>
       <i class="fa-solid fa-<?= $editItemRow ? 'pen' : 'plus' ?>"></i>
       <?php if ($editItemRow): ?>
-        <span style="color:var(--primary);">Editing Item #<?= $editItemRow['id'] ?>: "<?= htmlspecialchars($editItemRow['title']) ?>"</span>
+        <span style="color:var(--primary);">Editing Item #<?= $editItemRow['id'] ?>: "<?= htmlspecialchars($editItemRow['title'] ?? '') ?>"</span>
       <?php else: ?>
-        Add Content Card / Item to: <span style="color:var(--primary);"><?= htmlspecialchars($pageRow['page_title']) ?></span>
+        Add Content Card / Item to: <span style="color:var(--primary);"><?= htmlspecialchars($pageRow['page_title'] ?? '') ?></span>
       <?php endif; ?>
     </div>
     <?php if ($editItemRow): ?>
-      <a href="manage_pages.php?slug=<?= $selectedSlug ?>#itemsTable" class="btn-ghost" style="font-size:12px;padding:4px 12px;">Cancel Edit ✕</a>
+      <a href="manage_pages.php?slug=<?= urlencode($selectedSlug) ?>#itemsTable" class="btn-ghost" style="font-size:12px;padding:4px 12px;">Cancel Edit ✕</a>
     <?php endif; ?>
   </div>
 
@@ -496,7 +488,7 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
       <div class="form-group">
         <label style="visibility:hidden;">Status</label>
         <label style="display:flex;align-items:center;gap:8px;cursor:pointer;margin-top:8px;">
-          <input type="checkbox" name="is_active" value="1" <?= $editItemRow['is_active'] ? 'checked':'' ?>>
+          <input type="checkbox" name="is_active" value="1" <?= (!isset($editItemRow['is_active']) || $editItemRow['is_active']) ? 'checked':'' ?>>
           <b>Active / Visible</b>
         </label>
       </div>
@@ -506,7 +498,7 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
     <div style="margin-top:20px;display:flex;gap:10px;">
       <button type="submit" class="btn-save"><i class="fa-solid fa-floppy-disk"></i> <?= $editItemRow ? 'Update Item' : 'Add Item' ?></button>
       <?php if ($editItemRow): ?>
-      <a href="manage_pages.php?slug=<?= $selectedSlug ?>#itemsTable" class="btn-ghost">Cancel Edit</a>
+      <a href="manage_pages.php?slug=<?= urlencode($selectedSlug) ?>#itemsTable" class="btn-ghost">Cancel Edit</a>
       <?php endif; ?>
     </div>
   </form>
@@ -535,8 +527,8 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
       </thead>
       <tbody>
         <?php foreach ($gItems as $it): ?>
-        <tr style="<?= ($editItemId == $it['id']) ? 'background:#fff1f2;' : '' ?>">
-          <td><?= $it['id'] ?></td>
+        <tr style="<?= ($editItemId == ($it['id'] ?? 0)) ? 'background:#fff1f2;' : '' ?>">
+          <td><?= $it['id'] ?? '' ?></td>
           <td>
             <?php if (!empty($it['image_path'])): ?>
               <img src="../<?= htmlspecialchars($it['image_path']) ?>" class="table-img-thumb" alt="Preview">
@@ -544,23 +536,23 @@ if ($selectedSlug === 'national-advisory') $liveUrl = "../Statuary-Bodies.php";
               <div class="table-img-thumb" style="display:flex;align-items:center;justify-content:center;color:#94a3b8;font-size:11px;">No Img</div>
             <?php endif; ?>
           </td>
-          <td><b><?= htmlspecialchars($it['number_val']) ?></b></td>
+          <td><b><?= htmlspecialchars($it['number_val'] ?? '') ?></b></td>
           <td>
-            <b><?= htmlspecialchars($it['title']) ?></b><br>
-            <small style="color:#64748b;"><?= htmlspecialchars($it['subtitle']) ?></small>
+            <b><?= htmlspecialchars($it['title'] ?? '') ?></b><br>
+            <small style="color:#64748b;"><?= htmlspecialchars($it['subtitle'] ?? '') ?></small>
           </td>
-          <td style="max-width:320px;color:#334155;"><?= htmlspecialchars($it['text_val']) ?></td>
+          <td style="max-width:320px;color:#334155;"><?= htmlspecialchars($it['text_val'] ?? '') ?></td>
           <td>
-            <?php if ($it['badge_text']): ?><span style="background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:4px;font-weight:700;font-size:11px;"><?= htmlspecialchars($it['badge_text']) ?></span><br><?php endif; ?>
-            <?php if ($it['link_url']): ?><a href="<?= htmlspecialchars($it['link_url']) ?>" target="_blank" style="color:var(--primary);font-size:11px;">Link ↗</a><?php endif; ?>
+            <?php if (!empty($it['badge_text'])): ?><span style="background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:4px;font-weight:700;font-size:11px;"><?= htmlspecialchars($it['badge_text']) ?></span><br><?php endif; ?>
+            <?php if (!empty($it['link_url'])): ?><a href="<?= htmlspecialchars($it['link_url']) ?>" target="_blank" style="color:var(--primary);font-size:11px;">Link ↗</a><?php endif; ?>
           </td>
-          <td><?= $it['sort_order'] ?></td>
-          <td><?= $it['is_active'] ? '<span class="pm-badge-active">Active</span>' : '<span class="pm-badge-inactive">Hidden</span>' ?></td>
+          <td><?= $it['sort_order'] ?? 0 ?></td>
+          <td><?= (!isset($it['is_active']) || $it['is_active']) ? '<span class="pm-badge-active">Active</span>' : '<span class="pm-badge-inactive">Hidden</span>' ?></td>
           <td>
-            <a href="manage_pages.php?slug=<?= $selectedSlug ?>&edit_item=<?= $it['id'] ?>#itemEditor" class="btn-edit">Edit</a>
+            <a href="manage_pages.php?slug=<?= urlencode($selectedSlug) ?>&edit_item=<?= $it['id'] ?? 0 ?>#itemEditor" class="btn-edit">Edit</a>
             <form method="POST" style="display:inline;" onsubmit="return confirm('Delete this card item?')">
               <input type="hidden" name="action" value="delete_item">
-              <input type="hidden" name="item_id" value="<?= $it['id'] ?>">
+              <input type="hidden" name="item_id" value="<?= $it['id'] ?? 0 ?>">
               <button type="submit" class="btn-del">Delete</button>
             </form>
           </td>

@@ -25,7 +25,8 @@ $currentPage = basename($_SERVER['PHP_SELF']);
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+  <meta name="robots" content="noindex, nofollow" />
+
   <style>
     :root {
       --primary: #D9232D;
@@ -573,9 +574,13 @@ $currentPage = basename($_SERVER['PHP_SELF']);
       </a>
 
       <div class="menu-category">System</div>
-      <a href="../database/seed_data.php" target="_blank" class="menu-item" onclick="return confirm('⚠️ WARNING: Are you sure you want to Re-Seed the database? This will reset all homepage sections, items, settings and page definitions to baseline defaults. Continue?');">
+      <a href="db_sync.php" class="menu-item <?= ($currentPage == 'db_sync.php') ? 'active' : '' ?>">
+        <i class="fa-solid fa-arrows-rotate"></i>
+        <span>1-Click DB Sync ★</span>
+      </a>
+      <a href="../database/seed_all.php" target="_blank" class="menu-item">
         <i class="fa-solid fa-database"></i>
-        <span>Re-Seed Database</span>
+        <span>Full Database Seeder ↗</span>
       </a>
       <a href="../index.php" target="_blank" class="menu-item">
         <i class="fa-solid fa-globe"></i>

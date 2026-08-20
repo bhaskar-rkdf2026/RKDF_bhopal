@@ -33,7 +33,8 @@ $chanBannerImg    = !empty($allItems[0]['image_path']) ? $allItems[0]['image_pat
 
 $chanProfileTitle = !empty($allItems[1]['title']) ? $allItems[1]['title'] : 'Dr. Sadhna Kapoor';
 $chanProfileRole  = !empty($allItems[1]['badge_text']) ? $allItems[1]['badge_text'] : 'Chancellor';
-$chanProfileImg   = !empty($allItems[1]['image_path']) ? $allItems[1]['image_path'] : 'images/lovable/rkdf-chancellor.jpg';
+$rawProfileImg    = !empty($allItems[1]['image_path']) ? $allItems[1]['image_path'] : '';
+$chanProfileImg   = (!empty($rawProfileImg) && strpos($rawProfileImg, 'rkdf-chancellor.jpg') === false) ? $rawProfileImg : 'images/chancellor-dr-sadhna.jpg';
 $chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 'Pioneering technical, medical, and professional education across Madhya Pradesh.';
 ?>
 <!DOCTYPE html>
@@ -206,12 +207,18 @@ $chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] 
       overflow: hidden;
       box-shadow: 0 12px 32px rgba(12, 20, 36, 0.12);
       border: 3px solid #FAF9F5;
+      background: #f8fafc;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .chan-portrait-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 15%;
+      display: block;
     }
 
     .chan-side-name {
@@ -361,7 +368,7 @@ $chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] 
           <!-- Chancellor Profile Card -->
           <div class="chan-side-card">
             <div class="chan-portrait-box">
-              <img src="<?= htmlspecialchars($chanProfileImg) ?>" alt="<?= htmlspecialchars($chanProfileTitle) ?>" class="chan-portrait-img">
+              <img src="<?= htmlspecialchars($chanProfileImg) ?>" alt="<?= htmlspecialchars($chanProfileTitle) ?>" class="chan-portrait-img" onError="this.src='images/img/chancellor.jpg';">
             </div>
             <h3 class="chan-side-name"><?= htmlspecialchars($chanProfileTitle) ?></h3>
             <span class="chan-side-badge"><?= htmlspecialchars($chanProfileRole) ?></span>

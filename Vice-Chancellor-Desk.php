@@ -34,7 +34,8 @@ $vcBannerImg= !empty($allItems[0]['image_path']) ? $allItems[0]['image_path'] : 
 
 $vcProfileTitle = !empty($allItems[1]['title']) ? $allItems[1]['title'] : 'Prof. Vijay K. Agrawal';
 $vcProfileRole  = !empty($allItems[1]['badge_text']) ? $allItems[1]['badge_text'] : 'Vice-Chancellor';
-$vcProfileImg   = !empty($allItems[1]['image_path']) ? $allItems[1]['image_path'] : 'images/lovable/rkdf-chancellor.jpg';
+$rawVcImg       = !empty($allItems[1]['image_path']) ? $allItems[1]['image_path'] : '';
+$vcProfileImg   = (!empty($rawVcImg) && strpos($rawVcImg, 'rkdf-chancellor.jpg') === false) ? $rawVcImg : 'images/vice-chancellor-prof-vijay.jpg';
 $vcProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 'Distinguished academician with decades of research and administrative leadership in higher education.';
 ?>
 <!DOCTYPE html>
@@ -206,12 +207,18 @@ $vcProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 
       overflow: hidden;
       box-shadow: 0 12px 32px rgba(12, 20, 36, 0.12);
       border: 3px solid #FAF9F5;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .vc-portrait-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center top;
+      display: block;
     }
 
     .vc-side-name {
@@ -353,6 +360,14 @@ $vcProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 
                   <div class="vc-sig-name"><?= htmlspecialchars($vcProfileTitle) ?></div>
                   <div class="vc-sig-role"><?= htmlspecialchars($vcProfileRole) ?></div>
                   <div class="vc-sig-univ">RKDF University, Bhopal</div>
+                  <div style="font-size:13px;color:#475569;margin-top:4px;">
+                    M.Sc., D.Phil., PGD (Chem. &amp; Chem. Engg.), Tokyo Institute of Technology, Japan
+                  </div>
+                </div>
+                <div>
+                  <a href="VC Portfolio.pdf" target="_blank" class="rk-btn-outline-navy" style="display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:8px;font-weight:700;font-size:13.5px;text-decoration:none;border:1px solid #0C1424;color:#0C1424;">
+                    <span>📄 Brief Introduction (Portfolio)</span> <span>↗</span>
+                  </a>
                 </div>
               </div>
 
@@ -364,13 +379,22 @@ $vcProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 
         <aside>
           <div class="vc-side-card">
             <div class="vc-portrait-box">
-              <img src="<?= htmlspecialchars($vcProfileImg) ?>" alt="<?= htmlspecialchars($vcProfileTitle) ?>" class="vc-portrait-img">
+              <img src="<?= htmlspecialchars($vcProfileImg) ?>" alt="<?= htmlspecialchars($vcProfileTitle) ?>" class="vc-portrait-img" onError="this.src='images/img/VC Sir Pic.jpg';">
             </div>
             <h3 class="vc-side-name"><?= htmlspecialchars($vcProfileTitle) ?></h3>
             <span class="vc-side-badge"><?= htmlspecialchars($vcProfileRole) ?></span>
-            <p style="font-size:14px;color:#475569;line-height:1.6;margin-top:8px;">
-              <?= htmlspecialchars($vcProfileBio) ?>
-            </p>
+            <div style="font-size:13px;font-weight:600;color:#0C1424;margin-top:8px;">
+              M.Sc., D.Phil., PGD (Chem. &amp; Chem. Engg.)<br>
+              <span style="color:#64748B;font-weight:500;">Tokyo Institute of Technology, Japan</span>
+            </div>
+            <div style="margin-top:10px;font-size:13px;color:#C5A059;font-weight:700;">
+              ✉ vc@rkdf.ac.in
+            </div>
+            <div style="margin-top:16px;">
+              <a href="VC Portfolio.pdf" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:rgba(227,27,35,0.08);color:#E31B23;border-radius:8px;font-weight:700;font-size:12.5px;text-decoration:none;border:1px solid rgba(227,27,35,0.2);">
+                <span>Download VC Portfolio</span> <span>↗</span>
+              </a>
+            </div>
           </div>
 
           <div class="sidebar-card">
