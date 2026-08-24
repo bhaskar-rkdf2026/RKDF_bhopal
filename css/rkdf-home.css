@@ -1851,4 +1851,28 @@ a { text-decoration: none; color: inherit; }
   margin: 0;
 }
 
+/* ── Mobile Viewport Layout Fixes & Table Scroll (QA-008, QA-022, QA-047) ── */
+@media (max-width: 480px) {
+  .subpage-hero {
+    padding: 120px 0 50px !important;
+  }
+  .rk-hero-headline {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+    line-height: 1.15 !important;
+  }
+  .rk-h1 {
+    font-size: clamp(2rem, 7vw, 2.6rem) !important;
+  }
+  .rk-container {
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+.table-responsive, .ac-table-container, .qual-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 

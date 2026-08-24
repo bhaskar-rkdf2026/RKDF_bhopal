@@ -200,7 +200,7 @@ foreach ($allItems as $it) {
             ?>
           </div>
 
-          <!-- TOP ALERT BANNER -->
+          <!-- TOP ALERT BANNER & LIVE SEARCH BAR -->
           <div class="sres-alert-banner">
             <div class="sres-alert-item">
               <span class="sres-alert-title">📢 Important Notice — Examination &amp; Revaluation Guidelines</span>
@@ -208,38 +208,91 @@ foreach ($allItems as $it) {
             </div>
             <div class="sres-alert-item">
               <span class="sres-alert-title">💳 Student ERP Login for Online Scorecard Downloads</span>
-              <a href="https://erplive.rkdf.ac.in/" target="_blank" class="sres-portal-btn">ERP Login ↗</a>
+              <a href="https://erplive.rkdf.ac.in/" target="_blank" rel="noopener noreferrer" class="sres-portal-btn">ERP Login ↗</a>
+            </div>
+          </div>
+
+          <!-- Instant Live Search & Filter Bar -->
+          <div style="margin-bottom:28px;background:#ffffff;border:1px solid rgba(12,20,36,0.08);border-radius:14px;padding:16px 20px;box-shadow:0 4px 16px rgba(12,20,36,0.04);">
+            <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap;">
+              <div style="flex:1;min-width:240px;position:relative;">
+                <input type="text" id="resultLiveSearch" placeholder="🔍 Instant search declared results (e.g. B.Tech, MBA, Pharmacy, Semester 6)..." style="width:100%;padding:12px 16px;border-radius:8px;border:1px solid rgba(12,20,36,0.15);font-size:14px;outline:none;">
+              </div>
+              <span id="resultSearchCount" style="font-family:'JetBrains Mono',monospace;font-size:12px;color:#64748b;font-weight:700;"></span>
             </div>
           </div>
 
           <!-- RENDER GROUPED RESULTS -->
-          <?php foreach ($groupedResults as $gTitle => $rList): ?>
-          <div class="sres-group-box">
-            <div class="sres-group-title">
-              <span><?= htmlspecialchars($gTitle) ?></span>
-              <span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:#C5A059;">
-                <?= count($rList) ?> DECLARED RESULTS
-              </span>
-            </div>
-
-            <div class="sres-download-grid">
-              <?php foreach ($rList as $item): ?>
-              <div class="sres-download-row">
-                <div>
-                  <h3 class="sres-row-title"><?= htmlspecialchars($item['title']) ?></h3>
-                  <div class="sres-row-sub"><?= htmlspecialchars($item['subtitle']) ?></div>
-                </div>
-                <div class="sres-row-footer">
-                  <span class="sres-reval-tag"><?= htmlspecialchars($item['text_val']) ?></span>
-                  <a href="<?= htmlspecialchars(!empty($item['link_url']) ? $item['link_url'] : 'https://erplive.rkdf.ac.in/') ?>" target="_blank" class="sres-portal-btn">
-                    <span><?= htmlspecialchars($item['badge_text'] ?: 'ERP Login') ?></span> <span>↗</span>
-                  </a>
-                </div>
+          <div id="resultsContainer">
+            <?php foreach ($groupedResults as $gTitle => $rList): ?>
+            <div class="sres-group-box">
+              <div class="sres-group-title">
+                <span><?= htmlspecialchars($gTitle) ?></span>
+                <span style="font-size:12px;font-family:'JetBrains Mono',monospace;color:#C5A059;">
+                  <?= count($rList) ?> DECLARED RESULTS
+                </span>
               </div>
-              <?php endforeach; ?>
+
+              <div class="sres-download-grid">
+                <?php foreach ($rList as $item): ?>
+                <div class="sres-download-row">
+                  <div>
+                    <h3 class="sres-row-title"><?= htmlspecialchars($item['title']) ?></h3>
+                    <div class="sres-row-sub"><?= htmlspecialchars($item['subtitle']) ?></div>
+                  </div>
+                  <div class="sres-row-footer">
+                    <span class="sres-reval-tag"><?= htmlspecialchars($item['text_val']) ?></span>
+                    <a href="<?= htmlspecialchars(!empty($item['link_url']) ? $item['link_url'] : 'https://erplive.rkdf.ac.in/') ?>" target="_blank" rel="noopener noreferrer" class="sres-portal-btn">
+                      <span><?= htmlspecialchars($item['badge_text'] ?: 'ERP Login') ?></span> <span>↗</span>
+                    </a>
+                  </div>
+                </div>
+                <?php endforeach; ?>
+              </div>
             </div>
+            <?php endforeach; ?>
           </div>
-          <?php endforeach; ?>
+
+          <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var searchInput = document.getElementById('resultLiveSearch');
+            var rows = document.querySelectorAll('.sres-download-row');
+            var groupBoxes = document.querySelectorAll('.sres-group-box');
+            var countLabel = document.getElementById('resultSearchCount');
+
+            if (!searchInput) return;
+
+            searchInput.addEventListener('input', function() {
+              var q = this.value.toLowerCase().trim();
+              var matchCount = 0;
+
+              rows.forEach(function(row) {
+                var text = row.textContent.toLowerCase();
+                if (!q || text.indexOf(q) !== -1) {
+                  row.style.display = 'block';
+                  matchCount++;
+                } else {
+                  row.style.display = 'none';
+                }
+              });
+
+              groupBoxes.forEach(function(box) {
+                var visibleRows = box.querySelectorAll('.sres-download-row[style*="display: block"], .sres-download-row:not([style*="display: none"])');
+                var hasVisible = false;
+                box.querySelectorAll('.sres-download-row').forEach(function(r) {
+                  if (r.style.display !== 'none') hasVisible = true;
+                });
+                box.style.display = hasVisible ? 'block' : 'none';
+              });
+
+              if (q) {
+                countLabel.textContent = matchCount + ' matching result(s)';
+              } else {
+                countLabel.textContent = '';
+              }
+            });
+          });
+          </script>
 
         </div>
 

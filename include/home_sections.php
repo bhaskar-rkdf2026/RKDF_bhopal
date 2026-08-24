@@ -27,15 +27,13 @@ try {
     }
 } catch (Throwable $e) { /* DB optional fallback */ }
 
-// Helper function to format eyebrow tag text with section number
+// Helper function to format eyebrow tag text with clean label
 if (!function_exists('format_eyebrow_tag')) {
     function format_eyebrow_tag($sec) {
-        $tagNum = $sec['tag_number'] ?? '';
         $tagText = $sec['tag_text'] ?? '';
-        if (empty($tagNum)) return htmlspecialchars($tagText);
-        // If tag_text already contains tag_number, return as is
-        if (strpos($tagText, $tagNum) !== false) return htmlspecialchars($tagText);
-        return htmlspecialchars($tagNum . ' · ' . $tagText);
+        if (!empty($tagText)) return htmlspecialchars($tagText);
+        $tagNum = $sec['tag_number'] ?? '';
+        return htmlspecialchars($tagNum);
     }
 }
 

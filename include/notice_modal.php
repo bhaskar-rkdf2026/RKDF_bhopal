@@ -13,8 +13,8 @@ if (!$popupActive) {
 $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF University — Important Notices & Circulars'));
 ?>
 
-<!-- ── IMPORTANT NOTICE POPUP MODAL DIALOG ── -->
-<div class="rkdf-notice-modal-overlay" id="rkdfNoticeOverlay" aria-modal="true" role="dialog">
+<!-- ── IMPORTANT NOTICE POPUP MODAL DIALOG (Delayed Polite Load) ── -->
+<div class="rkdf-notice-modal-overlay" id="rkdfNoticeOverlay" aria-modal="true" role="dialog" style="display:none;">
   <div class="rkdf-notice-modal-card">
 
     <!-- Header -->
@@ -23,7 +23,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
         <span class="rkdf-notice-bell-icon">🔔</span>
         <div>
           <h3 class="rkdf-notice-h3"><?= $popupTitle ?></h3>
-          <div class="rkdf-notice-sub">Latest official notifications, postponements & career updates</div>
+          <div class="rkdf-notice-sub">Latest official notifications, postponements &amp; academic circulars</div>
         </div>
       </div>
       <button type="button" class="rkdf-notice-close-btn" id="rkdfNoticeClose" aria-label="Close Notice Popup">✕</button>
@@ -35,46 +35,46 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
       <!-- Notice Item 1 -->
       <div class="rkdf-notice-item highlight-red">
         <div class="rkdf-notice-tag">CONVOCATION JUNE 2026</div>
-        <a href="Convocation.php" target="_blank" class="rkdf-notice-link">
-          <strong>🎓 RKDF University 15th Annual Convocation June 2026</strong> — Degree registration & Medalist list online portal open.
+        <a href="Convocation.php" class="rkdf-notice-link">
+          <strong>🎓 RKDF University 15th Annual Convocation June 2026</strong> — Degree registration &amp; Medalist list online portal open.
         </a>
       </div>
 
       <!-- Notice Item 2 -->
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-blue">EXAMINATION NOTICE</div>
-        <a href="Content/Documents/Notices-26/EXAM POST PONED B.ARCH  JUNE-2026.pdf" target="_blank" class="rkdf-notice-link">
-          📌 <strong>B.ARCH - EXAM POSTPONED NOTICE (JUNE-2026)</strong> — Click here to download revised timetable.
+        <a href="Exam_Notice.php" class="rkdf-notice-link">
+          📌 <strong>Examination Circulars &amp; Revised Datesheets</strong> — Click here to view latest semester timetables.
         </a>
       </div>
 
       <!-- Notice Item 3 -->
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-gold">WALK-IN INTERVIEW · RECRUITMENT</div>
-        <a href="Careers.php" target="_blank" class="rkdf-notice-link">
-          💼 <strong>Walk-in Interview for MPCST Sponsored Project Positions</strong> — AI-Based Smart Agriculture Drone & Precision Farming @ RKDF University Bhopal.
+        <a href="Careers.php" class="rkdf-notice-link">
+          💼 <strong>Faculty Openings &amp; Research Project Positions</strong> — Explore walk-in interviews and project appointments.
         </a>
       </div>
 
       <!-- Notice Item 4 -->
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-green">PH.D ADMISSIONS 2026</div>
-        <a href="phd_entrance.php" target="_blank" class="rkdf-notice-link">
-          🔬 <strong>Ph.D Entrance Examination 2026 Notification</strong> — Application form, syllabus & list of 70 approved research supervisors.
+        <a href="phd_entrance.php" class="rkdf-notice-link">
+          🔬 <strong>Ph.D Entrance Examination 2026 Notification</strong> — Application form, syllabus &amp; approved research supervisors.
         </a>
       </div>
 
       <!-- Notice Item 5 -->
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-purple">ACCREDITATION</div>
-        <a href="Content/Documents/NAAC-Certificate-of-Accrediation-RKDF-University-Bhopal.pdf" target="_blank" class="rkdf-notice-link">
-          🏅 <strong>NAAC Certificate of Accreditation & ICAR Approval Details</strong> — Download official disclosure documents.
+        <a href="public-disclosure.php" class="rkdf-notice-link">
+          🏅 <strong>NAAC Certificate of Accreditation &amp; Statutory Approvals</strong> — View official regulatory disclosure documents.
         </a>
       </div>
 
     </div><!-- /rkdf-notice-body -->
 
-    <!-- Footer Action Bar -->
+    <!-- Footer Action Bar with distinct visual hierarchy -->
     <div class="rkdf-notice-footer">
       <label class="rkdf-notice-dontshow">
         <input type="checkbox" id="rkdfNoticeDontShow">
@@ -93,9 +93,9 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
 .rkdf-notice-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 20, 36, 0.75);
+  background: rgba(12, 20, 36, 0.78);
   backdrop-filter: blur(8px);
-  z-index: 10000;
+  z-index: 100002;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -219,12 +219,14 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
 }
 .rkdf-notice-dontshow {
   display: flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12.5px;
+  gap: 8px;
+  font-size: 13px;
   color: #64748b;
   cursor: pointer;
   user-select: none;
@@ -235,12 +237,19 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
   gap: 12px;
 }
 .rkdf-btn-all-notices {
-  font-size: 12.5px;
+  font-size: 13px;
   font-weight: 700;
   color: #0f172a;
   text-decoration: none;
+  padding: 8px 14px;
+  border: 1px solid rgba(12,20,36,0.15);
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
-.rkdf-btn-all-notices:hover { text-decoration: underline; color: #D9232D; }
+.rkdf-btn-all-notices:hover { 
+  background: #f1f5f9; 
+  color: #D9232D; 
+}
 .rkdf-btn-dismiss {
   padding: 8px 18px;
   background: #D9232D;
@@ -248,8 +257,9 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
   border: none;
   border-radius: 6px;
   font-weight: 700;
-  font-size: 12.5px;
+  font-size: 13px;
   cursor: pointer;
+  transition: background 0.2s ease;
 }
 .rkdf-btn-dismiss:hover { background: #b01921; }
 </style>
@@ -269,6 +279,11 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
     overlay.style.display = 'none';
     return;
   }
+
+  // Polite delay: Show after 3.5 seconds on initial visit
+  setTimeout(function() {
+    overlay.style.display = 'flex';
+  }, 3500);
 
   function hidePopup() {
     if (dontShow && dontShow.checked) {

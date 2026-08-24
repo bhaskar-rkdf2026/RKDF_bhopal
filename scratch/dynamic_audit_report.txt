@@ -1,0 +1,683 @@
+TOTAL PHP PAGES IN ROOT: 676
+DYNAMIC PAGES (CMS / DB / Settings Connected): 394
+PAGES TO REVIEW OR CONNECT: 282
+
+--- PAGES REQUIRING CMS CONNECTION ---
+ - Academic_Council-ren-18-Mar-2025.php
+ - Agriculture-30-Aug-2024.php
+ - Agriculture-31-Mar-2021.php
+ - Antiragging&All_Committee_10-Aug-2024.php
+ - BOS - 08-Nov-2025.php
+ - BoMM-03-Apr-2025.php
+ - BoMM-26-mAR-2025.php
+ - BoMM-ren-18-Mar-2025.php
+ - COA_approval - 20-June-2026.php
+ - COA_approval-19-July-2025.php
+ - COA_approval-June-2025.php
+ - Careers - 02-May-2026.php
+ - Careers - 06-April-2026.php
+ - Careers - 22-May-2026.php
+ - Careers - 30-Apr-2026.php
+ - Commerce-05-April-2021.php
+ - Committee-02-Aug-2024.php
+ - Committee-03-Apr-2025.php
+ - Committee-20-Mar-2025.php
+ - Computer-Application-01-April-2021.php
+ - Computer-Application-31-Mar-2021.php
+ - Contact_us.php
+ - Convocation - 21-May-2026.php
+ - Convocation-16-April-2024.php
+ - Convocation-26-Feb-2025.php
+ - Education-02-April-2021.php
+ - Engineering-02-April-2021.php
+ - Engineering-05-April-2021.php
+ - GoverningbodyMeetings-ren-18-Mar-2025.php
+ - Library-31-Mar-2021.php
+ - Management-01-April-2021.php
+ - Mtech-05-April-2021.php
+ - Nursing_Approval - 21-Nov-2025.php
+ - Nursing_Approval-14-May-2025.php
+ - Objectives-08-Apr-2025.php
+ - Registrar- 02-Aug-2025.php
+ - Result - 01-Apr-2026.php
+ - Result - 01-July-2025.php
+ - Result - 02-Aug-2025.php
+ - Result - 02-Mar-2026 In Correct.php
+ - Result - 02-Mar-2026.php
+ - Result - 03-June-2026.php
+ - Result - 03-Mar-2026.php
+ - Result - 04-Dec-2025.php
+ - Result - 06-Oct-2025.php
+ - Result - 08-Jan-2026.php
+ - Result - 09-Jun-2026.php
+ - Result - 09-Oct-2025.php
+ - Result - 10-Mar-2026.php
+ - Result - 11-Feb-2026.php
+ - Result - 13-Aug-2025.php
+ - Result - 13-June-2025.php
+ - Result - 14-Jan-2026.php
+ - Result - 15-June-2026.php
+ - Result - 17-Nov-2025.php
+ - Result - 20-Aug-2025.php
+ - Result - 20-Jan-2026.php
+ - Result - 20-June-2026.php
+ - Result - 21-July-2025.php
+ - Result - 21-June-2025.php
+ - Result - 22-June-2026.php
+ - Result - 24-June-2026.php
+ - Result - 26-Aug-2025.php
+ - Result - 26-Feb-2026.php
+ - Result - 26-June-2026.php
+ - Result - 27-Feb-2026.php
+ - Result - 28-Apr-2026.php
+ - Result - 29-June-2025.php
+ - Result-02-Feb-2026.php
+ - Result-02-June-2025.php
+ - Result-05-May-2025.php
+ - Result-07-Mar-2025.php
+ - Result-17-Feb-2026.php
+ - Result-19-July-2025.php
+ - Result-23-Feb-2026.php
+ - Result-27-May-2025.php
+ - Result-31-June-2025.php
+ - Science-05-April-2021.php
+ - University_Fees_Structure.php
+ - Vision&mission-08-Apr-2025.php
+ - acadmiccalander - 29-June-2025.php
+ - acadmiccalander-03-Apr-2025.php
+ - admissionform-04-May-2021.php
+ - aicte_approval - 04-May-2026.php
+ - aicte_approval - 22-Apr-2026.php
+ - aicte_approval- 19-May-2026.php
+ - aicte_approval-04-Apr-2025.php
+ - aicte_approval-09-Apr-2025.php
+ - aicte_approval-15-Apr-2025.php
+ - aicte_approval-16-Apr-2025.php
+ - aicte_approval-2023-24.php
+ - aicte_approval_all - 04-May-2026.php
+ - aicte_approval_all-2023-24.php
+ - alumni-03-June-2025.php
+ - alumni-08-Apr-2025.php
+ - approvals - 04-May-2026.php
+ - approvals - 20-June-2026.php
+ - approvals-2023-24.php
+ - approvals-28-May-2024.php
+ - bootstrap.php
+ - contact-us - 29-May-2026.php
+ - contact-us - 30-May-2026.php
+ - diploma_engg-05-April-2021.php
+ - email_form.php
+ - email_form26.05.23.php
+ - exam - 03-Dec-2025.php
+ - exam - 05-July-2025.php
+ - exam - 06-Feb-2026.php
+ - exam - 07-Aug-2025.php
+ - exam - 08-Aug-2025.php
+ - exam - 11-Dec-2025.php
+ - exam - 15-Nov-2025.php
+ - exam - 17-Dec-2025.php
+ - exam - 23-Feb-2026.php
+ - exam - 26-Mar-2026.php
+ - exam - 28-Feb-2026.php
+ - exam-04-Nov-2025.php
+ - exam-08-May-2024.php
+ - exam-10-Apr-2025.php
+ - exam-11-Dec-2021.php
+ - exam-11-May-2024.php
+ - exam-13-Feb-2025.php
+ - exam-16-Apr-2025.php
+ - exam-16-Nov-2024.php
+ - exam-19-Feb-2025.php
+ - exam-19-Nov-2024.php
+ - exam-22-Feb-2025.php
+ - exam-27-Feb-2025.php
+ - exam-29-Mar-2025.php
+ - examtimetable - 01-Dec-2025.php
+ - examtimetable - 03-May-2026.php
+ - examtimetable - 05-July-2025.php
+ - examtimetable - 06-Feb-2026.php
+ - examtimetable - 07-Mar-2026.php
+ - examtimetable - 08-Aug-2025.php
+ - examtimetable - 10-Feb-2026.php
+ - examtimetable - 15-Apr-2026.php
+ - examtimetable - 15-June-2026.php
+ - examtimetable - 17-Apr-2026.php
+ - examtimetable - 17-Feb-2026.php
+ - examtimetable - 17-Nov-2025.php
+ - examtimetable - 18-Apr-2026.php
+ - examtimetable - 20-Nov-2025.php
+ - examtimetable - 21-May-2026.php
+ - examtimetable - 23-Feb-2026.php
+ - examtimetable - 26-Mar-2026.php
+ - examtimetable - 29-Nov-2025.php
+ - examtimetable-03-Feb-2026.php
+ - examtimetable-06-Dec-2024.php
+ - examtimetable-07-Aug-2024.php
+ - examtimetable-08-Apr-2025.php
+ - examtimetable-08-June-2022.php
+ - examtimetable-08-May-2024.php
+ - examtimetable-09-May-2025.php
+ - examtimetable-10-May-2024.php
+ - examtimetable-10-Oct-2024.php
+ - examtimetable-11-Dec-2024.php
+ - examtimetable-11-Nov-2025.php
+ - examtimetable-11-Oct-2024.php
+ - examtimetable-12-Nov-2024.php
+ - examtimetable-13-Feb-2025.php
+ - examtimetable-15-Nov-2024.php
+ - examtimetable-16-Apr-2025.php
+ - examtimetable-16-Dec-2024.php
+ - examtimetable-18-Apr-2025.php
+ - examtimetable-19-Nov-2024.php
+ - examtimetable-19-Oct-2024.php
+ - examtimetable-21-Jan-2025.php
+ - examtimetable-22-Feb-2025.php
+ - examtimetable-27-Apr-2025.php
+ - examtimetable-29-Mar-2025.php
+ - examtimetable-30-Oct-2024.php
+ - examtimetable-June-2024.php
+ - examtimetable-June-25-Timetable-04-Nov-2025.php
+ - examtimetable_1styr-12-Nov-2024.php
+ - examtimetable_1styr-20-Nov-2024.php
+ - examtimetable_1styr-27-Nov-2024.php
+ - examtimetable_1styr-30-Oct-2024.php
+ - functions.php
+ - headercall.php
+ - hello.php
+ - hmlogin.php
+ - hmlogin23.php
+ - imggallery-21-May-2024.php
+ - imggallery-21-Sept-2024.php
+ - index  - 02-May-2026.php
+ - index - 01-Jan-2026.php
+ - index - 03-Feb-2026.php
+ - index - 04-Feb-2026.php
+ - index - 06-Apr-2026.php
+ - index - 07-Mar-2026.php
+ - index - 09-Feb-2026.php
+ - index - 10-Mar-2026.php
+ - index - 15-Apr-2026.php
+ - index - 15-June-2026.php
+ - index - 19-May-2026.php
+ - index - 20-Apr-2026.php
+ - index - 21-May-2026.php
+ - index - 22-June-2026.php
+ - index - 22-May-2026.php
+ - index - 23-Feb-2026.php
+ - index - 26-Mar-2026.php
+ - index - 28-Apr-2026.php
+ - index - 28-Feb-2026.php
+ - index - 29-May-2026.php
+ - index - 30-Apr-2026.php
+ - library-03-Apr-2025.php
+ - list_images_rand123.php
+ - list_images_rand456.php
+ - login.php
+ - logout.php
+ - logout23.php
+ - main.php
+ - nad-abc-19-Dec-2024.php
+ - new_diploma_login.php
+ - odl-07-Feb-2025.php
+ - odl-27-July-2024.php
+ - odl-27-June-2024.php
+ - odl-28-June-2024.php
+ - odl_ba-09-aUG-2024.php
+ - odl_ba05-Aug-2024.php
+ - other-officers-01-Apr-2025.php
+ - paramdical-01-April-2021.php
+ - pci_approval-08-Nov-2025.php
+ - pci_approval-27-Sept-2024.php
+ - pharmacy-02-April-2021.php
+ - phd-01-April-2021.php
+ - phd_entrance - 07-June-2025.php
+ - phd_entrance - 15-Apr-2026.php
+ - phd_entrance-07-Aug-2024.php
+ - phd_entrance-11-Apr-2025.php
+ - phd_entrance-17-July-2024.php
+ - phd_entrance-31-July-2024.php
+ - phdent_login.php
+ - phdstudent - 15-June-2026.php
+ - phdstudent-28-Feb-2025.php
+ - privacy-05-April-2021.php
+ - r&d-03-Apr-2025.php
+ - refund-05-April-2021.php
+ - scan_backups.php
+ - send_form_email.php
+ - sitemap.php
+ - stafflist - 02-July-2025.php
+ - stafflist - 08-Aug-2025.php
+ - stafflist-03-July-2025.php
+ - stafflist-05-Apr-2025.php
+ - stafflist-05-Aug-2025.php
+ - stafflist-25-May-2025.php
+ - stafflist-Original.php
+ - student-portal.php
+ - syllabusBe - 17-Nov-2025.php
+ - syllabusBe - 20-Nov-2025.php
+ - syllabusLaw-13-Sept-2024.php
+ - syllabusMba - 09-Feb-2026.php
+ - syllabusMba-15-Nov-2025.php
+ - syllabusMba-23-May-2024.php
+ - syllabusMca-10-July-2024.php
+ - syllabusMca-12-Dec-2024.php
+ - syllabusMtech - 11-May-2026.php
+ - syllabusPoly - 27-Sept-2025.php
+ - syllabus_Value-added-10-Feb-2023.php
+ - syllabus_science-22-Apr-2021.php
+ - syllabus_science-31-Oct-2025.php
+ - syllabus_science_12-June-2024.php
+ - syllabus_science_3year-12-Mar-2025.php
+ - syllabus_science_3year-18-Mar-2025.php
+ - syllabus_science_3year-25-Mar-2025.php
+ - syllabus_science_minor2ndyr - 01-May-2024.php
+ - syllabusag -  Renamed to Back - Agri Inspection - 02-Aug-2025.php
+ - syllabusag - 20-Aug-2025.php
+ - syllabusart - 17-Nov-2025.php
+ - syllabusart - 18-Nov-2025.php
+ - syllabusart - 26-Nov-2025.php
+ - syllabusart-11-July-2024.php
+ - syllabuscommerce-09-July-2024.php
+ - syllabuscommerce-15-Nov-2025.php
+ - syllabuslib - 15-Nov-2025.php
+ - t&p-08-Apr-2025.php
+ - terms&condition-05-April-2021.php
+ - ugcfile-02-Apr-2025.php
+ - ugcfile-17-Jan-2025.php
+ - ugcfile-22-fEB-2025.php
+
+--- DYNAMIC PAGES LIST ---
+ + About-Optometry.php
+ + Academic-Celendar.php
+ + Academic.php
+ + AcademicStaff.php
+ + Academic_Council.php
+ + Activities.php
+ + Administration.php
+ + Admission_search.php
+ + Agriculture 02.04.21.php
+ + Agriculture.php
+ + Alumni_Form.php
+ + Announcements.php
+ + Annual_Report.php
+ + Annual_Report_University.php
+ + Antiragging&All_Committee.php
+ + Awards.php
+ + B.Lib.php
+ + BAMS.php
+ + BE-BPharma-DPharma.php
+ + BHMS.php
+ + BOS.php
+ + Bank-And-ATM.php
+ + Bed.php
+ + Biology.php
+ + Biotechnology.php
+ + BoM.php
+ + BoMM.php
+ + Botany.php
+ + COA_approval.php
+ + Campus-Radio.php
+ + Campus.php
+ + Campus_Facilities_Video.php
+ + Canteen.php
+ + Careers.php
+ + Certificate-Courses.php
+ + Chancellor.php
+ + Chancellor1.php
+ + Chancellor14.04.21.php
+ + Chemistry.php
+ + Commerce.php
+ + Committee.php
+ + Computer-Application.php
+ + Conference-Center.php
+ + Confrence-Seminar.php
+ + Convocation-2023.php
+ + Convocation-2024.php
+ + Convocation.php
+ + Convocation_2023.php
+ + Courses-And-Programs.php
+ + Cultural.php
+ + Dean.php
+ + Diploma-Admissions.php
+ + Discipline-Comittee.php
+ + Doctoral(Ph.D).php
+ + Doctoral.php
+ + DoctoralExam.php
+ + E_Resource.php
+ + Education.php
+ + Eligibility.php
+ + Engineering.php
+ + Enrollment-Form.php
+ + Entrance-Exam.php
+ + Environmental.php
+ + Exam_Notice.php
+ + Examination.php
+ + Facilities.php
+ + Faculties-And-Departments.php
+ + Feedback_Analysis.php
+ + Finance-Officer.php
+ + Fine-Arts.php
+ + Games.php
+ + Governingbody.php
+ + GoverningbodyMeetings.php
+ + Graduate.php
+ + Health-Care-Medical-Center.php
+ + Hostel.php
+ + Humanities-Languages.php
+ + LMS.php
+ + Laboratories.php
+ + Law.php
+ + Library.php
+ + MBA-MCA.php
+ + Management.php
+ + Marksheet_Form.php
+ + Mass-Media.php
+ + Mathematics.php
+ + Medical-Robot.php
+ + Medical-Science.php
+ + Microbiology.php
+ + Migration_English.php
+ + Migration_Hindi.php
+ + Mission.php
+ + Mtech.php
+ + Mtech_02.04.21.php
+ + NIRF.php
+ + NIRF_Org.php
+ + Name_Correction_Form.php
+ + NewResult.php
+ + News_Letter.php
+ + Nursing_Approval.php
+ + Objectives.php
+ + Objectives_14.05.21.php
+ + Performing-Arts.php
+ + Photo.php
+ + Physics.php
+ + Post-Graduate-Admissions.php
+ + Post-Gratuate.php
+ + ProChancellor.php
+ + Proctor.php
+ + Recruitment.php
+ + Registrar.php
+ + Registrar14.04.21.php
+ + Research-Centers.php
+ + Result - 07-Jan-26.php
+ + Result - Result June2025.php
+ + Result - To Rename Back - 01-Aug-25.php
+ + Result new.php
+ + Result.php
+ + Result03.02.24.php
+ + RnD_Projects.php
+ + Rules-For-Faculty.php
+ + Schedule.php
+ + Science-Faculty.php
+ + Science.php
+ + Science06.04.21.php
+ + Social-Science.php
+ + Staff.php
+ + Statuary-Bodies.php
+ + Statuary-Bodies14.04.21.php
+ + Student-Feedback.php
+ + Student-Registration.php
+ + Student-Services.php
+ + Student_Portal.php
+ + Syllabus.php
+ + Syllabus14.04.21.php
+ + Transport.php
+ + Undergraduate-Admissions.php
+ + Verification_Form.php
+ + Vice-Chancellor-Desk.php
+ + Vice-Chancellor-Desk1.php
+ + Vice-Chancellor-Desk14.04.21.php
+ + Vision&mission.php
+ + Vision.php
+ + Visionncc.php
+ + Vocational-Courses.php
+ + Wi-Fi.php
+ + Zoology.php
+ + about.php
+ + abtevent.php
+ + abtsangram.php
+ + academic&departments.php
+ + academic_leadership.php
+ + acadmiccalander-24-Aug-23.php
+ + acadmiccalander.php
+ + admission.php
+ + admission23data.php
+ + admission23login.php
+ + admission_login.php
+ + admission_success_details.php
+ + admission_success_search.php
+ + admissionform.php
+ + admissionquery.php
+ + admit.php
+ + aicte_approval.php
+ + aicte_approval_all.php
+ + alumni.php
+ + alumni_reg.php
+ + antiragging.php
+ + approvals.php
+ + architect-02-April=2021.php
+ + architect.php
+ + awseminor.php
+ + bhmsreg.php
+ + board_management.php
+ + card.php
+ + cheakout.php
+ + circular.php
+ + contact-reg.php
+ + contact-us.php
+ + contact-vc.php
+ + contactbssneemach.php
+ + contactinfo.php
+ + contactinfomexwell.php
+ + contactsamagam.php
+ + contactsangraam.php
+ + criteria1.1.php
+ + criteria1.php
+ + criteria2.php
+ + criteria3.php
+ + criteria4.php
+ + criteria5.php
+ + criteria6.php
+ + criteria7.php
+ + curriculum.php
+ + dean_hod_principal.php
+ + deanhod.php
+ + delete.php
+ + details.php
+ + developer-NotUsed.php
+ + dgm.php
+ + dgm14.04.21.php
+ + dgr.php
+ + dgr14.04.21.php
+ + diplomaAG.php
+ + diploma_engg.php
+ + diploma_engg_02.04.21.php
+ + e_resources-org.php
+ + e_resources.php
+ + ec_boardgovernors.php
+ + electures.php
+ + email.php
+ + enrollment.php
+ + eresources.php
+ + eresourse_login.php
+ + event.php
+ + event2.php
+ + exam-16-July-24.php
+ + exam.php
+ + examtimetable-16-July-24.php
+ + examtimetable-23-Oct-24.php
+ + examtimetable-26-aUG-24.php
+ + examtimetable.php
+ + examtimetable_1Styr.php
+ + examtimetable_paramedical.php
+ + facultydevelopment.php
+ + fdp&seminar.php
+ + feedback.php
+ + feedbackcmplnt.php
+ + grievance.php
+ + grievance20.05.23.php
+ + healthcare.php
+ + hod.php
+ + home_login.php
+ + hotelmanagement.php
+ + idp.php
+ + imggallery-01-Dec-22.php
+ + imggallery.php
+ + index.php
+ + index_org.php
+ + indexnewpopup.php
+ + international-relation.php
+ + journals.php
+ + journals_aims.php
+ + journals_article.php
+ + journals_board.php
+ + journals_cont.php
+ + library_science.php
+ + listofsupervisors.php
+ + localadvisory.php
+ + localadvisory14.04.21.php
+ + maintenance.php
+ + marksheetnew.php
+ + megamindss.php
+ + megamindss_cont.php
+ + megamindss_data.php
+ + megamindss_event.php
+ + megamindss_reg.php
+ + megamindss_ypdata.php
+ + megamindss_ypreg.php
+ + menu-Not-Used.php
+ + naac.php
+ + nad-abc.php
+ + nad-abc2.php
+ + ncc.php
+ + ncte.php
+ + new_diplomaAG.php
+ + new_diplomaAG_result.php
+ + news_detail.php
+ + nursing.php
+ + odl-17-July-24.php
+ + odl_ba.php
+ + odl_ba24-July-24.php
+ + odl_bba.php
+ + odl_bcom.php
+ + odl_bsw.php
+ + odl_ma.php
+ + odl_mba.php
+ + odl_mcom.php
+ + odl_msw.php
+ + org-structure.php
+ + other-officers.php
+ + page.php
+ + paramdical.php
+ + patent.php
+ + pci_approval-10-June-23.php
+ + pci_approval.php
+ + pgdcautdresult.php
+ + pharmacy.php
+ + phd.php
+ + phd_ent_admitcard.php
+ + phd_ent_exam_syllabus.php
+ + phd_entrance - 03-June-26.php
+ + phd_entrance.php
+ + phd_examform2013-14.php
+ + phd_result.php
+ + phdadmitcard.php
+ + phdjournal.php
+ + phdresult.php
+ + phdstudent.php
+ + phdsubjects.php
+ + phdsyllabus.php
+ + policies.php
+ + policies_OLD.php
+ + privacy.php
+ + prospectus.php
+ + psg.php
+ + public-disclosure.php
+ + r&d.php
+ + rcp.php
+ + refund.php
+ + resultiindsem.php
+ + rkdf_admission_enquirydetails.php
+ + rkdf_payment_details.php
+ + rkdfmba.php
+ + rkdfmba_regform.php
+ + samagam.php
+ + samagam_data.php
+ + samagam_reg.php
+ + samagamgallery.php
+ + sangraamgallery.php
+ + sangram.php
+ + sangramreg.php
+ + scholarship.php
+ + sciencedevelopment.php
+ + sciencegallery.php
+ + search_details.php
+ + show_detail.php
+ + skill.php
+ + staffLnew - 30-June-2024.php
+ + staffLnew-11-June-2025.php
+ + staffLnew-13-June-2025.php
+ + staffLnew-29-June-2025.php
+ + staffLnew.php
+ + staffLnew13-June-2025.php
+ + stafflist.php
+ + stafflist01.php
+ + stafflist02.php
+ + studentdetail.php
+ + success.php
+ + successrf.php
+ + supervisors01.php
+ + supervisors02.php
+ + supervisors03.php
+ + supervisors04.php
+ + syllabusBAMS.php
+ + syllabusBe.php
+ + syllabusLaw.php
+ + syllabusMba.php
+ + syllabusMca.php
+ + syllabusMtech.php
+ + syllabusPhD.php
+ + syllabusPoly.php
+ + syllabus_Value-added - 09-Feb-23.php
+ + syllabus_Value-added.php
+ + syllabus_science.php
+ + syllabus_science_07-April_23.php
+ + syllabus_science_3year.php
+ + syllabus_science_major.php
+ + syllabus_science_major3rdsem.php
+ + syllabus_science_major_SEM-II.php
+ + syllabus_science_minor-22-Mar-23.php
+ + syllabus_science_minor.php
+ + syllabus_science_minor2ndyr.php
+ + syllabusag.php
+ + syllabusarchitect.php
+ + syllabusart.php
+ + syllabuscommerce-01.php
+ + syllabuscommerce.php
+ + syllabusedu.php
+ + syllabuslib.php
+ + syllabusnursing.php
+ + syllabusparamedical.php
+ + syllabuspharmacy.php
+ + syllabusvalueseprt.php
+ + t&p-23-Jan-25.php
+ + t&p.php
+ + terms&condition.php
+ + test.php
+ + test1.php
+ + test2.php
+ + test_payment.php
+ + timetable.php
+ + uafbscc.php
+ + ugccomnt.php
+ + ugcfile.php
+ + ugcprofarma.php
+ + vCampus.php
+ + valueseprt.php
+ + valueseprt14.05.21.php
+ + videogallery.php
+ + webinar.php
+ + whyrkdf.php
+ + womengrievance.php
+ + yrcoment.php

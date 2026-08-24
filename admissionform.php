@@ -228,6 +228,20 @@ $allItems = $itemStmt->fetchAll();
       background: rgba(12, 20, 36, 0.08);
     }
 
+    @media (max-width: 768px) {
+      .sadm-input, .sadm-select, .sadm-textarea {
+        min-height: 46px;
+        font-size: 16px;
+      }
+      .sadm-submit-btn, .sadm-reset-btn {
+        width: 100%;
+        min-height: 48px;
+        margin-bottom: 10px;
+        display: block;
+        text-align: center;
+      }
+    }
+
     /* Validation Feedback Styles */
     .sadm-input.is-invalid, .sadm-select.is-invalid, .sadm-textarea.is-invalid, .qual-table input.is-invalid {
       border-color: #E31B23 !important;
@@ -849,6 +863,15 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       if (firstInvalid) {
         firstInvalid.focus();
+      }
+    } else {
+      // Validation Passed: Prevent double submission & show loading indicator
+      var submitBtn = form.querySelector('.sadm-submit-btn');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = "⏳ Submitting Application...";
+        submitBtn.style.opacity = "0.75";
+        submitBtn.style.cursor = "not-allowed";
       }
     }
   });

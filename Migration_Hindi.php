@@ -348,11 +348,11 @@ foreach ($allItems as $it) {
           <div class="sidebar-card">
             <h4 class="sidebar-title">परीक्षा सेवाएं (Hindi)</h4>
             <ul class="sidebar-nav-list">
-              <li><a href="page.php?slug=migration-hindi" class="sidebar-link active"><span>माइग्रेशन फॉर्म (हिंदी)</span> <span>↗</span></a></li>
-              <li><a href="page.php?slug=migration-english" class="sidebar-link"><span>Migration Form (English)</span> <span>↗</span></a></li>
+              <li><a href="page.php?slug=migration-hindi" class="sidebar-link active"><span>माइग्रेशन फॉर्म (हिंदी माध्यम)</span> <span>↗</span></a></li>
+              <li><a href="page.php?slug=migration-english" class="sidebar-link"><span>माइग्रेशन फॉर्म (अंग्रेजी माध्यम)</span> <span>↗</span></a></li>
               <li><a href="page.php?slug=marksheet-form" class="sidebar-link"><span>अंकसूची संशोधन फॉर्म</span> <span>↗</span></a></li>
               <li><a href="page.php?slug=verification-form" class="sidebar-link"><span>दस्तावेज सत्यापन फॉर्म</span> <span>↗</span></a></li>
-              <li><a href="page.php?slug=result" class="sidebar-link"><span>परीक्षा परिणाम (Results)</span> <span>↗</span></a></li>
+              <li><a href="page.php?slug=result" class="sidebar-link"><span>परीक्षा परिणाम (परिणाम पोर्टल)</span> <span>↗</span></a></li>
             </ul>
           </div>
         </aside>

@@ -238,7 +238,7 @@ $govSubtitle  = !empty($allItems[0]['subtitle']) ? $allItems[0]['subtitle'] : 'O
                 <?= htmlspecialchars($govSubtitle) ?>
               </p>
             </div>
-            <a href="<?= htmlspecialchars($govPdfLink) ?>" target="_blank" class="govb-pdf-btn">
+            <a href="<?= htmlspecialchars($govPdfLink) ?>" target="_blank" rel="noopener noreferrer" class="govb-pdf-btn">
               📄 View Governing Body Members (PDF) ↗
             </a>
           </div>

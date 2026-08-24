@@ -97,12 +97,17 @@ foreach ($allItems as $it) {
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
       margin-top: 24px;
+      align-items: stretch;
     }
     .ver-info-box {
       background: #FAF9F5;
       border: 1px solid rgba(12, 20, 36, 0.08);
       border-radius: 14px;
       padding: 20px 24px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      box-sizing: border-box;
     }
     .ver-info-head {
       font-family: 'JetBrains Mono', monospace;

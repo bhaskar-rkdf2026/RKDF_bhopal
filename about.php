@@ -61,8 +61,14 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
     .ab-stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-      margin-bottom: 60px;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+    @media (max-width: 768px) {
+      .ab-stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
     }
 
     .ab-stat-card {
@@ -268,7 +274,7 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
               $para = trim($para);
               if (!empty($para)):
             ?>
-            <p class="ab-text-p"><?= htmlspecialchars($para) ?></p>
+            <p class="ab-text-para"><?= htmlspecialchars($para) ?></p>
             <?php
               endif;
             endforeach;
@@ -280,7 +286,7 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
                 <h4 style="font-size:17px;font-weight:700;color:#0C1424;margin-bottom:4px;">Download Illustrated Brochure</h4>
                 <p style="font-size:14px;color:#64748B;margin:0;">Download the original PDF information brochure for offline reading.</p>
               </div>
-              <a href="About_Us.pdf" target="_blank" class="rk-btn rk-btn-primary" style="padding:10px 20px;font-size:14px;">
+              <a href="About_Us.pdf" target="_blank" rel="noopener noreferrer" class="rk-btn rk-btn-primary" style="padding:10px 20px;font-size:14px;">
                 📄 View PDF Document ↗
               </a>
             </div>

@@ -212,11 +212,15 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST' && isset($_POST['phone'])) 
 
           <!-- RENDER DYNAMIC CONTACT CARDS -->
           <div class="cnt-cards-grid">
-            <?php foreach ($allItems as $item): ?>
+            <?php foreach ($allItems as $item): 
+              $valText = htmlspecialchars($item['text_val']);
+              // Auto-link emails
+              $valFormatted = preg_replace('/([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/', '<a href="mailto:$1" style="color:#E31B23;font-weight:600;text-decoration:none;">$1</a>', $valText);
+            ?>
             <article class="cnt-card">
               <span class="cnt-badge"><?= htmlspecialchars($item['badge_text'] ?: 'CONTACT') ?></span>
               <h3 class="cnt-item-title"><?= htmlspecialchars($item['title']) ?></h3>
-              <p class="cnt-item-desc"><?= htmlspecialchars($item['text_val']) ?></p>
+              <p class="cnt-item-desc"><?= $valFormatted ?></p>
             </article>
             <?php endforeach; ?>
           </div>

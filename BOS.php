@@ -194,7 +194,7 @@ foreach ($allItems as $it) {
               <p class="bos-item-desc"><?= htmlspecialchars($fItem['text_val']) ?></p>
             </div>
             <div>
-              <a href="<?= htmlspecialchars(!empty($fItem['link_url']) ? $fItem['link_url'] : '#') ?>" target="_blank" class="bos-pdf-btn">
+              <a href="<?= htmlspecialchars(!empty($fItem['link_url']) ? $fItem['link_url'] : '#') ?>" target="_blank" rel="noopener noreferrer" class="bos-pdf-btn">
                 <span>📄 View Document</span> <span>↗</span>
               </a>
             </div>
@@ -216,7 +216,7 @@ foreach ($allItems as $it) {
               <p class="bos-item-desc"><?= htmlspecialchars($sItem['text_val']) ?></p>
             </div>
             <div>
-              <a href="<?= htmlspecialchars(!empty($sItem['link_url']) ? $sItem['link_url'] : '#') ?>" target="_blank" class="bos-pdf-btn">
+              <a href="<?= htmlspecialchars(!empty($sItem['link_url']) ? $sItem['link_url'] : '#') ?>" target="_blank" rel="noopener noreferrer" class="bos-pdf-btn">
                 <span>📄 Open PDF</span> <span>↗</span>
               </a>
             </div>

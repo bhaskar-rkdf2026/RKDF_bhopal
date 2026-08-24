@@ -87,28 +87,29 @@ foreach ($allItems as $it) {
       padding-bottom: 10px;
       border-bottom: 2px solid #C5A059;
       display: flex;
-      align-items: center;
+      font-size: 19px;
+      font-weight: 700;
+      display: flex;
       justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      border-left: 4px solid #C5A059;
     }
 
     .en-notice-card {
-      background: #ffffff;
-      border: 1px solid rgba(12, 20, 36, 0.08);
-      border-radius: 16px;
-      padding: 22px 28px;
-      box-shadow: 0 4px 20px rgba(12, 20, 36, 0.04);
-      margin-bottom: 18px;
+      padding: 24px;
+      border-bottom: 1px solid rgba(12, 20, 36, 0.08);
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
       gap: 16px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: background 0.2s ease;
     }
+    .en-notice-card:last-child { border-bottom: none; }
     .en-notice-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(12, 20, 36, 0.08);
-      border-color: #E31B23;
+      background: #FAF9F5;
     }
 
     .en-badge {
@@ -123,6 +124,8 @@ foreach ($allItems as $it) {
       background: rgba(227, 27, 35, 0.12);
       color: #E31B23;
       margin-bottom: 6px;
+      word-break: break-word;
+      max-width: 100%;
     }
 
     .en-card-title { font-family: 'Playfair Display', Georgia, serif; font-size: 19px; font-weight: 700; color: #0C1424; margin: 0 0 4px 0; }
@@ -143,6 +146,9 @@ foreach ($allItems as $it) {
       white-space: nowrap;
     }
     .en-pdf-btn:hover { background: #E31B23; transform: translateX(3px); }
+    @media (max-width: 768px) {
+      .en-pdf-btn { width: 100%; justify-content: center; }
+    }
 
     aside { position: sticky; top: 100px; }
     .sidebar-card { background: #ffffff; border: 1px solid rgba(12, 20, 36, 0.08); border-radius: 18px; padding: 28px 24px; box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04); }

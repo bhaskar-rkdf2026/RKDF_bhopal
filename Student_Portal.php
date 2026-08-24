@@ -141,12 +141,16 @@ foreach ($allItems as $it) {
       flex-direction: column;
       justify-content: space-between;
       gap: 16px;
-      transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+      transition: transform 0.25s cubic-bezier(0.19,1,0.22,1), box-shadow 0.25s ease, border-color 0.25s ease;
+      cursor: pointer;
     }
     .sp-service-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 32px rgba(12, 20, 36, 0.08);
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px rgba(12, 20, 36, 0.09);
       border-color: #E31B23;
+    }
+    .sp-service-card:active {
+      transform: scale(0.98) translateY(-2px);
     }
 
     .sp-badge {

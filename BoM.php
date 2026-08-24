@@ -318,9 +318,9 @@ foreach ($allItems as $it) {
                 <thead>
                   <tr>
                     <th style="width:70px;">S.No.</th>
-                    <th>Name of Member</th>
-                    <th>Designation / Nominee Capacity</th>
-                    <th>Capacity / Role</th>
+                    <th style="min-width:200px;">Name of Member</th>
+                    <th style="min-width:250px;">Designation / Nominee Capacity</th>
+                    <th style="min-width:180px;">Capacity / Role</th>
                   </tr>
                 </thead>
                 <tbody>

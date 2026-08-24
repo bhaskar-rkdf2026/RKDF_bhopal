@@ -70,15 +70,20 @@ $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defau
 
     .dean-list-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 28px;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 24px;
+    }
+    @media (max-width: 768px) {
+      .dean-list-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .dean-member-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);
       border-radius: 20px;
-      padding: 32px 24px 28px;
+      padding: 28px 20px 24px;
       box-shadow: 0 4px 24px rgba(12, 20, 36, 0.04);
       transition: transform 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
       display: flex;
@@ -93,11 +98,11 @@ $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defau
     }
 
     .dean-avatar-box {
-      width: 140px;
-      height: 150px;
+      width: 130px;
+      height: 140px;
       border-radius: 16px;
       overflow: hidden;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       box-shadow: 0 8px 24px rgba(12, 20, 36, 0.12);
       border: 3px solid #FAF9F5;
       background: #0C1424;
@@ -115,7 +120,7 @@ $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defau
 
     .dean-name {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 21px;
+      font-size: 20px;
       font-weight: 700;
       color: #0C1424;
       margin-bottom: 4px;
@@ -128,11 +133,13 @@ $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defau
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
-      padding: 4px 14px;
+      padding: 5px 16px;
       border-radius: 99px;
       background: rgba(197, 160, 89, 0.18);
       color: #C5A059;
       margin-bottom: 12px;
+      max-width: 100%;
+      word-break: break-word;
     }
 
     .dean-faculty-title {

@@ -328,17 +328,22 @@ foreach ($allItems as $it) {
 
               <div style="margin-bottom:10px;">
                 <label style="display:block;font-size:12px;font-weight:700;color:#0C1424;margin-bottom:4px;">Enrollment Number *</label>
-                <input type="text" name="enrollment_no" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;box-sizing:border-box;" required placeholder="ENROLLMENT NUMBER" />
+                <input type="text" name="enrollment_no" pattern="[A-Za-z0-9\/\-]{4,25}" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;box-sizing:border-box;" required placeholder="e.g. RKDF2023BT012" />
               </div>
 
               <div style="margin-bottom:10px;">
-                <label style="display:block;font-size:12px;font-weight:700;color:#0C1424;margin-bottom:4px;">Mobile Number *</label>
-                <input type="text" name="mobile_no" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;box-sizing:border-box;" required placeholder="10-DIGIT MOBILE NUMBER" />
+                <label style="display:block;font-size:12px;font-weight:700;color:#0C1424;margin-bottom:4px;">10-Digit Mobile Number *</label>
+                <input type="tel" name="mobile_no" pattern="[6-9][0-9]{9}" maxlength="10" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;box-sizing:border-box;" required placeholder="10-digit mobile number" />
+              </div>
+
+              <div style="margin-bottom:10px;">
+                <label style="display:block;font-size:12px;font-weight:700;color:#0C1424;margin-bottom:4px;">Course / Program</label>
+                <input type="text" name="course" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;box-sizing:border-box;" placeholder="e.g. B.Tech, MBA" />
               </div>
 
               <div style="margin-bottom:14px;">
-                <label style="display:block;font-size:12px;font-weight:700;color:#0C1424;margin-bottom:4px;">Course / Program</label>
-                <input type="text" name="course" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13px;box-sizing:border-box;" placeholder="e.g. B.Tech, MBA" />
+                <label style="display:block;font-size:12px;font-weight:700;color:#0C1424;margin-bottom:4px;">Supporting Document (10th Marksheet/Aadhaar) (PDF/Image)</label>
+                <input type="file" name="proof_doc" accept=".pdf,.jpg,.jpeg,.png" style="width:100%;padding:6px;border:1px solid #cbd5e1;border-radius:6px;font-size:12px;box-sizing:border-box;" />
               </div>
 
               <button type="submit" name="submit_name_corr" style="width:100%;background:#0C1424;color:#ffffff;border:none;padding:12px;border-radius:8px;font-weight:700;font-size:13.5px;cursor:pointer;">Submit Correction Request ↗</button>

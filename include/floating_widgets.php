@@ -134,24 +134,27 @@
 @media (max-width: 768px) {
   .rkdf-floating-toolbar {
     top: auto;
-    bottom: 20px;
-    right: 16px;
+    bottom: 24px;
+    right: 12px;
     transform: none;
     flex-direction: row;
     gap: 8px;
+    z-index: 9998;
+    pointer-events: none;
   }
   .rkdf-float-btn {
+    pointer-events: auto;
     border-radius: 50%;
-    width: 46px;
-    height: 46px;
+    width: 42px;
+    height: 42px;
     padding: 0;
     justify-content: center;
     transform: none;
     border-right: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 4px 16px rgba(12, 20, 36, 0.2);
+    box-shadow: 0 4px 16px rgba(12, 20, 36, 0.25);
   }
   .rkdf-float-btn:hover {
-    transform: translateY(-4px);
+    transform: translateY(-3px);
   }
   .float-label {
     display: none;

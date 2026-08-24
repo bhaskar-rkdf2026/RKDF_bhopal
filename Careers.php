@@ -403,8 +403,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['apply_career'])) {
               </div>
 
               <div style="margin-bottom:12px;">
-                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">Mobile Number *</label>
-                <input type="text" name="mobile_no" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" required placeholder="10-DIGIT MOBILE NUMBER" />
+                <label style="display:block;font-size:12.5px;font-weight:700;color:#0C1424;margin-bottom:4px;">10-Digit Mobile Number *</label>
+                <input type="tel" name="mobile_no" pattern="[6-9][0-9]{9}" maxlength="10" style="width:100%;padding:8px 12px;border:1px solid #cbd5e1;border-radius:6px;font-size:13.5px;box-sizing:border-box;" required placeholder="10-digit mobile number" />
               </div>
 
               <div style="margin-bottom:12px;">
@@ -441,9 +441,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['apply_career'])) {
               <span>📞 Contact HR Desk</span>
               <span>→</span>
             </a>
-            <a href="images/Alumni-form.pdf" target="_blank" class="sidebar-link-btn">
+            <a href="Alumni_Form.php" class="sidebar-link-btn">
               <span>📝 Alumni Registration Form</span>
-              <span>PDF ↗</span>
+              <span>↗</span>
             </a>
           </div>
 
@@ -452,8 +452,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['apply_career'])) {
             <div style="font-size:14px;color:#334155;line-height:1.6;">
               <p><strong>HR &amp; Recruitment Cell</strong></p>
               <p>RKDF University, Airport Bypass Road, Gandhi Nagar, Bhopal (MP) 462033</p>
-              <p style="margin-top:8px;"><strong>Email:</strong> career@rkdf.ac.in</p>
-              <p><strong>Phone:</strong> +91-755-2740395</p>
+              <p style="margin-top:8px;"><strong>Email:</strong> <a href="mailto:career@rkdf.ac.in" style="color:#E31B23;text-decoration:none;font-weight:600;">career@rkdf.ac.in</a></p>
+              <p><strong>Phone:</strong> <a href="tel:+917552740395" style="color:#0C1424;text-decoration:none;font-weight:600;">+91-755-2740395</a></p>
             </div>
           </div>
 
