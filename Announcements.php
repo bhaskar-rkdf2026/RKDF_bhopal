@@ -10,15 +10,8 @@ $activeCat = $_GET['cat'] ?? 'all';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Announcements, Circulars & E-Tenders — RKDF University Bhopal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/rkdf-home.css?v=<?= time(); ?>">
-  <link rel="stylesheet" href="css/rkdf-navbar.css?v=<?= time(); ?>">
-  <link rel="icon" type="image/jpg" href="images/rkdflogo.jpg">
+  <?php $pageTitle = 'Announcements, Circulars & E-Tenders — RKDF University Bhopal'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .ann-hero {
       padding: 150px 0 60px;

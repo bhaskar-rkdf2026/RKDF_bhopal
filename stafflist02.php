@@ -5,10 +5,8 @@ require_once __DIR__ . '/config/db.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stafflist02 — RKDF University Bhopal</title>
-  <link rel="stylesheet" href="css/rkdf-home.css">
+  <?php $pageTitle = 'Stafflist02 — RKDF University Bhopal'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .subpage-hero {
       position: relative;

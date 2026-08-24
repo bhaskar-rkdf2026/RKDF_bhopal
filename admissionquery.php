@@ -1,14 +1,12 @@
 <?php
+$pageTitle = 'RKDF Online Admission Enquiry Form — RKDF University Bhopal';
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RKDF ONLINE ADMISSION ENQUIRY FORM — RKDF University Bhopal</title>
-  <link rel="stylesheet" href="css/rkdf-home.css">
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .subpage-hero {
       position: relative;

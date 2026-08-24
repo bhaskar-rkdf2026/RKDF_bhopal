@@ -1,2 +1,6 @@
-<img src="images/img/logo33.png" height="129" /> <img src="images/img/logo22.png" width="720" height="127" />
-			<!--<img src="images/indian79qikac.gif" width="95" height="118"  />-->
+<?php
+// ============================================================
+// RKDF University — Global Header & Navigation Component
+// ============================================================
+require_once __DIR__ . '/site_settings.php';
+require_once __DIR__ . '/new_navbar.php';

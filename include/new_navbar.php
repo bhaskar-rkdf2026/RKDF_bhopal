@@ -51,7 +51,7 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
     <!-- ── BRAND LOGO + CREST + TYPOGRAPHY ── -->
     <a href="index.php" class="rkdf-brand" title="<?= htmlspecialchars($siteTitle) ?> — Home">
       <div class="rkdf-badge-box">
-        <img src="images/lovable/rkdf-logo.png" alt="RKDF University Crest Logo" class="rkdf-badge-img" style="height:44px;max-height:44px;width:auto;max-width:40px;object-fit:contain;display:block;" onError="this.src='images/rkdflogo.JPG';">
+        <img src="images/lovable/rkdf-logo.png" alt="RKDF University Crest Logo" width="40" height="44" class="rkdf-badge-img" style="height:44px;max-height:44px;width:auto;max-width:40px;object-fit:contain;display:block;" onError="this.src='images/rkdflogo.JPG';">
       </div>
 
       <div class="rkdf-brand-info">

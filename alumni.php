@@ -50,16 +50,7 @@ $coordItem = $coordinatorArr[0] ?? [
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= htmlspecialchars($pageTitle) ?> — RKDF University Bhopal</title>
-  <meta name="description" content="<?= htmlspecialchars(strip_tags($heroSubtitle)) ?>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/rkdf-home.css?v=<?= time() ?>">
-  <link rel="stylesheet" href="css/rkdf-navbar.css?v=<?= time() ?>">
-  
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     /* ── Subpage Hero Section ── */
     .alumni-hero {

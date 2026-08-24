@@ -9,14 +9,8 @@ require_once __DIR__ . '/config/db.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Faculty of Law — RKDF University Bhopal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/rkdf-home.css">
-  <link rel="stylesheet" href="css/rkdf-navbar.css">
+  <?php $pageTitle = 'Faculty of Law — RKDF University Bhopal'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .subpage-hero {
       position: relative;

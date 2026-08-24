@@ -27,10 +27,7 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= htmlspecialchars($mainTitle) ?> — RKDF University Bhopal</title>
-  <link rel="stylesheet" href="css/rkdf-home.css">
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .subpage-hero {
       position: relative;

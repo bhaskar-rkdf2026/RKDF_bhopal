@@ -71,15 +71,7 @@ $pageTitle = htmlspecialchars($article['title']) . ' — RKDF University';
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= $pageTitle ?></title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/rkdf-home.css?v=<?= time(); ?>">
-  <link rel="stylesheet" href="css/rkdf-navbar.css?v=<?= time(); ?>">
-  <link rel="icon" type="image/jpg" href="images/rkdflogo.jpg">
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .news-detail-page {
       padding: 140px 0 80px;

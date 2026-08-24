@@ -9,6 +9,10 @@ require_once __DIR__ . '/../include/site_settings.php';
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Diploma Agriculture Result June 2026 — RKDF University Bhopal</title>

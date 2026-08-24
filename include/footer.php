@@ -24,7 +24,7 @@ $phoneClean = preg_replace('/[^0-9+]/', '', $footPhone);
       <!-- Brand column -->
       <div class="rk-footer-brand">
         <div class="rk-footer-logo-wrap">
-          <img src="images/lovable/rkdf-logo.png" alt="RKDF University Logo" class="rk-footer-logo" onError="this.src='images/rkdflogo.JPG';">
+          <img src="images/lovable/rkdf-logo.png" alt="RKDF University Logo" width="48" height="52" class="rk-footer-logo" onError="this.src='images/rkdflogo.JPG';">
           <div>
             <div class="rk-footer-brand-name">RKDF University</div>
             <div class="rk-footer-brand-loc">Bhopal, MP</div>

@@ -42,6 +42,10 @@ $checkSum = getChecksumFromArray($paramList,PAYTM_MERCHANT_KEY);
 ?>
 <html>
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
 <title>Merchant Check Out Page</title>
 </head>
 <body>

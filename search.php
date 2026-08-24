@@ -481,18 +481,12 @@ function highlightMatch($text, $query) {
     $pattern = '/(' . implode('|', $tokens) . ')/i';
     return preg_replace($pattern, '<mark style="background:#FFF3C4;color:#0C1424;font-weight:700;padding:0 2px;border-radius:3px;">$1</mark>', htmlspecialchars($text));
 }
+$pageTitle = !empty($query) ? $query . ' — Search Results' : 'Search Directory — RKDF University Bhopal';
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><?= !empty($query) ? htmlspecialchars($query) . ' — Search Results' : 'Search Directory' ?> — RKDF University Bhopal</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="css/rkdf-home.css">
-  <link rel="stylesheet" href="css/rkdf-navbar.css">
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .search-hero {
       position: relative;

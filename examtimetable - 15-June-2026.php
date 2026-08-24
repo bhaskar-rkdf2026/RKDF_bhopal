@@ -3,53 +3,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>RKDF UNIVERSITY | EEAM TIMETABLE</title>
-    <meta name="description"
-        content=" rkdf,rkdf university,EXAM TIMETABLE, EXAM , UNIVERSITY EXAM, timetable, rkdf exam, rkdf timetable">
-    <link rel="stylesheet" type="text/css" media="all" href="css/style1.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/style_engi_tech.css" />
-    <link rel="stylesheet" type="text/css" media="all" href="css/base.css" />
-    <link rel="shortcut icon" type="image/ico" href="images/favicon.ico" />
-    <script type='text/javascript' src='js/jquery.min1159.js?ver=1.4.2'></script>
-    <script type="text/javascript" src="js/script.js"></script>
-    <script type="text/javascript" src="js/jcarouselite.js"></script>
-    <script type="text/javascript" src="js/jquery.nivo.slider.js"></script>
-    <LINK rel=stylesheet type=text/css href="css/preview.css">
-    <LINK rel=stylesheet type=text/css href="css/wt-rotator.css">
-    <SCRIPT type=text/javascript src="js/jquery.wt-rotator.min.js"></SCRIPT>
-    <SCRIPT type=text/javascript src="js/preview.js"></SCRIPT>
-    <script type="text/javascript" src="js/jquery_0022.js"></script>
-    <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/ddaccordion.js"></script>
-    <script type="text/javascript">
-    ddaccordion.init({
-        headerclass: "submenuheader", //Shared CSS class name of headers group
-        contentclass: "submenu", //Shared CSS class name of contents group
-        revealtype: "click", //Reveal content when user clicks or onmouseover the header? Valid value: "click", "clickgo", or "mouseover"
-        mouseoverdelay: 200, //if revealtype="mouseover", set delay in milliseconds before header expands onMouseover
-        collapseprev: true, //Collapse previous content (so only one open at any time)? true/false
-        defaultexpanded: [], //index of content(s) open by default [index1, index2, etc] [] denotes no content
-        onemustopen: false, //Specify whether at least one header should be open always (so never all headers closed)
-        animatedefault: false, //Should contents open by default be animated into view?
-        persiststate: true, //persist state of opened contents within browser session?
-        toggleclass: ["",
-            ""
-        ], //Two CSS classes to be applied to the header when it's collapsed and expanded, respectively ["class1", "class2"]
-        togglehtml: ["suffix", "<img src='images/plus.gif' class='statusicon' />",
-            "<img src='images/minus.gif' class='statusicon' />"
-        ], //Additional HTML added to the header when it's collapsed and expanded, respectively  ["position", "html1", "html2"] (see docs)
-        animatespeed: "fast", //speed of animation: integer in milliseconds (ie: 200), or keywords "fast", "normal", or "slow"
-        oninit: function(headers, expandedindices) { //custom code to run when headers have initalized
-            //do nothing
-        },
-        onopenclose: function(header, index, state,
-            isuseractivated) { //custom code to run whenever a header is opened or closed
-            //do nothing
-        }
-    })
-    </script>
-    <style type="text/css">
+  <?php $pageTitle = 'RKDF UNIVERSITY | EEAM TIMETABLE'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
+  <style type="text/css">
     .submenu {
         display: none
     }

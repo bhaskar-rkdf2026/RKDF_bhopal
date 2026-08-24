@@ -31,6 +31,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
 <title>Transaction status query</title>
 <meta name="GENERATOR" content="Evrsoft First Page">
 </head>

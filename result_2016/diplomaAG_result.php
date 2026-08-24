@@ -4,6 +4,10 @@ session_start();
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Diploma AG Result - RKDF University, Bhopal</title>
 <style type="text/css">

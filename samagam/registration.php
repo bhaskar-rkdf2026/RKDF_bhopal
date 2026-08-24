@@ -2,6 +2,10 @@
 <html>
 
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
 
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

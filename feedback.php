@@ -29,11 +29,8 @@ if (isset($_POST['contact_submitted'])) {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Student Feedback & Enquiry — RKDF University Bhopal</title>
-  <link rel="stylesheet" href="css/rkdf-home.css">
-  <link rel="stylesheet" href="css/rkdf-navbar.css">
+  <?php $pageTitle = 'Student Feedback & Enquiry — RKDF University Bhopal'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .subpage-hero {
       position: relative;

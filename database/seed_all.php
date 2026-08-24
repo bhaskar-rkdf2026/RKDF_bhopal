@@ -62,6 +62,10 @@ header('Content-Type: text/html; charset=utf-8');
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
   <meta charset="UTF-8">
   <title>RKDF University — Database Synchronizer &amp; Setup</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">

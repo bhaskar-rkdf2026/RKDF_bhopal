@@ -26,9 +26,9 @@ font-size:34px}
 }
 </style>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>RKDF Admission Form 2020-21</title>
-</head>
+  <?php $pageTitle = 'RKDF Admission Form 2020-21'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
+  </head>
 
 <body topmargin="20px" leftmargin="20" >
 <table width="95%" border="0"  cellpadding="0" cellspacing="0">

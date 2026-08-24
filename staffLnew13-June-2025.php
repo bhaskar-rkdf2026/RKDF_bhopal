@@ -28,6 +28,10 @@ $errorMessage = null; // Initialize error message
 // and using 'include __DIR__ . "/../templates/header.php";' instead.
 $header_content = '
     <header class="bg-indigo-700 text-white p-4 shadow-md">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
         <img src="images/RKDFU_Header.png" style="justify-self: anchor-center;"/>
         <div class="container mx-auto flex justify-between items-center">
             <nav>
@@ -195,12 +199,9 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University Staff Directory</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <style>
+  <?php $pageTitle = 'University Staff Directory'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
+  <style>
         body {
             font-family: 'Inter', sans-serif;
             background-color: #f3f4f6; /* Light gray background */

@@ -188,11 +188,8 @@ try {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Application Submitted — RKDF University Bhopal</title>
-  <link rel="stylesheet" href="css/rkdf-home.css">
-  <link rel="stylesheet" href="css/rkdf-navbar.css">
+  <?php $pageTitle = 'Application Submitted — RKDF University Bhopal'; ?>
+  <?php include __DIR__ . '/include/head_meta.php'; ?>
   <style>
     .subpage-hero {
       position: relative;

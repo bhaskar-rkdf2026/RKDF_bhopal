@@ -1,5 +1,9 @@
 <html>
 <head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/fav.png">
+  <link rel="shortcut icon" href="images/fav.png" type="image/x-icon">
+  <link rel="apple-touch-icon" href="images/fav.png">
 <style>
 label{display:inline-block;width:100px;margin-bottom:10px;}
 </style>
