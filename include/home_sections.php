@@ -1331,98 +1331,609 @@ if (!$sec13 || ($sec13['is_active'] ?? 1)):
 <?php
 $sec14 = $cmsSections['sec_14_recognition'] ?? null;
 if (!$sec14 || ($sec14['is_active'] ?? 1)):
-  $sec14Tag   = format_eyebrow_tag($sec14 ?: ['tag_number'=>'14','tag_text'=>'ACCREDITATION & RECOGNITION']);
-  $sec14Title = $sec14['title_main'] ?? 'Recognised where it counts.';
-  $approvals = [
-    ['name'=>'NAAC A+ ACCREDITED', 'sub'=>'Grade A+ Accreditation', 'img'=>'images/img/NaccLogo.jpg', 'url'=>'Content/Documents/NAAC-Certificate-of-Accrediation-RKDF-University-Bhopal.pdf'],
-    ['name'=>'ICAR ACCREDITED', 'sub'=>'Indian Council of Agr. Research', 'img'=>'images/img/icarlogo.png', 'url'=>'images/Accreditation/ICAR Accreditation.jpeg'],
-    ['name'=>'UGC RECOGNISED', 'sub'=>'Under Sec 2(f) & 12(B)', 'img'=>'images/img/approval.gif', 'url'=>'ugcfile.php'],
-    ['name'=>'AICTE APPROVED', 'sub'=>'Technical Courses Approved', 'img'=>'images/img/approval.gif', 'url'=>'aicte_approval.php'],
-    ['name'=>'PCI APPROVED', 'sub'=>'Pharmacy Council of India', 'img'=>'images/img/approval.gif', 'url'=>'pci_approval.php'],
-    ['name'=>'ISO 9001:2015', 'sub'=>'Quality Management System', 'img'=>'images/img/approval.gif', 'url'=>'approvals.php'],
+  $sec14Tag    = format_eyebrow_tag($sec14 ?: ['tag_number'=>'14','tag_text'=>'ACCREDITATION & STATUTORY APPROVALS']);
+  $sec14Title  = $sec14['title_main']   ?? 'Recognised by Apex Councils.';
+  $sec14Accent = $sec14['title_accent'] ?? 'Validated Nationwide.';
+  $sec14Sub    = $sec14['subtitle']     ?? 'RKDF University is recognized by the University Grants Commission (UGC) under Section 2(f) and holds statutory council accreditations & approvals across Engineering, Pharmacy, Agriculture, Law, Architecture, and Education — ensuring 100% degree validity for central/state government employment and higher studies globally.';
+
+  $defaultApprovals = [
+    [
+      'code'      => 'UGC',
+      'name'      => 'University Grants Commission',
+      'badge'     => 'Statutory 2(f) & 12(B)',
+      'badge_bg'  => 'rgba(197, 160, 89, 0.12)',
+      'badge_col' => '#936e22',
+      'sub'       => 'Statutory Recognition with Degree Granting Powers under UGC Act 1956',
+      'img'       => 'images/img/ugc_logo.jpg',
+      'url'       => 'ugcfile.php',
+      'doc_type'  => 'Gazette & 2(f) Letter'
+    ],
+    [
+      'code'      => 'NAAC',
+      'name'      => 'NAAC Accreditation',
+      'badge'     => 'Grade A+ Accredited',
+      'badge_bg'  => 'rgba(227, 27, 35, 0.10)',
+      'badge_col' => '#E31B23',
+      'sub'       => 'Apex national assessment benchmark for institutional & academic excellence',
+      'img'       => 'images/img/NaccLogo.jpg',
+      'url'       => 'naac.php',
+      'doc_type'  => 'NAAC Certificate'
+    ],
+    [
+      'code'      => 'AICTE',
+      'name'      => 'All India Council for Technical Education',
+      'badge'     => 'AICTE Approved',
+      'badge_bg'  => 'rgba(12, 20, 36, 0.08)',
+      'badge_col' => '#0C1424',
+      'sub'       => 'Statutory approval for Engineering, Technology, Management & MCA programs',
+      'img'       => 'images/img/aicte.jpg',
+      'url'       => 'aicte_approval.php',
+      'doc_type'  => 'AICTE EOA Letters'
+    ],
+    [
+      'code'      => 'PCI',
+      'name'      => 'Pharmacy Council of India',
+      'badge'     => 'PCI Approved',
+      'badge_bg'  => 'rgba(16, 185, 129, 0.12)',
+      'badge_col' => '#059669',
+      'sub'       => 'Approved for B.Pharmacy & D.Pharmacy professional education & practice',
+      'img'       => 'images/img/pci2.jpg',
+      'url'       => 'pci_approval.php',
+      'doc_type'  => 'PCI Approval Order'
+    ],
+    [
+      'code'      => 'ICAR',
+      'name'      => 'Indian Council of Agricultural Research',
+      'badge'     => 'ICAR Accredited',
+      'badge_bg'  => 'rgba(234, 88, 12, 0.12)',
+      'badge_col' => '#c2410c',
+      'sub'       => 'Accreditation for B.Sc. (Hons.) Agriculture & Agricultural Sciences',
+      'img'       => 'images/img/icarlogo.png',
+      'url'       => 'images/Accreditation/ICAR Accreditation.jpeg',
+      'doc_type'  => 'Accreditation Order'
+    ],
+    [
+      'code'      => 'COA',
+      'name'      => 'Council of Architecture',
+      'badge'     => 'COA Approved',
+      'badge_bg'  => 'rgba(99, 102, 241, 0.12)',
+      'badge_col' => '#4f46e5',
+      'sub'       => 'Statutory approval for B.Arch & Architecture degree curriculum',
+      'img'       => 'images/coa.jpg',
+      'url'       => 'COA_approval.php',
+      'doc_type'  => 'COA Extension'
+    ],
+    [
+      'code'      => 'NCTE',
+      'name'      => 'National Council for Teacher Education',
+      'badge'     => 'NCTE Recognized',
+      'badge_bg'  => 'rgba(14, 165, 233, 0.12)',
+      'badge_col' => '#0284c7',
+      'sub'       => 'Recognition for B.Ed and Teacher Training programs',
+      'img'       => 'images/img/ncte.png',
+      'url'       => 'ncte.php',
+      'doc_type'  => 'NCTE Order'
+    ],
+    [
+      'code'      => 'ISO 9001',
+      'name'      => 'ISO 9001:2015 Certification',
+      'badge'     => 'Certified QMS',
+      'badge_bg'  => 'rgba(100, 116, 139, 0.12)',
+      'badge_col' => '#475569',
+      'sub'       => 'Certified Quality Management System for university administration & pedagogy',
+      'img'       => 'images/rkdflogo.JPG',
+      'url'       => 'approvals.php',
+      'doc_type'  => 'Quality Standard'
+    ]
   ];
+
+  $approvals = $defaultApprovals;
   $dbApprovals = $cmsItems['sec_14_recognition'] ?? [];
   if (!empty($dbApprovals)) {
     $approvals = [];
     foreach ($dbApprovals as $i) {
+      $titleUpper = strtoupper($i['title']);
+      $badgeBg = 'rgba(197, 160, 89, 0.12)';
+      $badgeCol = '#936e22';
+      $docType = 'View Official Approval';
+
+      if (strpos($titleUpper, 'UGC') !== false) {
+        $badgeBg = 'rgba(197, 160, 89, 0.14)';
+        $badgeCol = '#8a6519';
+        $docType = 'UGC 2(f) Gazette Order';
+      } elseif (strpos($titleUpper, 'NAAC') !== false) {
+        $badgeBg = 'rgba(227, 27, 35, 0.10)';
+        $badgeCol = '#E31B23';
+        $docType = 'NAAC Certificate (A+)';
+      } elseif (strpos($titleUpper, 'AICTE') !== false) {
+        $badgeBg = 'rgba(12, 20, 36, 0.08)';
+        $badgeCol = '#0C1424';
+        $docType = 'AICTE EOA Letters';
+      } elseif (strpos($titleUpper, 'PCI') !== false || strpos($titleUpper, 'PHARMACY') !== false) {
+        $badgeBg = 'rgba(16, 185, 129, 0.12)';
+        $badgeCol = '#059669';
+        $docType = 'PCI Approval Order';
+      } elseif (strpos($titleUpper, 'ICAR') !== false || strpos($titleUpper, 'AGRICULT') !== false) {
+        $badgeBg = 'rgba(234, 88, 12, 0.12)';
+        $badgeCol = '#c2410c';
+        $docType = 'ICAR Accreditation';
+      } elseif (strpos($titleUpper, 'COA') !== false || strpos($titleUpper, 'ARCHITECT') !== false) {
+        $badgeBg = 'rgba(99, 102, 241, 0.12)';
+        $badgeCol = '#4f46e5';
+        $docType = 'COA Extension Order';
+      } elseif (strpos($titleUpper, 'NCTE') !== false || strpos($titleUpper, 'TEACHER') !== false) {
+        $badgeBg = 'rgba(14, 165, 233, 0.12)';
+        $badgeCol = '#0284c7';
+        $docType = 'NCTE Recognition';
+      } elseif (strpos($titleUpper, 'NURSING') !== false) {
+        $badgeBg = 'rgba(236, 72, 153, 0.12)';
+        $badgeCol = '#db2777';
+        $docType = 'Nursing Council Order';
+      }
+
       $approvals[] = [
-        'name' => $i['title'],
-        'sub'  => $i['subtitle'] ?: 'Statutory Approval',
-        'img'  => $i['image_path'] ?: 'images/img/approval.gif',
-        'url'  => $i['link_url'] ?: 'approvals.php'
+        'name'      => $i['title'],
+        'badge'     => $i['badge_text'] ?: 'Approved',
+        'badge_bg'  => $badgeBg,
+        'badge_col' => $badgeCol,
+        'sub'       => $i['subtitle'] ?: 'Statutory Council Approval',
+        'img'       => $i['image_path'] ?: 'images/rkdflogo.JPG',
+        'url'       => $i['link_url'] ?: 'approvals.php',
+        'doc_type'  => $docType
       ];
     }
   }
 ?>
-<section class="rk-accred" id="recognitions" style="background:#fafafa;padding:70px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
+<section class="rk-accred-modern" id="recognitions">
   <div class="rk-container">
-    <div class="rk-accred-inner" style="display:grid;grid-template-columns:1fr;gap:40px;align-items:center;">
-      <div class="rk-accred-left rk-reveal">
-        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;letter-spacing:0.1em;margin-bottom:8px;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $sec14Tag ?></div>
-        <h3 class="rk-accred-title" style="font-family:'Instrument Serif',Georgia,serif;font-size:clamp(2.2rem,4vw,3.2rem);color:#0C1424;margin-bottom:12px;line-height:1.2;"><?= htmlspecialchars($sec14Title) ?></h3>
-        <p style="font-size:15px;color:#475569;margin-top:12px;line-height:1.7;max-width:540px;">
-          RKDF University holds national accreditations and statutory approvals from central regulatory councils, ensuring highest academic &amp; quality standards.
+    
+    <!-- Top Header Bar -->
+    <div class="rk-accred-header rk-reveal">
+      <div class="rk-accred-header-left">
+        <div class="rk-accred-eyebrow">
+          <span class="rk-accred-eyebrow-dot"></span>
+          <?= $sec14Tag ?>
+        </div>
+        <h2 class="rk-accred-h2">
+          <?= htmlspecialchars($sec14Title) ?>
+          <em class="rk-accred-em"><?= htmlspecialchars($sec14Accent) ?></em>
+        </h2>
+        <p class="rk-accred-lead">
+          <?= htmlspecialchars($sec14Sub) ?>
         </p>
       </div>
-      <div class="rk-accred-badges rk-reveal" style="--delay:0.1s;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;">
-        <?php foreach ($approvals as $app): ?>
-        <a href="<?= htmlspecialchars($app['url']) ?>" target="_blank" class="rk-accred-badge-card" style="text-decoration:none;">
-          <div class="rk-accred-badge-img-wrap">
-            <img src="<?= htmlspecialchars($app['img']) ?>" alt="<?= htmlspecialchars($app['name']) ?>" onError="this.src='images/rkdflogo.JPG';">
+
+      <div class="rk-accred-header-right">
+        <div class="rk-accred-stats-card">
+          <div class="rk-accred-stat-item">
+            <div class="rk-accred-stat-num">UGC 2(f)</div>
+            <div class="rk-accred-stat-lbl">Central Recognition</div>
           </div>
-          <div>
-            <div class="rk-accred-badge-name" style="font-size:14px;font-weight:700;color:#0C1424;"><?= htmlspecialchars($app['name']) ?></div>
-            <div style="font-size:12px;color:#64748b;margin-top:2px;font-weight:500;"><?= htmlspecialchars($app['sub']) ?></div>
+          <div class="rk-accred-stat-sep"></div>
+          <div class="rk-accred-stat-item">
+            <div class="rk-accred-stat-num">NAAC A+</div>
+            <div class="rk-accred-stat-lbl">Quality Benchmark</div>
           </div>
-        </a>
-        <?php endforeach; ?>
+          <div class="rk-accred-stat-sep"></div>
+          <div class="rk-accred-stat-item">
+            <div class="rk-accred-stat-num">100%</div>
+            <div class="rk-accred-stat-lbl">Govt Job Valid</div>
+          </div>
+        </div>
       </div>
     </div>
+
+    <!-- Recognition Badges Matrix -->
+    <div class="rk-accred-grid rk-reveal" style="--delay:0.12s;">
+      <?php foreach ($approvals as $app): ?>
+      <a href="<?= htmlspecialchars($app['url']) ?>" class="rk-accred-card" target="_blank" rel="noopener noreferrer">
+        <div class="rk-accred-card-top">
+          <div class="rk-accred-logo-box">
+            <img src="<?= htmlspecialchars($app['img']) ?>" alt="<?= htmlspecialchars($app['name']) ?>" onError="this.src='images/rkdflogo.JPG';">
+          </div>
+          <span class="rk-accred-pill" style="background:<?= $app['badge_bg'] ?>; color:<?= $app['badge_col'] ?>;">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <?= htmlspecialchars($app['badge']) ?>
+          </span>
+        </div>
+
+        <div class="rk-accred-card-body">
+          <h3 class="rk-accred-card-name"><?= htmlspecialchars($app['name']) ?></h3>
+          <p class="rk-accred-card-sub"><?= htmlspecialchars($app['sub']) ?></p>
+        </div>
+
+        <div class="rk-accred-card-foot">
+          <span class="rk-accred-link-text">
+            <?= htmlspecialchars($app['doc_type'] ?? 'View Approval') ?>
+          </span>
+          <span class="rk-accred-link-arrow">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+          </span>
+        </div>
+      </a>
+      <?php endforeach; ?>
+    </div>
+
+    <!-- Bottom Statutory Trust Banner -->
+    <div class="rk-accred-trust-banner rk-reveal" style="--delay:0.2s;">
+      <div class="rk-accred-trust-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+      </div>
+      <div class="rk-accred-trust-text">
+        <strong>Statutory Degree Validity:</strong> All qualifications &amp; degrees conferred by RKDF University Bhopal are formally recognized for UPSC, MPPSC, SSC, PSU recruitments, Banking, Judiciary, NET/GATE examinations, and postgraduate admissions in India and foreign universities.
+      </div>
+      <a href="approvals.php" class="rk-accred-trust-btn">
+        All Approvals Matrix &rarr;
+      </a>
+    </div>
+
   </div>
 </section>
+
 <style>
-@media (min-width: 992px) {
-  .rk-accred-inner {
-    grid-template-columns: 360px 1fr !important;
-  }
+/* ─────────────────────────────────────────────────────────────
+   §14 MODERN ACCREDITATION & RECOGNITIONS STYLES
+   ───────────────────────────────────────────────────────────── */
+.rk-accred-modern {
+  position: relative;
+  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F8FAFC 100%);
+  padding: 95px 0 90px;
+  border-top: 1px solid #E2E8F0;
+  border-bottom: 1px solid #E2E8F0;
+  overflow: hidden;
 }
-.rk-accred-badge-card {
+
+.rk-accred-modern::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 1400px;
+  height: 380px;
+  background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08) 0%, rgba(227, 27, 35, 0.03) 45%, transparent 70%);
+  pointer-events: none;
+}
+
+.rk-accred-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 50px;
+  flex-wrap: wrap;
+}
+
+.rk-accred-header-left {
+  max-width: 720px;
+}
+
+.rk-accred-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  font-weight: 700;
+  color: #C5A059;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  background: rgba(197, 160, 89, 0.08);
+  border: 1px solid rgba(197, 160, 89, 0.25);
+  padding: 6px 14px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.rk-accred-eyebrow-dot {
+  width: 7px;
+  height: 7px;
+  background: #C5A059;
+  border-radius: 50%;
+  box-shadow: 0 0 8px #C5A059;
+  animation: rkPulse 2s infinite ease-in-out;
+}
+
+@keyframes rkPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+.rk-accred-h2 {
+  font-family: 'Instrument Serif', Georgia, serif;
+  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
+  font-weight: 400;
+  color: #0C1424;
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.rk-accred-em {
+  font-style: italic;
+  color: #E31B23;
+  font-weight: 400;
+}
+
+.rk-accred-lead {
+  font-size: 15.5px;
+  color: #475569;
+  line-height: 1.75;
+  margin: 0;
+}
+
+/* Stats Card Top Right */
+.rk-accred-stats-card {
   display: flex;
   align-items: center;
-  gap: 14px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  padding: 16px 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 16px rgba(12,20,36,0.04);
-  transition: all 0.25s ease;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  box-shadow: 0 10px 30px rgba(12, 20, 36, 0.05);
+  border-radius: 16px;
+  padding: 16px 24px;
+  gap: 20px;
 }
-.rk-accred-badge-card:hover {
-  background: #ffffff;
-  border-color: #E31B23;
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(12,20,36,0.08);
+
+.rk-accred-stat-item {
+  text-align: center;
 }
-.rk-accred-badge-img-wrap {
-  width: 48px;
-  height: 48px;
-  background: #f8fafc;
-  border-radius: 8px;
-  border: 1px solid #e2e8f0;
+
+.rk-accred-stat-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 800;
+  font-size: 18px;
+  color: #0C1424;
+  line-height: 1.2;
+}
+
+.rk-accred-stat-lbl {
+  font-size: 11.5px;
+  color: #64748B;
+  font-weight: 600;
+  margin-top: 4px;
+  white-space: nowrap;
+}
+
+.rk-accred-stat-sep {
+  width: 1px;
+  height: 32px;
+  background: #E2E8F0;
+}
+
+/* Cards Grid */
+.rk-accred-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  margin-bottom: 40px;
+}
+
+@media (max-width: 1200px) {
+  .rk-accred-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .rk-accred-grid {
+    grid-template-columns: 1fr;
+  }
+  .rk-accred-stats-card {
+    width: 100%;
+    justify-content: space-around;
+  }
+}
+
+/* Accreditation Card */
+.rk-accred-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 18px;
+  padding: 24px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(12, 20, 36, 0.04);
+  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.rk-accred-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #C5A059, transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rk-accred-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(197, 160, 89, 0.6);
+  box-shadow: 0 20px 38px rgba(12, 20, 36, 0.09), 0 6px 14px rgba(197, 160, 89, 0.12);
+}
+
+.rk-accred-card:hover::before {
+  opacity: 1;
+}
+
+.rk-accred-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.rk-accred-logo-box {
+  width: 58px;
+  height: 58px;
+  background: #FFFFFF;
+  border: 1px solid #E2E8F0;
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(12, 20, 36, 0.04);
+  transition: transform 0.3s ease;
   flex-shrink: 0;
-  padding: 4px;
 }
-.rk-accred-badge-img-wrap img {
+
+.rk-accred-card:hover .rk-accred-logo-box {
+  transform: scale(1.06);
+  border-color: #C5A059;
+}
+
+.rk-accred-logo-box img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
+
+.rk-accred-pill {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  padding: 4px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.01em;
+}
+
+.rk-accred-card-body {
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.rk-accred-card-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: #0C1424;
+  line-height: 1.35;
+  margin: 0 0 8px;
+  transition: color 0.25s ease;
+}
+
+.rk-accred-card:hover .rk-accred-card-name {
+  color: #E31B23;
+}
+
+.rk-accred-card-sub {
+  font-size: 13px;
+  color: #64748B;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.rk-accred-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  border-top: 1px dashed #E2E8F0;
+}
+
+.rk-accred-link-text {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #0C1424;
+  letter-spacing: 0.02em;
+  transition: color 0.25s ease;
+}
+
+.rk-accred-card:hover .rk-accred-link-text {
+  color: #E31B23;
+}
+
+.rk-accred-link-arrow {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #F1F5F9;
+  color: #0C1424;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.rk-accred-card:hover .rk-accred-link-arrow {
+  background: #E31B23;
+  color: #FFFFFF;
+  transform: translate(2px, -2px);
+}
+
+/* Trust Guarantee Bottom Banner */
+.rk-accred-trust-banner {
+  background: #0C1424;
+  color: #FFFFFF;
+  border-radius: 16px;
+  padding: 22px 30px;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  box-shadow: 0 14px 34px rgba(12, 20, 36, 0.12);
+  border: 1px solid rgba(197, 160, 89, 0.3);
+  flex-wrap: wrap;
+}
+
+.rk-accred-trust-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(197, 160, 89, 0.15);
+  border: 1px solid rgba(197, 160, 89, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.rk-accred-trust-text {
+  flex: 1;
+  min-width: 280px;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: #CBD5E1;
+}
+
+.rk-accred-trust-text strong {
+  color: #C5A059;
+  font-weight: 700;
+}
+
+.rk-accred-trust-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #C5A059;
+  color: #0C1424;
+  font-size: 13.5px;
+  font-weight: 700;
+  padding: 12px 22px;
+  border-radius: 10px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
+}
+
+.rk-accred-trust-btn:hover {
+  background: #E31B23;
+  color: #FFFFFF;
+  box-shadow: 0 6px 18px rgba(227, 27, 35, 0.4);
+  transform: translateY(-2px);
+}
 </style>
 <?php endif; ?>
+
 
 
 <!-- ══════════════════════════════════════════════════════════
