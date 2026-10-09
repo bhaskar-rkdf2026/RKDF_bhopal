@@ -60,35 +60,35 @@ try {
             'key' => 'sec_01_numbers',
             'tag_num' => '01',
             'tag_text' => 'THE INSTITUTE IN NUMBERS',
-            'title_main' => 'The Institute',
-            'title_accent' => 'in Numbers',
+            'title_main' => 'THE INSTITUTE IN NUMBERS',
+            'title_accent' => '',
             'subtitle' => 'Key milestones and stats of RKDF University',
             'sort' => 1,
             'items' => [
-                ['type' => 'stat', 'title' => 'Academic Programs', 'number_val' => '100+', 'subtitle' => 'Academic Programs'],
-                ['type' => 'stat', 'title' => 'Enrolled Students', 'number_val' => '25k+', 'subtitle' => 'Enrolled Students'],
-                ['type' => 'stat', 'title' => 'Expert Faculty', 'number_val' => '1.5k+', 'subtitle' => 'Expert Faculty'],
-                ['type' => 'stat', 'title' => 'Placement Rate', 'number_val' => '95%', 'subtitle' => 'Placement Rate'],
-                ['type' => 'stat', 'title' => 'Research Labs', 'number_val' => '50+', 'subtitle' => 'Research Labs'],
-                ['type' => 'stat', 'title' => 'Years of Legacy', 'number_val' => '40+', 'subtitle' => 'Years of Legacy']
+                ['type' => 'stat', 'title' => 'Academic Programs', 'number_val' => '100', 'subtitle' => 'ACADEMIC PROGRAMS'],
+                ['type' => 'stat', 'title' => 'Enrolled Students', 'number_val' => '25k+', 'subtitle' => 'ENROLLED STUDENTS'],
+                ['type' => 'stat', 'title' => 'Expert Faculty', 'number_val' => '1.5k+', 'subtitle' => 'EXPERT FACULTY'],
+                ['type' => 'stat', 'title' => 'Placement Rate', 'number_val' => '95', 'subtitle' => 'PLACEMENT RATE'],
+                ['type' => 'stat', 'title' => 'Research Labs', 'number_val' => '50', 'subtitle' => 'RESEARCH LABS'],
+                ['type' => 'stat', 'title' => 'Years of Legacy', 'number_val' => '40', 'subtitle' => 'YEARS OF LEGACY']
             ]
         ],
         [
             'key' => 'sec_02_university',
             'tag_num' => '02',
-            'tag_text' => '02 · THE UNIVERSITY',
+            'tag_text' => 'ABOUT THE UNIVERSITY',
             'title_main' => 'A four-decade legacy,',
             'title_accent' => 'reimagined',
             'subtitle' => 'RKDF University brings together eleven professional schools, thirty-five departments and a cross-disciplinary research culture — under a single unwavering commitment to intellectual rigour and public good.',
             'image_path' => 'images/lovable/rkdf-library.jpg',
             'extra_text_1' => '"An education worth having is one that makes you useful — to yourself, and to a world in motion."',
-            'extra_text_2' => '— Shri Sunil Kapoor, Chancellor',
+            'extra_text_2' => '',
             'sort' => 2,
             'items' => [
-                ['type' => 'timeline', 'title' => 'Founding vision', 'number_val' => '1995', 'subtitle' => 'RKDF Group commits to accessible, quality higher education in central India.'],
-                ['type' => 'timeline', 'title' => 'University status', 'number_val' => '2011', 'subtitle' => 'Established as a private state university under the MP Act.'],
-                ['type' => 'timeline', 'title' => 'Research charter', 'number_val' => '2017', 'subtitle' => 'Expanded doctoral & interdisciplinary research programs across faculties.'],
-                ['type' => 'timeline', 'title' => 'Global outlook', 'number_val' => '2024', 'subtitle' => 'NAAC accreditation & World Education Leadership Award recognition.']
+                ['type' => 'timeline', 'title' => 'Gazette Notification', 'number_val' => '2011', 'subtitle' => 'Established by Ayushmati Education and Social Society under M.P. Act (State Gazette, 19th July 2011).'],
+                ['type' => 'timeline', 'title' => 'UGC Approval & Statutes', 'number_val' => '2012', 'subtitle' => 'Approved by UGC under Section 2(f) 1956; Statutes approved by Dept. of Higher Education, Govt. of M.P.'],
+                ['type' => 'timeline', 'title' => 'Oxford Recognition', 'number_val' => '2017', 'subtitle' => 'Hon\'ble Chancellor awarded Honorary Professor by Oxford Academic Union; Asia\'s 1st Carbon Capture Plant.'],
+                ['type' => 'timeline', 'title' => 'NEP-2020 & Global Award', 'number_val' => '2022', 'subtitle' => 'Conferred Grand Star of Success Award at Oxford University, U.K. & implemented NEP-2020 framework.']
             ]
         ],
         [
