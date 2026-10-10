@@ -12623,7 +12623,7 @@
             "badge_text": "HON'BLE GOVERNOR",
             "meta_json": null,
             "sort_order": 3,
-            "is_active": 1,
+            "is_active": 0,
             "created_at": "2026-08-10 16:51:00",
             "updated_at": "2026-08-10 22:38:33"
         },

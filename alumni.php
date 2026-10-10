@@ -8,11 +8,15 @@ require_once __DIR__ . '/config/db.php';
 
 $pageSlug = 'alumni';
 $pdo = getDbConnection();
+$pageData = [];
 
-// Fetch dynamic page header content from site_pages table
-$stmtPage = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmtPage->execute([$pageSlug]);
-$pageData = $stmtPage->fetch();
+if ($pdo) {
+    try {
+        $stmtPage = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmtPage->execute([$pageSlug]);
+        $pageData = $stmtPage->fetch() ?: [];
+    } catch (Throwable $e) {}
+}
 
 // Default Fallbacks
 $eyebrow       = $pageData['eyebrow'] ?? 'ALUMNI NETWORK · RKDF UNIVERSITY BHOPAL';

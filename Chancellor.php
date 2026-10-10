@@ -35,7 +35,7 @@ $chanProfileTitle = !empty($allItems[1]['title']) ? $allItems[1]['title'] : 'Dr.
 $chanProfileRole  = !empty($allItems[1]['badge_text']) ? $allItems[1]['badge_text'] : 'Chancellor';
 $rawProfileImg    = !empty($allItems[1]['image_path']) ? $allItems[1]['image_path'] : '';
 $chanProfileImg   = (!empty($rawProfileImg) && strpos($rawProfileImg, 'rkdf-chancellor.jpg') === false) ? $rawProfileImg : 'images/chancellor-dr-sadhna.jpg';
-$chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 'Pioneering technical, medical, and professional education across Madhya Pradesh.';
+$chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 'Pioneering technical, medical, and higher education across Madhya Pradesh. First Chancellor in India to be honored twice by the Oxford Academic Union (Honorary Professor in 2014 Switzerland & in December 2022 Oxford, UK).';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -178,7 +178,7 @@ $chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] 
     /* Side Leadership Card & Sidebar Wrapper */
     aside {
       position: sticky;
-      top: 100px;
+      top: 130px;
     }
 
     .chan-side-card {
@@ -235,7 +235,14 @@ $chanProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] 
       color: #E31B23;
       margin-bottom: 12px;
     }
-
+    aside {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
+    }
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);

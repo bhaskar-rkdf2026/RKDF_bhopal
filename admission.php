@@ -47,21 +47,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $tm5  = trim($_POST['tm5'] ?? '');
     $mo5  = trim($_POST['mo5'] ?? '');
     $per5 = trim($_POST['per5'] ?? '');
-    $qPg   = !empty($nob5) ? "$nob5 ($yop5) — $mo5/$tm5 ($per5%)" : 'N/A';
+    $city = trim($_POST['city'] ?? '');
+    $state = trim($_POST['state'] ?? '');
+    $college = trim($_POST['college'] ?? '');
+    $address = trim($_POST['address'] ?? ($city . ($state ? ', ' . $state : '')));
 
     $_SESSION['app_data'] = [
         'name'         => $_POST['nm'] ?? '',
         'fname'        => $_POST['fnm'] ?? '',
-        'adhar'        => $_POST['adhar'] ?? '',
+        'adhar'        => $_POST['adhar'] ?? 'N/A',
         'mob'          => $_POST['mob'] ?? '',
         'email'        => $_POST['eid'] ?? '',
+        'college'      => $college,
         'course'       => $_POST['category'] ?? '',
-        'branch'       => $_POST['choices'] ?? '',
-        'gen'          => $_POST['gen'] ?? '',
-        'cat'          => $_POST['cat'] ?? '',
-        'dom'          => $_POST['dom'] ?? '',
-        'add1'         => $_POST['address'] ?? '',
-        'ref'          => $_POST['ref'] ?? '',
+        'branch'       => $_POST['choices'] ?? $college,
+        'gen'          => $_POST['gen'] ?? 'N/A',
+        'cat'          => $_POST['cat'] ?? 'GENERAL',
+        'dom'          => $_POST['dom'] ?? ($state ?: 'MP'),
+        'city'         => $city,
+        'state'        => $state,
+        'add1'         => $address ?: 'N/A',
+        'ref'          => $_POST['ref'] ?? 'Online Admission Portal',
         'nob1' => $nob1, 'yop1' => $yop1, 'tm1' => $tm1, 'mo1' => $mo1, 'per1' => $per1,
         'nob2' => $nob2, 'yop2' => $yop2, 'tm2' => $tm2, 'mo2' => $mo2, 'per2' => $per2,
         'nob3' => $nob3, 'yop3' => $yop3, 'tm3' => $tm3, 'mo3' => $mo3, 'per3' => $per3,
@@ -79,11 +85,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $app = $_SESSION['app_data'] ?? [];
 $name        = htmlspecialchars($app['name'] ?? 'N/A');
 $fname       = htmlspecialchars($app['fname'] ?? 'N/A');
+$college     = htmlspecialchars($app['college'] ?? 'N/A');
 $adhar       = htmlspecialchars($app['adhar'] ?? 'N/A');
 $mob         = htmlspecialchars($app['mob'] ?? 'N/A');
 $email       = htmlspecialchars($app['email'] ?? 'N/A');
 $course      = htmlspecialchars($app['course'] ?? 'N/A');
 $branch      = htmlspecialchars($app['branch'] ?? 'N/A');
+$city        = htmlspecialchars($app['city'] ?? 'N/A');
+$state       = htmlspecialchars($app['state'] ?? 'N/A');
 $gen         = htmlspecialchars($app['gen'] ?? 'N/A');
 $cat         = htmlspecialchars($app['cat'] ?? 'N/A');
 $dom         = htmlspecialchars($app['dom'] ?? 'N/A');
@@ -319,74 +328,64 @@ try {
             <td class="label-col">Student Full Name</td>
             <td class="val-col"><?= $name ?></td>
           </tr>
+          <?php if ($fname !== 'N/A' && !empty($fname)): ?>
           <tr>
             <td class="label-col">Father's Name</td>
             <td class="val-col"><?= $fname ?></td>
           </tr>
+          <?php endif; ?>
+          <?php if ($college !== 'N/A' && !empty($college)): ?>
+          <tr>
+            <td class="label-col">College / Institute</td>
+            <td class="val-col"><?= $college ?></td>
+          </tr>
+          <?php endif; ?>
           <tr>
             <td class="label-col">Course / Discipline</td>
             <td class="val-col"><?= $course ?></td>
           </tr>
           <tr>
-            <td class="label-col">Specialization / Branch</td>
-            <td class="val-col"><?= $branch ?></td>
-          </tr>
-          <tr>
-            <td class="label-col">Aadhaar Number</td>
-            <td class="val-col"><?= $adhar ?></td>
-          </tr>
-          <tr>
             <td class="label-col">Mobile Number</td>
-            <td class="val-col"><?= $mob ?></td>
+            <td class="val-col">+91 <?= $mob ?></td>
           </tr>
           <tr>
             <td class="label-col">Email Address</td>
             <td class="val-col"><?= $email ?></td>
           </tr>
+          <?php if ($city !== 'N/A' && !empty($city)): ?>
           <tr>
-            <td class="label-col">Gender</td>
-            <td class="val-col"><?= $gen ?></td>
+            <td class="label-col">City / District</td>
+            <td class="val-col"><?= $city ?></td>
           </tr>
+          <?php endif; ?>
+          <?php if ($state !== 'N/A' && !empty($state)): ?>
           <tr>
-            <td class="label-col">Category</td>
-            <td class="val-col"><?= $cat ?></td>
+            <td class="label-col">State</td>
+            <td class="val-col"><?= $state ?></td>
           </tr>
+          <?php endif; ?>
+          <?php if ($adhar !== 'N/A' && !empty($adhar)): ?>
           <tr>
-            <td class="label-col">Domicile</td>
-            <td class="val-col"><?= $dom ?></td>
+            <td class="label-col">Aadhaar Number</td>
+            <td class="val-col"><?= $adhar ?></td>
           </tr>
+          <?php endif; ?>
+          <?php if ($add1 !== 'N/A' && !empty($add1) && empty($city) && empty($state)): ?>
           <tr>
             <td class="label-col">Postal Address</td>
             <td class="val-col"><?= $add1 ?></td>
           </tr>
-          <tr>
-            <td class="label-col">Reference / Counselor</td>
-            <td class="val-col"><?= $ref ?></td>
-          </tr>
+          <?php endif; ?>
+          <?php if ($qual10th !== 'N/A' && !empty($qual10th)): ?>
           <tr>
             <td class="label-col">10th Qualification</td>
             <td class="val-col"><?= $qual10th ?></td>
           </tr>
+          <?php endif; ?>
+          <?php if ($qual12th !== 'N/A' && !empty($qual12th)): ?>
           <tr>
             <td class="label-col">12th Qualification</td>
             <td class="val-col"><?= $qual12th ?></td>
-          </tr>
-          <?php if ($qualDiploma !== 'N/A'): ?>
-          <tr>
-            <td class="label-col">Diploma Qualification</td>
-            <td class="val-col"><?= $qualDiploma ?></td>
-          </tr>
-          <?php endif; ?>
-          <?php if ($qualGrad !== 'N/A'): ?>
-          <tr>
-            <td class="label-col">Graduation Qualification</td>
-            <td class="val-col"><?= $qualGrad ?></td>
-          </tr>
-          <?php endif; ?>
-          <?php if ($qualPg !== 'N/A'): ?>
-          <tr>
-            <td class="label-col">Post Graduation</td>
-            <td class="val-col"><?= $qualPg ?></td>
           </tr>
           <?php endif; ?>
         </table>

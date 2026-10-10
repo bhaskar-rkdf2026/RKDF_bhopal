@@ -36,7 +36,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
       <div class="rkdf-notice-item highlight-red">
         <div class="rkdf-notice-tag">CONVOCATION JUNE 2026</div>
         <a href="Convocation.php" class="rkdf-notice-link">
-          <strong>🎓 RKDF University 15th Annual Convocation June 2026</strong> — Degree registration &amp; Medalist list online portal open.
+          <strong>🎓 RKDF University 15th Annual Convocation June 2026</strong>
         </a>
       </div>
 
@@ -44,7 +44,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-blue">EXAMINATION NOTICE</div>
         <a href="Exam_Notice.php" class="rkdf-notice-link">
-          📌 <strong>Examination Circulars &amp; Revised Datesheets</strong> — Click here to view latest semester timetables.
+          <strong>📌 Examination Circulars &amp; Revised Datesheets</strong>
         </a>
       </div>
 
@@ -52,7 +52,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-gold">WALK-IN INTERVIEW · RECRUITMENT</div>
         <a href="Careers.php" class="rkdf-notice-link">
-          💼 <strong>Faculty Openings &amp; Research Project Positions</strong> — Explore walk-in interviews and project appointments.
+          <strong>💼 Faculty Openings &amp; Research Project Positions</strong>
         </a>
       </div>
 
@@ -60,7 +60,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-green">PH.D ADMISSIONS 2026</div>
         <a href="phd_entrance.php" class="rkdf-notice-link">
-          🔬 <strong>Ph.D Entrance Examination 2026 Notification</strong> — Application form, syllabus &amp; approved research supervisors.
+          <strong>🔬 Ph.D Entrance Examination 2026 Notification</strong>
         </a>
       </div>
 
@@ -68,7 +68,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
       <div class="rkdf-notice-item">
         <div class="rkdf-notice-tag tag-purple">ACCREDITATION</div>
         <a href="public-disclosure.php" class="rkdf-notice-link">
-          🏅 <strong>NAAC Certificate of Accreditation &amp; Statutory Approvals</strong> — View official regulatory disclosure documents.
+          <strong>🏅 NAAC Certificate of Accreditation &amp; Statutory Approvals</strong>
         </a>
       </div>
 
@@ -93,9 +93,10 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
 .rkdf-notice-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(12, 20, 36, 0.78);
+  background: rgba(12, 20, 36, 0.82);
   backdrop-filter: blur(8px);
-  z-index: 100002;
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999999;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +112,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
   border-radius: 16px;
   max-width: 620px;
   width: 100%;
-  box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+  box-shadow: 0 24px 60px rgba(0,0,0,0.45);
   overflow: hidden;
   border: 1px solid #e2e8f0;
   animation: rkdfNoticePop 0.35s cubic-bezier(0.19,1,0.22,1);
@@ -204,7 +205,7 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
 
 .rkdf-notice-link {
   color: #1e293b;
-  font-size: 13.5px;
+  font-size: 14px;
   line-height: 1.5;
   text-decoration: none;
   display: block;
@@ -273,24 +274,12 @@ $popupTitle = htmlspecialchars(get_site_setting('popup_notice_title', 'RKDF Univ
 
   if (!overlay) return;
 
-  // Check localStorage for "Don't show again today"
-  const hideUntil = localStorage.getItem('rkdf_notice_hide_until');
-  if (hideUntil && new Date().getTime() < parseInt(hideUntil, 10)) {
-    overlay.style.display = 'none';
-    return;
-  }
-
-  // Polite delay: Show after 3.5 seconds on initial visit
+  // Show after 2 seconds on page load
   setTimeout(function() {
     overlay.style.display = 'flex';
-  }, 3500);
+  }, 2000);
 
   function hidePopup() {
-    if (dontShow && dontShow.checked) {
-      // Hide for 24 hours
-      const expiry = new Date().getTime() + (24 * 60 * 60 * 1000);
-      localStorage.setItem('rkdf_notice_hide_until', expiry.toString());
-    }
     overlay.style.display = 'none';
   }
 

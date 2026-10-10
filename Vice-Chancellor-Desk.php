@@ -178,7 +178,7 @@ $vcProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 
 
     aside {
       position: sticky;
-      top: 100px;
+      top: 130px;
     }
 
     .vc-side-card {
@@ -235,7 +235,14 @@ $vcProfileBio   = !empty($allItems[1]['text_val']) ? $allItems[1]['text_val'] : 
       color: #E31B23;
       margin-bottom: 12px;
     }
-
+    aside {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
+    }
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12, 20, 36, 0.08);

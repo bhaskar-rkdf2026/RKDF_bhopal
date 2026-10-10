@@ -81,7 +81,14 @@ $pcProfileBio   = !empty($profileItem['text_val']) ? $profileItem['text_val'] : 
     .pc-sig-name { font-family: 'Playfair Display', Georgia, serif; font-size: 22px; font-weight: 700; color: #0C1424; }
     .pc-sig-role { font-size: 14px; font-weight: 700; color: #C5A059; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
     .pc-sig-univ { font-size: 14px; color: #64748B; margin-top: 2px; }
-    aside { position: sticky; top: 100px; }
+    aside {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
+    }
     .pc-side-card { background: #ffffff; border: 1px solid rgba(12,20,36,0.08); border-radius: 20px; padding: 32px 24px; text-align: center; box-shadow: 0 4px 24px rgba(12,20,36,0.04); margin-bottom: 28px; }
     .pc-portrait-box { width: 100%; max-width: 280px; height: 340px; margin: 0 auto 20px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(12,20,36,0.12); border: 3px solid #FAF9F5; }
     .pc-portrait-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }

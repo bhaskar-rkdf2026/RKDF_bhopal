@@ -46,12 +46,12 @@ if (empty($valItems)) $valItems = array_slice($allItems, 2);
 
 $visionTitle = !empty($vCard['title']) ? $vCard['title'] : 'University Vision';
 $visionBadge = !empty($vCard['badge_text']) ? $vCard['badge_text'] : 'OUR VISION';
-$visionQuote = !empty($vCard['text_val']) ? $vCard['text_val'] : 'To establish a University of excellence and relevance to impart Higher Education through knowledge, pioneering Scholarship, Research and teaching...';
+$visionQuote = !empty($vCard['text_val']) ? $vCard['text_val'] : 'To establish a University of excellence and relevance to impart Higher Education through knowledge, pioneering Scholarship, Research and teaching and to groom the youth to become global leaders in science, technology, management, health sciences and humanities with moral and ethical values.';
 $visionImg   = !empty($vCard['image_path']) ? $vCard['image_path'] : 'images/ai_vision/rkdf_vision_banner.jpg';
 
 $missionTitle = !empty($mCard['title']) ? $mCard['title'] : 'University Mission';
 $missionBadge = !empty($mCard['badge_text']) ? $mCard['badge_text'] : 'OUR MISSION';
-$missionText  = !empty($mCard['text_val']) ? $mCard['text_val'] : 'Harmonize higher education with excellence in science and technology...';
+$missionText  = !empty($mCard['text_val']) ? $mCard['text_val'] : "• Harmonize higher education with excellence in science and technology, output and contributing to livelihood security and sustainable societal development.\n• Strive to make education a catalyst for social change, women empowerment, environmental preservation and national development.\n• Promote industry-oriented applied research, skill enhancement, entrepreneurial spirit and global academic collaborations.\n• The University offers a congenial Academic & Research environment to enable its students, Research scholars, faculty & staff to achieve professional Excellence and personality development to promise an exceptional future for all stakeholders.";
 $missionImg   = !empty($mCard['image_path']) ? $mCard['image_path'] : 'images/ai_vision/rkdf_mission_banner.jpg';
 ?>
 <!DOCTYPE html>
@@ -230,8 +230,12 @@ $missionImg   = !empty($mCard['image_path']) ? $mCard['image_path'] : 'images/ai
     }
 
     aside {
+      position: -webkit-sticky;
       position: sticky;
-      top: 100px;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
     }
     .sidebar-card {
       background: #ffffff;

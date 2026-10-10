@@ -9,7 +9,7 @@
 <aside class="rkdf-floating-toolbar" aria-label="Quick Actions">
   
   <!-- Apply Now Button -->
-  <a href="admissionform.php" class="rkdf-float-btn float-apply" title="Apply Online Admissions 2026-27">
+  <a href="admissionform.php" class="rkdf-float-btn float-apply" id="rkdfFloatApplyBtn" aria-label="Apply Online Admissions 2026-27">
     <span class="float-icon">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
     </span>
@@ -25,7 +25,7 @@
   </a>
 
   <!-- WhatsApp Enquiry -->
-  <a href="https://wa.me/917554075800?text=Hello%20RKDF%20University,%20I%20want%20to%20enquire%20about%20Admissions" target="_blank" class="rkdf-float-btn float-whatsapp" title="Chat on WhatsApp">
+  <a href="https://wa.me/917880100550?text=Hello%20RKDF%20University,%20I%20want%20to%20enquire%20about%20Admissions" target="_blank" class="rkdf-float-btn float-whatsapp" title="Chat on WhatsApp">
     <span class="float-icon">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
     </span>
@@ -44,20 +44,21 @@
 
 <style>
 .rkdf-floating-toolbar {
-  position: fixed;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 9999;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 8px;
-  padding-right: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position: fixed !important;
+  right: 0 !important;
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-end !important;
+  gap: 8px !important;
+  padding-right: 0 !important;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif !important;
 }
 
 .rkdf-float-btn {
+  position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
@@ -72,7 +73,7 @@
   box-shadow: -4px 6px 20px rgba(12, 20, 36, 0.16);
   /* Default collapsed state: show only icon (first 44px) */
   transform: translateX(calc(100% - 35px));
-  transition: transform 0.3s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.3s ease;
+  transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1), box-shadow 0.35s ease;
   cursor: pointer;
   border: 1px solid rgba(255, 255, 255, 0.25);
   border-right: none;
@@ -81,9 +82,10 @@
   white-space: nowrap;
 }
 
-/* Hover state: smooth slide out to reveal full label */
-.rkdf-float-btn:hover {
-  transform: translateX(0);
+/* Hover & Popped State */
+.rkdf-float-btn:hover,
+.rkdf-float-btn.is-popped {
+  transform: translateX(0) !important;
   box-shadow: -6px 8px 24px rgba(12, 20, 36, 0.28);
   color: #ffffff !important;
 }
@@ -91,8 +93,10 @@
 .rkdf-float-btn.float-apply {
   background: linear-gradient(135deg, #E31B23 0%, #C9192A 100%);
 }
-.rkdf-float-btn.float-apply:hover {
+.rkdf-float-btn.float-apply:hover,
+.rkdf-float-btn.float-apply.is-popped {
   background: linear-gradient(135deg, #FF1F29 0%, #D91A2B 100%);
+  box-shadow: -6px 8px 28px rgba(227, 27, 35, 0.45) !important;
 }
 
 .rkdf-float-btn.float-pay {
@@ -131,45 +135,78 @@
   padding-left: 6px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .rkdf-floating-toolbar {
-    top: auto;
-    bottom: 24px;
-    right: 12px;
-    transform: none;
-    flex-direction: row;
-    gap: 8px;
-    z-index: 9998;
-    pointer-events: none;
+    top: auto !important;
+    bottom: 20px !important;
+    right: 12px !important;
+    transform: none !important;
+    flex-direction: row !important;
+    gap: 8px !important;
+    z-index: 9998 !important;
+    pointer-events: none !important;
   }
   .rkdf-float-btn {
-    pointer-events: auto;
-    border-radius: 50%;
-    width: 42px;
-    height: 42px;
-    padding: 0;
-    justify-content: center;
-    transform: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.25);
-    box-shadow: 0 4px 16px rgba(12, 20, 36, 0.25);
+    pointer-events: auto !important;
+    border-radius: 50% !important;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 0 !important;
+    justify-content: center !important;
+    transform: none !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.25) !important;
+    box-shadow: 0 4px 16px rgba(12, 20, 36, 0.25) !important;
   }
   .rkdf-float-btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-3px) !important;
   }
-  .float-label {
-    display: none;
+  .float-label,
+  .float-tooltip {
+    display: none !important;
   }
 }
 </style>
 
 <script>
 (function() {
-  const btn = document.getElementById('rkdfFloatNoticeBtn');
-  if (btn) {
-    btn.addEventListener('click', function() {
+  const noticeBtn = document.getElementById('rkdfFloatNoticeBtn');
+  if (noticeBtn) {
+    noticeBtn.addEventListener('click', function() {
       const overlay = document.getElementById('rkdfNoticeOverlay');
       if (overlay) overlay.style.display = 'flex';
     });
+  }
+
+  // Precise Alignment Pop-up for Apply Now Button
+  const applyBtn = document.getElementById('rkdfFloatApplyBtn') || document.querySelector('.rkdf-float-btn.float-apply');
+  const admSection = document.getElementById('admissions');
+
+  if (applyBtn && admSection) {
+    function updateApplyPopup() {
+      const headingEl = admSection.querySelector('.rk-adm-header') || admSection.querySelector('h2') || admSection;
+      const startAppBtn = admSection.querySelector('.rk-adm-ctas .rk-btn-navy') || admSection.querySelector('.rk-adm-ctas') || admSection;
+
+      const btnRect = applyBtn.getBoundingClientRect();
+      const buttonCenterY = btnRect.top + (btnRect.height / 2);
+
+      const headingRect = headingEl.getBoundingClientRect();
+      const startAppRect = startAppBtn.getBoundingClientRect();
+
+      // Heading has reached button alignment (saamne aate hi)
+      const hasReachedHeading = headingRect.top <= (buttonCenterY + 30);
+      // Start Application button has NOT yet reached button alignment
+      const beforeStartBtn = startAppRect.top > (buttonCenterY - 10);
+
+      if (hasReachedHeading && beforeStartBtn) {
+        applyBtn.classList.add('is-popped');
+      } else {
+        applyBtn.classList.remove('is-popped');
+      }
+    }
+
+    window.addEventListener('scroll', updateApplyPopup, { passive: true });
+    window.addEventListener('resize', updateApplyPopup, { passive: true });
+    updateApplyPopup();
   }
 })();
 </script>

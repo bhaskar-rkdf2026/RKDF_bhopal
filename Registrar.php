@@ -86,7 +86,14 @@ $regPhone        = '+91 755-2740395';
     .reg-contact-chips { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px; }
     .reg-contact-chip { display: inline-flex; align-items: center; gap: 10px; background: #FAF9F5; border: 1px solid rgba(12,20,36,0.1); padding: 12px 20px; border-radius: 10px; font-size: 15px; font-weight: 600; color: #0C1424; text-decoration: none; transition: all 0.25s ease; }
     .reg-contact-chip:hover { background: #0C1424; color: #ffffff; border-color: #0C1424; }
-    aside { position: sticky; top: 100px; }
+    aside {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
+    }
     .reg-side-card { background: #ffffff; border: 1px solid rgba(12,20,36,0.08); border-radius: 20px; padding: 32px 24px; text-align: center; box-shadow: 0 4px 24px rgba(12,20,36,0.04); margin-bottom: 28px; }
     .reg-portrait-box { width: 100%; max-width: 280px; height: 340px; margin: 0 auto 20px; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 32px rgba(12,20,36,0.12); border: 3px solid #FAF9F5; }
     .reg-portrait-img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }

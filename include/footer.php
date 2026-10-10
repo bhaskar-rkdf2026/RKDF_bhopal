@@ -114,12 +114,12 @@ $phoneClean = preg_replace('/[^0-9+]/', '', $footPhone);
       <div class="rk-footer-contact-item">
         <span class="rk-footer-contact-icon">📞</span>
         <div>
-          <div class="rk-footer-contact-label">Admissions Helpline</div>
+          <div class="rk-footer-contact-label">Toll-Free Admissions Helpline</div>
           <div class="rk-footer-contact-val">
-            <a href="tel:<?= $phoneClean ?>" style="color:inherit;text-decoration:none;font-weight:700;"><?= $footPhone ?></a>
+            <a href="tel:18002700320" style="color:inherit;text-decoration:none;font-weight:700;">1800-2700-320</a>
           </div>
           <div style="font-size:12px;color:rgba(250,249,246,0.6);margin-top:4px;">
-            Emergency · <a href="tel:18002002233" style="color:#fef08a;text-decoration:none;font-weight:700;">1800 200 2233</a>
+            24x7 Anti-Ragging · <a href="tel:18001805522" style="color:#fef08a;text-decoration:none;font-weight:700;">1800-180-5522</a>
           </div>
         </div>
       </div>

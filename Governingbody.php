@@ -143,8 +143,12 @@ $govSubtitle  = !empty($allItems[0]['subtitle']) ? $allItems[0]['subtitle'] : 'O
     }
 
     aside {
+      position: -webkit-sticky;
       position: sticky;
-      top: 100px;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
     }
     .sidebar-card {
       background: #ffffff;

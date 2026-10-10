@@ -11,9 +11,9 @@ require_once __DIR__ . '/../config/db.php';
 
 $siteSettings = [
     'site_title' => 'RKDF University Bhopal',
-    'contact_phone' => '+91-755-2740395',
+    'contact_phone' => '1800-2700-320',
     'contact_email' => 'info@rkdf.ac.in',
-    'admission_email' => 'admission@rkdf.ac.in',
+    'admission_email' => 'info@rkdf.ac.in',
     'admission_year' => '2026-27',
     'admission_status' => 'OPEN',
     'erp_portal_url' => 'https://erplive.rkdf.ac.in',

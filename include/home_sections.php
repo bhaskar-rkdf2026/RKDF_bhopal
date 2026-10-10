@@ -64,15 +64,15 @@ $sec1 = $cmsSections['sec_01_numbers'] ?? null;
 
 $sec1Tag = !empty($sec1['tag_text']) ? $sec1['tag_text'] : 'THE INSTITUTE IN NUMBERS';
 $stats = [
-  ['num'=>'100',   'label'=>'ACADEMIC PROGRAMS',  'to'=>100],
-  ['num'=>'25k+',  'label'=>'ENROLLED STUDENTS',  'to'=>25000],
-  ['num'=>'1.5k+', 'label'=>'EXPERT FACULTY',     'to'=>1500],
-  ['num'=>'95',    'label'=>'PLACEMENT RATE',      'to'=>95],
-  ['num'=>'50',    'label'=>'RESEARCH LABS',       'to'=>50],
-  ['num'=>'40',    'label'=>'YEARS OF LEGACY',     'to'=>40],
+  ['num'=>'100+',  'label'=>'ACADEMIC PROGRAMS',    'to'=>100],
+  ['num'=>'16k+',  'label'=>'ENROLLED STUDENTS',    'to'=>16000],
+  ['num'=>'530+',  'label'=>'DISTINGUISHED FACULTY', 'to'=>530],
+  ['num'=>'130+',  'label'=>'ACRES ECO CAMPUS',     'to'=>130],
+  ['num'=>'68+',   'label'=>'ACADEMIC & R&D MOUS',  'to'=>68],
+  ['num'=>'8k+',   'label'=>'PLACED IN TOP MNCS',   'to'=>8000],
 ];
 $dbStats = $cmsItems['sec_01_numbers'] ?? [];
-if (!empty($dbStats)) {
+if (!empty($dbStats) && count($dbStats) >= 6) {
   $stats = [];
   foreach ($dbStats as $i) {
     $valStr = $i['number_val'] ?: $i['title'];
@@ -115,12 +115,7 @@ if (!$sec0 || ($sec0['is_active'] ?? 1)):
   <div class="rk-hero-overlay-gradient"></div>
   <div class="rk-hero-overlay-radial"></div>
 
-  <div class="rk-hero-body">
-    <div class="rk-hero-eyebrow">
-      <span class="rk-gold-line"></span>
-      <span class="rk-eyebrow-mono"><?= htmlspecialchars($heroEyebrow) ?></span>
-    </div>
-
+  <div class="rk-hero-body" style="justify-content:flex-end;">
     <div class="rk-hero-foot">
       <h1 class="rk-hero-headline">
         <?= htmlspecialchars($heroTitle) ?><br>
@@ -317,17 +312,7 @@ if (!$sec3 || ($sec3['is_active'] ?? 1)):
       'theme' => 'indigo',
       'cta'   => 'Access Notices',
       'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'
-    ],
-    [
-      'id'    => 'tour',
-      'label' => 'Campus Virtual Tour',
-      'desc'  => 'Take an immersive 360° walk through our 130+ acre green campus, labs & sports arena.',
-      'badge' => '360° Campus',
-      'url'   => 'videogallery.php',
-      'theme' => 'rose',
-      'cta'   => 'Start Virtual Tour',
-      'svg'   => '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"/></svg>'
-    ],
+    ]
   ];
 
   $gateways = $defaultGateways;
@@ -335,6 +320,7 @@ if (!$sec3 || ($sec3['is_active'] ?? 1)):
   if (!empty($dbGateways)) {
     $gateways = [];
     foreach ($dbGateways as $idx => $i) {
+      if ($idx >= 8) break;
       $fallback = $defaultGateways[$idx % count($defaultGateways)];
       $gateways[] = [
         'id'    => $fallback['id'],
@@ -348,6 +334,7 @@ if (!$sec3 || ($sec3['is_active'] ?? 1)):
       ];
     }
   }
+  $gateways = array_slice($gateways, 0, 8);
 ?>
 <section class="rk-gateway" id="gateway">
   <div class="rk-container">
@@ -365,7 +352,7 @@ if (!$sec3 || ($sec3['is_active'] ?? 1)):
         <p class="rk-gw-subtitle"><?= htmlspecialchars($sec3Sub) ?></p>
         <div class="rk-gw-status-pill">
           <span class="rk-gw-pill-icon">⚡</span>
-          <span>9 Fast-Track Student Services</span>
+          <span>8 Fast-Track Student Services</span>
         </div>
       </div>
     </div>
@@ -482,9 +469,14 @@ if (!$secLead || ($secLead['is_active'] ?? 1)):
   $secLeadTag   = format_eyebrow_tag($secLead ?: ['tag_number'=>'04','tag_text'=>'ACADEMIC LEADERSHIP']);
   $secLeadTitle = $secLead['title_main']   ?? 'Guiding vision &';
   $secLeadAccent= $secLead['title_accent'] ?? 'leadership.';
-  $secLeadSub   = $secLead['subtitle']     ?? 'Inspiring mentorship from our Chancellor, Vice-Chancellor and Hon\'ble Governor of MP.';
+  $secLeadSub   = $secLead['subtitle']     ?? 'Inspiring mentorship from our Chancellor, Pro-Chancellor and Vice-Chancellor.';
 
-  $leaders = $cmsItems['sec_02_leadership'] ?? [];
+  $rawLeaders = $cmsItems['sec_02_leadership'] ?? [];
+  $leaders = array_values(array_filter($rawLeaders, function($item) {
+    $t = strtolower(($item['title'] ?? '') . ' ' . ($item['badge_text'] ?? '') . ' ' . ($item['subtitle'] ?? ''));
+    return strpos($t, 'mangubhai') === false && strpos($t, 'governor') === false;
+  }));
+
   if (empty($leaders)) {
     $leaders = [
       [
@@ -510,14 +502,6 @@ if (!$secLead || ($secLead['is_active'] ?? 1)):
         'text_val'   => 'RKDF University is marching towards meeting global challenges by nurturing knowledge, critical thinking, research excellence, and ethical values in every student.',
         'image_path' => 'images/vice-chancellor-prof-vijay.jpg',
         'link_url'   => 'Vice-Chancellor-Desk.php'
-      ],
-      [
-        'title'      => 'Shri Mangubhai Patel',
-        'subtitle'   => "Hon'ble Governor of Madhya Pradesh",
-        'badge_text' => "HON'BLE GOVERNOR",
-        'text_val'   => 'Higher education plays a transformative role in nation-building, societal upliftment, and inspiring youth towards selfless service, innovation, and ethical leadership.',
-        'image_path' => 'images/governor_mangubhai_patel.jpg',
-        'link_url'   => 'Chancellor.php'
       ]
     ];
   }
@@ -818,94 +802,139 @@ if (!$sec4 || ($sec4['is_active'] ?? 1)):
 
 
 <!-- ══════════════════════════════════════════════════════════
-  6. COURSES (Featured Programs)
+  6. COURSES & ACADEMIC PROGRAMS (Compact Tabbed Explorer)
 ══════════════════════════════════════════════════════════ -->
 <?php
 $sec7 = $cmsSections['sec_07_programs'] ?? null;
 if (!$sec7 || ($sec7['is_active'] ?? 1)):
   $sec7Tag = format_eyebrow_tag($sec7 ?: ['tag_number'=>'06','tag_text'=>'COURSES & PROGRAMS']);
-  $dbProgs = $cmsItems['sec_07_programs'] ?? [];
 
-  $bigProg = [
-    'title' => 'B.Tech in Computer Science & AI',
-    'badge' => 'Flagship · Engineering',
-    'subtitle' => '4 Years · 240 Seats · 10+2 PCM',
-    'img'   => 'images/lovable/rkdf-engineering.jpg',
-    'url'   => 'Engineering.php'
-  ];
-  $smallProgs = [
-    ['tag'=>'Management', 'title'=>'MBA in Business Analytics',   'detail'=>'2 Years · 120 Seats', 'img'=>'images/lovable/rkdf-management.jpg',  'url'=>'Management.php'],
-    ['tag'=>'Pharmacy',   'title'=>'M.Pharm Clinical Research',   'detail'=>'2 Years · 60 Seats',  'img'=>'images/lovable/rkdf-pharmacy.jpg',     'url'=>'pharmacy.php'],
-    ['tag'=>'Law',        'title'=>'BA-LLB (Hons.) Integrated',   'detail'=>'5 Years · 180 Seats', 'img'=>'images/lovable/rkdf-law.jpg',          'url'=>'Law.php'],
+  $allPrograms = [
+    // Undergraduate (UG)
+    ['name'=>'B.Tech in Computer Science & Engineering', 'cat'=>'ug', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'4 Years', 'elig'=>'10+2 PCM (45%)', 'focus'=>'AI, Machine Learning, Cloud Computing & Full-Stack Systems', 'url'=>'Engineering.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'B.Tech in Mechanical Engineering', 'cat'=>'ug', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'4 Years', 'elig'=>'10+2 PCM (45%)', 'focus'=>'CAD/CAM, Robotics, Thermal Systems & EV Technology', 'url'=>'Engineering.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'B.Tech in Civil Engineering', 'cat'=>'ug', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'4 Years', 'elig'=>'10+2 PCM (45%)', 'focus'=>'Structural Design, Smart Infrastructure, Geotech & Surveying', 'url'=>'Engineering.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'B.Tech in Electrical & Electronics Engineering', 'cat'=>'ug', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'4 Years', 'elig'=>'10+2 PCM (45%)', 'focus'=>'Smart Power Grids, Renewable Energy & Embedded Systems', 'url'=>'Engineering.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'B.Pharm (Bachelor of Pharmacy)', 'cat'=>'ug', 'dept'=>'Pharmacy', 'theme'=>'rk-theme-pharmacy', 'dur'=>'4 Years', 'elig'=>'10+2 PCB/PCM', 'focus'=>'Pharmaceutical Chemistry, Pharmacology & Drug Formulations', 'url'=>'pharmacy.php', 'badge'=>'PCI Approved'],
+    ['name'=>'B.Sc. (Hons.) Agriculture', 'cat'=>'ug', 'dept'=>'Agriculture', 'theme'=>'rk-theme-agriculture', 'dur'=>'4 Years', 'elig'=>'10+2 PCB/Agri', 'focus'=>'Agronomy, Crop Genetics, Organic Farming & Smart Agro', 'url'=>'agriculture.php', 'badge'=>'ICAR Curriculum'],
+    ['name'=>'BBA (Bachelor of Business Administration)', 'cat'=>'ug', 'dept'=>'Management', 'theme'=>'rk-theme-management', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'Marketing, Financial Analysis, HR & Digital Strategy', 'url'=>'Management.php', 'badge'=>'UGC Recognized'],
+    ['name'=>'BCA (Bachelor of Computer Applications)', 'cat'=>'ug', 'dept'=>'Computer App', 'theme'=>'rk-theme-engineering', 'dur'=>'3 Years', 'elig'=>'10+2 with Maths', 'focus'=>'Software Development, Web Technologies & Database Systems', 'url'=>'academic&departments.php', 'badge'=>'UGC Recognized'],
+    ['name'=>'BA-LLB (Hons.) Integrated 5-Year', 'cat'=>'ug', 'dept'=>'Law', 'theme'=>'rk-theme-law', 'dur'=>'5 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'Constitutional Law, Corporate Jurisprudence & Moot Court', 'url'=>'Law.php', 'badge'=>'BCI Approved'],
+    ['name'=>'LLB (Bachelor of Legislative Law)', 'cat'=>'ug', 'dept'=>'Law', 'theme'=>'rk-theme-law', 'dur'=>'3 Years', 'elig'=>'Graduation (45%)', 'focus'=>'Civil & Criminal Litigation, Cyber Law & Legal Drafting', 'url'=>'Law.php', 'badge'=>'BCI Approved'],
+    ['name'=>'B.Arch (Bachelor of Architecture)', 'cat'=>'ug', 'dept'=>'Architecture', 'theme'=>'rk-theme-engineering', 'dur'=>'5 Years', 'elig'=>'10+2 PCM + NATA', 'focus'=>'Sustainable Architecture, Urban Planning & 3D Modeling', 'url'=>'academic&departments.php', 'badge'=>'COA Approved'],
+    ['name'=>'B.Com (Hons.) & Professional', 'cat'=>'ug', 'dept'=>'Commerce', 'theme'=>'rk-theme-management', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'Corporate Accounting, Taxation, Banking & Auditing', 'url'=>'Management.php', 'badge'=>'UGC Recognized'],
+    ['name'=>'B.Ed (Bachelor of Education)', 'cat'=>'ug', 'dept'=>'Education', 'theme'=>'rk-theme-education', 'dur'=>'2 Years', 'elig'=>'Graduation (50%)', 'focus'=>'Pedagogical Methodology, Child Psychology & Educational Tech', 'url'=>'education.php', 'badge'=>'NCTE Approved'],
+    ['name'=>'B.Sc. in Biotechnology / Microbiology / IT', 'cat'=>'ug', 'dept'=>'Science', 'theme'=>'rk-theme-pharmacy', 'dur'=>'3 Years', 'elig'=>'10+2 PCB/PCM', 'focus'=>'Applied Genetics, Industrial Microbiology & Bio-IT', 'url'=>'academic&departments.php', 'badge'=>'UGC Recognized'],
+    ['name'=>'BA / BSW (Social Work & Humanities)', 'cat'=>'ug', 'dept'=>'Humanities', 'theme'=>'rk-theme-doctoral', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'Community Welfare, Public Administration & Social Development', 'url'=>'academic&departments.php', 'badge'=>'UGC Recognized'],
+
+    // Postgraduate (PG)
+    ['name'=>'MBA (Master of Business Administration)', 'cat'=>'pg', 'dept'=>'Management', 'theme'=>'rk-theme-management', 'dur'=>'2 Years', 'elig'=>'Graduation (50%)', 'focus'=>'Dual Specialization: Finance, Marketing, HR & Business Analytics', 'url'=>'Management.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'MCA (Master of Computer Applications)', 'cat'=>'pg', 'dept'=>'Computer App', 'theme'=>'rk-theme-engineering', 'dur'=>'2 Years', 'elig'=>'BCA / B.Sc / B.Tech', 'focus'=>'Data Science, Cloud Computing & Enterprise Full-Stack Systems', 'url'=>'academic&departments.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'M.Pharm (Pharmaceutics / Pharmacology)', 'cat'=>'pg', 'dept'=>'Pharmacy', 'theme'=>'rk-theme-pharmacy', 'dur'=>'2 Years', 'elig'=>'B.Pharm (55%)', 'focus'=>'Advanced Drug Delivery, Pre-clinical Trials & Quality Assurance', 'url'=>'pharmacy.php', 'badge'=>'PCI Approved'],
+    ['name'=>'M.Tech in CSE / Structural / Thermal / VLSI', 'cat'=>'pg', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'2 Years', 'elig'=>'B.Tech / B.E.', 'focus'=>'Advanced Industry 4.0, Simulation & Advanced Prototyping', 'url'=>'Engineering.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'M.Sc. Agriculture (Agronomy / Horticulture)', 'cat'=>'pg', 'dept'=>'Agriculture', 'theme'=>'rk-theme-agriculture', 'dur'=>'2 Years', 'elig'=>'B.Sc. Agri (4y)', 'focus'=>'Advanced Soil Chemistry, Crop Improvement & Agribusiness', 'url'=>'agriculture.php', 'badge'=>'ICAR Syllabus'],
+    ['name'=>'LLM (Master of Laws)', 'cat'=>'pg', 'dept'=>'Law', 'theme'=>'rk-theme-law', 'dur'=>'1 / 2 Years', 'elig'=>'LLB / BA-LLB', 'focus'=>'Corporate Law, Constitutional Law & Cyber Jurisprudence', 'url'=>'Law.php', 'badge'=>'BCI Approved'],
+    ['name'=>'M.Sc. in Physics, Chemistry, Maths & Biotech', 'cat'=>'pg', 'dept'=>'Science', 'theme'=>'rk-theme-pharmacy', 'dur'=>'2 Years', 'elig'=>'B.Sc. in Subject', 'focus'=>'Pure & Applied Scientific Research & Advanced Instrumentation', 'url'=>'academic&departments.php', 'badge'=>'UGC Recognized'],
+    ['name'=>'MSW (Master of Social Work) / MA', 'cat'=>'pg', 'dept'=>'Humanities', 'theme'=>'rk-theme-doctoral', 'dur'=>'2 Years', 'elig'=>'Graduation', 'focus'=>'NGO Governance, CSR Leadership & Rural Community Transformation', 'url'=>'academic&departments.php', 'badge'=>'UGC Recognized'],
+
+    // Medical, AYUSH & Nursing
+    ['name'=>'BAMS (Ayurvedacharya)', 'cat'=>'medical', 'dept'=>'Ayurveda', 'theme'=>'rk-theme-medical', 'dur'=>'5.5 Years', 'elig'=>'NEET + 10+2 PCB', 'focus'=>'Charak Samhita, Panchakarma, Herbal Medicine & 1-Yr Clinicals', 'url'=>'ayurvedic.php', 'badge'=>'NCISM Approved'],
+    ['name'=>'BHMS (Homoeopathic Medicine & Surgery)', 'cat'=>'medical', 'dept'=>'Homoeopathy', 'theme'=>'rk-theme-medical', 'dur'=>'5.5 Years', 'elig'=>'NEET + 10+2 PCB', 'focus'=>'Organon of Medicine, Materia Medica & Hospital OPD Training', 'url'=>'homoeopathic.php', 'badge'=>'NCH Approved'],
+    ['name'=>'MD Homoeopathy (Postgraduate)', 'cat'=>'medical', 'dept'=>'Homoeopathy', 'theme'=>'rk-theme-medical', 'dur'=>'3 Years', 'elig'=>'BHMS Degree', 'focus'=>'Specialized Homoeopathic Clinical Research & Therapeutics', 'url'=>'homoeopathic.php', 'badge'=>'NCH Approved'],
+    ['name'=>'B.Sc. Nursing (Basic)', 'cat'=>'medical', 'dept'=>'Nursing', 'theme'=>'rk-theme-medical', 'dur'=>'4 Years', 'elig'=>'10+2 PCB (45%)', 'focus'=>'Critical Care Nursing, Hospital Clinical Postings & Child Health', 'url'=>'nursing.php', 'badge'=>'INC Approved'],
+    ['name'=>'Post Basic B.Sc. Nursing', 'cat'=>'medical', 'dept'=>'Nursing', 'theme'=>'rk-theme-medical', 'dur'=>'2 Years', 'elig'=>'GNM Registered', 'focus'=>'Advanced Nursing Care, Ward Administration & Clinical Supervision', 'url'=>'nursing.php', 'badge'=>'INC Approved'],
+    ['name'=>'BPT (Bachelor of Physiotherapy)', 'cat'=>'medical', 'dept'=>'Paramedical', 'theme'=>'rk-theme-medical', 'dur'=>'4.5 Years', 'elig'=>'10+2 PCB', 'focus'=>'Orthopedic Rehabilitation, Neuro Physiotherapy & Sports Medicine', 'url'=>'paramedical.php', 'badge'=>'Paramedical Council'],
+    ['name'=>'BMLT (Medical Lab Technology)', 'cat'=>'medical', 'dept'=>'Paramedical', 'theme'=>'rk-theme-medical', 'dur'=>'3 Years', 'elig'=>'10+2 PCB/PCM', 'focus'=>'Clinical Biochemistry, Hematology & Diagnostic Pathology', 'url'=>'paramedical.php', 'badge'=>'Paramedical Council'],
+
+    // Polytechnic & Diploma
+    ['name'=>'Polytechnic Diploma in Civil / Mech / EE / CS', 'cat'=>'diploma', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'3 Years', 'elig'=>'10th Pass (35%)', 'focus'=>'Hands-on Technical Workshops, CAD Drafting & Industrial Labs', 'url'=>'Engineering.php', 'badge'=>'AICTE Approved'],
+    ['name'=>'D.Pharm (Diploma in Pharmacy)', 'cat'=>'diploma', 'dept'=>'Pharmacy', 'theme'=>'rk-theme-pharmacy', 'dur'=>'2 Years', 'elig'=>'10+2 PCB/PCM', 'focus'=>'Dispensing Pharmacy, Hospital Drug Store & Basic Pharmacology', 'url'=>'pharmacy.php', 'badge'=>'PCI Approved'],
+    ['name'=>'GNM (General Nursing & Midwifery)', 'cat'=>'diploma', 'dept'=>'Nursing', 'theme'=>'rk-theme-medical', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream (40%)', 'focus'=>'Bedside Patient Care, Midwifery & Community Health Nursing', 'url'=>'nursing.php', 'badge'=>'INC / MPNRC'],
+    ['name'=>'DMLT / X-Ray Radiographer / OT Technician', 'cat'=>'diploma', 'dept'=>'Paramedical', 'theme'=>'rk-theme-medical', 'dur'=>'2 Years', 'elig'=>'10+2 PCB', 'focus'=>'Diagnostic Laboratory, Medical Imaging & Hospital OT Assistance', 'url'=>'paramedical.php', 'badge'=>'Paramedical Council'],
+    ['name'=>'PGDCA & DCA (Computer Applications)', 'cat'=>'diploma', 'dept'=>'Computer App', 'theme'=>'rk-theme-engineering', 'dur'=>'1 Year', 'elig'=>'Grad / 12th', 'focus'=>'Office Automation, Accounting Software & Practical Programming', 'url'=>'academic&departments.php', 'badge'=>'UGC Recognized'],
+    ['name'=>'Diploma in Architecture Assistantship', 'cat'=>'diploma', 'dept'=>'Architecture', 'theme'=>'rk-theme-engineering', 'dur'=>'3 Years', 'elig'=>'10th Pass', 'focus'=>'Architectural Drafting, Building Materials & Construction Estimating', 'url'=>'academic&departments.php', 'badge'=>'AICTE Approved'],
+
+    // Apprenticeship & Industry Embedded
+    ['name'=>'BBA in Logistics (Apprenticeship Embedded)', 'cat'=>'apprenticeship', 'dept'=>'Logistics', 'theme'=>'rk-theme-logistics', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'NATS Dual Degree Model: Live Industry Training with Monthly Stipend', 'url'=>'Management.php', 'badge'=>'Govt Apprenticeship'],
+    ['name'=>'BMS in Agri-Storage & Cold Chain Logistics', 'cat'=>'apprenticeship', 'dept'=>'Logistics', 'theme'=>'rk-theme-logistics', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'Warehouse Management, Supply Chain Networks & On-Job Training', 'url'=>'Management.php', 'badge'=>'Govt Apprenticeship'],
+    ['name'=>'BBA in Retail Operations & Supply Chain', 'cat'=>'apprenticeship', 'dept'=>'Logistics', 'theme'=>'rk-theme-logistics', 'dur'=>'3 Years', 'elig'=>'10+2 Any Stream', 'focus'=>'Modern Retail Management, Inventory Planning & Paid Apprenticeship', 'url'=>'Management.php', 'badge'=>'Govt Apprenticeship'],
+
+    // Ph.D & Doctoral
+    ['name'=>'Ph.D in Engineering & Technology', 'cat'=>'phd', 'dept'=>'Engineering', 'theme'=>'rk-theme-engineering', 'dur'=>'3 - 5 Years', 'elig'=>'Master\'s in Engg (55%)', 'focus'=>'Advanced AI, Materials Science, Energy Systems & Nanotechnology', 'url'=>'Engineering.php', 'badge'=>'UGC Regulations'],
+    ['name'=>'Ph.D in Pharmaceutical Sciences', 'cat'=>'phd', 'dept'=>'Pharmacy', 'theme'=>'rk-theme-pharmacy', 'dur'=>'3 - 5 Years', 'elig'=>'M.Pharm (55%)', 'focus'=>'Drug Discovery, Novel Delivery Systems & Phytochemistry Research', 'url'=>'pharmacy.php', 'badge'=>'PCI & UGC'],
+    ['name'=>'Ph.D in Management & Commerce', 'cat'=>'phd', 'dept'=>'Management', 'theme'=>'rk-theme-management', 'dur'=>'3 - 5 Years', 'elig'=>'MBA / M.Com (55%)', 'focus'=>'Strategic Business Management, Financial Economics & Market Research', 'url'=>'Management.php', 'badge'=>'UGC Regulations'],
+    ['name'=>'Ph.D in Agriculture Sciences', 'cat'=>'phd', 'dept'=>'Agriculture', 'theme'=>'rk-theme-agriculture', 'dur'=>'3 - 5 Years', 'elig'=>'M.Sc. Agri (55%)', 'focus'=>'Crop Genetics, Sustainable Agrotechnology & Soil Ecology', 'url'=>'agriculture.php', 'badge'=>'ICAR & UGC'],
+    ['name'=>'Ph.D in Law / Basic Sciences / Humanities', 'cat'=>'phd', 'dept'=>'Interdisciplinary', 'theme'=>'rk-theme-doctoral', 'dur'=>'3 - 5 Years', 'elig'=>'Master\'s in Subject (55%)', 'focus'=>'Constitutional Law, Applied Physics, Chemistry & Social Sciences', 'url'=>'academic&departments.php', 'badge'=>'UGC Regulations'],
   ];
 
-  if (!empty($dbProgs)) {
-    $first = $dbProgs[0];
-    $bigProg = [
-      'title' => $first['title'],
-      'badge' => $first['badge_text'] ?: 'Flagship Program',
-      'subtitle' => $first['subtitle'] ?: $first['text_val'],
-      'img'   => $first['image_path'] ?: 'images/lovable/rkdf-engineering.jpg',
-      'url'   => $first['link_url'] ?: 'academic&departments.php'
-    ];
-    if (count($dbProgs) > 1) {
-      $smallProgs = [];
-      for ($sp = 1; $sp < count($dbProgs); $sp++) {
-        $item = $dbProgs[$sp];
-        $smallProgs[] = [
-          'tag'    => $item['badge_text'] ?: 'Program',
-          'title'  => $item['title'],
-          'detail' => $item['subtitle'] ?: $item['text_val'],
-          'img'    => $item['image_path'] ?: 'images/lovable/rkdf-management.jpg',
-          'url'    => $item['link_url'] ?: 'academic&departments.php'
-        ];
-      }
-    }
+  // Count per category
+  $catCounts = ['all' => count($allPrograms)];
+  foreach ($allPrograms as $p) {
+    $c = $p['cat'];
+    $catCounts[$c] = ($catCounts[$c] ?? 0) + 1;
   }
 ?>
 <section class="rk-programs" id="programs">
   <div class="rk-container">
-    <div class="rk-eyebrow rk-reveal"><?= $sec7Tag ?></div>
+    <div class="rk-programs-header-wrap">
+      <div>
+        <div class="rk-eyebrow rk-reveal"><?= $sec7Tag ?></div>
+        <h2 class="rk-programs-heading rk-reveal">Academic Programs & <span class="rk-prog-title-accent">Degrees</span></h2>
+        <p class="rk-programs-sub rk-reveal">Explore 100+ UGC & Apex Council recognized courses across Engineering, Medical & AYUSH, Pharmacy, Management, Law, Agriculture & Apprenticeship streams.</p>
+      </div>
 
-    <div class="rk-programs-grid">
-      <!-- Big feature card -->
-      <div class="rk-prog-big rk-reveal">
-        <img src="<?= (strpos($bigProg['img'], '/') !== false) ? htmlspecialchars($bigProg['img']) : 'images/lovable/' . htmlspecialchars($bigProg['img']) ?>" alt="<?= htmlspecialchars($bigProg['title']) ?>" loading="lazy">
-        <div class="rk-prog-big-overlay"></div>
-        <div class="rk-prog-big-body">
-          <span class="rk-prog-big-eyebrow"><?= htmlspecialchars($bigProg['badge']) ?></span>
-          <h3 class="rk-prog-big-title"><?= htmlspecialchars($bigProg['title']) ?></h3>
-          <div class="rk-prog-big-meta">
-            <?php
-            $metaParts = explode('·', $bigProg['subtitle']);
-            foreach ($metaParts as $mp):
-            ?>
-            <div>
-              <div class="rk-prog-meta-label">Info</div>
-              <div class="rk-prog-meta-val"><?= htmlspecialchars(trim($mp)) ?></div>
-            </div>
-            <?php endforeach; ?>
+      <!-- Live Search Box with Icon & Clear Button -->
+      <div class="rk-prog-search-box rk-reveal">
+        <span class="rk-prog-search-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </span>
+        <input type="text" id="rkProgSearchInput" class="rk-prog-search-input" placeholder="Search courses (e.g. AI, BAMS, MBA, Law, CS)..." autocomplete="off">
+        <button type="button" id="rkProgSearchClear" class="rk-prog-search-clear" aria-label="Clear Search">✕</button>
+      </div>
+    </div>
+
+    <!-- Category Tabs Navigation -->
+    <div class="rk-prog-tabs-bar rk-reveal" id="rkProgTabs">
+      <button class="rk-prog-tab-btn active" data-cat="all">All Programs <span class="rk-prog-tab-count"><?= $catCounts['all'] ?></span></button>
+      <button class="rk-prog-tab-btn" data-cat="ug">Undergraduate (UG) <span class="rk-prog-tab-count"><?= $catCounts['ug'] ?? 0 ?></span></button>
+      <button class="rk-prog-tab-btn" data-cat="pg">Postgraduate (PG) <span class="rk-prog-tab-count"><?= $catCounts['pg'] ?? 0 ?></span></button>
+      <button class="rk-prog-tab-btn" data-cat="medical">Medical & AYUSH <span class="rk-prog-tab-count"><?= $catCounts['medical'] ?? 0 ?></span></button>
+      <button class="rk-prog-tab-btn" data-cat="diploma">Diploma & Poly <span class="rk-prog-tab-count"><?= $catCounts['diploma'] ?? 0 ?></span></button>
+      <button class="rk-prog-tab-btn" data-cat="apprenticeship">Apprenticeship <span class="rk-prog-tab-count"><?= $catCounts['apprenticeship'] ?? 0 ?></span></button>
+      <button class="rk-prog-tab-btn" data-cat="phd">Doctoral (Ph.D) <span class="rk-prog-tab-count"><?= $catCounts['phd'] ?? 0 ?></span></button>
+    </div>
+
+    <!-- Cards Grid -->
+    <div class="rk-prog-cards-grid" id="rkProgGrid">
+      <?php foreach ($allPrograms as $index => $prog): ?>
+      <a href="<?= htmlspecialchars($prog['url']) ?>" class="rk-course-item-card rk-reveal <?= $index >= 6 ? 'rk-card-collapsed' : '' ?>" data-cat="<?= $prog['cat'] ?>" data-name="<?= strtolower(htmlspecialchars($prog['name'] . ' ' . $prog['dept'] . ' ' . $prog['focus'] . ' ' . $prog['badge'])) ?>">
+        <div>
+          <div class="rk-course-top-meta">
+            <span class="rk-course-dept-label"><?= htmlspecialchars($prog['dept']) ?></span>
+            <span class="rk-course-badge-label"><?= htmlspecialchars($prog['badge']) ?></span>
           </div>
-          <a href="<?= htmlspecialchars($bigProg['url']) ?>" class="rk-btn-gold-sm">Apply for this program ↗</a>
+          <h3 class="rk-course-title"><?= htmlspecialchars($prog['name']) ?></h3>
+          <div class="rk-course-meta-row">
+            <span><?= htmlspecialchars($prog['dur']) ?></span>
+            <span class="rk-course-meta-divider">·</span>
+            <span><?= htmlspecialchars($prog['elig']) ?></span>
+          </div>
+          <p class="rk-course-focus-text"><?= htmlspecialchars($prog['focus']) ?></p>
         </div>
-      </div>
+        <div class="rk-course-foot-cta">
+          <span class="rk-course-cta-text">Explore Program</span>
+          <span class="rk-course-cta-arrow">↗</span>
+        </div>
+      </a>
+      <?php endforeach; ?>
+    </div>
 
-      <!-- Small program cards stack -->
-      <div class="rk-prog-stack">
-        <?php foreach ($smallProgs as $idx => $p): ?>
-        <a href="<?= htmlspecialchars($p['url']) ?>" class="rk-prog-small rk-reveal" style="--delay:<?= 0.1 + $idx * 0.08 ?>s">
-          <div class="rk-prog-small-img">
-            <img src="<?= (strpos($p['img'], '/') !== false) ? htmlspecialchars($p['img']) : 'images/lovable/' . htmlspecialchars($p['img']) ?>" alt="<?= htmlspecialchars($p['title']) ?>" loading="lazy">
-          </div>
-          <div class="rk-prog-small-body">
-            <div class="rk-prog-small-tag"><?= htmlspecialchars($p['tag']) ?></div>
-            <h4 class="rk-prog-small-title"><?= htmlspecialchars($p['title']) ?></h4>
-            <div class="rk-prog-small-detail"><?= htmlspecialchars($p['detail']) ?></div>
-            <div class="rk-prog-small-link">Explore ↗</div>
-          </div>
-        </a>
-        <?php endforeach; ?>
-      </div>
+    <!-- View All / Collapse Button -->
+    <div class="rk-prog-expand-wrap rk-reveal">
+      <button type="button" id="rkProgExpandBtn" class="rk-prog-expand-btn">
+        <span id="rkProgExpandText">View All <?= count($allPrograms) ?> Programs</span>
+        <span id="rkProgExpandIcon" style="font-size: 14px; font-weight: 700;">↓</span>
+      </button>
     </div>
   </div>
 </section>
@@ -913,7 +942,7 @@ if (!$sec7 || ($sec7['is_active'] ?? 1)):
 
 
 <!-- ══════════════════════════════════════════════════════════
-  7. APPROVALS (Accreditation, Approvals & Statutory Links)
+  7. APPROVALS & RECOGNITION (Auto-Scrolling Logo Marquee)
 ══════════════════════════════════════════════════════════ -->
 <?php
 $sec14 = $cmsSections['sec_14_recognition'] ?? null;
@@ -921,655 +950,190 @@ if (!$sec14 || ($sec14['is_active'] ?? 1)):
   $sec14Tag    = format_eyebrow_tag($sec14 ?: ['tag_number'=>'07','tag_text'=>'ACCREDITATION & STATUTORY APPROVALS']);
   $sec14Title  = $sec14['title_main']   ?? 'Recognised by Apex Councils.';
   $sec14Accent = $sec14['title_accent'] ?? 'Validated Nationwide.';
-  $sec14Sub    = $sec14['subtitle']     ?? 'RKDF University is recognized by the University Grants Commission (UGC) under Section 2(f) and holds statutory council accreditations & approvals across Engineering, Pharmacy, Agriculture, Law, Architecture, and Education — ensuring 100% degree validity for central/state government employment and higher studies globally.';
+  $sec14Sub    = $sec14['subtitle']     ?? 'RKDF University degrees and academic programs are recognized by UGC under Section 2(f) and hold apex statutory approvals across all technical, medical, pharmacy, agriculture, law, and teacher education disciplines.';
 
-  $defaultApprovals = [
-    [
-      'code'      => 'UGC',
-      'name'      => 'University Grants Commission',
-      'badge'     => 'Statutory 2(f) & 12(B)',
-      'badge_bg'  => 'rgba(197, 160, 89, 0.12)',
-      'badge_col' => '#936e22',
-      'sub'       => 'Statutory Recognition with Degree Granting Powers under UGC Act 1956',
-      'img'       => 'images/img/ugc_logo.jpg',
-      'url'       => 'ugcfile.php',
-      'doc_type'  => 'Gazette & 2(f) Letter'
-    ],
-    [
-      'code'      => 'NAAC',
-      'name'      => 'NAAC Accreditation',
-      'badge'     => 'Grade A+ Accredited',
-      'badge_bg'  => 'rgba(227, 27, 35, 0.10)',
-      'badge_col' => '#E31B23',
-      'sub'       => 'Apex national assessment benchmark for institutional & academic excellence',
-      'img'       => 'images/img/NaccLogo.jpg',
-      'url'       => 'naac.php',
-      'doc_type'  => 'NAAC Certificate'
-    ],
-    [
-      'code'      => 'AICTE',
-      'name'      => 'All India Council for Technical Education',
-      'badge'     => 'AICTE Approved',
-      'badge_bg'  => 'rgba(12, 20, 36, 0.08)',
-      'badge_col' => '#0C1424',
-      'sub'       => 'Statutory approval for Engineering, Technology, Management & MCA programs',
-      'img'       => 'images/img/aicte.jpg',
-      'url'       => 'aicte_approval.php',
-      'doc_type'  => 'AICTE EOA Letters'
-    ],
-    [
-      'code'      => 'PCI',
-      'name'      => 'Pharmacy Council of India',
-      'badge'     => 'PCI Approved',
-      'badge_bg'  => 'rgba(16, 185, 129, 0.12)',
-      'badge_col' => '#059669',
-      'sub'       => 'Approved for B.Pharmacy & D.Pharmacy professional education & practice',
-      'img'       => 'images/img/pci2.jpg',
-      'url'       => 'pci_approval.php',
-      'doc_type'  => 'PCI Approval Order'
-    ],
-    [
-      'code'      => 'ICAR',
-      'name'      => 'Indian Council of Agricultural Research',
-      'badge'     => 'ICAR Accredited',
-      'badge_bg'  => 'rgba(234, 88, 12, 0.12)',
-      'badge_col' => '#c2410c',
-      'sub'       => 'Accreditation for B.Sc. (Hons.) Agriculture & Agricultural Sciences',
-      'img'       => 'images/img/icarlogo.png',
-      'url'       => 'images/Accreditation/ICAR Accreditation.jpeg',
-      'doc_type'  => 'Accreditation Order'
-    ],
-    [
-      'code'      => 'COA',
-      'name'      => 'Council of Architecture',
-      'badge'     => 'COA Approved',
-      'badge_bg'  => 'rgba(99, 102, 241, 0.12)',
-      'badge_col' => '#4f46e5',
-      'sub'       => 'Statutory approval for B.Arch & Architecture degree curriculum',
-      'img'       => 'images/coa.jpg',
-      'url'       => 'COA_approval.php',
-      'doc_type'  => 'COA Extension'
-    ],
-    [
-      'code'      => 'NCTE',
-      'name'      => 'National Council for Teacher Education',
-      'badge'     => 'NCTE Recognized',
-      'badge_bg'  => 'rgba(14, 165, 233, 0.12)',
-      'badge_col' => '#0284c7',
-      'sub'       => 'Recognition for B.Ed and Teacher Training programs',
-      'img'       => 'images/img/ncte.png',
-      'url'       => 'ncte.php',
-      'doc_type'  => 'NCTE Order'
-    ],
-    [
-      'code'      => 'ISO 9001',
-      'name'      => 'ISO 9001:2015 Certification',
-      'badge'     => 'Certified QMS',
-      'badge_bg'  => 'rgba(100, 116, 139, 0.12)',
-      'badge_col' => '#475569',
-      'sub'       => 'Certified Quality Management System for university administration & pedagogy',
-      'img'       => 'images/rkdflogo.JPG',
-      'url'       => 'approvals.php',
-      'doc_type'  => 'Quality Standard'
-    ]
+  $recognitionLogos = [
+    ['code'=>'BCI',      'status'=>'APPROVED',    'name'=>'Bar Council of India',                     'img'=>'images/img/law.jpg',                 'url'=>'Law.php'],
+    ['code'=>'DCI',      'status'=>'APPROVED',    'name'=>'Dental & Paramedical Council',             'img'=>'images/img/prmdcl.jpg',              'url'=>'paramedical.php'],
+    ['code'=>'NCTE',     'status'=>'APPROVED',    'name'=>'National Council for Teacher Education',   'img'=>'images/img/ncte.png',                'url'=>'ncte.php'],
+    ['code'=>'MPNRC',    'status'=>'RECOGNIZED',  'name'=>'M.P. Nurses Registration Council',         'img'=>'images/inc_nurising.jfif',           'url'=>'nursing.php'],
+    ['code'=>'MP Govt.', 'status'=>'RECOGNIZED',  'name'=>'Govt. of Madhya Pradesh',                  'img'=>'images/rkdflogo.JPG',                'url'=>'approvals.php'],
+    ['code'=>'NCH',      'status'=>'APPROVED',    'name'=>'National Commission for Homoeopathy',      'img'=>'images/img/homoeopathic.jpeg',       'url'=>'homoeopathic.php'],
+    ['code'=>'UGC',      'status'=>'SECTION 2(F)','name'=>'University Grants Commission',              'img'=>'images/img/ugc_logo.jpg',            'url'=>'ugcfile.php'],
+    ['code'=>'AICTE',    'status'=>'APPROVED',    'name'=>'All India Council for Technical Education','img'=>'images/img/aicte.jpg',              'url'=>'aicte_approval.php'],
+    ['code'=>'PCI',      'status'=>'APPROVED',    'name'=>'Pharmacy Council of India',                'img'=>'images/img/pci2.jpg',                'url'=>'pci_approval.php'],
+    ['code'=>'NAAC',     'status'=>'GRADE A+',    'name'=>'NAAC Accreditation',                       'img'=>'images/img/NaccLogo.jpg',            'url'=>'naac.php'],
+    ['code'=>'NCISM',    'status'=>'APPROVED',    'name'=>'National Commission for Indian Medicine',  'img'=>'images/BAMS.gif',                    'url'=>'ayurvedic.php'],
+    ['code'=>'COA',      'status'=>'APPROVED',    'name'=>'Council of Architecture',                  'img'=>'images/coa.jpg',                     'url'=>'COA_approval.php'],
+    ['code'=>'ICAR',     'status'=>'ACCREDITED',  'name'=>'Indian Council of Agricultural Research',  'img'=>'images/img/icarlogo.png',            'url'=>'agriculture.php'],
+    ['code'=>'ISO 9001', 'status'=>'CERTIFIED',   'name'=>'ISO 9001 Quality Certified',              'img'=>'images/rkdf_logo_naac.png',          'url'=>'approvals.php'],
   ];
-
-  $approvals = $defaultApprovals;
-  $dbApprovals = $cmsItems['sec_14_recognition'] ?? [];
-  if (!empty($dbApprovals)) {
-    $approvals = [];
-    foreach ($dbApprovals as $i) {
-      $titleUpper = strtoupper($i['title']);
-      $badgeBg = 'rgba(197, 160, 89, 0.12)';
-      $badgeCol = '#936e22';
-      $docType = 'View Official Approval';
-
-      if (strpos($titleUpper, 'UGC') !== false) {
-        $badgeBg = 'rgba(197, 160, 89, 0.14)';
-        $badgeCol = '#8a6519';
-        $docType = 'UGC 2(f) Gazette Order';
-      } elseif (strpos($titleUpper, 'NAAC') !== false) {
-        $badgeBg = 'rgba(227, 27, 35, 0.10)';
-        $badgeCol = '#E31B23';
-        $docType = 'NAAC Certificate (A+)';
-      } elseif (strpos($titleUpper, 'AICTE') !== false) {
-        $badgeBg = 'rgba(12, 20, 36, 0.08)';
-        $badgeCol = '#0C1424';
-        $docType = 'AICTE EOA Letters';
-      } elseif (strpos($titleUpper, 'PCI') !== false || strpos($titleUpper, 'PHARMACY') !== false) {
-        $badgeBg = 'rgba(16, 185, 129, 0.12)';
-        $badgeCol = '#059669';
-        $docType = 'PCI Approval Order';
-      } elseif (strpos($titleUpper, 'ICAR') !== false || strpos($titleUpper, 'AGRICULT') !== false) {
-        $badgeBg = 'rgba(234, 88, 12, 0.12)';
-        $badgeCol = '#c2410c';
-        $docType = 'ICAR Accreditation';
-      } elseif (strpos($titleUpper, 'COA') !== false || strpos($titleUpper, 'ARCHITECT') !== false) {
-        $badgeBg = 'rgba(99, 102, 241, 0.12)';
-        $badgeCol = '#4f46e5';
-        $docType = 'COA Extension Order';
-      } elseif (strpos($titleUpper, 'NCTE') !== false || strpos($titleUpper, 'TEACHER') !== false) {
-        $badgeBg = 'rgba(14, 165, 233, 0.12)';
-        $badgeCol = '#0284c7';
-        $docType = 'NCTE Recognition';
-      } elseif (strpos($titleUpper, 'NURSING') !== false) {
-        $badgeBg = 'rgba(236, 72, 153, 0.12)';
-        $badgeCol = '#db2777';
-        $docType = 'Nursing Council Order';
-      }
-
-      $approvals[] = [
-        'name'      => $i['title'],
-        'badge'     => $i['badge_text'] ?: 'Approved',
-        'badge_bg'  => $badgeBg,
-        'badge_col' => $badgeCol,
-        'sub'       => $i['subtitle'] ?: 'Statutory Council Approval',
-        'img'       => $i['image_path'] ?: 'images/rkdflogo.JPG',
-        'url'       => $i['link_url'] ?: 'approvals.php',
-        'doc_type'  => $docType
-      ];
-    }
-  }
 ?>
-<section class="rk-accred-modern" id="recognitions">
+<section class="rk-accred-marquee-section" id="recognitions">
   <div class="rk-container">
-    
-    <!-- Top Header Bar -->
     <div class="rk-accred-header rk-reveal">
       <div class="rk-accred-header-left">
-        <div class="rk-accred-eyebrow">
-          <span class="rk-accred-eyebrow-dot"></span>
-          <?= $sec14Tag ?>
-        </div>
-        <h2 class="rk-accred-h2">
+        <div class="rk-eyebrow"><?= $sec14Tag ?></div>
+        <h2 class="rk-accred-h2-oneline">
           <?= htmlspecialchars($sec14Title) ?>
-          <em class="rk-accred-em"><?= htmlspecialchars($sec14Accent) ?></em>
+          <span class="rk-prog-title-accent"><?= htmlspecialchars($sec14Accent) ?></span>
         </h2>
-        <p class="rk-accred-lead">
+        <p class="rk-programs-sub rk-accred-lead-wide">
           <?= htmlspecialchars($sec14Sub) ?>
         </p>
       </div>
-
-      <div class="rk-accred-header-right">
-        <div class="rk-accred-stats-card">
-          <div class="rk-accred-stat-item">
-            <div class="rk-accred-stat-num">UGC 2(f)</div>
-            <div class="rk-accred-stat-lbl">Central Recognition</div>
-          </div>
-          <div class="rk-accred-stat-sep"></div>
-          <div class="rk-accred-stat-item">
-            <div class="rk-accred-stat-num">NAAC A+</div>
-            <div class="rk-accred-stat-lbl">Quality Benchmark</div>
-          </div>
-          <div class="rk-accred-stat-sep"></div>
-          <div class="rk-accred-stat-item">
-            <div class="rk-accred-stat-num">100%</div>
-            <div class="rk-accred-stat-lbl">Govt Job Valid</div>
-          </div>
-        </div>
+      <div>
+        <a href="approvals.php" class="rk-prog-expand-btn" style="margin-top:0;">
+          <span>All Approvals Matrix</span>
+          <span style="font-size:13px;">↗</span>
+        </a>
       </div>
     </div>
+  </div>
 
-    <!-- Recognition Badges Matrix -->
-    <div class="rk-accred-grid rk-reveal" style="--delay:0.12s;">
-      <?php foreach ($approvals as $app): ?>
-      <a href="<?= htmlspecialchars($app['url']) ?>" class="rk-accred-card" target="_blank" rel="noopener noreferrer">
-        <div class="rk-accred-card-top">
-          <div class="rk-accred-logo-box">
-            <img src="<?= htmlspecialchars($app['img']) ?>" alt="<?= htmlspecialchars($app['name']) ?>" onError="this.src='images/rkdflogo.JPG';">
-          </div>
-          <span class="rk-accred-pill" style="background:<?= $app['badge_bg'] ?>; color:<?= $app['badge_col'] ?>;">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="margin-right:4px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <?= htmlspecialchars($app['badge']) ?>
-          </span>
-        </div>
-
-        <div class="rk-accred-card-body">
-          <h3 class="rk-accred-card-name"><?= htmlspecialchars($app['name']) ?></h3>
-          <p class="rk-accred-card-sub"><?= htmlspecialchars($app['sub']) ?></p>
-        </div>
-
-        <div class="rk-accred-card-foot">
-          <span class="rk-accred-link-text">
-            <?= htmlspecialchars($app['doc_type'] ?? 'View Approval') ?>
-          </span>
-          <span class="rk-accred-link-arrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
-          </span>
-        </div>
-      </a>
-      <?php endforeach; ?>
-    </div>
-
-    <!-- Bottom Statutory Trust Banner -->
-    <div class="rk-accred-trust-banner rk-reveal" style="--delay:0.2s;">
-      <div class="rk-accred-trust-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#C5A059" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+  <!-- Auto Scrolling Logo Marquee Track -->
+  <div class="rk-accred-marquee-outer rk-reveal">
+    <div class="rk-accred-marquee-row" id="rk-accred-marquee-row">
+      <div class="rk-marquee-track">
+        <?php for ($loop = 0; $loop < 2; $loop++): ?>
+          <?php foreach ($recognitionLogos as $item): ?>
+          <a href="<?= htmlspecialchars($item['url']) ?>" class="rk-accred-logo-card" title="<?= htmlspecialchars($item['name']) ?>">
+            <div class="rk-accred-logo-img-wrap">
+              <img src="<?= htmlspecialchars($item['img']) ?>" alt="<?= htmlspecialchars($item['code']) ?>" loading="lazy" onError="this.src='images/rkdflogo.JPG';">
+            </div>
+            <div class="rk-accred-logo-title"><?= htmlspecialchars($item['code']) ?></div>
+            <div class="rk-accred-logo-status"><?= htmlspecialchars($item['status']) ?></div>
+          </a>
+          <?php endforeach; ?>
+        <?php endfor; ?>
       </div>
-      <div class="rk-accred-trust-text">
-        <strong>Statutory Degree Validity:</strong> All qualifications &amp; degrees conferred by RKDF University Bhopal are formally recognized for UPSC, MPPSC, SSC, PSU recruitments, Banking, Judiciary, NET/GATE examinations, and postgraduate admissions in India and foreign universities.
-      </div>
-      <a href="approvals.php" class="rk-accred-trust-btn">
-        All Approvals Matrix &rarr;
-      </a>
     </div>
-
   </div>
 </section>
 
 <style>
 /* ─────────────────────────────────────────────────────────────
-   MODERN ACCREDITATION & RECOGNITIONS STYLES
+   AUTO SCROLLING ACCREDITATION LOGO MARQUEE
    ───────────────────────────────────────────────────────────── */
-.rk-accred-modern {
+.rk-accred-marquee-section {
+  background: var(--p-paper);
+  padding: 60px 0 68px;
   position: relative;
-  background: linear-gradient(180deg, #F8FAFC 0%, #FFFFFF 50%, #F8FAFC 100%);
-  padding: 95px 0 90px;
-  border-top: 1px solid #E2E8F0;
-  border-bottom: 1px solid #E2E8F0;
+  border-top: 1px solid rgba(12, 20, 36, 0.08);
   overflow: hidden;
 }
-
-.rk-accred-modern::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 1400px;
-  height: 380px;
-  background: radial-gradient(circle at 50% 0%, rgba(197, 160, 89, 0.08) 0%, rgba(227, 27, 35, 0.03) 45%, transparent 70%);
-  pointer-events: none;
-}
-
 .rk-accred-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 40px;
-  margin-bottom: 50px;
+  gap: 32px;
+  margin-bottom: 24px;
   flex-wrap: wrap;
 }
-
 .rk-accred-header-left {
-  max-width: 720px;
+  max-width: 950px;
 }
-
-.rk-accred-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 12px;
-  font-weight: 700;
-  color: #C5A059;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  background: rgba(197, 160, 89, 0.08);
-  border: 1px solid rgba(197, 160, 89, 0.25);
-  padding: 6px 14px;
-  border-radius: 999px;
-  margin-bottom: 16px;
-}
-
-.rk-accred-eyebrow-dot {
-  width: 7px;
-  height: 7px;
-  background: #C5A059;
-  border-radius: 50%;
-  box-shadow: 0 0 8px #C5A059;
-  animation: rkPulse 2s infinite ease-in-out;
-}
-
-@keyframes rkPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.4; transform: scale(0.85); }
-}
-
-.rk-accred-h2 {
-  font-family: 'Instrument Serif', Georgia, serif;
-  font-size: clamp(2.4rem, 4.2vw, 3.6rem);
-  font-weight: 400;
-  color: #0C1424;
+.rk-accred-h2-oneline {
+  font-family: var(--p-font-serif);
+  font-size: clamp(2rem, 3vw, 3.2rem);
   line-height: 1.15;
-  margin: 0 0 16px;
+  letter-spacing: -0.01em;
+  color: var(--p-navy-deep);
+  margin-top: 8px;
+  white-space: normal;
 }
-
-.rk-accred-em {
-  font-style: italic;
-  color: #E31B23;
-  font-weight: 400;
+.rk-accred-lead-wide {
+  max-width: 950px !important;
+  font-size: 15px;
+  color: rgba(12, 20, 36, 0.7);
+  line-height: 1.6;
 }
-
-.rk-accred-lead {
-  font-size: 15.5px;
-  color: #475569;
-  line-height: 1.75;
-  margin: 0;
+.rk-accred-marquee-outer {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 6px 0 12px;
 }
-
-/* Stats Card Top Right */
-.rk-accred-stats-card {
+.rk-accred-marquee-row {
   display: flex;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  user-select: none;
+  cursor: grab;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  padding-top: 12px;
+  padding-bottom: 14px;
+}
+.rk-accred-marquee-row::-webkit-scrollbar {
+  display: none !important;
+}
+.rk-accred-marquee-row.is-grabbing {
+  cursor: grabbing !important;
+}
+.rk-accred-marquee-row .rk-marquee-track {
+  display: flex;
+  width: max-content;
   align-items: center;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  box-shadow: 0 10px 30px rgba(12, 20, 36, 0.05);
-  border-radius: 16px;
-  padding: 16px 24px;
-  gap: 20px;
+  padding: 4px 0;
 }
-
-.rk-accred-stat-item {
-  text-align: center;
-}
-
-.rk-accred-stat-num {
-  font-family: 'JetBrains Mono', monospace;
-  font-weight: 800;
-  font-size: 18px;
-  color: #0C1424;
-  line-height: 1.2;
-}
-
-.rk-accred-stat-lbl {
-  font-size: 11.5px;
-  color: #64748B;
-  font-weight: 600;
-  margin-top: 4px;
-  white-space: nowrap;
-}
-
-.rk-accred-stat-sep {
-  width: 1px;
-  height: 32px;
-  background: #E2E8F0;
-}
-
-/* Cards Grid */
-.rk-accred-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  margin-bottom: 40px;
-}
-
-@media (max-width: 1200px) {
-  .rk-accred-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 640px) {
-  .rk-accred-grid {
-    grid-template-columns: 1fr;
-  }
-  .rk-accred-stats-card {
-    width: 100%;
-    justify-content: space-around;
-  }
-}
-
-/* Accreditation Card */
-.rk-accred-card {
+.rk-accred-logo-card {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 18px;
-  padding: 24px;
-  text-decoration: none;
-  box-shadow: 0 4px 18px rgba(12, 20, 36, 0.04);
-  transition: all 0.32s cubic-bezier(0.16, 1, 0.3, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.rk-accred-card::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, transparent, #C5A059, transparent);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.rk-accred-card:hover {
-  transform: translateY(-6px);
-  border-color: rgba(197, 160, 89, 0.6);
-  box-shadow: 0 20px 38px rgba(12, 20, 36, 0.09), 0 6px 14px rgba(197, 160, 89, 0.12);
-}
-
-.rk-accred-card:hover::before {
-  opacity: 1;
-}
-
-.rk-accred-card-top {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-bottom: 18px;
-}
-
-.rk-accred-logo-box {
-  width: 58px;
-  height: 58px;
+  justify-content: center;
+  text-align: center;
   background: #FFFFFF;
-  border: 1px solid #E2E8F0;
-  border-radius: 14px;
+  border: 1.5px solid rgba(12, 20, 36, 0.12);
+  border-radius: 12px;
+  width: 156px;
+  height: 154px;
+  padding: 18px 14px 14px;
+  margin-right: 20px;
+  flex-shrink: 0;
+  text-decoration: none;
+  box-shadow: 0 2px 8px rgba(12, 20, 36, 0.03);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-sizing: border-box;
+}
+.rk-accred-logo-card:hover {
+  border-color: #1e3a8a;
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(30, 58, 138, 0.12);
+}
+.rk-accred-logo-img-wrap {
+  width: 62px;
+  height: 62px;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 6px;
-  box-shadow: 0 2px 8px rgba(12, 20, 36, 0.04);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
+  margin-bottom: 8px;
 }
-
-.rk-accred-card:hover .rk-accred-logo-box {
-  transform: scale(1.06);
-  border-color: #C5A059;
-}
-
-.rk-accred-logo-box img {
+.rk-accred-logo-img-wrap img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
 }
-
-.rk-accred-pill {
-  display: inline-flex;
-  align-items: center;
-  font-size: 11.5px;
+.rk-accred-logo-title {
+  font-family: var(--p-font-sans);
+  font-size: 14.5px;
+  font-weight: 800;
+  color: var(--p-navy-deep, #0C1424);
+  line-height: 1.2;
+}
+.rk-accred-logo-status {
+  font-family: var(--p-font-mono);
+  font-size: 9.5px;
   font-weight: 700;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-  padding: 4px 10px;
-  border-radius: 999px;
-  letter-spacing: 0.01em;
-}
-
-.rk-accred-card-body {
-  margin-bottom: 20px;
-  flex-grow: 1;
-}
-
-.rk-accred-card-name {
-  font-size: 17px;
-  font-weight: 700;
-  color: #0C1424;
-  line-height: 1.35;
-  margin: 0 0 8px;
-  transition: color 0.25s ease;
-}
-
-.rk-accred-card:hover .rk-accred-card-name {
-  color: #E31B23;
-}
-
-.rk-accred-card-sub {
-  font-size: 13px;
-  color: #64748B;
-  line-height: 1.6;
-  margin: 0;
-}
-
-.rk-accred-card-foot {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding-top: 14px;
-  border-top: 1px dashed #E2E8F0;
-}
-
-.rk-accred-link-text {
-  font-size: 12.5px;
-  font-weight: 700;
-  color: #0C1424;
-  letter-spacing: 0.02em;
-  transition: color 0.25s ease;
-}
-
-.rk-accred-card:hover .rk-accred-link-text {
-  color: #E31B23;
-}
-
-.rk-accred-link-arrow {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: #F1F5F9;
-  color: #0C1424;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.25s ease;
-}
-
-.rk-accred-card:hover .rk-accred-link-arrow {
-  background: #E31B23;
-  color: #FFFFFF;
-  transform: translate(2px, -2px);
-}
-
-/* Trust Guarantee Bottom Banner */
-.rk-accred-trust-banner {
-  background: #0C1424;
-  color: #FFFFFF;
-  border-radius: 16px;
-  padding: 22px 30px;
-  display: flex;
-  align-items: center;
-  gap: 22px;
-  box-shadow: 0 14px 34px rgba(12, 20, 36, 0.12);
-  border: 1px solid rgba(197, 160, 89, 0.3);
-  flex-wrap: wrap;
-}
-
-.rk-accred-trust-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
-  background: rgba(197, 160, 89, 0.15);
-  border: 1px solid rgba(197, 160, 89, 0.4);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-
-.rk-accred-trust-text {
-  flex: 1;
-  min-width: 280px;
-  font-size: 13.5px;
-  line-height: 1.65;
-  color: #CBD5E1;
-}
-
-.rk-accred-trust-text strong {
-  color: #C5A059;
-  font-weight: 700;
-}
-
-.rk-accred-trust-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #C5A059;
-  color: #0C1424;
-  font-size: 13.5px;
-  font-weight: 700;
-  padding: 12px 22px;
-  border-radius: 10px;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: all 0.25s ease;
-  box-shadow: 0 4px 14px rgba(197, 160, 89, 0.35);
-}
-
-.rk-accred-trust-btn:hover {
-  background: #E31B23;
-  color: #FFFFFF;
-  box-shadow: 0 6px 18px rgba(227, 27, 35, 0.4);
-  transform: translateY(-2px);
+  letter-spacing: 0.12em;
+  color: #d97706;
+  text-transform: uppercase;
+  margin-top: 4px;
 }
 </style>
 <?php endif; ?>
 
-<?php
-$secImp = $cmsSections['sec_14_important_links'] ?? null;
-if (!$secImp || ($secImp['is_active'] ?? 1)):
-  $secImpTag   = format_eyebrow_tag($secImp ?: ['tag_number'=>'07B','tag_text'=>'STATUTORY & QUICK LINKS']);
-  $secImpTitle = $secImp['title_main']   ?? 'Statutory Approvals &';
-  $secImpAccent= $secImp['title_accent'] ?? 'Quick Links.';
-  $secImpSub   = $secImp['subtitle']     ?? 'Direct access to official university certificates, committees, ordinances, webmail, and e-tenders.';
-
-  $impLinks = $cmsItems['sec_14_important_links'] ?? [];
-  if (empty($impLinks)) {
-    $impLinks = [
-      ['title'=>'UGC 2(f) Notification', 'subtitle'=>'Statutory Central Recognition Order', 'badge_text'=>'STATUTORY', 'link_url'=>'ugcfile.php'],
-      ['title'=>'NAAC Accreditation Certificate', 'subtitle'=>'Apex National Benchmark Grade A+', 'badge_text'=>'ACCREDITATION', 'link_url'=>'naac.php'],
-      ['title'=>'AICTE Approval Letters', 'subtitle'=>'Technical & Management Programs', 'badge_text'=>'AICTE', 'link_url'=>'aicte_approval.php'],
-      ['title'=>'PCI Approval Orders', 'subtitle'=>'Pharmacy Council of India Approvals', 'badge_text'=>'PHARMACY', 'link_url'=>'pci_approval.php'],
-      ['title'=>'Anti-Ragging Committee', 'subtitle'=>'Campus Safety & Monitoring Cell', 'badge_text'=>'COMPLIANCE', 'link_url'=>'antiragging.php'],
-      ['title'=>'Student Grievance Redressal', 'subtitle'=>'Online Redressal Mechanism & Portal', 'badge_text'=>'STUDENT SUPPORT', 'link_url'=>'grievance.php'],
-      ['title'=>'Academic Calendar', 'subtitle'=>'Schedule of Sessions & Semesters', 'badge_text'=>'ACADEMICS', 'link_url'=>'Academic-Celendar.php'],
-      ['title'=>'Mandatory Public Disclosure', 'subtitle'=>'Statutory University Disclosures', 'badge_text'=>'DISCLOSURE', 'link_url'=>'public-disclosure.php'],
-    ];
-  }
-?>
-<section class="rk-imp-links" id="important-links" style="background:#ffffff;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
-  <div class="rk-container">
-    <div class="rk-section-header rk-reveal">
-      <div>
-        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $secImpTag ?></div>
-        <h2 class="rk-h2-xl" style="margin-top:12px;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
-          <?= htmlspecialchars($secImpTitle) ?> <em class="rk-italic" style="color:#E31B23;"><?= htmlspecialchars($secImpAccent) ?></em>
-        </h2>
-      </div>
-      <p class="rk-section-sub" style="color:#475569;font-size:16px;max-width:540px;"><?= htmlspecialchars($secImpSub) ?></p>
-    </div>
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:40px;">
-      <?php foreach ($impLinks as $link): ?>
-      <a href="<?= htmlspecialchars($link['link_url'] ?: '#') ?>" target="_blank" class="rk-reveal" style="text-decoration:none;display:flex;align-items:center;justify-content:space-between;background:#f8fafc;border:1px solid #e2e8f0;padding:16px 20px;border-radius:12px;transition:all 0.25s ease;">
-        <div>
-          <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:#E31B23;background:rgba(227,27,35,0.08);padding:2px 8px;border-radius:99px;"><?= htmlspecialchars($link['badge_text'] ?: 'LINK') ?></span>
-          <h4 style="font-size:14.5px;font-weight:700;color:#0C1424;margin-top:6px;margin-bottom:2px;"><?= htmlspecialchars($link['title']) ?></h4>
-          <div style="font-size:12px;color:#64748b;"><?= htmlspecialchars($link['subtitle']) ?></div>
-        </div>
-        <span style="font-size:16px;color:#0C1424;font-weight:700;">↗</span>
-      </a>
-      <?php endforeach; ?>
-    </div>
-  </div>
-</section>
-<?php endif; ?>
 
 
 <!-- ══════════════════════════════════════════════════════════
@@ -1943,17 +1507,23 @@ if (!$secStar || ($secStar['is_active'] ?? 1)):
   $secStarAccent= $secStar['title_accent'] ?? 'Shining Stars.';
   $secStarSub   = $secStar['subtitle']     ?? 'RKDF graduates securing top corporate packages in Fortune 500 companies.';
 
-  $stars = $cmsItems['sec_09_shining_stars'] ?? [];
-  if (empty($stars)) {
-    $stars = [
-      ['title'=>'Aman Sharma',    'subtitle'=>'Package: ₹44.5 LPA · Amazon',        'badge_text'=>'B.Tech CSE 2024',  'text_val'=>'Software Development Engineer at Amazon AWS Cloud Team.', 'image_path'=>'images/lovable/rkdf-student-1.jpg'],
-      ['title'=>'Pooja Verma',    'subtitle'=>'Package: ₹38.0 LPA · Microsoft',     'badge_text'=>'B.Tech AI 2024',   'text_val'=>'Data Scientist at Microsoft Azure AI & Machine Learning.', 'image_path'=>'images/lovable/rkdf-student-2.jpg'],
-      ['title'=>'Rohan Gupta',    'subtitle'=>'Package: ₹32.0 LPA · Google',        'badge_text'=>'B.Tech ECE 2023',  'text_val'=>'System Architect at Google India Technology Center.',    'image_path'=>'images/lovable/rkdf-student-3.jpg'],
-      ['title'=>'Shreya Mishra',  'subtitle'=>'Package: ₹28.5 LPA · Goldman Sachs', 'badge_text'=>'MBA Finance 2024',  'text_val'=>'Financial Risk Analyst at Goldman Sachs Global division.', 'image_path'=>'images/lovable/rkdf-student-1.jpg'],
-      ['title'=>'Vikram Singh',   'subtitle'=>'Package: ₹24.0 LPA · TCS Digital',   'badge_text'=>'M.Tech CS 2023',   'text_val'=>'Lead Full-Stack Architect at Tata Consultancy Services.',   'image_path'=>'images/lovable/rkdf-student-2.jpg'],
-      ['title'=>'Ananya Patel',   'subtitle'=>'Package: ₹22.0 LPA · Deloitte',      'badge_text'=>'B.Pharm 2024',     'text_val'=>'Healthcare & Pharma Consultant at Deloitte Strategy.',     'image_path'=>'images/lovable/rkdf-student-3.jpg'],
-    ];
-  }
+  $defaultStars = [
+    ['title'=>'Aman Sharma',    'subtitle'=>'Package: ₹44.5 LPA · Amazon',        'badge_text'=>'B.Tech CSE 2024',  'text_val'=>'Software Development Engineer at Amazon AWS Cloud Team.', 'image_path'=>'images/lovable/rkdf-student-1.jpg'],
+    ['title'=>'Pooja Verma',    'subtitle'=>'Package: ₹38.0 LPA · Microsoft',     'badge_text'=>'B.Tech AI 2024',   'text_val'=>'Data Scientist at Microsoft Azure AI & Machine Learning.', 'image_path'=>'images/lovable/rkdf-student-2.jpg'],
+    ['title'=>'Rohan Gupta',    'subtitle'=>'Package: ₹32.0 LPA · Google',        'badge_text'=>'B.Tech ECE 2023',  'text_val'=>'System Architect at Google India Technology Center.',    'image_path'=>'images/lovable/rkdf-student-3.jpg'],
+    ['title'=>'Shreya Mishra',  'subtitle'=>'Package: ₹28.5 LPA · Goldman Sachs', 'badge_text'=>'MBA Finance 2024',  'text_val'=>'Financial Risk Analyst at Goldman Sachs Global division.', 'image_path'=>'images/lovable/rkdf-student-1.jpg'],
+    ['title'=>'Priya Sharma',   'subtitle'=>'Package: ₹26.5 LPA · Adobe',         'badge_text'=>'B.Tech CSE 2024',  'text_val'=>'Product Software Engineer at Adobe Experience Platform.', 'image_path'=>'images/lovable/rkdf-student-2.jpg'],
+    ['title'=>'Vikram Singh',   'subtitle'=>'Package: ₹24.0 LPA · TCS Digital',   'badge_text'=>'M.Tech CS 2023',   'text_val'=>'Lead Full-Stack Architect at Tata Consultancy Services.',   'image_path'=>'images/lovable/rkdf-student-3.jpg'],
+    ['title'=>'Aditya Malhotra','subtitle'=>'Package: ₹25.0 LPA · Cisco Systems', 'badge_text'=>'B.Tech IT 2023',   'text_val'=>'Cloud Security Engineer at Cisco India R&D Center.',      'image_path'=>'images/lovable/rkdf-student-1.jpg'],
+    ['title'=>'Ananya Patel',   'subtitle'=>'Package: ₹22.0 LPA · Deloitte',      'badge_text'=>'B.Pharm 2024',     'text_val'=>'Healthcare & Pharma Consultant at Deloitte Strategy.',     'image_path'=>'images/lovable/rkdf-student-2.jpg'],
+    ['title'=>'Sneha Nair',     'subtitle'=>'Package: ₹21.5 LPA · Morgan Stanley','badge_text'=>'MBA Marketing 2024','text_val'=>'Associate Investment Analyst at Morgan Stanley.',         'image_path'=>'images/lovable/rkdf-student-3.jpg'],
+    ['title'=>'Kartik Joshi',   'subtitle'=>'Package: ₹27.0 LPA · Oracle',        'badge_text'=>'B.Tech AI & DS 2024','text_val'=>'Cloud Infrastructure Engineer at Oracle Cloud.',         'image_path'=>'images/lovable/rkdf-student-1.jpg'],
+    ['title'=>'Rahul Deshmukh', 'subtitle'=>'Package: ₹19.0 LPA · Larsen & Toubro','badge_text'=>'B.Tech Mech 2023','text_val'=>'Robotics & Automation Specialist at L&T Heavy Engg.',     'image_path'=>'images/lovable/rkdf-student-2.jpg'],
+    ['title'=>'Megha Kulkarni', 'subtitle'=>'Package: ₹18.5 LPA · Infosys',       'badge_text'=>'MCA 2024',         'text_val'=>'Senior Software Specialist at Infosys Finacle.',           'image_path'=>'images/lovable/rkdf-student-3.jpg'],
+  ];
+
+  $dbStars = $cmsItems['sec_09_shining_stars'] ?? [];
+  $stars = (!empty($dbStars) && count($dbStars) >= 8) ? $dbStars : $defaultStars;
 ?>
 <section class="rk-stars" id="shining-stars" style="background:#ffffff;padding:80px 0;border-top:1px solid #e2e8f0;border-bottom:1px solid #e2e8f0;">
   <div class="rk-container">
@@ -1974,8 +1544,9 @@ if (!$secStar || ($secStar['is_active'] ?? 1)):
 
   <div class="rk-stars-outer">
     <div class="rk-stars-rail no-scrollbar" id="secStar-rail">
+      <?php for ($rep = 0; $rep < 2; $rep++): ?>
       <?php foreach ($stars as $st): ?>
-      <div class="rk-star-card rk-reveal">
+      <div class="rk-star-card">
         <div class="rk-star-avatar">
           <img src="<?= htmlspecialchars($st['image_path'] ?: 'images/rkdflogo.JPG') ?>" alt="<?= htmlspecialchars($st['title']) ?>" onError="this.src='images/rkdflogo.JPG';">
         </div>
@@ -1985,6 +1556,7 @@ if (!$secStar || ($secStar['is_active'] ?? 1)):
         <p class="rk-star-desc"><?= htmlspecialchars($st['text_val']) ?></p>
       </div>
       <?php endforeach; ?>
+      <?php endfor; ?>
     </div>
   </div>
 </section>
@@ -2001,41 +1573,50 @@ if (!$sec11 || ($sec11['is_active'] ?? 1)):
   $sec11Title  = $sec11['title_main']   ?? 'What our graduates';
   $sec11Accent = $sec11['title_accent'] ?? 'carry with them.';
 
-  $testimonials = [
-    ['name'=>'Priya Sharma', 'role'=>'M.Sc. Data Science, 2024','quote'=>'The research culture here doesn\'t wait for permission. I published two papers before graduation and joined a team at Amazon straight after.','img'=>'images/lovable/rkdf-student-1.jpg'],
-    ['name'=>'Arjun Verma',  'role'=>'B.Tech CSE, 2023',        'quote'=>'Faculty who actually build things, labs open past midnight, and a placement cell that treated every one of my 12 offers as if it mattered.','img'=>'images/lovable/rkdf-student-2.jpg'],
-    ['name'=>'Meera Iyer',   'role'=>'BA-LLB, 2024',            'quote'=>'The moot court program at RKDF is genuinely national-tier. I argued in six states before I even sat for the bar.','img'=>'images/lovable/rkdf-student-3.jpg'],
+  $defaultTestimonials = [
+    ['name'=>'Priya Sharma',   'role'=>'M.Sc. Data Science, 2024', 'quote'=>'The research culture here doesn\'t wait for permission. I published two papers before graduation and joined a team at Amazon straight after.', 'img'=>'images/lovable/rkdf-student-1.jpg'],
+    ['name'=>'Arjun Verma',    'role'=>'B.Tech CSE, 2023',         'quote'=>'Faculty who actually build things, labs open past midnight, and a placement cell that treated every one of my 12 offers as if it mattered.', 'img'=>'images/lovable/rkdf-student-2.jpg'],
+    ['name'=>'Meera Iyer',     'role'=>'BA-LLB, 2024',             'quote'=>'The moot court program at RKDF is genuinely national-tier. I argued in six states before I even sat for the bar.', 'img'=>'images/lovable/rkdf-student-3.jpg'],
+    ['name'=>'Rohit Nair',     'role'=>'MBA Marketing, 2024',      'quote'=>'The industry mentorship and real-time live business consulting projects gave me an immense edge during Fortune 500 corporate interviews.', 'img'=>'images/lovable/rkdf-student-1.jpg'],
+    ['name'=>'Sneha Deshmukh', 'role'=>'B.Pharm, 2024',            'quote'=>'World-class pharmaceutical research labs and hands-on clinical drug development experience paved my way directly to Sun Pharma R&D.', 'img'=>'images/lovable/rkdf-student-2.jpg'],
+    ['name'=>'Kartik Saxena',  'role'=>'B.Tech AI & DS, 2024',     'quote'=>'Hackathons, supercomputing GPU clusters, and incredible peer culture shaped me into a confident machine learning engineer at Microsoft.', 'img'=>'images/lovable/rkdf-student-3.jpg'],
   ];
   $dbTestimonials = $cmsItems['sec_11_voices'] ?? [];
-  if (!empty($dbTestimonials)) {
-    $testimonials = [];
-    foreach ($dbTestimonials as $i) {
-      $testimonials[] = ['name'=>$i['title'],'role'=>$i['subtitle'],'quote'=>$i['text_val'],'img'=>$i['image_path']?:'images/lovable/rkdf-student-1.jpg'];
-    }
-  }
+  $testimonials = (!empty($dbTestimonials) && count($dbTestimonials) >= 5) ? $dbTestimonials : $defaultTestimonials;
 ?>
 <section class="rk-voices" id="voices">
   <div class="rk-container">
-    <div class="rk-eyebrow rk-reveal"><?= $sec11Tag ?></div>
-    <h2 class="rk-h2-huge rk-reveal" style="margin-bottom:48px;">
-      <?= htmlspecialchars($sec11Title) ?> <em class="rk-italic-plain"><?= htmlspecialchars($sec11Accent) ?></em>
-    </h2>
-    <div class="rk-testimonials-grid">
-      <?php foreach ($testimonials as $idx => $t): ?>
-      <div class="rk-testi-card rk-reveal <?= ($idx === 1) ? 'rk-testi-offset' : '' ?>" style="--delay:<?= $idx * 0.1 ?>s">
-        <div>
-          <div class="rk-testi-quote-mark">&ldquo;</div>
-          <p class="rk-testi-quote"><?= htmlspecialchars($t['quote']) ?></p>
-        </div>
-        <div class="rk-testi-author">
-          <img src="<?= (strpos($t['img'], '/') !== false) ? htmlspecialchars($t['img']) : 'images/lovable/' . htmlspecialchars($t['img']) ?>" alt="<?= htmlspecialchars($t['name']) ?>" loading="lazy">
+    <div class="rk-section-header rk-reveal" style="display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:48px;flex-wrap:wrap;gap:16px;">
+      <div>
+        <div class="rk-eyebrow" style="color:#C5A059;font-weight:700;font-family:'JetBrains Mono',monospace;font-size:12px;"><?= $sec11Tag ?></div>
+        <h2 class="rk-h2-huge" style="margin-top:10px;margin-bottom:0;color:#0C1424;font-family:'Instrument Serif',Georgia,serif;">
+          <?= htmlspecialchars($sec11Title) ?> <em class="rk-italic-plain" style="color:#E31B23;"><?= htmlspecialchars($sec11Accent) ?></em>
+        </h2>
+      </div>
+      <div class="rk-slider-nav-btns" style="display:flex;gap:8px;">
+        <button type="button" class="rk-slider-btn rk-slider-prev" id="secVoices-prev" aria-label="Previous Testimonial">‹</button>
+        <button type="button" class="rk-slider-btn rk-slider-next" id="secVoices-next" aria-label="Next Testimonial">›</button>
+      </div>
+    </div>
+
+    <div class="rk-voices-outer">
+      <div class="rk-voices-rail no-scrollbar" id="secVoices-rail">
+        <?php foreach ($testimonials as $idx => $t): ?>
+        <div class="rk-testi-card rk-reveal" style="--delay:<?= $idx * 0.1 ?>s">
           <div>
-            <div class="rk-testi-name"><?= htmlspecialchars($t['name']) ?></div>
-            <div class="rk-testi-role"><?= htmlspecialchars($t['role']) ?></div>
+            <div class="rk-testi-quote-mark">&ldquo;</div>
+            <p class="rk-testi-quote"><?= htmlspecialchars($t['quote']) ?></p>
+          </div>
+          <div class="rk-testi-author">
+            <img src="<?= (strpos($t['img'], '/') !== false) ? htmlspecialchars($t['img']) : 'images/lovable/' . htmlspecialchars($t['img']) ?>" alt="<?= htmlspecialchars($t['name']) ?>" onError="this.src='images/rkdflogo.JPG';" loading="lazy">
+            <div>
+              <div class="rk-testi-name"><?= htmlspecialchars($t['name']) ?></div>
+              <div class="rk-testi-role"><?= htmlspecialchars($t['role']) ?></div>
+            </div>
           </div>
         </div>
+        <?php endforeach; ?>
       </div>
-      <?php endforeach; ?>
     </div>
   </div>
 </section>
@@ -2365,29 +1946,188 @@ if (!$sec16 || ($sec16['is_active'] ?? 1)):
 ══════════════════════════════════════════════════════════ -->
 <script>
 (function() {
-  // Slider Engine for Section 04 and Section 09B / Shining Stars
-  function initRkSlider(railId, prevBtnId, nextBtnId) {
+  // Continuous Non-Stop Infinite Auto-Slide Engine for Shining Stars
+  function initContinuousStarSlider(railId, prevBtnId, nextBtnId, speed) {
     const rail = document.getElementById(railId);
     const prevBtn = document.getElementById(prevBtnId);
     const nextBtn = document.getElementById(nextBtnId);
     if (!rail) return;
 
-    function getScrollStep() {
-      const card = rail.querySelector('.rk-school-card, .rk-star-card');
-      return card ? (card.offsetWidth + 24) * 2 : 600;
+    speed = speed !== undefined ? speed : 0.85;
+    let isDown = false;
+    let startX = 0;
+    let scrollStart = 0;
+    let isHovered = false;
+    let hasDragged = false;
+    let currentScroll = 0;
+
+    function getHalfWidth() {
+      return rail.scrollWidth / 2;
+    }
+
+    function step() {
+      const halfWidth = getHalfWidth();
+      if (halfWidth > 0 && !isDown && !isHovered && !document.hidden) {
+        currentScroll += speed;
+        if (currentScroll >= halfWidth) {
+          currentScroll -= halfWidth;
+        } else if (currentScroll < 0) {
+          currentScroll += halfWidth;
+        }
+        rail.scrollLeft = currentScroll;
+      }
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+
+    function getCardWidth() {
+      const card = rail.querySelector('.rk-star-card');
+      return card ? (card.offsetWidth + 24) : 340;
     }
 
     if (prevBtn) {
       prevBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        rail.scrollBy({ left: -getScrollStep(), behavior: 'smooth' });
+        const stepSize = getCardWidth();
+        currentScroll -= stepSize;
+        const halfWidth = getHalfWidth();
+        if (halfWidth > 0 && currentScroll < 0) {
+          currentScroll += halfWidth;
+        }
+        rail.scrollLeft = currentScroll;
       });
     }
 
     if (nextBtn) {
       nextBtn.addEventListener('click', function(e) {
         e.preventDefault();
-        rail.scrollBy({ left: getScrollStep(), behavior: 'smooth' });
+        const stepSize = getCardWidth();
+        currentScroll += stepSize;
+        const halfWidth = getHalfWidth();
+        if (halfWidth > 0 && currentScroll >= halfWidth) {
+          currentScroll -= halfWidth;
+        }
+        rail.scrollLeft = currentScroll;
+      });
+    }
+
+    // Hover Pause on desktop
+    rail.addEventListener('mouseenter', function() {
+      isHovered = true;
+      currentScroll = rail.scrollLeft;
+    });
+
+    rail.addEventListener('mouseleave', function() {
+      isHovered = false;
+      isDown = false;
+      rail.classList.remove('is-dragging');
+      currentScroll = rail.scrollLeft;
+    });
+
+    // Drag-to-Scroll (Mouse)
+    rail.addEventListener('mousedown', function(e) {
+      isDown = true;
+      hasDragged = false;
+      rail.classList.add('is-dragging');
+      startX = e.pageX - rail.offsetLeft;
+      scrollStart = rail.scrollLeft;
+      currentScroll = rail.scrollLeft;
+    });
+
+    window.addEventListener('mouseup', function() {
+      if (isDown) {
+        isDown = false;
+        rail.classList.remove('is-dragging');
+        currentScroll = rail.scrollLeft;
+      }
+    });
+
+    rail.addEventListener('mousemove', function(e) {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - rail.offsetLeft;
+      const walk = (x - startX) * 1.5;
+      if (Math.abs(walk) > 4) hasDragged = true;
+
+      let targetScroll = scrollStart - walk;
+      const halfWidth = getHalfWidth();
+      if (halfWidth > 0) {
+        while (targetScroll >= halfWidth) targetScroll -= halfWidth;
+        while (targetScroll < 0) targetScroll += halfWidth;
+      }
+      rail.scrollLeft = targetScroll;
+      currentScroll = targetScroll;
+    });
+
+    // Touch Support for mobile
+    let touchStartX = 0;
+    let touchScrollStart = 0;
+    rail.addEventListener('touchstart', function(e) {
+      isHovered = true;
+      if (e.touches && e.touches.length > 0) {
+        touchStartX = e.touches[0].pageX - rail.offsetLeft;
+        touchScrollStart = rail.scrollLeft;
+        currentScroll = rail.scrollLeft;
+      }
+    }, { passive: true });
+
+    rail.addEventListener('touchmove', function(e) {
+      if (e.touches && e.touches.length > 0) {
+        const x = e.touches[0].pageX - rail.offsetLeft;
+        const walk = (x - touchStartX) * 1.5;
+        let targetScroll = touchScrollStart - walk;
+        const halfWidth = getHalfWidth();
+        if (halfWidth > 0) {
+          while (targetScroll >= halfWidth) targetScroll -= halfWidth;
+          while (targetScroll < 0) targetScroll += halfWidth;
+        }
+        rail.scrollLeft = targetScroll;
+        currentScroll = targetScroll;
+      }
+    }, { passive: true });
+
+    rail.addEventListener('touchend', function() {
+      currentScroll = rail.scrollLeft;
+      setTimeout(function() {
+        isHovered = false;
+      }, 600);
+    }, { passive: true });
+  }
+
+  // Step Slider for Testimonials (§14 Voices)
+  function initTestimonialSlider(railId, prevBtnId, nextBtnId) {
+    const rail = document.getElementById(railId);
+    const prevBtn = document.getElementById(prevBtnId);
+    const nextBtn = document.getElementById(nextBtnId);
+    if (!rail) return;
+
+    function getScrollStep() {
+      const card = rail.querySelector('.rk-testi-card');
+      return card ? (card.offsetWidth + 24) : 380;
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const step = getScrollStep();
+        if (rail.scrollLeft <= 15) {
+          rail.scrollTo({ left: rail.scrollWidth - rail.clientWidth, behavior: 'smooth' });
+        } else {
+          rail.scrollBy({ left: -step, behavior: 'smooth' });
+        }
+      });
+    }
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const step = getScrollStep();
+        const maxScroll = rail.scrollWidth - rail.clientWidth;
+        if (rail.scrollLeft >= maxScroll - 15) {
+          rail.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          rail.scrollBy({ left: step, behavior: 'smooth' });
+        }
       });
     }
 
@@ -2423,9 +2163,11 @@ if (!$sec16 || ($sec16['is_active'] ?? 1)):
   }
 
   function initSliders() {
-    initRkSlider('secStar-rail', 'secStar-prev', 'secStar-next');
+    initContinuousStarSlider('secStar-rail', 'secStar-prev', 'secStar-next', 0.85);
+    initTestimonialSlider('secVoices-rail', 'secVoices-prev', 'secVoices-next');
     setupMarqueeRow('rk-marquee-row-1', 'ltr');
     setupMarqueeRow('rk-marquee-row-2', 'rtl');
+    setupMarqueeRow('rk-accred-marquee-row', 'rtl');
   }
 
   // Smooth Infinite Marquee with Drag-to-Scroll Engine
@@ -2535,6 +2277,118 @@ if (!$sec16 || ($sec16['is_active'] ?? 1)):
     document.addEventListener('DOMContentLoaded', initSliders);
   } else {
     initSliders();
+  }
+
+  // Academic Programs Tabbed Explorer & Search Handler
+  function initCourseExplorer() {
+    var tabsWrap = document.getElementById('rkProgTabs');
+    var searchInput = document.getElementById('rkProgSearchInput');
+    var expandBtn = document.getElementById('rkProgExpandBtn');
+    var expandText = document.getElementById('rkProgExpandText');
+    var expandIcon = document.getElementById('rkProgExpandIcon');
+    var grid = document.getElementById('rkProgGrid');
+    if (!grid) return;
+
+    var cards = Array.from(grid.querySelectorAll('.rk-course-item-card'));
+    var currentCat = 'all';
+    var isExpanded = false;
+
+    function applyFilter() {
+      var query = (searchInput ? searchInput.value : '').toLowerCase().trim();
+      var visibleMatches = [];
+
+      cards.forEach(function(card) {
+        var cardCat = card.dataset.cat;
+        var cardData = card.dataset.name || '';
+        var matchesCat = (currentCat === 'all' || cardCat === currentCat);
+        var matchesSearch = (!query || cardData.indexOf(query) !== -1);
+
+        if (matchesCat && matchesSearch) {
+          card.style.display = '';
+          visibleMatches.push(card);
+        } else {
+          card.style.display = 'none';
+        }
+      });
+
+      // Handle collapse / expand logic
+      if (query.length > 0 || currentCat !== 'all') {
+        // When searching or specific tab selected, show all matching
+        visibleMatches.forEach(function(c) {
+          c.classList.remove('rk-card-collapsed');
+        });
+        if (expandBtn) expandBtn.style.display = 'none';
+      } else {
+        // Default "All" view with no query: paginate with expand button
+        if (expandBtn) expandBtn.style.display = 'inline-flex';
+        visibleMatches.forEach(function(c, idx) {
+          if (!isExpanded && idx >= 6) {
+            c.classList.add('rk-card-collapsed');
+          } else {
+            c.classList.remove('rk-card-collapsed');
+          }
+        });
+
+        if (expandText && expandIcon) {
+          if (isExpanded) {
+            expandText.textContent = 'Show Top Programs Only ↑';
+            expandIcon.textContent = '↑';
+          } else {
+            expandText.textContent = 'View All ' + visibleMatches.length + ' Programs ↓';
+            expandIcon.textContent = '↓';
+          }
+        }
+      }
+    }
+
+    if (tabsWrap) {
+      tabsWrap.addEventListener('click', function(e) {
+        var btn = e.target.closest('.rk-prog-tab-btn');
+        if (!btn) return;
+        tabsWrap.querySelectorAll('.rk-prog-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        currentCat = btn.dataset.cat || 'all';
+        applyFilter();
+      });
+    }
+
+    if (searchInput) {
+      var clearBtn = document.getElementById('rkProgSearchClear');
+      searchInput.addEventListener('input', function() {
+        if (clearBtn) {
+          clearBtn.style.display = searchInput.value.trim().length > 0 ? 'flex' : 'none';
+        }
+        applyFilter();
+      });
+
+      if (clearBtn) {
+        clearBtn.addEventListener('click', function() {
+          searchInput.value = '';
+          clearBtn.style.display = 'none';
+          searchInput.focus();
+          applyFilter();
+        });
+      }
+    }
+
+    if (expandBtn) {
+      expandBtn.addEventListener('click', function() {
+        isExpanded = !isExpanded;
+        applyFilter();
+        if (!isExpanded) {
+          var progSec = document.getElementById('programs');
+          if (progSec) progSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    }
+
+    applyFilter();
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initCourseExplorer);
+  } else {
+    initCourseExplorer();
   }
 
   // Intersection Observer for .rk-reveal

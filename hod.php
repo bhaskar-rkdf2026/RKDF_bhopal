@@ -253,7 +253,7 @@ $displayHods = !empty($allItems) ? $allItems : $defaultHods;
     /* Sidebar Links */
     aside {
       position: sticky;
-      top: 100px;
+      top: 130px;
     }
 
     .sidebar-card {

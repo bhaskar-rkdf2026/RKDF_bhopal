@@ -5,22 +5,30 @@
 // ============================================================
 require_once __DIR__ . '/include/site_settings.php';
 require_once __DIR__ . '/config/db.php';
+require_once __DIR__ . '/include/cms_engine.php';
 
 $pdo = getDbConnection();
 $pageSlug = 'scholarship';
+$pRow = [];
+$allItems = [];
 
-$stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
-$stmt->execute([$pageSlug]);
-$pRow = $stmt->fetch();
+if ($pdo) {
+    try {
+        $stmt = $pdo->prepare("SELECT * FROM site_pages WHERE page_slug = ? AND is_active = 1");
+        $stmt->execute([$pageSlug]);
+        $pRow = $stmt->fetch() ?: [];
 
-$eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : 'ADMISSIONS · SCHOLARSHIPS';
-$mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'University Scholarships & Financial Aid';
-$heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Government post-matric scholarships (ST/SC/OBC), MP Medhavi Chhatra Yojana, and Chancellor Merit Scholarships.';
-$heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'images/lovable/rkdf-why-bg.jpg';
-
-$itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
-$itemStmt->execute([$pageSlug]);
-$allItems = $itemStmt->fetchAll();
+        $itemStmt = $pdo->prepare("SELECT * FROM page_sections WHERE page_slug = ? AND is_active = 1 ORDER BY sort_order ASC, id ASC");
+        $itemStmt->execute([$pageSlug]);
+        $allItems = $itemStmt->fetchAll() ?: [];
+    } catch (Throwable $e) {
+        $pRow = cms_get_page($pageSlug);
+        $allItems = cms_get_page_sections($pageSlug);
+    }
+} else {
+    $pRow = cms_get_page($pageSlug);
+    $allItems = cms_get_page_sections($pageSlug);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -324,6 +332,34 @@ $allItems = $itemStmt->fetchAll();
                 <ul class="sch-list">
                   <li>Provided by Govt. of India and MP Govt. for meritorious minority community students.</li>
                   <li>Aims to ensure financial assistance so deserving students are not deprived of higher education.</li>
+                </ul>
+              </div>
+
+              <!-- SCHEME 6: CRPF / DEFENCE SCHOLARSHIP FROM PDF -->
+              <div class="sch-scheme-card" style="border-left-color: #E31B23;">
+                <div class="sch-scheme-title">6. 50% Fees Concession for Wards of CRPF &amp; Defence Personnel</div>
+                <ul class="sch-list">
+                  <li><strong>Special 50% Tuition Fees Concession</strong> granted to children of personnel martyred or injured in encounter, and gallantry medal holders of CRPF / Indian Armed Forces / Defence Personnel.</li>
+                  <li>Honoring the supreme sacrifice and dedicated service of brave soldiers and security forces.</li>
+                </ul>
+              </div>
+
+              <!-- SCHEME 7: CHANCELLOR MERIT SCHOLARSHIP FROM PDF -->
+              <div class="sch-scheme-card">
+                <div class="sch-scheme-title">7. Chancellor Scholarship on Merit Basis</div>
+                <ul class="sch-list">
+                  <li>Special institutional merit scholarship awarded to top academic performers in University entrance and qualifying examinations.</li>
+                  <li>Encourages academic excellence, research aptitude, and distinguished performance across all faculties.</li>
+                </ul>
+              </div>
+
+              <!-- SCHEME 8: BUDDY4STUDY MOU & STUDENT CREDIT CARDS FROM PDF -->
+              <div class="sch-scheme-card">
+                <div class="sch-scheme-title">8. Buddy4Study Scholarships &amp; State Student Credit Card Schemes</div>
+                <ul class="sch-list">
+                  <li><strong>Buddy4Study MOU:</strong> Special CSR scholarships available for eligible students via the University's official collaboration with Buddy4Study.</li>
+                  <li><strong>Bihar Student Credit Card Yojna (MNSSBY):</strong> RKDF University is approved under Bihar State Student Credit Card scheme providing education financing up to INR 4 Lakhs.</li>
+                  <li><strong>Jharkhand Guruji Student Credit Card Yojana:</strong> RKDF University students can avail subsidized educational loan facilities under the Govt. of Jharkhand scheme.</li>
                 </ul>
               </div>
 

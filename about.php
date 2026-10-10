@@ -23,7 +23,7 @@ foreach ($allSections as $s) {
 $eyebrow      = !empty($pRow['eyebrow'])       ? $pRow['eyebrow']       : '01 · OVERVIEW';
 $mainTitle    = !empty($pRow['page_title'])    ? $pRow['page_title']    : 'About RKDF University';
 $heroSubtitle = !empty($pRow['hero_subtitle']) ? $pRow['hero_subtitle'] : 'Education Glorifies the Nation — Pioneer in Skill-Based, Technology-Driven Higher Education and Advanced Research.';
-$defaultIntroText = "Ram Krishna Dharmarth Foundation (RKDF) University, Bhopal was established in the year 2011 by an Act of Madhya Pradesh State Legislature under the MP Niji Vishwavidyalaya Adhiniyam, 2007.\n\nThe University is sponsored by the RKDF Education Society, which has been a pioneer in higher education since 1995. Over the years, RKDF Group has grown into one of the largest educational groups in Central India, operating multiple campuses, colleges, and research institutes across engineering, management, pharmacy, medical sciences, agriculture, and humanities.\n\nRKDF University Bhopal is recognized by the University Grants Commission (UGC) under Section 2(f) of the UGC Act 1956 and is approved by respective statutory bodies including AICTE, PCI, BCI, NCTE, and INC. The University is committed to fostering academic excellence, industry alignment, multidisciplinary research, and holistic student development.";
+$defaultIntroText = "Ram Krishna Dharmarth Foundation (RKDF) University, Bhopal was established in the year 2011 by an Act of Madhya Pradesh State Legislature under the MP Niji Vishwavidyalaya Adhiniyam, 2007.\n\nThe University is sponsored by the RKDF Education Society, celebrating 31 Years of Excellence and 16 Successful Golden Years of the Campus. RKDF University is accredited NAAC Grade 'A+' (1st Cycle) and ranked 4th in Madhya Pradesh and 59th in India by The Times of India. The B.Sc. (Hons.) Agriculture program is accredited by ICAR (Govt. of India).\n\nRKDF University Bhopal is recognized by the University Grants Commission (UGC) under Section 2(f) of the UGC Act 1956 and is approved by respective statutory bodies including AICTE, PCI, BCI, NCTE, and INC. Spanning a sprawling 130.62-acre lush green campus, the University houses Sir J.C. Bose Integrated Research Centre (in collaboration with 5 CSIR institutes), Asia's 1st Carbon Capture Plant, 100kW Solar PV Plant, and state-of-the-art academic infrastructure committed to fostering global academic excellence and holistic student development.";
 
 $introHeading = !empty($pRow['intro_heading']) ? $pRow['intro_heading'] : 'About RKDF University Bhopal';
 $introText    = !empty($pRow['intro_text'])    ? $pRow['intro_text']    : $defaultIntroText;
@@ -147,7 +147,14 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
     }
 
     /* Sidebar Links */
-    aside { position: sticky; top: 100px; }
+    aside {
+      position: -webkit-sticky;
+      position: sticky;
+      top: 130px;
+      align-self: start;
+      height: fit-content;
+      z-index: 20;
+    }
     .sidebar-card {
       background: #ffffff;
       border: 1px solid rgba(12,20,36,0.08);
@@ -222,27 +229,27 @@ $heroBgImg    = !empty($pRow['hero_bg_image']) ? $pRow['hero_bg_image'] : 'image
       <!-- STATS HIGHLIGHTS GRID -->
       <div class="ab-stats-grid">
         <div class="ab-stat-card">
-          <div class="ab-stat-num">15,000+</div>
+          <div class="ab-stat-num">16,000+</div>
           <div class="ab-stat-title">Students Enrolled</div>
           <div class="ab-stat-desc">Pursuing UG, PG &amp; Doctoral programs</div>
         </div>
         <div class="ab-stat-card">
-          <div class="ab-stat-num">16</div>
-          <div class="ab-stat-title">Faculties &amp; Schools</div>
-          <div class="ab-stat-desc">Multidisciplinary academic units</div>
+          <div class="ab-stat-num">530+</div>
+          <div class="ab-stat-title">Distinguished Faculty</div>
+          <div class="ab-stat-desc">Senior professors, scientists &amp; guides</div>
         </div>
         <div class="ab-stat-card">
-          <div class="ab-stat-num">99</div>
-          <div class="ab-stat-title">Degree Courses</div>
-          <div class="ab-stat-desc">Approved UG, PG &amp; Diploma degrees</div>
+          <div class="ab-stat-num">130.62</div>
+          <div class="ab-stat-title">Acres Campus</div>
+          <div class="ab-stat-desc">Eco-friendly campus &amp; agro farmland</div>
         </div>
         <div class="ab-stat-card">
-          <div class="ab-stat-num">42</div>
-          <div class="ab-stat-title">Value-Added Courses</div>
-          <div class="ab-stat-desc">Skill enhancement certifications</div>
+          <div class="ab-stat-num">68+</div>
+          <div class="ab-stat-title">R&amp;D &amp; Global MOUs</div>
+          <div class="ab-stat-desc">CSIR, NASA associates, RPI New York</div>
         </div>
         <div class="ab-stat-card">
-          <div class="ab-stat-num">2.02 Lakh+</div>
+          <div class="ab-stat-num">2.60 Lakh+</div>
           <div class="ab-stat-title">Library Books</div>
           <div class="ab-stat-desc">1 Central + 19 Departmental Libraries</div>
         </div>

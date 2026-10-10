@@ -36,7 +36,7 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
         WebMail Login ↗
       </a>
       <span class="rkdf-util-divider">|</span>
-      <span class="rkdf-util-org">RAM KRISHNA DHARMARTH FOUNDATION (RKDF) GROUP</span>
+      <span class="rkdf-util-org">RAM KRISHNA DHARMARTH FOUNDATION (RKDF) VISHWAVIDYALAYA</span>
     </div>
 
     <div class="rkdf-utility-right">
@@ -76,9 +76,9 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
       <!-- 2. About -->
       <li class="rkdf-nav-item" role="none">
         <a href="about.php" class="rkdf-nav-link" role="menuitem" aria-haspopup="true">
-          About <span class="rkdf-caret">▼</span>
+          About Us <span class="rkdf-caret">▼</span>
         </a>
-        <div class="rkdf-drop rkdf-drop-wide" role="menu" style="min-width:560px;">
+        <div class="rkdf-drop rkdf-drop-wide" role="menu" style="min-width:640px;">
           <div class="rkdf-drop-col">
             <span class="rkdf-drop-head">About &amp; Leadership</span>
             <a href="about.php" class="rkdf-drop-link" role="menuitem">About Us Overview</a>
@@ -89,6 +89,8 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
             <a href="Chancellor.php" class="rkdf-drop-link" role="menuitem">Chancellor's Desk</a>
             <a href="ProChancellor.php" class="rkdf-drop-link" role="menuitem">Pro-Chancellor</a>
             <a href="Vice-Chancellor-Desk.php" class="rkdf-drop-link" role="menuitem">Vice Chancellor's Desk</a>
+            <a href="dgm.php" class="rkdf-drop-link" role="menuitem">DGM Profile</a>
+            <a href="dgr.php" class="rkdf-drop-link" role="menuitem">DGR Profile</a>
             <a href="Registrar.php" class="rkdf-drop-link" role="menuitem">Registrar Profile</a>
             <a href="other-officers.php" class="rkdf-drop-link" role="menuitem">Other Officers</a>
           </div>
@@ -100,7 +102,8 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
             <a href="BoM.php" class="rkdf-drop-link" role="menuitem">Board of Management</a>
             <a href="Academic_Council.php" class="rkdf-drop-link" role="menuitem">Academic Council</a>
             <a href="BOS.php" class="rkdf-drop-link" role="menuitem">Board of Studies</a>
-            <a href="approvals.php" class="rkdf-drop-link" role="menuitem">Approvals &amp; Accreditations</a>
+            <a href="Statuary-Bodies.php" class="rkdf-drop-link" role="menuitem">National Core Advisory Group</a>
+            <a href="localadvisory.php" class="rkdf-drop-link" role="menuitem">Local Core Advisory Group</a>
             <a href="public-disclosure.php" class="rkdf-drop-link" role="menuitem">Public Self Disclosure</a>
             <a href="imggallery.php" class="rkdf-drop-link" role="menuitem">Photo Gallery</a>
           </div>
@@ -315,13 +318,13 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
         <span>CONTACT</span>
       </a>
 
-      <!-- Mobile Hamburger Button -->
-      <button class="rkdf-burger" id="rkdfBurger" aria-label="Toggle Menu" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="4" x2="20" y1="12" y2="12"></line>
-          <line x1="4" x2="20" y1="6" y2="6"></line>
-          <line x1="4" x2="20" y1="18" y2="18"></line>
-        </svg>
+      <!-- Mobile Animated Hamburger Button -->
+      <button class="rkdf-burger" id="rkdfBurger" aria-label="Toggle Menu" aria-expanded="false" type="button">
+        <span class="rkdf-burger-box">
+          <span class="rkdf-burger-line line-1"></span>
+          <span class="rkdf-burger-line line-2"></span>
+          <span class="rkdf-burger-line line-3"></span>
+        </span>
       </button>
     </div>
 
@@ -329,8 +332,37 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
 
 </nav><!-- /rkdf-nav-bar -->
 
+<!-- Mobile Backdrop Overlay -->
+<div class="rkdf-mobile-backdrop" id="rkdfMobileBackdrop"></div>
+
 <!-- Mobile Navigation Accordion Drawer -->
-<div class="rkdf-mobile-drawer" id="rkdfMobileDrawer">
+<div class="rkdf-mobile-drawer" id="rkdfMobileDrawer" role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+  
+  <!-- Mobile Drawer Top Bar -->
+  <div class="rkdf-mob-drawer-topbar">
+    <div class="rkdf-mob-brand-badge">
+      <img src="images/rkdf_logo_naac.png" alt="RKDF Logo" width="36" height="42" class="rkdf-mob-drawer-logo" onError="this.src='images/rkdflogo.JPG';">
+      <div class="rkdf-mob-drawer-title-group">
+        <span class="rkdf-mob-drawer-name">RKDF University</span>
+        <span class="rkdf-mob-drawer-tag">NAAC A+ &bull; BHOPAL</span>
+      </div>
+    </div>
+    <button type="button" class="rkdf-mob-close-btn" id="rkdfMobileClose" aria-label="Close Navigation Menu">
+      <span>✕</span>
+    </button>
+  </div>
+
+  <!-- Mobile Quick Action CTAs (Top of Drawer) -->
+  <div class="rkdf-mob-header-ctas">
+    <a href="admissionform.php" class="rkdf-mob-cta-primary">
+      <span>APPLY ONLINE 2026-27</span>
+      <span class="rkdf-mob-cta-arr">→</span>
+    </a>
+    <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" rel="noopener noreferrer" class="rkdf-mob-cta-secondary">
+      <span>STUDENT ERP LOGIN ↗</span>
+    </a>
+  </div>
+
   <div class="rkdf-mobile-accordion">
     
     <!-- 1. Home -->
@@ -339,7 +371,7 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
     <!-- 2. About -->
     <div class="rkdf-mob-acc-item">
       <button type="button" class="rkdf-mob-acc-btn">
-        <span>About</span>
+        <span>About Us</span>
         <svg class="rkdf-mob-chev" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
       </button>
       <div class="rkdf-mob-acc-body">
@@ -351,15 +383,20 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
         <a href="Chancellor.php" class="rkdf-mob-sublink">Chancellor's Desk</a>
         <a href="ProChancellor.php" class="rkdf-mob-sublink">Pro-Chancellor</a>
         <a href="Vice-Chancellor-Desk.php" class="rkdf-mob-sublink">Vice Chancellor's Desk</a>
+        <a href="dgm.php" class="rkdf-mob-sublink">DGM Profile</a>
+        <a href="dgr.php" class="rkdf-mob-sublink">DGR Profile</a>
         <a href="Registrar.php" class="rkdf-mob-sublink">Registrar Profile</a>
-        <a href="dean.php" class="rkdf-mob-sublink">Faculty Deans</a>
-        <a href="hod.php" class="rkdf-mob-sublink">Institute Heads &amp; HODs</a>
+        <a href="other-officers.php" class="rkdf-mob-sublink">Other Officers</a>
+        <a href="dean.php" class="rkdf-mob-sublink">Dean's Profile</a>
+        <a href="hod.php" class="rkdf-mob-sublink">Institute Head / HOD's</a>
         <a href="Governingbody.php" class="rkdf-mob-sublink">Governing Body</a>
         <a href="BoM.php" class="rkdf-mob-sublink">Board of Management</a>
         <a href="Academic_Council.php" class="rkdf-mob-sublink">Academic Council</a>
         <a href="BOS.php" class="rkdf-mob-sublink">Board of Studies</a>
-        <a href="approvals.php" class="rkdf-mob-sublink">Approvals &amp; Accreditations</a>
-        <a href="public-disclosure.php" class="rkdf-mob-sublink">Public Self Disclosures</a>
+        <a href="Statuary-Bodies.php" class="rkdf-mob-sublink">National Core Advisory Group</a>
+        <a href="localadvisory.php" class="rkdf-mob-sublink">Local Core Advisory Group</a>
+        <a href="public-disclosure.php" class="rkdf-mob-sublink">Public Self Disclosure</a>
+        <a href="imggallery.php" class="rkdf-mob-sublink">Photo Gallery</a>
       </div>
     </div>
 
@@ -517,11 +554,24 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
       </div>
     </div>
 
-    <!-- Direct Contact Button in Mobile -->
-    <div class="rkdf-mob-quick-links">
-      <a href="contact-us.php" class="rkdf-mobile-link rkdf-mob-apply-btn">CONTACT US →</a>
-      <a href="admissionform.php" class="rkdf-mobile-link rkdf-mob-login-btn">APPLY ONLINE <?= htmlspecialchars($admissionYear) ?> ↗</a>
-      <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" rel="noopener noreferrer" class="rkdf-mobile-link">Student ERP Portal ↗</a>
+    <!-- Bottom Help & Contact Card -->
+    <div class="rkdf-mob-contact-card">
+      <div class="rkdf-mob-contact-title">ADMISSION HELPLINE &amp; CAMPUS</div>
+      <a href="tel:07556185300" class="rkdf-mob-contact-link">
+        <span class="rkdf-mob-icon">📞</span>
+        <span>0755-6185300 / 0755-6185300</span>
+      </a>
+      <a href="https://wa.me/917880100550?text=Hello%20RKDF%20University,%20I%20want%20to%20enquire%20about%20Admissions" target="_blank" rel="noopener noreferrer" class="rkdf-mob-contact-link">
+        <span class="rkdf-mob-icon">💬</span>
+        <span>WhatsApp: +91 7880100550</span>
+      </a>
+      <a href="mailto:info@rkdf.ac.in" class="rkdf-mob-contact-link">
+        <span class="rkdf-mob-icon">✉</span>
+        <span>info@rkdf.ac.in</span>
+      </a>
+      <div class="rkdf-mob-address">
+        📍 Airport Bypass Road, Gandhi Nagar, Bhopal (MP) - 462033
+      </div>
     </div>
 
   </div>
@@ -534,25 +584,53 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
   const navBar = document.getElementById('rkdfNavBar');
   const burger = document.getElementById('rkdfBurger');
   const drawer = document.getElementById('rkdfMobileDrawer');
+  const backdrop = document.getElementById('rkdfMobileBackdrop');
+  const closeBtn = document.getElementById('rkdfMobileClose');
 
   function updateNavScroll() {
     if (window.scrollY > 20) {
-      navBar.classList.add('scrolled');
+      if (navBar) navBar.classList.add('scrolled');
     } else {
-      navBar.classList.remove('scrolled');
+      if (navBar) navBar.classList.remove('scrolled');
     }
   }
 
   window.addEventListener('scroll', updateNavScroll, { passive: true });
   updateNavScroll();
 
-  // Burger drawer toggle
-  if (burger && drawer) {
-    burger.addEventListener('click', function() {
-      const isOpen = drawer.classList.toggle('active');
-      burger.setAttribute('aria-expanded', isOpen);
-    });
+  function openMenu() {
+    if (!drawer) return;
+    drawer.classList.add('active');
+    if (backdrop) backdrop.classList.add('active');
+    if (burger) {
+      burger.classList.add('active');
+      burger.setAttribute('aria-expanded', 'true');
+    }
+    document.body.classList.add('rkdf-menu-open');
   }
+
+  function closeMenu() {
+    if (!drawer) return;
+    drawer.classList.remove('active');
+    if (backdrop) backdrop.classList.remove('active');
+    if (burger) {
+      burger.classList.remove('active');
+      burger.setAttribute('aria-expanded', 'false');
+    }
+    document.body.classList.remove('rkdf-menu-open');
+  }
+
+  function toggleMenu() {
+    if (drawer && drawer.classList.contains('active')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  }
+
+  if (burger) burger.addEventListener('click', toggleMenu);
+  if (backdrop) backdrop.addEventListener('click', closeMenu);
+  if (closeBtn) closeBtn.addEventListener('click', closeMenu);
 
   // Mobile Accordion functionality
   const accBtns = document.querySelectorAll('.rkdf-mob-acc-btn');
@@ -560,19 +638,31 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
     btn.addEventListener('click', function() {
       const item = this.parentElement;
       const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.rkdf-mob-acc-item').forEach(function(el) { el.classList.remove('open'); });
+      document.querySelectorAll('.rkdf-mob-acc-item').forEach(function(el) {
+        if (el !== item) el.classList.remove('open');
+      });
       if (!isOpen) {
         item.classList.add('open');
+      } else {
+        item.classList.remove('open');
+      }
+    });
+  });
+
+  // Close menu on navigation link click (internal anchor / page jump)
+  const navLinks = drawer ? drawer.querySelectorAll('a:not(.rkdf-mob-acc-btn)') : [];
+  navLinks.forEach(function(link) {
+    link.addEventListener('click', function() {
+      const href = this.getAttribute('href') || '';
+      if (!href.startsWith('javascript:') && !href.startsWith('#')) {
+        closeMenu();
       }
     });
   });
 
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      if (drawer && drawer.classList.contains('active')) {
-        drawer.classList.remove('active');
-        if (burger) burger.setAttribute('aria-expanded', 'false');
-      }
+    if (e.key === 'Escape' && drawer && drawer.classList.contains('active')) {
+      closeMenu();
     }
   });
 })();
