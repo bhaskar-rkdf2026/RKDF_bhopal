@@ -44,6 +44,7 @@ $erpPortalUrl       = get_site_setting('erp_portal_url', 'https://erplive.rkdf.a
       <a href="alumni.php" class="rkdf-util-link">Alumni</a>
       <a href="t&amp;p.php" class="rkdf-util-link">T&amp;P Cell</a>
       <a href="Careers.php" class="rkdf-util-link">Careers</a>
+      <a href="News_Letter.php" class="rkdf-util-link">Newsletter</a>
       <a href="<?= htmlspecialchars($erpPortalUrl) ?>" target="_blank" rel="noopener noreferrer" class="rkdf-util-link highlight-erp">Student Login ↗</a>
       <a href="Announcements.php?cat=tender" class="rkdf-util-link highlight-tender">⚡ E-Tenders</a>
     </div>
